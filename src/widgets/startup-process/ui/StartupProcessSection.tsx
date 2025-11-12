@@ -21,43 +21,40 @@ export default function StartupProcessSection() {
       title: '계약 체결',
       description: '투명한 계약 조건 안내\n가맹 계약 및 교육 일정 확정',
       icon: 'IMG',
-      color: 'from-accent-pink to-primary',
+      color: 'from-secondary to-accent',
     },
     {
       step: 'STEP 3',
       title: '매장 준비',
       description: '인테리어 시공 지원\n주방 설비 및 집기 설치',
       icon: 'IMG',
-      color: 'from-accent-blue to-accent-green',
+      color: 'from-accent to-primary',
     },
     {
       step: 'STEP 4',
       title: '오픈 교육',
       description: '본사 직영점 실습 교육\n조리, 서빙, 운영 관리 전반',
       icon: 'IMG',
-      color: 'from-accent-green to-primary',
+      color: 'from-primary to-accent',
     },
     {
       step: 'STEP 5',
       title: '그랜드 오픈',
       description: '오픈 마케팅 전폭 지원\nSNS 광고 및 전단지 배포',
       icon: 'IMG',
-      color: 'from-secondary to-accent-pink',
+      color: 'from-secondary to-primary',
     },
     {
       step: 'STEP 6',
       title: '사후 관리',
       description: '정기 방문 및 컨설팅\n신메뉴 개발 및 교육 지속',
       icon: 'IMG',
-      color: 'from-accent-pink to-accent-blue',
+      color: 'from-accent to-secondary',
     },
   ];
 
   return (
-    <section id="startup-process" className="py-20 md:py-32 bg-gradient-to-br from-accent-blue/5 to-accent-green/5 relative overflow-hidden" ref={ref}>
-      {/* 배경 장식 */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent-pink/10 rounded-full blur-3xl" />
+    <section id="startup-process" className="py-20 md:py-32 bg-white relative overflow-hidden" ref={ref}>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -93,7 +90,7 @@ export default function StartupProcessSection() {
               whileHover={{ scale: 1.03, y: -5 }}
             >
               {/* 카드 */}
-              <div className="bg-white rounded-3xl p-8 shadow-strong-hover h-full relative overflow-hidden">
+              <div className="bg-primary/5 backdrop-blur-sm rounded-3xl p-8 shadow-strong-hover h-full relative overflow-hidden border-2 border-primary/20">
                 {/* 배경 장식 */}
                 <div className={cn("absolute top-0 right-0 w-32 h-32 bg-gradient-to-br opacity-10 rounded-full -mr-10 -mt-10", process.color)} />
 

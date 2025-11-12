@@ -17,7 +17,7 @@ const baeminOrders: BaeminOrder[] = [
     storeName: '강남점',
     orderCount: 1234,
     period: '최근 1개월',
-    bgColor: 'bg-accent-pink',
+    bgColor: 'bg-secondary',
   },
   {
     id: '2',
@@ -31,14 +31,14 @@ const baeminOrders: BaeminOrder[] = [
     storeName: '신촌점',
     orderCount: 998,
     period: '최근 1개월',
-    bgColor: 'bg-accent-blue',
+    bgColor: 'bg-primary',
   },
   {
     id: '4',
     storeName: '잠실점',
     orderCount: 1445,
     period: '최근 1개월',
-    bgColor: 'bg-accent-green',
+    bgColor: 'bg-accent',
   },
   {
     id: '5',
@@ -52,7 +52,7 @@ const baeminOrders: BaeminOrder[] = [
     storeName: '신림점',
     orderCount: 876,
     period: '최근 1개월',
-    bgColor: 'bg-accent-pink',
+    bgColor: 'bg-secondary',
   },
 ];
 
@@ -61,10 +61,7 @@ export default function BaeminOrdersSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   
   return (
-    <section id="baemin" className="py-20 md:py-32 bg-gradient-to-br from-accent-pink/10 via-secondary/10 to-primary/10 relative overflow-hidden" ref={ref}>
-      {/* 배경 장식 */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-accent-blue/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent-green/20 rounded-full blur-3xl" />
+    <section id="baemin" className="py-20 md:py-32 bg-white relative overflow-hidden" ref={ref}>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div

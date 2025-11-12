@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiX, HiChatAlt2 } from 'react-icons/hi';
 import { useForm } from 'react-hook-form';
-import type { InquiryForm } from '@/types';
+import type { InquiryForm } from '@/shared/types';
 
 export default function FloatingInquiry() {
   const [isOpen, setIsOpen] = useState(false);
@@ -129,7 +129,7 @@ export default function FloatingInquiry() {
                         style={{ fontFamily: "'Gaegu', sans-serif" }}
                       />
                       {errors.name && (
-                        <p className="text-accent-pink text-sm mt-1">{errors.name.message}</p>
+                        <p className="text-secondary text-sm mt-1">{errors.name.message}</p>
                       )}
                     </div>
 
@@ -155,7 +155,7 @@ export default function FloatingInquiry() {
                         style={{ fontFamily: "'Gaegu', sans-serif" }}
                       />
                       {errors.phone && (
-                        <p className="text-accent-pink text-sm mt-1">{errors.phone.message}</p>
+                        <p className="text-secondary text-sm mt-1">{errors.phone.message}</p>
                       )}
                     </div>
 
@@ -175,7 +175,7 @@ export default function FloatingInquiry() {
                         style={{ fontFamily: "'Gaegu', sans-serif" }}
                       />
                       {errors.region && (
-                        <p className="text-accent-pink text-sm mt-1">{errors.region.message}</p>
+                        <p className="text-secondary text-sm mt-1">{errors.region.message}</p>
                       )}
                     </div>
 
@@ -196,7 +196,7 @@ export default function FloatingInquiry() {
                       </label>
                     </div>
                     {errors.agree && (
-                      <p className="text-accent-pink text-sm">{errors.agree.message}</p>
+                      <p className="text-secondary text-sm">{errors.agree.message}</p>
                     )}
 
                     {/* 제출 버튼 */}
@@ -216,19 +216,6 @@ export default function FloatingInquiry() {
           </>
         )}
       </AnimatePresence>
-
-      {/* Scroll to Top Button */}
-      <motion.button
-        className="fixed bottom-28 right-8 z-40 w-12 h-12 md:w-14 md:h-14 bg-white border-4 border-primary rounded-full shadow-strong-hover flex items-center justify-center text-primary text-2xl font-bold"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-      >
-        ↑
-      </motion.button>
     </>
   );
 }

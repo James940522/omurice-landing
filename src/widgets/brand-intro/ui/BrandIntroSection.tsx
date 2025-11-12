@@ -9,9 +9,6 @@ export default function BrandIntroSection() {
 
   return (
     <section id="brand" className="py-20 md:py-32 bg-white relative overflow-hidden" ref={ref}>
-      {/* 배경 장식 */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-accent-pink/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-blue/10 rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -43,8 +40,8 @@ export default function BrandIntroSection() {
               </div>
             </div>
             {/* 장식 요소 */}
-            <div className="absolute -top-8 -right-8 w-32 h-32 bg-accent-green rounded-full shadow-strong" />
-            <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-accent-pink rounded-full shadow-strong" />
+            <div className="absolute -top-8 -right-8 w-32 h-32 bg-accent rounded-full shadow-strong" />
+            <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-secondary rounded-full shadow-strong" />
           </motion.div>
 
           {/* 텍스트 영역 */}
@@ -55,11 +52,11 @@ export default function BrandIntroSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <motion.div
-              className="bg-accent-pink/10 p-8 rounded-3xl shadow-strong-hover"
+              className="bg-secondary/10 p-8 rounded-3xl shadow-strong-hover"
               whileHover={{ scale: 1.02 }}
             >
               <h3
-                className="text-3xl md:text-4xl font-bold mb-4 text-accent-pink"
+                className="text-3xl md:text-4xl font-bold mb-4 text-secondary"
                 style={{ fontFamily: "'Jua', sans-serif" }}
               >
                 검증된 브랜드 파워
@@ -70,18 +67,18 @@ export default function BrandIntroSection() {
               >
                 배달형 오므라이스 시장을 개척한
                 <br />
-                <strong className="text-accent-pink">1세대 브랜드</strong>
+                <strong className="text-secondary">1세대 브랜드</strong>
                 <br />
                 수많은 운영 경험과 노하우로 검증된 시스템
               </p>
             </motion.div>
 
             <motion.div
-              className="bg-accent-blue/10 p-8 rounded-3xl shadow-strong-hover"
+              className="bg-primary/10 p-8 rounded-3xl shadow-strong-hover"
               whileHover={{ scale: 1.02 }}
             >
               <h3
-                className="text-3xl md:text-4xl font-bold mb-4 text-accent-blue"
+                className="text-3xl md:text-4xl font-bold mb-4 text-primary"
                 style={{ fontFamily: "'Jua', sans-serif" }}
               >
                 안정적인 수익 구조
@@ -90,7 +87,7 @@ export default function BrandIntroSection() {
                 className="text-xl md:text-2xl text-foreground/80 leading-relaxed"
                 style={{ fontFamily: "'Gaegu', sans-serif" }}
               >
-                <strong className="text-accent-blue">낮은 재료비 30%대</strong>
+                <strong className="text-primary">낮은 재료비 30%대</strong>
                 <br />
                 높은 마진율로 안정적인 수익 실현
                 <br />
@@ -99,11 +96,11 @@ export default function BrandIntroSection() {
             </motion.div>
 
             <motion.div
-              className="bg-accent-green/10 p-8 rounded-3xl shadow-strong-hover"
+              className="bg-accent/10 p-8 rounded-3xl shadow-strong-hover"
               whileHover={{ scale: 1.02 }}
             >
               <h3
-                className="text-3xl md:text-4xl font-bold mb-4 text-accent-green"
+                className="text-3xl md:text-4xl font-bold mb-4 text-accent"
                 style={{ fontFamily: "'Jua', sans-serif" }}
               >
                 본사의 전폭적인 지원
@@ -112,7 +109,7 @@ export default function BrandIntroSection() {
                 className="text-xl md:text-2xl text-foreground/80 leading-relaxed"
                 style={{ fontFamily: "'Gaegu', sans-serif" }}
               >
-                <strong className="text-accent-green">점포 개발부터 오픈까지</strong>
+                <strong className="text-accent">점포 개발부터 오픈까지</strong>
                 <br />
                 전담 매니저가 1:1 밀착 관리
                 <br />

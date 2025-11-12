@@ -51,12 +51,12 @@ const stores: Store[] = [
 ];
 
 const colors = [
-  'bg-accent-pink',
-  'bg-primary',
-  'bg-accent-blue',
-  'bg-accent-green',
   'bg-secondary',
-  'bg-accent-pink/80',
+  'bg-primary',
+  'bg-accent',
+  'bg-accent',
+  'bg-secondary',
+  'bg-primary/80',
 ];
 
 export default function StoreSection() {
@@ -66,10 +66,7 @@ export default function StoreSection() {
   // 검색 기능은 추후 Client Component로 features에 추가 예정
 
   return (
-    <section id="store" className="py-20 md:py-32 bg-gradient-to-br from-accent-blue/10 to-accent-green/10 relative overflow-hidden" ref={ref}>
-      {/* 배경 장식 */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-pink/10 rounded-full blur-3xl" />
+    <section id="store" className="py-20 md:py-32 bg-white relative overflow-hidden" ref={ref}>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -140,7 +137,7 @@ export default function StoreSection() {
               {/* 정보 */}
               <div className="p-6 space-y-4">
                 <div className="flex items-start gap-3">
-                  <div className="shrink-0 w-8 h-8 bg-accent-pink rounded-full flex items-center justify-center text-white font-bold">
+                  <div className="shrink-0 w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-white font-bold">
                     📍
                   </div>
                   <div>
@@ -160,7 +157,7 @@ export default function StoreSection() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="shrink-0 w-8 h-8 bg-accent-blue rounded-full flex items-center justify-center text-white font-bold">
+                  <div className="shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold">
                     📞
                   </div>
                   <div>
@@ -180,7 +177,7 @@ export default function StoreSection() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="shrink-0 w-8 h-8 bg-accent-green rounded-full flex items-center justify-center text-white font-bold">
+                  <div className="shrink-0 w-8 h-8 bg-accent rounded-full flex items-center justify-center text-white font-bold">
                     📅
                   </div>
                   <div>

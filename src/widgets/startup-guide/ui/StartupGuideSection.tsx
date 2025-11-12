@@ -23,7 +23,7 @@ export default function StartupGuideSection() {
       emoji: 'IMG',
       title: '1년만에\n가맹점 100호점 돌파',
       description: '폭발적인 성장세, 믿을 수 있는 브랜드',
-      bgColor: 'bg-gradient-to-br from-accent-pink to-accent-blue',
+      bgColor: 'bg-gradient-to-br from-secondary to-primary',
       stats: '월평균 8개점 오픈',
       detail: '검증된 창업 시스템과 높은 가맹점 만족도로\n빠르게 성장하는 대한민국 대표 브랜드',
     },
@@ -40,9 +40,6 @@ export default function StartupGuideSection() {
 
   return (
     <section id="startup-guide" className="py-20 md:py-32 bg-white relative overflow-hidden" ref={ref}>
-      {/* 배경 장식 */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-accent-pink/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-blue/10 rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -144,7 +141,7 @@ export default function StartupGuideSection() {
 
         {/* 하단 CTA */}
         <motion.div
-          className="text-center bg-gradient-to-r from-primary via-secondary to-accent-pink rounded-3xl p-12 md:p-16 shadow-strong text-white"
+          className="text-center bg-gradient-to-r from-primary via-secondary to-accent rounded-3xl p-12 md:p-16 shadow-strong text-white"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}

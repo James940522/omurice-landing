@@ -19,19 +19,19 @@ export default function StartupCostSection() {
       category: '교육비',
       amount: '200만원',
       description: '본사 직영점 실습 교육',
-      color: 'bg-accent-pink',
+      color: 'bg-secondary',
     },
     {
       category: '인테리어',
       amount: '2,000만원',
       description: '15평 기준 (평수에 따라 변동)',
-      color: 'bg-accent-blue',
+      color: 'bg-accent',
     },
     {
       category: '집기/설비',
       amount: '1,500만원',
       description: '주방 설비 및 매장 집기',
-      color: 'bg-accent-green',
+      color: 'bg-accent',
     },
     {
       category: '초도 물품',
@@ -43,7 +43,7 @@ export default function StartupCostSection() {
       category: '보증금',
       amount: '별도',
       description: '지역 및 평수에 따라 상이',
-      color: 'bg-accent-pink',
+      color: 'bg-primary',
     },
   ];
 
@@ -58,9 +58,6 @@ export default function StartupCostSection() {
 
   return (
     <section id="startup-cost" className="py-20 md:py-32 bg-white relative overflow-hidden" ref={ref}>
-      {/* 배경 장식 */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-accent-blue/10 rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -89,7 +86,7 @@ export default function StartupCostSection() {
           {costs.map((cost, index) => (
             <motion.div
               key={index}
-              className="bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 shadow-strong-hover border-4 border-gray-100"
+              className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-3xl p-8 shadow-strong-hover border-2 border-primary/20"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.1 * index }}
@@ -126,7 +123,7 @@ export default function StartupCostSection() {
 
         {/* 총 예상 비용 */}
         <motion.div
-          className="bg-gradient-to-r from-primary via-secondary to-accent-pink rounded-3xl p-10 md:p-12 mb-16 shadow-strong text-white text-center"
+          className="bg-gradient-to-r from-primary via-secondary to-accent rounded-3xl p-10 md:p-12 mb-16 shadow-strong text-white text-center"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
@@ -167,7 +164,7 @@ export default function StartupCostSection() {
             {supports.map((support, index) => (
               <motion.div
                 key={index}
-                className="flex items-center gap-4 bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+                className="flex items-center gap-4 bg-secondary/5 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow border border-secondary/20"
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.5, delay: 1.2 + 0.1 * index }}

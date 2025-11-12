@@ -37,7 +37,7 @@ const menuCategories: MenuCategory[] = [
     id: 'white',
     name: '화이트 오므라이스',
     emoji: 'IMG',
-    color: 'from-accent-blue to-primary',
+    color: 'from-accent to-primary',
     items: [
       '큐브 스테이크 화이트 오므라이스',
       '돈까스 화이트 오므라이스',
@@ -54,7 +54,7 @@ const menuCategories: MenuCategory[] = [
     id: 'kimchi',
     name: '김치 오므라이스',
     emoji: 'IMG',
-    color: 'from-accent-pink to-secondary',
+    color: 'from-secondary to-primary',
     items: [
       '큐브 스테이크 김치 오므라이스',
       '돈까스 김치 오므라이스',
@@ -71,7 +71,7 @@ const menuCategories: MenuCategory[] = [
     id: 'kimchi-white',
     name: '김치 화이트 오므라이스',
     emoji: 'IMG',
-    color: 'from-accent-green to-accent-pink',
+    color: 'from-accent to-secondary',
     items: [
       '큐브 스테이크 김치 화이트 오므라이스',
       '돈까스 김치 화이트 오므라이스',
@@ -88,7 +88,7 @@ const menuCategories: MenuCategory[] = [
     id: 'bokkeumbap',
     name: '베이컨 김치 볶음밥',
     emoji: 'IMG',
-    color: 'from-secondary to-accent-green',
+    color: 'from-secondary to-accent',
     items: [
       '스테이크 베이컨 김치볶음밥',
       '떡갈비 베이컨 김치볶음밥',
@@ -104,7 +104,7 @@ const menuCategories: MenuCategory[] = [
     id: 'set',
     name: '세트메뉴',
     emoji: 'IMG',
-    color: 'from-accent-pink to-accent-blue',
+    color: 'from-primary to-accent',
     items: [
       '나홀로 오므라이스 세트 (메인1+사이드1+음료1)',
       '둘이서 오므라이스 세트 (메인2)',
@@ -115,7 +115,7 @@ const menuCategories: MenuCategory[] = [
     id: 'side',
     name: '사이드',
     emoji: 'IMG',
-    color: 'from-primary to-accent-pink',
+    color: 'from-primary to-secondary',
     items: [
       '감자튀김',
       '가라아게',
@@ -134,12 +134,12 @@ const menuCategories: MenuCategory[] = [
 
 const colorClasses = [
   'bg-primary',
-  'bg-accent-blue',
-  'bg-accent-pink',
-  'bg-accent-green',
+  'bg-accent',
+  'bg-secondary',
+  'bg-accent',
   'bg-secondary',
   'bg-primary',
-  'bg-accent-pink',
+  'bg-secondary',
 ];
 
 export default function MenuSection() {
@@ -150,10 +150,7 @@ export default function MenuSection() {
   const activeCategoryData = menuCategories[0];
 
   return (
-    <section id="menu" className="py-20 md:py-32 bg-gradient-to-br from-primary/10 to-accent-pink/10 relative overflow-hidden" ref={ref}>
-      {/* 배경 장식 */}
-      <div className="absolute top-1/4 left-0 w-72 h-72 bg-accent-blue/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-accent-green/20 rounded-full blur-3xl" />
+    <section id="menu" className="py-20 md:py-32 bg-white relative overflow-hidden" ref={ref}>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div

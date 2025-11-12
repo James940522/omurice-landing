@@ -1,3 +1,8 @@
-// UI 컴포넌트는 추후 추가 예정
-export {};
-
+// shadcn UI 컴포넌트들
+export * from './button';
+export * from './input';
+export * from './separator';
+export * from './sheet';
+export * from './sidebar';
+export * from './skeleton';
+export * from './tooltip';

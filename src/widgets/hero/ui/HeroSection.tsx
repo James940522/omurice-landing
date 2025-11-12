@@ -21,8 +21,7 @@ export default function HeroSection() {
             className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground"
             style={{ fontFamily: "'Jua', sans-serif" }}
           >
-            <span className="text-primary">오늘은</span>{' '}
-            <span className="text-secondary">오므라이스</span>
+            <span className="text-primary">오늘은 오므라이스</span>
           </h1>
 
           {/* 서브 타이틀 */}
@@ -49,16 +48,11 @@ export default function HeroSection() {
             </a>
             <a
               href="#menu"
-              className="bg-white text-foreground px-10 py-4 rounded-full text-xl md:text-2xl font-bold shadow-strong-hover hover:bg-accent-pink hover:text-white transition-all duration-300 border-4 border-primary inline-block"
+              className="bg-white text-foreground px-10 py-4 rounded-full text-xl md:text-2xl font-bold shadow-strong-hover hover:bg-accent-pink transition-all duration-300 border-4 border-primary inline-block"
             >
               메뉴 보기
             </a>
           </div>
-        </div>
-
-        {/* 스크롤 다운 인디케이터 */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-          <div className="text-2xl text-primary font-bold">↓</div>
         </div>
       </div>
     </section>
