@@ -2,6 +2,7 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { cn } from '@/shared/lib/utils';
 
 export default function StartupGuideSection() {
   const ref = useRef(null);
@@ -38,23 +39,21 @@ export default function StartupGuideSection() {
   ];
 
   return (
-    <section id="startup-guide" className="py-20 md:py-32 bg-white relative overflow-hidden">
+    <section id="startup-guide" className="py-20 md:py-32 bg-white relative overflow-hidden" ref={ref}>
       {/* 배경 장식 */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-accent-pink/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-blue/10 rounded-full blur-3xl" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <motion.div
-            className="inline-block mb-6"
-          >
+          <div className="inline-block mb-6">
             <span className="text-4xl md:text-5xl font-bold text-primary">IMG</span>
-          </motion.div>
+          </div>
           <h2
             className="text-4xl md:text-6xl font-bold mb-6 text-foreground"
             style={{ fontFamily: "'Jua', sans-serif" }}
@@ -75,33 +74,25 @@ export default function StartupGuideSection() {
           {sections.map((section, index) => (
             <motion.div
               key={section.id}
+              className="relative group"
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + index * 0.2 }}
               whileHover={{ scale: 1.03, y: -10 }}
-              className="relative group"
             >
               {/* 메인 카드 */}
-              <div className={`${section.bgColor} rounded-3xl p-8 md:p-10 shadow-strong-hover text-white relative overflow-hidden`}>
+              <div className={cn(section.bgColor, "rounded-3xl p-8 md:p-10 shadow-strong-hover text-white relative overflow-hidden")}>
                 {/* 배경 장식 */}
-                <motion.div
-                  className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full"
-                  animate={{ scale: [1, 1.2, 1], rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                />
-                <motion.div
-                  className="absolute -bottom-10 -left-10 w-32 h-32 bg-white/10 rounded-full"
-                  animate={{ scale: [1, 1.3, 1] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                />
+                <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full" />
+                <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-white/10 rounded-full" />
 
                 {/* 이미지 플레이스홀더 */}
-                <motion.div
+                <div
                   className="text-5xl md:text-6xl font-bold mb-6 relative z-10 text-white"
                   style={{ fontFamily: "'Jua', sans-serif" }}
                 >
                   {section.emoji}
-                </motion.div>
+                </div>
 
                 {/* 타이틀 */}
                 <h3
@@ -147,11 +138,6 @@ export default function StartupGuideSection() {
                   </span>
                 </div>
               </div>
-
-              {/* 호버 시 추가 효과 */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-              />
             </motion.div>
           ))}
         </div>
@@ -163,11 +149,9 @@ export default function StartupGuideSection() {
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <motion.div
-            className="inline-block mb-6"
-          >
+          <div className="inline-block mb-6">
             <span className="text-4xl md:text-5xl font-bold text-white">IMG</span>
-          </motion.div>
+          </div>
           <h3
             className="text-3xl md:text-5xl font-bold mb-6"
             style={{ fontFamily: "'Jua', sans-serif" }}
@@ -180,21 +164,15 @@ export default function StartupGuideSection() {
           >
             성공을 향한 첫 걸음, 오늘은 오므라이스와 함께하세요
           </p>
-          <motion.button
-            onClick={() => {
-              const element = document.querySelector('#contact');
-              if (element) element.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="bg-white text-primary px-12 py-5 rounded-full text-xl md:text-2xl font-bold shadow-strong-hover hover:bg-foreground hover:text-white transition-all duration-300"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <a
+            href="#contact"
+            className="inline-block bg-white text-primary px-12 py-5 rounded-full text-xl md:text-2xl font-bold shadow-strong-hover hover:bg-foreground hover:text-white transition-all duration-300"
             style={{ fontFamily: "'Jua', sans-serif" }}
           >
             창업 상담 신청하기 →
-          </motion.button>
+          </a>
         </motion.div>
       </div>
     </section>
   );
 }
-

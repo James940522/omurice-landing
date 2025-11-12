@@ -20,6 +20,10 @@
   --color-accent-green: var(--accent-green);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -98,4 +102,43 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 
 .animate-wiggle {
   animation: wiggle 1s ease-in-out infinite;
+}
+
+/* Swiper 커스터마이징 */
+.baemin-swiper .swiper-button-next,
+.baemin-swiper .swiper-button-prev {
+  background: var(--primary) !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.3s ease !important;
+}
+
+.baemin-swiper .swiper-button-next:hover,
+.baemin-swiper .swiper-button-prev:hover {
+  background: var(--secondary) !important;
+  transform: scale(1.1) !important;
+}
+
+.baemin-swiper .swiper-button-next::after,
+.baemin-swiper .swiper-button-prev::after {
+  font-size: 12px !important;
+  color: white !important;
+  font-weight: bold !important;
+}
+
+.baemin-swiper .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: var(--foreground);
+  opacity: 0.3;
+  transition: all 0.3s ease;
+}
+
+.baemin-swiper .swiper-pagination-bullet-active {
+  background: var(--primary);
+  opacity: 1;
+  width: 32px;
+  border-radius: 6px;
 }

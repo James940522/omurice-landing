@@ -1,7 +1,11 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
+import { cn } from '@/shared/lib/utils';
+
+// 추후 탭 기능은 Client Component로 features에서 추가 예정
+// 현재는 첫 번째 카테고리만 표시
 
 interface MenuCategory {
   id: string;
@@ -141,17 +145,17 @@ const colorClasses = [
 export default function MenuSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [activeCategory, setActiveCategory] = useState('omurice');
-
-  const activeCategoryData = menuCategories.find((cat) => cat.id === activeCategory)!;
+  
+  // 현재는 첫 번째 카테고리만 표시
+  const activeCategoryData = menuCategories[0];
 
   return (
-    <section id="menu" className="py-20 md:py-32 bg-gradient-to-br from-primary/10 to-accent-pink/10 relative overflow-hidden">
+    <section id="menu" className="py-20 md:py-32 bg-gradient-to-br from-primary/10 to-accent-pink/10 relative overflow-hidden" ref={ref}>
       {/* 배경 장식 */}
       <div className="absolute top-1/4 left-0 w-72 h-72 bg-accent-blue/20 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-accent-green/20 rounded-full blur-3xl" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 50 }}
@@ -173,68 +177,44 @@ export default function MenuSection() {
           <div className="w-24 h-2 bg-primary mx-auto rounded-full" />
         </motion.div>
 
-        {/* 카테고리 탭 */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-3 md:gap-4 mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
+        {/* 카테고리 탭 - 추후 동적 기능 추가 예정 */}
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-12">
           {menuCategories.map((category, index) => (
-            <motion.button
+            <div
               key={category.id}
-              onClick={() => setActiveCategory(category.id)}
-              className={`px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-base md:text-lg transition-all duration-300 shadow-strong-hover ${
-                activeCategory === category.id
-                  ? `${colorClasses[index]} text-white scale-110`
-                  : 'bg-white text-foreground'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className={cn(
+                "px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-base md:text-lg shadow-strong-hover",
+                index === 0 ? cn(colorClasses[index], "text-white") : "bg-white text-foreground"
+              )}
               style={{ fontFamily: "'Jua', sans-serif" }}
             >
               {category.name}
-            </motion.button>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* 메뉴 그리드 */}
-        <motion.div
-          key={activeCategory}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -30 }}
-          transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {activeCategoryData.items.map((item, index) => (
             <motion.div
               key={item}
-              initial={{ opacity: 0, scale: 0.8, y: 50 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              whileHover={{ scale: 1.05, rotate: 1 }}
               className="bg-white rounded-3xl overflow-hidden shadow-strong-hover"
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+              whileHover={{ scale: 1.05, y: -5 }}
             >
               {/* 이미지 플레이스홀더 */}
-              <div className={`aspect-square bg-gradient-to-br ${activeCategoryData.color} flex items-center justify-center relative overflow-hidden`}>
-                <motion.span
+              <div className={cn("aspect-square bg-gradient-to-br flex items-center justify-center relative overflow-hidden", activeCategoryData.color)}>
+                <span
                   className="text-5xl md:text-6xl font-bold text-white"
                   style={{ fontFamily: "'Jua', sans-serif" }}
                 >
                   IMG
-                </motion.span>
+                </span>
                 {/* 귀여운 장식 */}
-                <motion.div
-                  className="absolute top-4 right-4 w-12 h-12 bg-white/30 rounded-full"
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-                <motion.div
-                  className="absolute bottom-4 left-4 w-8 h-8 bg-white/30 rounded-full"
-                  animate={{ scale: [1, 1.3, 1] }}
-                  transition={{ duration: 2.5, repeat: Infinity, delay: 0.5 }}
-                />
+                <div className="absolute top-4 right-4 w-12 h-12 bg-white/30 rounded-full" />
+                <div className="absolute bottom-4 left-4 w-8 h-8 bg-white/30 rounded-full" />
               </div>
 
               {/* 메뉴 이름 */}
@@ -248,20 +228,18 @@ export default function MenuSection() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
         {/* 하단 안내 */}
         <motion.div
           className="mt-16 text-center bg-white rounded-3xl p-8 shadow-strong"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <motion.span
-            className="text-3xl md:text-4xl font-bold text-primary inline-block mb-4"
-          >
+          <span className="text-3xl md:text-4xl font-bold text-primary inline-block mb-4">
             IMG
-          </motion.span>
+          </span>
           <p
             className="text-2xl md:text-3xl text-foreground font-bold mb-2"
             style={{ fontFamily: "'Jua', sans-serif" }}
@@ -279,4 +257,3 @@ export default function MenuSection() {
     </section>
   );
 }
-

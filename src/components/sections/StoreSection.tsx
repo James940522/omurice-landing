@@ -1,9 +1,9 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
-import { HiLocationMarker, HiPhone, HiCalendar } from 'react-icons/hi';
-import type { Store } from '@/types';
+import { useRef } from 'react';
+import type { Store } from '@/shared/types';
+import { cn } from '@/shared/lib/utils';
 
 const stores: Store[] = [
   {
@@ -62,32 +62,25 @@ const colors = [
 export default function StoreSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const filteredStores = stores.filter(
-    (store) =>
-      store.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      store.address.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  
+  // 검색 기능은 추후 Client Component로 features에 추가 예정
 
   return (
-    <section id="store" className="py-20 md:py-32 bg-gradient-to-br from-accent-blue/10 to-accent-green/10 relative overflow-hidden">
+    <section id="store" className="py-20 md:py-32 bg-gradient-to-br from-accent-blue/10 to-accent-green/10 relative overflow-hidden" ref={ref}>
       {/* 배경 장식 */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-pink/10 rounded-full blur-3xl" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <motion.div
-            className="inline-block mb-6"
-          >
+          <div className="inline-block mb-6">
             <span className="text-4xl md:text-5xl font-bold text-primary">IMG</span>
-          </motion.div>
+          </div>
           <h2
             className="text-4xl md:text-6xl font-bold mb-6 text-foreground"
             style={{ fontFamily: "'Jua', sans-serif" }}
@@ -98,147 +91,149 @@ export default function StoreSection() {
             className="text-xl md:text-2xl text-foreground/70 mb-6"
             style={{ fontFamily: "'Gaegu', sans-serif" }}
           >
-            전국 각지에서 만나보세요
+            전국 각지에서 성공적으로 운영 중
           </p>
           <div className="w-24 h-2 bg-primary mx-auto rounded-full" />
         </motion.div>
 
-        {/* 검색 바 */}
-        <motion.div
-          className="max-w-2xl mx-auto mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <div className="relative">
+        {/* 검색 박스 (추후 동적 기능 추가) */}
+        <div className="max-w-xl mx-auto mb-12">
+          <div className="bg-white rounded-full shadow-strong p-2 flex items-center gap-4">
+            <div className="pl-4">
+              <span className="text-2xl">🔍</span>
+            </div>
             <input
               type="text"
-                placeholder="지역명 또는 매장명으로 검색하세요"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-6 py-4 rounded-full border-4 border-primary text-lg md:text-xl focus:outline-none focus:border-secondary transition-colors shadow-strong"
+              placeholder="지역 또는 매장명으로 검색"
+              className="flex-1 py-3 px-2 text-lg outline-none"
               style={{ fontFamily: "'Gaegu', sans-serif" }}
+              disabled
             />
           </div>
-        </motion.div>
+        </div>
 
         {/* 매장 그리드 */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          {filteredStores.map((store, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {stores.map((store, index) => (
             <motion.div
               key={store.id}
               className="bg-white rounded-3xl overflow-hidden shadow-strong-hover"
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 * index }}
-              whileHover={{ scale: 1.03, rotate: 1 }}
+              transition={{ duration: 0.6, delay: 0.1 * index }}
+              whileHover={{ scale: 1.03 }}
             >
-              {/* 상단 색상 바 */}
-              <div className={`${colors[index % colors.length]} h-3`} />
-
-              {/* 매장 정보 */}
-              <div className="p-6 md:p-8">
+              {/* 헤더 */}
+              <div className={cn(colors[index % colors.length], "p-6 text-white relative overflow-hidden")}>
+                <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/10 rounded-full" />
+                <div className="inline-block mb-4">
+                  <span className="text-3xl md:text-4xl font-bold text-white">IMG</span>
+                </div>
                 <h3
-                  className="text-2xl md:text-3xl font-bold mb-6 text-foreground"
+                  className="text-3xl md:text-4xl font-bold relative z-10"
                   style={{ fontFamily: "'Jua', sans-serif" }}
                 >
                   {store.name}
                 </h3>
+              </div>
 
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <HiLocationMarker className="text-2xl text-accent-pink flex-shrink-0 mt-1" />
+              {/* 정보 */}
+              <div className="p-6 space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="shrink-0 w-8 h-8 bg-accent-pink rounded-full flex items-center justify-center text-white font-bold">
+                    📍
+                  </div>
+                  <div>
                     <p
-                      className="text-lg text-foreground/80"
+                      className="text-sm text-foreground/60 mb-1"
+                      style={{ fontFamily: "'Gaegu', sans-serif" }}
+                    >
+                      주소
+                    </p>
+                    <p
+                      className="text-lg font-medium text-foreground"
                       style={{ fontFamily: "'Gaegu', sans-serif" }}
                     >
                       {store.address}
                     </p>
                   </div>
+                </div>
 
-                  <div className="flex items-center gap-3">
-                    <HiPhone className="text-2xl text-accent-blue flex-shrink-0" />
+                <div className="flex items-start gap-3">
+                  <div className="shrink-0 w-8 h-8 bg-accent-blue rounded-full flex items-center justify-center text-white font-bold">
+                    📞
+                  </div>
+                  <div>
                     <p
-                      className="text-lg text-foreground/80"
+                      className="text-sm text-foreground/60 mb-1"
                       style={{ fontFamily: "'Gaegu', sans-serif" }}
+                    >
+                      전화번호
+                    </p>
+                    <p
+                      className="text-lg font-medium text-foreground"
+                      style={{ fontFamily: "'Jua', sans-serif" }}
                     >
                       {store.phone}
                     </p>
                   </div>
+                </div>
 
-                  <div className="flex items-center gap-3">
-                    <HiCalendar className="text-2xl text-accent-green flex-shrink-0" />
+                <div className="flex items-start gap-3">
+                  <div className="shrink-0 w-8 h-8 bg-accent-green rounded-full flex items-center justify-center text-white font-bold">
+                    📅
+                  </div>
+                  <div>
                     <p
-                      className="text-lg text-foreground/80"
+                      className="text-sm text-foreground/60 mb-1"
                       style={{ fontFamily: "'Gaegu', sans-serif" }}
                     >
-                      OPEN {store.openingDate}
+                      오픈일
+                    </p>
+                    <p
+                      className="text-lg font-medium text-foreground"
+                      style={{ fontFamily: "'Jua', sans-serif" }}
+                    >
+                      {store.openingDate}
                     </p>
                   </div>
                 </div>
-
-                {/* 방문하기 버튼 */}
-                <motion.button
-                  className="mt-6 w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-full font-bold text-lg shadow-strong-hover"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  매장 자세히 보기 →
-                </motion.button>
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* 검색 결과 없음 */}
-        {filteredStores.length === 0 && (
-          <motion.div
-            className="text-center py-20"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <p
-              className="text-2xl md:text-3xl text-foreground/60"
-              style={{ fontFamily: "'Gaegu', sans-serif" }}
-            >
-              검색 결과가 없습니다
-            </p>
-          </motion.div>
-        )}
-
-        {/* 더 많은 매장 오픈 예정 */}
+        {/* 하단 안내 */}
         <motion.div
-          className="mt-16 text-center bg-white rounded-3xl p-8 md:p-12 shadow-strong"
+          className="mt-16 text-center bg-gradient-to-r from-primary to-secondary rounded-3xl p-10 md:p-12 shadow-strong text-white"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <motion.div
-            className="inline-block mb-4"
-          >
-            <span className="text-3xl md:text-4xl font-bold text-primary">IMG</span>
-          </motion.div>
-          <p
-            className="text-2xl md:text-3xl text-foreground font-bold mb-4"
+          <div className="inline-block mb-6">
+            <span className="text-4xl md:text-5xl font-bold text-white">IMG</span>
+          </div>
+          <h3
+            className="text-3xl md:text-4xl font-bold mb-4"
             style={{ fontFamily: "'Jua', sans-serif" }}
           >
-            더 많은 매장이 준비 중입니다!
-          </p>
+            100개 이상의 가맹점이 성공 중!
+          </h3>
           <p
-            className="text-xl md:text-2xl text-foreground/70"
+            className="text-lg md:text-xl opacity-90 mb-6"
             style={{ fontFamily: "'Gaegu', sans-serif" }}
           >
-            당신의 지역에서도 곧 만나요
+            당신도 오늘은 오므라이스 가족이 되어보세요
           </p>
+          <a
+            href="#contact"
+            className="inline-block bg-white text-primary px-10 py-4 rounded-full text-xl md:text-2xl font-bold shadow-strong-hover hover:bg-foreground hover:text-white transition-all duration-300"
+            style={{ fontFamily: "'Jua', sans-serif" }}
+          >
+            창업 문의하기
+          </a>
         </motion.div>
       </div>
     </section>
   );
 }
-

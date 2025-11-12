@@ -1,29 +1,9 @@
-'use client';
-
-import { motion } from 'framer-motion';
-import { FaInstagram, FaFacebook, FaYoutube, FaBlog } from 'react-icons/fa';
-
 export default function Footer() {
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   const socialLinks = [
-    { icon: FaInstagram, href: '#', label: 'Instagram' },
-    { icon: FaFacebook, href: '#', label: 'Facebook' },
-    { icon: FaYoutube, href: '#', label: 'YouTube' },
-    { icon: FaBlog, href: '#', label: 'Blog' },
-  ];
-
-  const quickLinks = [
-    { name: '브랜드', href: '#brand' },
-    { name: '메뉴', href: '#menu' },
-    { name: '배민 주문', href: '#baemin' },
-    { name: '매장안내', href: '#store' },
-    { name: '창업문의', href: '#contact' },
+    { label: 'Instagram' },
+    { label: 'Facebook' },
+    { label: 'YouTube' },
+    { label: 'Blog' },
   ];
 
   return (
@@ -50,16 +30,12 @@ export default function Footer() {
             {/* 소셜 미디어 */}
             <div className="flex gap-4">
               {socialLinks.map((social) => (
-                <motion.a
+                <div
                   key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white hover:bg-secondary transition-colors"
-                  whileHover={{ scale: 1.1, rotate: 10 }}
-                  whileTap={{ scale: 0.9 }}
+                  className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white hover:bg-secondary transition-colors text-xs"
                 >
-                  <social.icon className="text-xl" />
-                </motion.a>
+                  SNS
+                </div>
               ))}
             </div>
           </div>
@@ -73,17 +49,15 @@ export default function Footer() {
               바로가기
             </h4>
             <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.name}>
-                  <motion.button
-                    onClick={() => scrollToSection(link.href)}
+              {['브랜드', '메뉴', '배민 주문', '매장안내', '창업문의'].map((item) => (
+                <li key={item}>
+                  <a
+                    href={`#${item.toLowerCase()}`}
                     className="text-lg text-white/80 hover:text-primary transition-colors"
                     style={{ fontFamily: "'Gaegu', sans-serif" }}
-                    whileHover={{ x: 5 }}
-                    whileTap={{ scale: 0.95 }}
                   >
-                    {link.name}
-                  </motion.button>
+                    {item}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -166,13 +140,9 @@ export default function Footer() {
         </div>
 
         {/* 귀여운 장식 */}
-        <motion.div
-          className="text-center mt-8"
-          animate={{ y: [0, -5, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
+        <div className="text-center mt-8">
           <span className="text-2xl font-bold text-primary">IMG</span>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );
