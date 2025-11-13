@@ -25,10 +25,9 @@ export default function HeroSection() {
                 textShadow: '4px 4px 0px rgba(255, 255, 255, 0.3)',
               }}
             >
-              계란덮밥의 원조
-              <br />
+      
               <span className="text-white">
-                오늘은 오므라이스
+                오늘은<br /> 오므라이스
               </span>
             </motion.h1>
 

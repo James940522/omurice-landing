@@ -47,7 +47,7 @@ export default function BrandIntroSection() {
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              그것이 오늘은 오므라이스 점주님들의 <span className="font-bold text-secondary">'성공'</span>이기도 하지만 저희의 <span className="font-bold text-secondary">'성공'</span>이기 때문입니다.
+              그것이 오늘은 오므라이스 점주님들의 <span className="font-bold text-secondary">{'성공'}</span>이기도 하지만 저희의 <span className="font-bold text-secondary">{'성공'}</span>이기 때문입니다.
             </motion.p>
             
             <motion.p

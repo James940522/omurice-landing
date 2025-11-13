@@ -44,7 +44,7 @@ export default function Header() {
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-strong' : 'bg-transparent'
+        isScrolled ? 'bg-white shadow-strong' : 'bg-white/95 backdrop-blur-sm shadow-md'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -60,7 +60,9 @@ export default function Header() {
           >
             <a
               href="#"
-              className="text-primary hover:text-secondary transition-colors duration-300 font-bold"
+              className={`font-bold transition-colors duration-300 ${
+                isScrolled ? 'text-primary' : 'text-foreground'
+              } hover:text-primary`}
             >
               오늘은 오므라이스
             </a>
@@ -72,7 +74,9 @@ export default function Header() {
               <motion.button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className="text-foreground hover:text-primary font-medium text-lg transition-colors duration-300"
+                className={`font-medium text-lg transition-colors duration-300 ${
+                  isScrolled ? 'text-foreground hover:text-primary' : 'text-foreground/90 hover:text-foreground'
+                }`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -81,7 +85,7 @@ export default function Header() {
             ))}
             <motion.button
               onClick={() => scrollToSection('#contact')}
-              className="bg-primary text-white px-6 py-2 rounded-full hover:bg-secondary transition-all duration-300 shadow-strong-hover font-bold"
+              className="bg-foreground text-white px-6 py-2 rounded-full hover:bg-primary hover:text-white transition-all duration-300 shadow-strong-hover font-bold border-2 border-foreground hover:border-primary"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -94,7 +98,7 @@ export default function Header() {
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
                 <button 
-                  className="text-foreground text-3xl"
+                  className="text-foreground text-3xl hover:text-primary transition-colors"
                   type="button"
                 >
                   <HiMenu />
