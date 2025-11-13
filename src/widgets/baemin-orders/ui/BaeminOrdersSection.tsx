@@ -75,13 +75,13 @@ export default function BaeminOrdersSection() {
           </div>
           <h2
             className="text-4xl md:text-6xl font-bold mb-6 text-foreground"
-            style={{ fontFamily: "'Jua', sans-serif" }}
+            
           >
             배달의민족 최근 주문수
           </h2>
           <p
             className="text-xl md:text-2xl text-foreground/70 mb-6"
-            style={{ fontFamily: "'Gaegu', sans-serif" }}
+            
           >
             실제 매장의 생생한 주문 현황
           </p>
@@ -139,7 +139,7 @@ export default function BaeminOrdersSection() {
                   {/* 매장명 */}
                   <h3
                     className="text-3xl md:text-4xl font-bold mb-4 relative z-10"
-                    style={{ fontFamily: "'Jua', sans-serif" }}
+                    
                   >
                     {order.storeName}
                   </h3>
@@ -148,13 +148,13 @@ export default function BaeminOrdersSection() {
                   <div className="relative z-10 mb-4">
                     <p
                       className="text-lg md:text-xl opacity-90 mb-2"
-                      style={{ fontFamily: "'Gaegu', sans-serif" }}
+                      
                     >
                       {order.period} 주문수
                     </p>
                     <p
                       className="text-5xl md:text-6xl font-bold"
-                      style={{ fontFamily: "'Jua', sans-serif" }}
+                      
                     >
                       {order.orderCount.toLocaleString()}건
                     </p>
@@ -164,7 +164,7 @@ export default function BaeminOrdersSection() {
                   <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 relative z-10">
                     <p
                       className="text-lg md:text-xl font-bold"
-                      style={{ fontFamily: "'Gaegu', sans-serif" }}
+                      
                     >
                       실제 검증된 매출!
                     </p>
@@ -187,13 +187,13 @@ export default function BaeminOrdersSection() {
           </div>
           <p
             className="text-2xl md:text-3xl text-foreground font-bold mb-2"
-            style={{ fontFamily: "'Jua', sans-serif" }}
+            
           >
             모든 수치는 실제 배민 주문 데이터!
           </p>
           <p
             className="text-lg md:text-xl text-foreground/70"
-            style={{ fontFamily: "'Gaegu', sans-serif" }}
+            
           >
             믿을 수 있는 검증된 브랜드입니다
           </p>

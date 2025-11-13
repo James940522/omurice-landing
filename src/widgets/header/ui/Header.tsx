@@ -60,8 +60,7 @@ export default function Header() {
           >
             <a
               href="#"
-              className="text-primary hover:text-secondary transition-colors duration-300"
-              style={{ fontFamily: "'Jua', sans-serif" }}
+              className="text-primary hover:text-secondary transition-colors duration-300 font-bold"
             >
               오늘은 오므라이스
             </a>
@@ -105,7 +104,6 @@ export default function Header() {
                 <SheetHeader className="border-b-2 border-primary pb-4">
                   <SheetTitle
                     className="text-2xl font-bold text-primary"
-                    style={{ fontFamily: "'Jua', sans-serif" }}
                   >
                     메뉴
                   </SheetTitle>
@@ -122,7 +120,6 @@ export default function Header() {
                         key={item.name}
                         onClick={() => scrollToSection(item.href)}
                         className="block w-full text-left text-foreground hover:text-primary font-bold text-xl py-4 px-4 rounded-xl hover:bg-primary/10 transition-all duration-300"
-                        style={{ fontFamily: "'Jua', sans-serif" }}
                       >
                         {item.name}
                       </button>
@@ -135,7 +132,6 @@ export default function Header() {
                   <button
                     onClick={() => scrollToSection('#contact')}
                     className="w-full bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full hover:shadow-strong transition-all duration-300 font-bold text-xl"
-                    style={{ fontFamily: "'Jua', sans-serif" }}
                   >
                     창업문의 하기 →
                   </button>

@@ -65,13 +65,13 @@ export default function StartupProcessSection() {
         >
           <h2
             className="text-4xl md:text-6xl font-bold mb-6 text-foreground"
-            style={{ fontFamily: "'Jua', sans-serif" }}
+            
           >
             창업 프로세스
           </h2>
           <p
             className="text-xl md:text-2xl text-foreground/70 mb-6"
-            style={{ fontFamily: "'Gaegu', sans-serif" }}
+            
           >
             상담부터 오픈까지, 체계적인 6단계 시스템
           </p>
@@ -98,7 +98,7 @@ export default function StartupProcessSection() {
                 <div className="mb-4">
                   <span
                     className="text-primary text-lg md:text-xl font-bold"
-                    style={{ fontFamily: "'Jua', sans-serif" }}
+                    
                   >
                     {process.step}
                   </span>
@@ -108,7 +108,7 @@ export default function StartupProcessSection() {
                 <div className={cn("w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br rounded-2xl flex items-center justify-center mb-6 shadow-strong", process.color)}>
                   <span
                     className="text-3xl md:text-4xl font-bold text-white"
-                    style={{ fontFamily: "'Jua', sans-serif" }}
+                    
                   >
                     {process.icon}
                   </span>
@@ -117,7 +117,7 @@ export default function StartupProcessSection() {
                 {/* 제목 */}
                 <h3
                   className="text-2xl md:text-3xl font-bold mb-4 text-foreground"
-                  style={{ fontFamily: "'Jua', sans-serif" }}
+                  
                 >
                   {process.title}
                 </h3>
@@ -125,7 +125,7 @@ export default function StartupProcessSection() {
                 {/* 설명 */}
                 <p
                   className="text-lg md:text-xl text-foreground/70 leading-relaxed whitespace-pre-line"
-                  style={{ fontFamily: "'Gaegu', sans-serif" }}
+                  
                 >
                   {process.description}
                 </p>
@@ -143,20 +143,20 @@ export default function StartupProcessSection() {
         >
           <h3
             className="text-2xl md:text-4xl font-bold mb-4"
-            style={{ fontFamily: "'Jua', sans-serif" }}
+            
           >
             상담부터 오픈까지 평균 2~3개월
           </h3>
           <p
             className="text-lg md:text-xl opacity-90 mb-6"
-            style={{ fontFamily: "'Gaegu', sans-serif" }}
+            
           >
             전담 매니저가 처음부터 끝까지 함께합니다
           </p>
           <a
             href="#contact"
             className="inline-block bg-white text-primary px-10 py-4 rounded-full text-lg md:text-xl font-bold shadow-strong-hover hover:bg-foreground hover:text-white transition-all duration-300"
-            style={{ fontFamily: "'Jua', sans-serif" }}
+            
           >
             무료 상담 신청하기
           </a>

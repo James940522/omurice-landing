@@ -76,19 +76,19 @@ export default function FloatingInquiry() {
                 >
                   <motion.div
                     className="text-4xl font-bold text-primary mb-4"
-                    style={{ fontFamily: "'Jua', sans-serif" }}
+                    
                   >
                     IMG
                   </motion.div>
                   <h3
                     className="text-2xl font-bold text-foreground mb-2"
-                    style={{ fontFamily: "'Jua', sans-serif" }}
+                    
                   >
                     신청 완료!
                   </h3>
                   <p
                     className="text-lg text-foreground/70"
-                    style={{ fontFamily: "'Gaegu', sans-serif" }}
+                    
                   >
                     곧 연락드리겠습니다
                   </p>
@@ -99,13 +99,13 @@ export default function FloatingInquiry() {
                   <div className="bg-gradient-to-r from-primary to-secondary p-6">
                   <h3
                     className="text-2xl font-bold text-white text-center"
-                    style={{ fontFamily: "'Jua', sans-serif" }}
+                    
                   >
                     IMG 오늘은 오므라이스
                   </h3>
                     <p
                       className="text-white/90 text-center mt-2"
-                      style={{ fontFamily: "'Gaegu', sans-serif" }}
+                      
                     >
                       지금 바로 시작하세요!
                     </p>
@@ -117,7 +117,7 @@ export default function FloatingInquiry() {
                     <div>
                       <label
                         className="block text-foreground font-bold mb-2"
-                        style={{ fontFamily: "'Jua', sans-serif" }}
+                        
                       >
                         이름 *
                       </label>
@@ -126,7 +126,7 @@ export default function FloatingInquiry() {
                         {...register('name', { required: '이름을 입력해주세요' })}
                         className="w-full px-4 py-3 border-2 border-primary/30 rounded-xl focus:border-primary focus:outline-none transition-colors"
                         placeholder="홍길동"
-                        style={{ fontFamily: "'Gaegu', sans-serif" }}
+                        
                       />
                       {errors.name && (
                         <p className="text-secondary text-sm mt-1">{errors.name.message}</p>
@@ -137,7 +137,7 @@ export default function FloatingInquiry() {
                     <div>
                       <label
                         className="block text-foreground font-bold mb-2"
-                        style={{ fontFamily: "'Jua', sans-serif" }}
+                        
                       >
                         연락처 *
                       </label>
@@ -152,7 +152,7 @@ export default function FloatingInquiry() {
                         })}
                         className="w-full px-4 py-3 border-2 border-primary/30 rounded-xl focus:border-primary focus:outline-none transition-colors"
                         placeholder="010-1234-5678"
-                        style={{ fontFamily: "'Gaegu', sans-serif" }}
+                        
                       />
                       {errors.phone && (
                         <p className="text-secondary text-sm mt-1">{errors.phone.message}</p>
@@ -163,7 +163,7 @@ export default function FloatingInquiry() {
                     <div>
                       <label
                         className="block text-foreground font-bold mb-2"
-                        style={{ fontFamily: "'Jua', sans-serif" }}
+                        
                       >
                         희망 지역 *
                       </label>
@@ -172,7 +172,7 @@ export default function FloatingInquiry() {
                         {...register('region', { required: '희망 지역을 입력해주세요' })}
                         className="w-full px-4 py-3 border-2 border-primary/30 rounded-xl focus:border-primary focus:outline-none transition-colors"
                         placeholder="서울 강남구"
-                        style={{ fontFamily: "'Gaegu', sans-serif" }}
+                        
                       />
                       {errors.region && (
                         <p className="text-secondary text-sm mt-1">{errors.region.message}</p>
@@ -190,7 +190,7 @@ export default function FloatingInquiry() {
                       <label
                         htmlFor="agree"
                         className="text-sm text-foreground/70"
-                        style={{ fontFamily: "'Gaegu', sans-serif" }}
+                        
                       >
                         개인정보 처리방침에 동의합니다 *
                       </label>
@@ -205,7 +205,7 @@ export default function FloatingInquiry() {
                       className="w-full bg-gradient-to-r from-primary to-secondary text-white py-4 rounded-xl font-bold text-lg shadow-strong-hover"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      style={{ fontFamily: "'Jua', sans-serif" }}
+                      
                     >
                       상담 신청하기
                     </motion.button>

@@ -2,7 +2,9 @@
 import { Header } from '@/widgets/header';
 import { HeroSection } from '@/widgets/hero';
 import { BrandIntroSection } from '@/widgets/brand-intro';
+import { RevenueProofSection } from '@/widgets/revenue-proof';
 import { StartupGuideSection } from '@/widgets/startup-guide';
+import { SpecialSection } from '@/widgets/special';
 import { StartupProcessSection } from '@/widgets/startup-process';
 import { StartupCostSection } from '@/widgets/startup-cost';
 import { MenuSection } from '@/widgets/menu';
@@ -12,7 +14,6 @@ import { Footer } from '@/widgets/footer';
 
 // Features
 import { FloatingInquiry } from '@/features/inquiry';
-import { ScrollToTop } from '@/features/scroll-to-top';
 
 export default function Home() {
   return (
@@ -20,7 +21,9 @@ export default function Home() {
       <Header />
       <HeroSection />
       <BrandIntroSection />
+      <RevenueProofSection />
       <StartupGuideSection />
+      <SpecialSection />
       <StartupProcessSection />
       <StartupCostSection />
       <MenuSection />
@@ -28,7 +31,6 @@ export default function Home() {
       <StoreSection />
       <Footer />
       <FloatingInquiry />
-      <ScrollToTop />
     </main>
   );
 }

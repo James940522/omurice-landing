@@ -161,13 +161,13 @@ export default function MenuSection() {
         >
           <h2
             className="text-4xl md:text-6xl font-bold mb-6 text-foreground"
-            style={{ fontFamily: "'Jua', sans-serif" }}
+            
           >
             메뉴 소개
           </h2>
           <p
             className="text-xl md:text-2xl text-foreground/70 mb-6"
-            style={{ fontFamily: "'Gaegu', sans-serif" }}
+            
           >
             다양한 메뉴로 고객의 입맛을 사로잡습니다
           </p>
@@ -183,7 +183,7 @@ export default function MenuSection() {
                 "px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-base md:text-lg shadow-strong-hover",
                 index === 0 ? cn(colorClasses[index], "text-white") : "bg-white text-foreground"
               )}
-              style={{ fontFamily: "'Jua', sans-serif" }}
+              
             >
               {category.name}
             </div>
@@ -205,7 +205,7 @@ export default function MenuSection() {
               <div className={cn("aspect-square bg-gradient-to-br flex items-center justify-center relative overflow-hidden", activeCategoryData.color)}>
                 <span
                   className="text-5xl md:text-6xl font-bold text-white"
-                  style={{ fontFamily: "'Jua', sans-serif" }}
+                  
                 >
                   IMG
                 </span>
@@ -218,7 +218,7 @@ export default function MenuSection() {
               <div className="p-6 md:p-8">
                 <h3
                   className="text-xl md:text-2xl font-bold text-foreground text-center leading-relaxed"
-                  style={{ fontFamily: "'Jua', sans-serif" }}
+                  
                 >
                   {item}
                 </h3>
@@ -239,13 +239,13 @@ export default function MenuSection() {
           </span>
           <p
             className="text-2xl md:text-3xl text-foreground font-bold mb-2"
-            style={{ fontFamily: "'Jua', sans-serif" }}
+            
           >
             모든 메뉴 포장 & 배달 가능!
           </p>
           <p
             className="text-lg md:text-xl text-foreground/70"
-            style={{ fontFamily: "'Gaegu', sans-serif" }}
+            
           >
             이미지는 추후 업데이트 예정입니다
           </p>

@@ -15,13 +15,13 @@ export default function Footer() {
           <div>
             <h3
               className="text-3xl md:text-4xl font-bold mb-4 text-primary"
-              style={{ fontFamily: "'Jua', sans-serif" }}
+              
             >
               IMG 오늘은 오므라이스
             </h3>
             <p
               className="text-lg text-white/80 mb-6"
-              style={{ fontFamily: "'Gaegu', sans-serif" }}
+              
             >
               당신의 성공적인 창업을
               <br />
@@ -44,7 +44,7 @@ export default function Footer() {
           <div>
             <h4
               className="text-xl md:text-2xl font-bold mb-4 text-primary"
-              style={{ fontFamily: "'Jua', sans-serif" }}
+              
             >
               바로가기
             </h4>
@@ -54,7 +54,7 @@ export default function Footer() {
                   <a
                     href={`#${item.toLowerCase()}`}
                     className="text-lg text-white/80 hover:text-primary transition-colors"
-                    style={{ fontFamily: "'Gaegu', sans-serif" }}
+                    
                   >
                     {item}
                   </a>
@@ -67,20 +67,20 @@ export default function Footer() {
           <div>
             <h4
               className="text-xl md:text-2xl font-bold mb-4 text-primary"
-              style={{ fontFamily: "'Jua', sans-serif" }}
+              
             >
               고객센터
             </h4>
             <div className="space-y-3">
               <p
                 className="text-3xl font-bold text-primary"
-                style={{ fontFamily: "'Jua', sans-serif" }}
+                
               >
                 1588-0000
               </p>
               <p
                 className="text-lg text-white/80"
-                style={{ fontFamily: "'Gaegu', sans-serif" }}
+                
               >
                 평일 09:00 - 18:00
                 <br />
@@ -88,7 +88,7 @@ export default function Footer() {
               </p>
               <p
                 className="text-lg text-white/80"
-                style={{ fontFamily: "'Gaegu', sans-serif" }}
+                
               >
                 이메일: help@omurice.co.kr
               </p>
@@ -105,7 +105,7 @@ export default function Footer() {
           <div>
             <p
               className="text-sm text-white/60 leading-relaxed"
-              style={{ fontFamily: "'Gaegu', sans-serif" }}
+              
             >
               (주)오늘은오므라이스 | 대표이사: 홍길동
               <br />
@@ -132,7 +132,7 @@ export default function Footer() {
             </div>
             <p
               className="text-sm text-white/60"
-              style={{ fontFamily: "'Gaegu', sans-serif" }}
+              
             >
               © 2024 오늘은 오므라이스. All rights reserved.
             </p>

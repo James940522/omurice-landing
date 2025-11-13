@@ -80,13 +80,13 @@ export default function StoreSection() {
           </div>
           <h2
             className="text-4xl md:text-6xl font-bold mb-6 text-foreground"
-            style={{ fontFamily: "'Jua', sans-serif" }}
+            
           >
             매장 안내
           </h2>
           <p
             className="text-xl md:text-2xl text-foreground/70 mb-6"
-            style={{ fontFamily: "'Gaegu', sans-serif" }}
+            
           >
             전국 각지에서 성공적으로 운영 중
           </p>
@@ -103,7 +103,7 @@ export default function StoreSection() {
               type="text"
               placeholder="지역 또는 매장명으로 검색"
               className="flex-1 py-3 px-2 text-lg outline-none"
-              style={{ fontFamily: "'Gaegu', sans-serif" }}
+              
               disabled
             />
           </div>
@@ -128,7 +128,7 @@ export default function StoreSection() {
                 </div>
                 <h3
                   className="text-3xl md:text-4xl font-bold relative z-10"
-                  style={{ fontFamily: "'Jua', sans-serif" }}
+                  
                 >
                   {store.name}
                 </h3>
@@ -143,13 +143,13 @@ export default function StoreSection() {
                   <div>
                     <p
                       className="text-sm text-foreground/60 mb-1"
-                      style={{ fontFamily: "'Gaegu', sans-serif" }}
+                      
                     >
                       주소
                     </p>
                     <p
                       className="text-lg font-medium text-foreground"
-                      style={{ fontFamily: "'Gaegu', sans-serif" }}
+                      
                     >
                       {store.address}
                     </p>
@@ -163,13 +163,13 @@ export default function StoreSection() {
                   <div>
                     <p
                       className="text-sm text-foreground/60 mb-1"
-                      style={{ fontFamily: "'Gaegu', sans-serif" }}
+                      
                     >
                       전화번호
                     </p>
                     <p
                       className="text-lg font-medium text-foreground"
-                      style={{ fontFamily: "'Jua', sans-serif" }}
+                      
                     >
                       {store.phone}
                     </p>
@@ -183,13 +183,13 @@ export default function StoreSection() {
                   <div>
                     <p
                       className="text-sm text-foreground/60 mb-1"
-                      style={{ fontFamily: "'Gaegu', sans-serif" }}
+                      
                     >
                       오픈일
                     </p>
                     <p
                       className="text-lg font-medium text-foreground"
-                      style={{ fontFamily: "'Jua', sans-serif" }}
+                      
                     >
                       {store.openingDate}
                     </p>
@@ -212,20 +212,20 @@ export default function StoreSection() {
           </div>
           <h3
             className="text-3xl md:text-4xl font-bold mb-4"
-            style={{ fontFamily: "'Jua', sans-serif" }}
+            
           >
             100개 이상의 가맹점이 성공 중!
           </h3>
           <p
             className="text-lg md:text-xl opacity-90 mb-6"
-            style={{ fontFamily: "'Gaegu', sans-serif" }}
+            
           >
             당신도 오늘은 오므라이스 가족이 되어보세요
           </p>
           <a
             href="#contact"
             className="inline-block bg-white text-primary px-10 py-4 rounded-full text-xl md:text-2xl font-bold shadow-strong-hover hover:bg-foreground hover:text-white transition-all duration-300"
-            style={{ fontFamily: "'Jua', sans-serif" }}
+            
           >
             창업 문의하기
           </a>

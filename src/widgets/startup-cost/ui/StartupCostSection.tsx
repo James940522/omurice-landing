@@ -68,13 +68,13 @@ export default function StartupCostSection() {
         >
           <h2
             className="text-4xl md:text-6xl font-bold mb-6 text-foreground"
-            style={{ fontFamily: "'Jua', sans-serif" }}
+            
           >
             창업 비용 안내
           </h2>
           <p
             className="text-xl md:text-2xl text-foreground/70 mb-6"
-            style={{ fontFamily: "'Gaegu', sans-serif" }}
+            
           >
             투명한 비용 공개, 숨은 비용 없음
           </p>
@@ -96,7 +96,7 @@ export default function StartupCostSection() {
               <div className={cn(cost.color, "text-white px-4 py-2 rounded-full inline-block mb-4")}>
                 <span
                   className="text-lg md:text-xl font-bold"
-                  style={{ fontFamily: "'Jua', sans-serif" }}
+                  
                 >
                   {cost.category}
                 </span>
@@ -105,7 +105,7 @@ export default function StartupCostSection() {
               {/* 금액 */}
               <h3
                 className="text-4xl md:text-5xl font-bold mb-4 text-foreground"
-                style={{ fontFamily: "'Jua', sans-serif" }}
+                
               >
                 {cost.amount}
               </h3>
@@ -113,7 +113,7 @@ export default function StartupCostSection() {
               {/* 설명 */}
               <p
                 className="text-lg md:text-xl text-foreground/70"
-                style={{ fontFamily: "'Gaegu', sans-serif" }}
+                
               >
                 {cost.description}
               </p>
@@ -130,19 +130,19 @@ export default function StartupCostSection() {
         >
           <p
             className="text-xl md:text-2xl mb-4 opacity-90"
-            style={{ fontFamily: "'Gaegu', sans-serif" }}
+            
           >
             총 예상 창업 비용 (보증금 제외)
           </p>
           <h3
             className="text-5xl md:text-7xl font-bold mb-4"
-            style={{ fontFamily: "'Jua', sans-serif" }}
+            
           >
             약 4,500만원
           </h3>
           <p
             className="text-lg md:text-xl opacity-90"
-            style={{ fontFamily: "'Gaegu', sans-serif" }}
+            
           >
             * 15평 기준이며, 매장 상황에 따라 변동될 수 있습니다
           </p>
@@ -156,7 +156,7 @@ export default function StartupCostSection() {
         >
           <h3
             className="text-3xl md:text-4xl font-bold mb-8 text-center text-foreground"
-            style={{ fontFamily: "'Jua', sans-serif" }}
+            
           >
             본사 지원 사항
           </h3>
@@ -174,7 +174,7 @@ export default function StartupCostSection() {
                 </div>
                 <p
                   className="text-lg md:text-xl text-foreground font-medium"
-                  style={{ fontFamily: "'Gaegu', sans-serif" }}
+                  
                 >
                   {support}
                 </p>
