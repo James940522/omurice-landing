@@ -29,11 +29,11 @@ export default function BrandIntroSection() {
         </motion.div>
 
         {/* 메인 콘텐츠 */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
           {/* 왼쪽: 텍스트 */}
-          <div className="space-y-6">
+          <div className="space-y-6 order-2 lg:order-1">
             <motion.p
-              className="text-xl md:text-2xl text-foreground leading-relaxed"
+              className="text-lg md:text-xl lg:text-2xl text-foreground leading-relaxed"
               initial={{ opacity: 0, x: -30 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -42,7 +42,7 @@ export default function BrandIntroSection() {
             </motion.p>
             
             <motion.p
-              className="text-lg md:text-xl text-foreground/80 leading-relaxed"
+              className="text-base md:text-lg lg:text-xl text-foreground/80 leading-relaxed"
               initial={{ opacity: 0, x: -30 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -51,7 +51,7 @@ export default function BrandIntroSection() {
             </motion.p>
             
             <motion.p
-              className="text-lg md:text-xl text-foreground/80 leading-relaxed"
+              className="text-base md:text-lg lg:text-xl text-foreground/80 leading-relaxed"
               initial={{ opacity: 0, x: -30 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -60,19 +60,19 @@ export default function BrandIntroSection() {
             </motion.p>
             
             <motion.div
-              className="bg-primary/10 border-l-4 border-primary p-6 rounded-r-xl"
+              className="bg-primary/10 border-l-4 border-primary p-4 md:p-6 rounded-r-xl"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
               whileHover={{ scale: 1.02, x: 5 }}
             >
-              <p className="text-base md:text-lg text-foreground leading-relaxed">
+              <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed">
                 물론 무조건적인 성공을 보장할 수는 없지만 저희들은 점주님과의 <span className="font-bold">상생을 위해 누구보다도 깊이 고민하고, 시장을 분석하며, 빠르게 실행에 옮긴다는 점</span>에서 저희와 한 배를 타는 것은 꽤나 매력적인 선택지가 될 수 있다고 생각합니다.
               </p>
             </motion.div>
             
             <motion.p
-              className="text-xl md:text-2xl text-primary font-bold leading-relaxed"
+              className="text-lg md:text-xl lg:text-2xl text-primary font-bold leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -87,7 +87,7 @@ export default function BrandIntroSection() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative max-w-sm md:max-w-md lg:max-w-full mx-auto"
+            className="relative max-w-sm md:max-w-md lg:max-w-full mx-auto order-1 lg:order-2 px-8 md:px-0"
           >
             {/* 메인 이미지 */}
             <motion.div
@@ -108,7 +108,7 @@ export default function BrandIntroSection() {
 
             {/* 플로팅 통계 카드들 */}
             <motion.div
-              className="absolute -top-4 -right-4 md:-top-8 md:-right-8 bg-white rounded-xl md:rounded-2xl shadow-2xl p-3 md:p-6 border-2 md:border-4 border-primary cursor-pointer"
+              className="absolute top-2 right-2 md:-top-8 md:-right-8 bg-white rounded-xl md:rounded-2xl shadow-2xl p-3 md:p-6 border-2 md:border-4 border-primary cursor-pointer"
               initial={{ scale: 0, rotate: -10 }}
               animate={isInView ? { 
                 scale: 1, 
@@ -127,7 +127,7 @@ export default function BrandIntroSection() {
             </motion.div>
 
             <motion.div
-              className="absolute -bottom-4 -left-4 md:-bottom-8 md:-left-8 bg-white rounded-xl md:rounded-2xl shadow-2xl p-3 md:p-6 border-2 md:border-4 border-secondary cursor-pointer"
+              className="absolute bottom-2 left-2 md:-bottom-8 md:-left-8 bg-white rounded-xl md:rounded-2xl shadow-2xl p-3 md:p-6 border-2 md:border-4 border-secondary cursor-pointer"
               initial={{ scale: 0, rotate: 10 }}
               animate={isInView ? { 
                 scale: 1, 
@@ -156,7 +156,7 @@ export default function BrandIntroSection() {
         >
           <motion.a
             href="#startup-guide"
-            className="inline-block bg-gradient-to-r from-primary to-secondary text-white px-12 py-5 rounded-full text-lg md:text-xl font-bold shadow-strong-hover"
+            className="inline-block bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 md:px-12 md:py-5 rounded-full text-base md:text-lg lg:text-xl font-bold shadow-strong-hover"
             whileHover={{ scale: 1.05, y: -5 }}
             whileTap={{ scale: 0.95 }}
           >
