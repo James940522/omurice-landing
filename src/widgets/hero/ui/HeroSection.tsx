@@ -13,7 +13,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-left"
+            className="text-center lg:text-left order-2 lg:order-1"
           >
             {/* 메인 타이틀 */}
             <motion.h1
@@ -71,13 +71,13 @@ export default function HeroSection() {
 
           {/* 오른쪽: 이미지 영역 */}
           <motion.div
-            className="relative flex items-center justify-center"
+            className="relative flex items-center justify-center order-1 lg:order-2"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             {/* 메인 이미지 - 실제 음식 사진처럼 */}
-            <div className="relative w-full max-w-2xl">
+            <div className="relative w-full max-w-sm md:max-w-md lg:max-w-2xl">
               <motion.div
                 className="relative aspect-square"
                 animate={{ 
@@ -91,12 +91,12 @@ export default function HeroSection() {
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-100 rounded-full shadow-2xl flex items-center justify-center">
-                  <span className="text-9xl font-bold text-primary">IMG</span>
+                  <span className="text-5xl md:text-7xl lg:text-9xl font-bold text-primary">IMG</span>
                 </div>
                 
                 {/* 반짝이는 효과 */}
                 <motion.div
-                  className="absolute top-1/4 left-1/4 w-8 h-8 text-white text-4xl"
+                  className="absolute top-1/4 left-1/4 w-6 h-6 md:w-8 md:h-8 text-white text-2xl md:text-4xl"
                   animate={{ 
                     scale: [1, 1.2, 1],
                     opacity: [0.5, 1, 0.5]
@@ -108,17 +108,6 @@ export default function HeroSection() {
                 >
                   ✨
                 </motion.div>
-              </motion.div>
-
-              {/* 오른쪽 하단 강조 라벨 */}
-              <motion.div
-                className="absolute -bottom-4 -right-4 bg-white rounded-full shadow-2xl p-8 border-4 border-foreground"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-              >
-                <div className="text-sm text-foreground/60 mb-1 text-center font-bold">참맛동의</div>
-                <div className="text-4xl font-black text-foreground text-center">1위</div>
               </motion.div>
             </div>
           </motion.div>

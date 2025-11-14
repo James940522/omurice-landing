@@ -175,12 +175,12 @@ export default function MenuSection() {
         </motion.div>
 
         {/* 카테고리 탭 - 추후 동적 기능 추가 예정 */}
-        <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12">
           {menuCategories.map((category, index) => (
             <div
               key={category.id}
               className={cn(
-                "px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-base md:text-lg shadow-strong-hover",
+                "px-4 py-2 md:px-6 md:py-3 rounded-full font-bold text-sm md:text-base shadow-strong-hover",
                 index === 0 ? cn(colorClasses[index], "text-white") : "bg-white text-foreground"
               )}
               
@@ -191,11 +191,11 @@ export default function MenuSection() {
         </div>
 
         {/* 메뉴 그리드 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
           {activeCategoryData.items.map((item, index) => (
             <motion.div
               key={item}
-              className="bg-white rounded-3xl overflow-hidden shadow-strong-hover"
+              className="bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-strong-hover"
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
@@ -204,20 +204,20 @@ export default function MenuSection() {
               {/* 이미지 플레이스홀더 */}
               <div className={cn("aspect-square bg-gradient-to-br flex items-center justify-center relative overflow-hidden", activeCategoryData.color)}>
                 <span
-                  className="text-5xl md:text-6xl font-bold text-white"
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold text-white"
                   
                 >
                   IMG
                 </span>
                 {/* 귀여운 장식 */}
-                <div className="absolute top-4 right-4 w-12 h-12 bg-white/30 rounded-full" />
-                <div className="absolute bottom-4 left-4 w-8 h-8 bg-white/30 rounded-full" />
+                <div className="absolute top-2 right-2 md:top-3 md:right-3 w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-white/30 rounded-full" />
+                <div className="absolute bottom-2 left-2 md:bottom-3 md:left-3 w-4 h-4 md:w-6 md:h-6 lg:w-8 lg:h-8 bg-white/30 rounded-full" />
               </div>
 
               {/* 메뉴 이름 */}
-              <div className="p-6 md:p-8">
+              <div className="p-3 md:p-4 lg:p-5">
                 <h3
-                  className="text-xl md:text-2xl font-bold text-foreground text-center leading-relaxed"
+                  className="text-sm md:text-base lg:text-lg font-bold text-foreground text-center leading-tight"
                   
                 >
                   {item}
@@ -229,22 +229,22 @@ export default function MenuSection() {
 
         {/* 하단 안내 */}
         <motion.div
-          className="mt-16 text-center bg-white rounded-3xl p-8 shadow-strong"
+          className="mt-16 text-center bg-white rounded-3xl p-6 md:p-8 shadow-strong"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <span className="text-3xl md:text-4xl font-bold text-primary inline-block mb-4">
+          <span className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary inline-block mb-4">
             IMG
           </span>
           <p
-            className="text-2xl md:text-3xl text-foreground font-bold mb-2"
+            className="text-xl md:text-2xl lg:text-3xl text-foreground font-bold mb-2"
             
           >
             모든 메뉴 포장 & 배달 가능!
           </p>
           <p
-            className="text-lg md:text-xl text-foreground/70"
+            className="text-base md:text-lg lg:text-xl text-foreground/70"
             
           >
             이미지는 추후 업데이트 예정입니다

@@ -99,8 +99,8 @@ export default function RevenueProofSection() {
                 transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
               >
                 {/* 순위 배지 */}
-                <div className="absolute -top-4 -left-4 z-10">
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-white shadow-strong ${
+                <div className="absolute -top-3 -left-3 md:-top-4 md:-left-4 z-10">
+                  <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center font-bold text-white shadow-strong text-sm md:text-base ${
                     index === 0 ? 'bg-gradient-to-br from-yellow-400 to-yellow-600' :
                     index === 1 ? 'bg-gradient-to-br from-gray-300 to-gray-500' :
                     index === 2 ? 'bg-gradient-to-br from-orange-400 to-orange-600' :
@@ -112,8 +112,8 @@ export default function RevenueProofSection() {
 
                 {/* 카드 */}
                 <motion.div
-                  className={`relative bg-white rounded-2xl p-6 shadow-strong-hover ${
-                    store.highlight ? 'border-4 border-primary' : ''
+                  className={`relative bg-white rounded-2xl p-4 md:p-6 shadow-strong-hover ${
+                    store.highlight ? 'border-2 md:border-4 border-primary' : ''
                   }`}
                   whileHover={{ 
                     scale: 1.08, 
@@ -128,15 +128,15 @@ export default function RevenueProofSection() {
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <span className="text-5xl font-bold text-white">IMG</span>
+                    <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">IMG</span>
                   </motion.div>
 
                   {/* 매장 정보 */}
                   <div className="text-center">
-                    <h4 className="text-xl font-bold text-foreground mb-2">{store.storeName}</h4>
-                    <div className="text-sm text-foreground/60 mb-2">월 매출</div>
+                    <h4 className="text-lg md:text-xl font-bold text-foreground mb-2">{store.storeName}</h4>
+                    <div className="text-xs md:text-sm text-foreground/60 mb-2">월 매출</div>
                     <motion.div
-                      className={`text-2xl font-bold ${store.highlight ? 'text-primary' : 'text-secondary'}`}
+                      className={`text-xl md:text-2xl font-bold ${store.highlight ? 'text-primary' : 'text-secondary'}`}
                       animate={{ scale: store.highlight ? [1, 1.1, 1] : 1 }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >

@@ -87,7 +87,7 @@ export default function BrandIntroSection() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative"
+            className="relative max-w-sm md:max-w-md lg:max-w-full mx-auto"
           >
             {/* 메인 이미지 */}
             <motion.div
@@ -97,7 +97,7 @@ export default function BrandIntroSection() {
             >
               <div className="absolute inset-0 flex items-center justify-center">
                 <motion.span
-                  className="text-8xl md:text-9xl font-bold text-white"
+                  className="text-5xl md:text-7xl lg:text-9xl font-bold text-white"
                   animate={{ scale: [1, 1.1, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
@@ -108,7 +108,7 @@ export default function BrandIntroSection() {
 
             {/* 플로팅 통계 카드들 */}
             <motion.div
-              className="absolute -top-8 -right-8 bg-white rounded-2xl shadow-2xl p-6 border-4 border-primary cursor-pointer"
+              className="absolute -top-4 -right-4 md:-top-8 md:-right-8 bg-white rounded-xl md:rounded-2xl shadow-2xl p-3 md:p-6 border-2 md:border-4 border-primary cursor-pointer"
               initial={{ scale: 0, rotate: -10 }}
               animate={isInView ? { 
                 scale: 1, 
@@ -122,12 +122,12 @@ export default function BrandIntroSection() {
               }}
               whileHover={{ scale: 1.1, rotate: 5 }}
             >
-              <div className="text-sm text-foreground/60 mb-1 font-medium">평균 월매출</div>
-              <div className="text-3xl font-bold text-primary">1억+</div>
+              <div className="text-xs md:text-sm text-foreground/60 mb-1 font-medium">평균 월매출</div>
+              <div className="text-xl md:text-3xl font-bold text-primary">1억+</div>
             </motion.div>
 
             <motion.div
-              className="absolute -bottom-8 -left-8 bg-white rounded-2xl shadow-2xl p-6 border-4 border-secondary cursor-pointer"
+              className="absolute -bottom-4 -left-4 md:-bottom-8 md:-left-8 bg-white rounded-xl md:rounded-2xl shadow-2xl p-3 md:p-6 border-2 md:border-4 border-secondary cursor-pointer"
               initial={{ scale: 0, rotate: 10 }}
               animate={isInView ? { 
                 scale: 1, 
@@ -141,8 +141,8 @@ export default function BrandIntroSection() {
               }}
               whileHover={{ scale: 1.1, rotate: -5 }}
             >
-              <div className="text-sm text-foreground/60 mb-1 font-medium">재가맹률</div>
-              <div className="text-3xl font-bold text-secondary">95%</div>
+              <div className="text-xs md:text-sm text-foreground/60 mb-1 font-medium">재가맹률</div>
+              <div className="text-xl md:text-3xl font-bold text-secondary">95%</div>
             </motion.div>
           </motion.div>
         </div>
