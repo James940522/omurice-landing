@@ -51,7 +51,7 @@ export default function HeroSection() {
       </motion.div>
       
       {/* 중앙 컨텐츠 그룹 */}
-      <div className="relative z-20 flex flex-col items-center w-full">
+      <div className="relative z-20 flex flex-col items-center w-full max-w-7xl mx-auto px-4">
         {/* 떠다니는 메뉴 이미지들 - 좌측 상단 (왼쪽 끝, 크게) */}
         <motion.div
           className="absolute left-0 md:left-2 lg:left-4 top-[10%] w-44 md:w-60 lg:w-80 hidden lg:block"
@@ -260,7 +260,7 @@ export default function HeroSection() {
         
         {/* 2. 중앙 메인 이미지 - 태블릿/데스크톱에서만 표시 */}
         <motion.div
-          className="hidden lg:block w-full max-w-xs md:max-w-sm lg:max-w-lg px-4 relative z-30"
+          className="hidden lg:block w-full max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg px-4 relative z-30"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}

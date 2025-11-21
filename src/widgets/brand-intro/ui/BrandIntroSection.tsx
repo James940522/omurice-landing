@@ -2,6 +2,7 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import Image from 'next/image';
 
 export default function BrandIntroSection() {
   const ref = useRef(null);
@@ -147,11 +148,15 @@ export default function BrandIntroSection() {
             transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           >
             <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-3 md:p-4 lg:p-5 border-2 border-white/20">
-              <img 
-                src="/asset/menu/메뉴모음컷/01.13108769.jpg"
-                alt="메뉴 이미지"
-                className="w-full h-auto rounded-2xl shadow-2xl"
-              />
+              <div className="relative w-full aspect-square">
+                <Image 
+                  src="/asset/menu/메뉴모음컷/01.13108769.jpg"
+                  alt="메뉴 이미지"
+                  fill
+                  className="rounded-2xl shadow-2xl object-cover"
+                  quality={75}
+                />
+              </div>
               {/* 장식 요소 */}
               <div className="absolute -top-6 -right-6 w-32 h-32 bg-yellow-400 rounded-full blur-3xl opacity-40" />
               <div className="absolute -bottom-6 -left-6 w-40 h-40 bg-orange-400 rounded-full blur-3xl opacity-40" />

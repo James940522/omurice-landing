@@ -4,6 +4,93 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
 
+// 개별 강점 아이템 컴포넌트
+interface StrengthItemProps {
+  strength: {
+    number: string;
+    title: string;
+    desc: string;
+    image: string;
+  };
+  index: number;
+}
+
+const StrengthItem = ({ strength, index }: StrengthItemProps) => {
+  const itemRef = useRef(null);
+  const isItemInView = useInView(itemRef, { 
+    once: true, 
+    margin: '-100px',
+    amount: 0.3  // 항목의 30%가 보일 때 트리거
+  });
+  const isEven = index % 2 === 1;
+
+  return (
+    <motion.div
+      ref={itemRef}
+      className="relative"
+      initial={{ 
+        opacity: 0, 
+        x: isEven ? 100 : -100 
+      }}
+      animate={isItemInView ? { 
+        opacity: 1, 
+        x: 0 
+      } : {}}
+      transition={{ 
+        duration: 0.8, 
+        ease: "easeOut"
+      }}
+    >
+      <div className={`flex flex-col ${isEven ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 md:gap-12 items-center`}>
+        {/* 이미지 영역 */}
+        <motion.div 
+          className="w-full md:w-1/2"
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="relative aspect-4/3 rounded-3xl overflow-hidden shadow-strong bg-linear-to-br from-gray-50 to-gray-100">
+            <Image 
+              src={strength.image} 
+              alt={strength.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+            
+            {/* 넘버 오버레이 */}
+            <div className="absolute top-6 left-6 z-10">
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white/95 backdrop-blur-sm flex items-center justify-center shadow-lg">
+                <span className="text-2xl md:text-3xl font-bold text-primary">{strength.number}</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+        
+        {/* 텍스트 영역 */}
+        <div className="w-full md:w-1/2">
+          <h4 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 md:mb-8">
+            {strength.title}
+          </h4>
+          <div className="w-12 h-1 bg-primary mb-6 md:mb-8"></div>
+          <p className="text-base md:text-lg text-foreground/70 leading-relaxed">
+            {strength.desc}
+          </p>
+        </div>
+      </div>
+      
+      {/* 구분선 */}
+      {index < 6 && (
+        <motion.div 
+          className="mt-16 md:mt-20 lg:mt-24 w-full h-px bg-linear-to-r from-transparent via-foreground/20 to-transparent"
+          initial={{ scaleX: 0 }}
+          animate={isItemInView ? { scaleX: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        />
+      )}
+    </motion.div>
+  );
+};
+
 export default function RevenueProofSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
@@ -147,76 +234,13 @@ export default function RevenueProofSection() {
                 desc: '고정비를 최소화한 구조로 경기 변동에도 안정적입니다. 작은 매장, 적은 인원, 단순한 재고로 리스크를 낮추고 수익성을 유지합니다. 우리는 지속 가능한 재료 선택과 생산 방법을 채택하여 환경에 친화적인 사업 운영을 추구하며, 브랜드와 소비자 간의 긴밀한 유대감을 형성합니다.',
                 image: '/asset/menu/메뉴모음컷/메뉴모음컷 3.jpg',
               },
-            ].map((strength, index) => {
-              const isEven = index % 2 === 1;
-              
-              return (
-                <motion.div
-                  key={strength.number}
-                  className="relative"
-                  initial={{ 
-                    opacity: 0, 
-                    x: isEven ? 100 : -100 
-                  }}
-                  animate={isInView ? { 
-                    opacity: 1, 
-                    x: 0 
-                  } : {}}
-                  transition={{ 
-                    duration: 0.8, 
-                    delay: 0.7 + index * 0.15,
-                    ease: "easeOut"
-                  }}
-                >
-                  <div className={`flex flex-col ${isEven ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 md:gap-12 items-center`}>
-                    {/* 이미지 영역 */}
-                    <motion.div 
-                      className="w-full md:w-1/2"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <div className="relative aspect-4/3 rounded-3xl overflow-hidden shadow-strong bg-linear-to-br from-gray-50 to-gray-100">
-                        <Image 
-                          src={strength.image} 
-                          alt={strength.title}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, 50vw"
-                        />
-                        
-                        {/* 넘버 오버레이 */}
-                        <div className="absolute top-6 left-6 z-10">
-                          <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white/95 backdrop-blur-sm flex items-center justify-center shadow-lg">
-                            <span className="text-2xl md:text-3xl font-bold text-primary">{strength.number}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                    
-                    {/* 텍스트 영역 */}
-                    <div className="w-full md:w-1/2">
-                      <h4 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 md:mb-8">
-                        {strength.title}
-                      </h4>
-                      <div className="w-12 h-1 bg-primary mb-6 md:mb-8"></div>
-                      <p className="text-base md:text-lg text-foreground/70 leading-relaxed">
-                        {strength.desc}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  {/* 구분선 */}
-                  {index < 6 && (
-                    <motion.div 
-                      className="mt-16 md:mt-20 lg:mt-24 w-full h-px bg-linear-to-r from-transparent via-foreground/20 to-transparent"
-                      initial={{ scaleX: 0 }}
-                      animate={isInView ? { scaleX: 1 } : {}}
-                      transition={{ duration: 0.8, delay: 0.9 + index * 0.15 }}
-                    />
-                  )}
-                </motion.div>
-              );
-            })}
+            ].map((strength, index) => (
+              <StrengthItem 
+                key={strength.number} 
+                strength={strength} 
+                index={index} 
+              />
+            ))}
           </div>
         </motion.div>
       </div>
