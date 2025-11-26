@@ -54,13 +54,12 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 md:h-16">
           {/* Logo */}
-          <motion.div
-            className="shrink-0"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <a href="#" className="flex items-center gap-2 md:gap-3" aria-label="오늘은 오므라이스 홈으로 이동">
-
+          <motion.div className="shrink-0" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <a
+              href="#"
+              className="flex items-center gap-2 md:gap-3"
+              aria-label="오늘은 오므라이스 홈으로 이동"
+            >
               <Image
                 src="/asset/logo/오므라이스_문구.png"
                 alt="오늘은 오므라이스"
@@ -80,7 +79,9 @@ export default function Header() {
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
                 className={`font-medium text-lg transition-colors duration-300 ${
-                  isScrolled ? 'text-foreground hover:text-primary' : 'text-foreground/90 hover:text-foreground'
+                  isScrolled
+                    ? 'text-foreground hover:text-primary'
+                    : 'text-foreground/90 hover:text-foreground'
                 }`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -102,7 +103,7 @@ export default function Header() {
           <div className="md:hidden">
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
-                <button 
+                <button
                   className="text-foreground text-3xl hover:text-primary transition-colors"
                   type="button"
                   aria-label="메뉴 열기"
@@ -112,14 +113,8 @@ export default function Header() {
               </SheetTrigger>
               <SheetContent side="right" className="w-80 bg-white">
                 <SheetHeader className="border-b-2 border-primary pb-4">
-                  <SheetTitle
-                    className="text-2xl font-bold text-primary"
-                  >
-                    메뉴
-                  </SheetTitle>
-                  <SheetDescription className="sr-only">
-                    네비게이션 메뉴
-                  </SheetDescription>
+                  <SheetTitle className="text-2xl font-bold text-primary">메뉴</SheetTitle>
+                  <SheetDescription className="sr-only">네비게이션 메뉴</SheetDescription>
                 </SheetHeader>
 
                 {/* Navigation Items */}

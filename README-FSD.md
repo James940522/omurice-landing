@@ -49,6 +49,7 @@ src/
 ## 🎯 현재 상태
 
 ### ✅ 완료
+
 - `shared/lib/` - 유틸리티 함수
 - `shared/types/` - 타입 정의
 - `widgets/header/` - 헤더 (Server Component)
@@ -56,7 +57,9 @@ src/
 - `widgets/footer/` - 푸터 (Server Component)
 
 ### 🚧 진행 중
+
 나머지 섹션들은 기존 `components/sections/`에 유지:
+
 - BrandIntroSection
 - StartupGuideSection
 - StartupProcessSection
@@ -66,6 +69,7 @@ src/
 - StoreSection
 
 ### 📅 향후 작업
+
 1. **나머지 섹션을 widgets로 이동**
 2. **동적 기능 추가 시 features로 분리**:
    - inquiry-form (문의 폼, 모달)
@@ -78,8 +82,8 @@ src/
 1. **단방향 의존성**: 상위 계층만 하위 계층 import 가능
    - ❌ shared → entities (불가능)
    - ✅ entities → shared (가능)
-   
 2. **Public API**: 각 모듈은 `index.ts`를 통해 export
+
    ```ts
    // widgets/header/index.ts
    export { default as Header } from './ui/Header';
@@ -101,6 +105,7 @@ import Header from '@/widgets/header/ui/Header';
 ## 🚀 Server Component 전환
 
 모든 컴포넌트를 Server Component로 변경:
+
 - ✅ `'use client'` 제거
 - ✅ `framer-motion` 애니메이션 제거
 - ✅ `useState`, `useEffect` 등 React Hooks 제거
@@ -118,4 +123,3 @@ import Header from '@/widgets/header/ui/Header';
 - [ ] 나머지 widgets 이동
 - [ ] entities 구성
 - [ ] features 추가 (동적 기능)
-

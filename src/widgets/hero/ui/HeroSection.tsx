@@ -9,12 +9,17 @@ import 'swiper/css/pagination';
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20 md:pt-24 pb-8 md:pb-12 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-500">
-      {/* 부드러운 배경 효과 */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-amber-400/50 via-transparent to-orange-400/30" />
-        <div className="absolute top-20 right-20 w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-20 w-[500px] h-[500px] bg-amber-500/20 rounded-full blur-3xl" />
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20 md:pt-24 pb-8 md:pb-12">
+      {/* 배경 이미지 */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/asset/bg/sec1-bg.jpg"
+          alt="배경"
+          fill
+          className="object-cover"
+          priority
+          quality={90}
+        />
       </div>
 
       {/* 반복되는 텍스트 배경 - 상단 */}
@@ -24,7 +29,10 @@ export default function HeroSection() {
         transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
       >
         <div className="text-[3rem] md:text-[5rem] lg:text-[6rem] font-black text-white/20 whitespace-nowrap">
-          맛있는 · 프리미엄 · 신선한 · 오므라이스 · 맛있는 · 프리미엄 · 신선한 · 오므라이스 · 맛있는 · 프리미엄 · 신선한 · 오므라이스 · 맛있는 · 프리미엄 · 신선한 · 오므라이스 맛있는 · 프리미엄 · 신선한 · 오므라이스 · 맛있는 · 프리미엄 · 신선한 · 오므라이스 · 맛있는 · 프리미엄 · 신선한 · 오므라이스 · 맛있는 · 프리미엄 · 신선한 · 오므라이스
+          맛있는 · 프리미엄 · 신선한 · 오므라이스 · 맛있는 · 프리미엄 · 신선한 · 오므라이스 · 맛있는
+          · 프리미엄 · 신선한 · 오므라이스 · 맛있는 · 프리미엄 · 신선한 · 오므라이스 맛있는 ·
+          프리미엄 · 신선한 · 오므라이스 · 맛있는 · 프리미엄 · 신선한 · 오므라이스 · 맛있는 ·
+          프리미엄 · 신선한 · 오므라이스 · 맛있는 · 프리미엄 · 신선한 · 오므라이스
         </div>
       </motion.div>
 
@@ -35,7 +43,9 @@ export default function HeroSection() {
         transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
       >
         <div className="text-[3rem] md:text-[5rem] lg:text-[6rem] font-black text-white/20 whitespace-nowrap">
-          창업 · 성공 · 수익 · 가맹점 · 창업 · 성공 · 수익 · 가맹점 · 창업 · 성공 · 수익 · 가맹점 · 창업 · 성공 · 수익 · 가맹점 · 창업 · 성공 · 수익 · 가맹점 · 창업 · 성공 · 수익 · 가맹점 · 창업 · 성공 · 수익 · 가맹점
+          창업 · 성공 · 수익 · 가맹점 · 창업 · 성공 · 수익 · 가맹점 · 창업 · 성공 · 수익 · 가맹점 ·
+          창업 · 성공 · 수익 · 가맹점 · 창업 · 성공 · 수익 · 가맹점 · 창업 · 성공 · 수익 · 가맹점 ·
+          창업 · 성공 · 수익 · 가맹점
         </div>
       </motion.div>
 
@@ -46,27 +56,30 @@ export default function HeroSection() {
         transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
       >
         <div className="text-[3rem] md:text-[5rem] lg:text-[6rem] font-black text-white/20 whitespace-nowrap">
-          100호점 · 1위 · 프랜차이즈 · OMURICE · 100호점 · 1위 · 프랜차이즈 · OMURICE · 100호점 · 1위 · 프랜차이즈 · OMURICE · 100호점 · 1위 · 프랜차이즈 · OMURICE · 100호점 · 1위 · 프랜차이즈 · OMURICE · 100호점 · 1위 · 프랜차이즈 · OMURICE · 100호점 · 1위 · 프랜차이즈 · OMURICE
+          100호점 · 1위 · 프랜차이즈 · OMURICE · 100호점 · 1위 · 프랜차이즈 · OMURICE · 100호점 ·
+          1위 · 프랜차이즈 · OMURICE · 100호점 · 1위 · 프랜차이즈 · OMURICE · 100호점 · 1위 ·
+          프랜차이즈 · OMURICE · 100호점 · 1위 · 프랜차이즈 · OMURICE · 100호점 · 1위 · 프랜차이즈 ·
+          OMURICE
         </div>
       </motion.div>
-      
+
       {/* 중앙 컨텐츠 그룹 */}
       <div className="relative z-20 flex flex-col items-center w-full max-w-7xl mx-auto px-4">
         {/* 떠다니는 메뉴 이미지들 - 좌측 상단 (왼쪽 끝, 크게) */}
         <motion.div
           className="absolute left-0 md:left-2 lg:left-4 top-[10%] w-44 md:w-60 lg:w-80 hidden lg:block"
           initial={{ opacity: 0, x: -120, rotate: -20 }}
-          animate={{ 
-            opacity: 1, 
+          animate={{
+            opacity: 1,
             x: 0,
             y: [0, -25, 0],
-            rotate: [-8, 3, -8]
+            rotate: [-8, 3, -8],
           }}
-          transition={{ 
+          transition={{
             opacity: { duration: 1, delay: 0.5 },
             x: { duration: 1, delay: 0.5 },
-            y: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-            rotate: { duration: 7, repeat: Infinity, ease: "easeInOut" }
+            y: { duration: 5, repeat: Infinity, ease: 'easeInOut' },
+            rotate: { duration: 7, repeat: Infinity, ease: 'easeInOut' },
           }}
         >
           <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white/40">
@@ -84,17 +97,17 @@ export default function HeroSection() {
         <motion.div
           className="absolute left-[10%] md:left-[12%] lg:left-[15%] bottom-[15%] w-28 md:w-40 lg:w-52 hidden lg:block"
           initial={{ opacity: 0, x: -80, rotate: 15 }}
-          animate={{ 
-            opacity: 1, 
+          animate={{
+            opacity: 1,
             x: 0,
             y: [0, 20, 0],
-            rotate: [10, -6, 10]
+            rotate: [10, -6, 10],
           }}
-          transition={{ 
+          transition={{
             opacity: { duration: 1, delay: 0.9 },
             x: { duration: 1, delay: 0.9 },
-            y: { duration: 6.5, repeat: Infinity, ease: "easeInOut" },
-            rotate: { duration: 8.5, repeat: Infinity, ease: "easeInOut" }
+            y: { duration: 6.5, repeat: Infinity, ease: 'easeInOut' },
+            rotate: { duration: 8.5, repeat: Infinity, ease: 'easeInOut' },
           }}
         >
           <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white/40">
@@ -112,17 +125,17 @@ export default function HeroSection() {
         <motion.div
           className="absolute right-0 md:right-2 lg:right-4 top-[8%] w-42 md:w-56 lg:w-72 hidden lg:block"
           initial={{ opacity: 0, x: 120, rotate: 18 }}
-          animate={{ 
-            opacity: 1, 
+          animate={{
+            opacity: 1,
             x: 0,
             y: [0, 28, 0],
-            rotate: [8, -10, 8]
+            rotate: [8, -10, 8],
           }}
-          transition={{ 
+          transition={{
             opacity: { duration: 1, delay: 0.7 },
             x: { duration: 1, delay: 0.7 },
-            y: { duration: 5.5, repeat: Infinity, ease: "easeInOut" },
-            rotate: { duration: 7.8, repeat: Infinity, ease: "easeInOut" }
+            y: { duration: 5.5, repeat: Infinity, ease: 'easeInOut' },
+            rotate: { duration: 7.8, repeat: Infinity, ease: 'easeInOut' },
           }}
         >
           <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white/40">
@@ -140,17 +153,17 @@ export default function HeroSection() {
         <motion.div
           className="absolute right-[10%] md:right-[12%] lg:right-[15%] bottom-[18%] w-32 md:w-44 lg:w-56 hidden lg:block"
           initial={{ opacity: 0, x: 100, rotate: -15 }}
-          animate={{ 
-            opacity: 1, 
+          animate={{
+            opacity: 1,
             x: 0,
             y: [0, -22, 0],
-            rotate: [-12, 5, -12]
+            rotate: [-12, 5, -12],
           }}
-          transition={{ 
+          transition={{
             opacity: { duration: 1, delay: 1.1 },
             x: { duration: 1, delay: 1.1 },
-            y: { duration: 6.2, repeat: Infinity, ease: "easeInOut" },
-            rotate: { duration: 8.2, repeat: Infinity, ease: "easeInOut" }
+            y: { duration: 6.2, repeat: Infinity, ease: 'easeInOut' },
+            rotate: { duration: 8.2, repeat: Infinity, ease: 'easeInOut' },
           }}
         >
           <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white/40">
@@ -173,13 +186,13 @@ export default function HeroSection() {
         >
           <motion.div
             className="relative w-48 md:w-64 lg:w-72 xl:w-80 h-auto"
-            animate={{ 
+            animate={{
               y: [0, -8, 0],
             }}
-            transition={{ 
-              duration: 3, 
+            transition={{
+              duration: 3,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: 'easeInOut',
             }}
           >
             <Image
@@ -257,7 +270,7 @@ export default function HeroSection() {
             </SwiperSlide>
           </Swiper>
         </div>
-        
+
         {/* 2. 중앙 메인 이미지 - 태블릿/데스크톱에서만 표시 */}
         <motion.div
           className="hidden lg:block w-full max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg px-4 relative z-30"
@@ -267,13 +280,13 @@ export default function HeroSection() {
         >
           <motion.div
             className="relative w-full aspect-[4/3]"
-            animate={{ 
+            animate={{
               y: [0, -15, 0],
             }}
-            transition={{ 
-              duration: 5, 
+            transition={{
+              duration: 5,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: 'easeInOut',
             }}
           >
             <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl">
@@ -286,8 +299,6 @@ export default function HeroSection() {
                 quality={75}
               />
             </div>
-
- 
           </motion.div>
         </motion.div>
 

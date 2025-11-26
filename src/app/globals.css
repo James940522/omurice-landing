@@ -1,63 +1,63 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
   /* 메인 톤앤매너 색상 - 오므라이스 로고 기반 */
-  --primary: #FEC601;
-  --secondary: #FF6B4A;
-  --accent: #66BB6A;
-  --background: #FFFFFF;
-  --foreground: #6B4423;
-  
+  --primary: #fec601;
+  --secondary: #ff6b4a;
+  --accent: #66bb6a;
+  --background: #ffffff;
+  --foreground: #6b4423;
+
   /* 추가 악센트 색상 */
-  --accent-yellow: #FEC601;
-  --accent-red: #FF6B4A;
-  --accent-green: #66BB6A;
-  --accent-brown: #8B4513;
-  
+  --accent-yellow: #fec601;
+  --accent-red: #ff6b4a;
+  --accent-green: #66bb6a;
+  --accent-brown: #8b4513;
+
   /* 파스텔 배경 색상 - 이미지 톤앤매너 기반 */
-  --pastel-pink: #FFB3BA;
-  --pastel-peach: #FFCC99;
-  --pastel-yellow: #FFE599;
-  --pastel-mint: #B5EAD7;
-  --pastel-blue: #C7CEEA;
-  --pastel-lavender: #E0BBE4;
-  --pastel-cream: #FFF9E6;
-  --pastel-ivory: #FFFEF0;
-  
+  --pastel-pink: #ffb3ba;
+  --pastel-peach: #ffcc99;
+  --pastel-yellow: #ffe599;
+  --pastel-mint: #b5ead7;
+  --pastel-blue: #c7ceea;
+  --pastel-lavender: #e0bbe4;
+  --pastel-cream: #fff9e6;
+  --pastel-ivory: #fffef0;
+
   /* shadcn 호환성을 위한 추가 변수 */
   --radius: 0.625rem;
-  --card: #FFFFFF;
-  --card-foreground: #6B4423;
-  --popover: #FFFFFF;
-  --popover-foreground: #6B4423;
-  --primary-foreground: #FFFFFF;
-  --secondary-foreground: #FFFFFF;
-  --muted: #FFF9E6;
-  --muted-foreground: #A0522D;
-  --accent-foreground: #FFFFFF;
-  --destructive: #FF4444;
-  --destructive-foreground: #FFFFFF;
-  --border: #FFE8B3;
-  --input: #FFF5DC;
-  --ring: #FEC601;
-  --chart-1: #FEC601;
-  --chart-2: #FF6B4A;
-  --chart-3: #66BB6A;
-  --chart-4: #8B4513;
-  --chart-5: #FFD700;
-  
+  --card: #ffffff;
+  --card-foreground: #6b4423;
+  --popover: #ffffff;
+  --popover-foreground: #6b4423;
+  --primary-foreground: #ffffff;
+  --secondary-foreground: #ffffff;
+  --muted: #fff9e6;
+  --muted-foreground: #a0522d;
+  --accent-foreground: #ffffff;
+  --destructive: #ff4444;
+  --destructive-foreground: #ffffff;
+  --border: #ffe8b3;
+  --input: #fff5dc;
+  --ring: #fec601;
+  --chart-1: #fec601;
+  --chart-2: #ff6b4a;
+  --chart-3: #66bb6a;
+  --chart-4: #8b4513;
+  --chart-5: #ffd700;
+
   /* sidebar 색상 */
-  --sidebar: #FFFFFF;
-  --sidebar-foreground: #6B4423;
-  --sidebar-primary: #FEC601;
-  --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #FFF9E6;
-  --sidebar-accent-foreground: #6B4423;
-  --sidebar-border: #FFE8B3;
-  --sidebar-ring: #FEC601;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #6b4423;
+  --sidebar-primary: #fec601;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #fff9e6;
+  --sidebar-accent-foreground: #6b4423;
+  --sidebar-border: #ffe8b3;
+  --sidebar-ring: #fec601;
 }
 
 @theme inline {
@@ -116,20 +116,40 @@ html {
 }
 
 body {
-  font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  cursor: url("/asset/logo/cursor.png") 16 16, auto;
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
+  cursor:
+    url('/asset/logo/cursor.png') 16 16,
+    auto;
   overflow-x: hidden;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  cursor: url("/asset/logo/cursor.png") 16 16, auto;
+  cursor:
+    url('/asset/logo/cursor.png') 16 16,
+    auto;
 }
 
 /* 커스텀 커서 스타일 */
-a, button, [role="button"], input[type="submit"], input[type="button"], 
-a *, button *, [role="button"] * {
-  cursor: url("/asset/logo/cursor.png") 16 16, pointer !important;
+a,
+button,
+[role='button'],
+input[type='submit'],
+input[type='button'],
+a *,
+button *,
+[role='button'] * {
+  cursor:
+    url('/asset/logo/cursor.png') 16 16,
+    pointer !important;
 }
 
 /* 스크롤바 커스터마이징 */
@@ -138,17 +158,17 @@ a *, button *, [role="button"] * {
 }
 
 ::-webkit-scrollbar-track {
-  background: #FFFBF0;
+  background: #fffbf0;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #FEC601 0%, #FF6B4A 100%);
+  background: linear-gradient(180deg, #fec601 0%, #ff6b4a 100%);
   border-radius: 6px;
-  border: 2px solid #FFFBF0;
+  border: 2px solid #fffbf0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #FFD700 0%, #FF8A5C 100%);
+  background: linear-gradient(180deg, #ffd700 0%, #ff8a5c 100%);
 }
 
 /* 강한 그림자 효과 (톤앤매너) */
@@ -167,7 +187,8 @@ a *, button *, [role="button"] * {
 
 /* 귀여운 애니메이션 */
 @keyframes bounce-cute {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -176,7 +197,8 @@ a *, button *, [role="button"] * {
 }
 
 @keyframes wiggle {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(0deg);
   }
   25% {
@@ -198,7 +220,7 @@ a *, button *, [role="button"] * {
 /* Swiper 커스터마이징 */
 .baemin-swiper .swiper-button-next,
 .baemin-swiper .swiper-button-prev {
-  background: #FEC601 !important;
+  background: #fec601 !important;
   width: 40px !important;
   height: 40px !important;
   border-radius: 50% !important;
@@ -208,27 +230,27 @@ a *, button *, [role="button"] * {
 
 .baemin-swiper .swiper-button-next:hover,
 .baemin-swiper .swiper-button-prev:hover {
-  background: #FFD700 !important;
+  background: #ffd700 !important;
   transform: scale(1.1) !important;
 }
 
 .baemin-swiper .swiper-button-next::after,
 .baemin-swiper .swiper-button-prev::after {
   font-size: 12px !important;
-  color: #6B4423 !important;
+  color: #6b4423 !important;
   font-weight: bold !important;
 }
 
 .baemin-swiper .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
-  background: #A0522D;
+  background: #a0522d;
   opacity: 0.3;
   transition: all 0.3s ease;
 }
 
 .baemin-swiper .swiper-pagination-bullet-active {
-  background: #FEC601;
+  background: #fec601;
   opacity: 1;
   width: 32px;
   border-radius: 6px;
@@ -238,13 +260,13 @@ a *, button *, [role="button"] * {
 .hero-swiper .swiper-pagination-bullet {
   width: 10px;
   height: 10px;
-  background: #6B4423;
+  background: #6b4423;
   opacity: 0.5;
   transition: all 0.3s ease;
 }
 
 .hero-swiper .swiper-pagination-bullet-active {
-  background: #6B4423;
+  background: #6b4423;
   opacity: 1;
   width: 24px;
   border-radius: 5px;

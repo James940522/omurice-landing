@@ -27,4 +27,3 @@ export interface InquiryForm {
   region: string;
   agree: boolean;
 }
-

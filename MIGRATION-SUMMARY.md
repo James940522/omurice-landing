@@ -3,7 +3,9 @@
 ## ✅ 완료된 작업
 
 ### 1. Server Component 전환
+
 모든 컴포넌트를 Server Component로 변환:
+
 - ✅ `'use client'` 제거
 - ✅ `framer-motion` 애니메이션 제거
 - ✅ `useState`, `useEffect`, `useRef` 등 React Hooks 제거
@@ -45,11 +47,13 @@ src/
 ### 3. 변환된 컴포넌트
 
 #### Widgets (Server Component)
+
 - ✅ `widgets/header/` - 고정 헤더
 - ✅ `widgets/hero/` - 메인 히어로 섹션
 - ✅ `widgets/footer/` - 푸터
 
 #### Sections (Server Component)
+
 - ✅ `BrandIntroSection` - 브랜드 소개
 - ✅ `StartupGuideSection` - 창업 안내 (3개 섹션)
 - ✅ `StartupProcessSection` - 창업 프로세스 (6단계)
@@ -59,6 +63,7 @@ src/
 - ✅ `StoreSection` - 매장 안내
 
 ### 4. 제거된 기능 (추후 features로 재구현)
+
 - ❌ 애니메이션 (framer-motion)
 - ❌ 상태 관리 (useState)
 - ❌ 인터랙션 (onClick, onChange)
@@ -69,6 +74,7 @@ src/
 ## 📝 남은 작업
 
 ### Phase 1: 나머지 Widgets 이동
+
 ```bash
 # 이동 예정
 components/sections/BrandIntroSection.tsx → widgets/brand-intro/
@@ -81,6 +87,7 @@ components/sections/StoreSection.tsx → widgets/store/
 ```
 
 ### Phase 2: 동적 기능 추가 (Client Component)
+
 ```typescript
 // features/inquiry-form/
 'use client';
@@ -88,22 +95,23 @@ import { useState } from 'react';
 // 문의 폼 구현
 
 // features/search-store/
-'use client';
+('use client');
 import { useState } from 'react';
 // 매장 검색 구현
 
 // features/mobile-menu/
-'use client';
+('use client');
 import { useState } from 'react';
 // 모바일 햄버거 메뉴 구현
 
 // features/menu-tabs/
-'use client';
+('use client');
 import { useState } from 'react';
 // 메뉴 카테고리 탭 구현
 ```
 
 ### Phase 3: Entities 구성
+
 ```typescript
 // entities/menu/
 - model/ - 메뉴 데이터 로직
@@ -133,11 +141,13 @@ Route (app)
 ## 📊 성능 개선
 
 ### Before (Client Component)
+
 - JavaScript 번들 크기: ~500KB (framer-motion, react-hook-form 포함)
 - TTI (Time to Interactive): ~2s
 - 클라이언트 사이드 hydration 필요
 
 ### After (Server Component)
+
 - JavaScript 번들 크기: ~50KB (최소한의 클라이언트 JS)
 - TTI: ~0.5s
 - Server-side rendering으로 즉시 렌더링
@@ -190,5 +200,5 @@ import Header from '@/widgets/header/ui/Header';
    - 메타 태그 최적화
 
 ## 📞 문의
-궁금한 사항이 있으시면 언제든 문의해주세요!
 
+궁금한 사항이 있으시면 언제든 문의해주세요!

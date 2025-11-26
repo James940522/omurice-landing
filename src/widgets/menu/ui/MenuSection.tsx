@@ -28,7 +28,10 @@ const menuCategories: MenuCategory[] = [
     emoji: 'IMG',
     color: 'from-primary to-secondary',
     items: [
-      { name: '큐브스테이크 오므라이스', image: '/asset/menu/오므라이스/큐브스테이크 오므라이스.jpg' },
+      {
+        name: '큐브스테이크 오므라이스',
+        image: '/asset/menu/오므라이스/큐브스테이크 오므라이스.jpg',
+      },
       { name: '돈까스 오므라이스', image: '/asset/menu/오므라이스/돈까스 오므라이스.jpg' },
       { name: '떡갈비 오므라이스', image: '/asset/menu/오므라이스/떡갈비 오므라이스.jpg' },
       { name: '가라아게 오므라이스', image: '/asset/menu/오므라이스/가라아게 오므라이스.jpg' },
@@ -45,15 +48,42 @@ const menuCategories: MenuCategory[] = [
     emoji: 'IMG',
     color: 'from-accent to-primary',
     items: [
-      { name: '큐브스테이크 화이트 오므라이스', image: '/asset/menu/화이트오므라이스/큐브 스테이크 화이트 오므라이스.jpg' },
-      { name: '돈까스 화이트 오므라이스', image: '/asset/menu/화이트오므라이스/돈까스 화이트 오므라이스.jpg' },
-      { name: '떡갈비 화이트 오므라이스', image: '/asset/menu/화이트오므라이스/떡갈비 화이트 오므라이스.jpg' },
-      { name: '가라아게 화이트 오므라이스', image: '/asset/menu/화이트오므라이스/가라아게 화이트 오므라이스.jpg' },
-      { name: '새우까스 화이트 오므라이스', image: '/asset/menu/화이트오므라이스/새우까스 화이트 오므라이스.jpg' },
-      { name: '삼겹 화이트 오므라이스', image: '/asset/menu/화이트오므라이스/삼겹 화이트 오므라이스.jpg' },
-      { name: '우삼겹 화이트 오므라이스', image: '/asset/menu/화이트오므라이스/우삼겹 화이트 오므라이스.jpg' },
-      { name: '스팸 화이트 오므라이스', image: '/asset/menu/화이트오므라이스/스팸 화이트 오므라이스.jpg' },
-      { name: '소세지 화이트 오므라이스', image: '/asset/menu/화이트오므라이스/소세지 화이트 오므라이스.jpg' },
+      {
+        name: '큐브스테이크 화이트 오므라이스',
+        image: '/asset/menu/화이트오므라이스/큐브 스테이크 화이트 오므라이스.jpg',
+      },
+      {
+        name: '돈까스 화이트 오므라이스',
+        image: '/asset/menu/화이트오므라이스/돈까스 화이트 오므라이스.jpg',
+      },
+      {
+        name: '떡갈비 화이트 오므라이스',
+        image: '/asset/menu/화이트오므라이스/떡갈비 화이트 오므라이스.jpg',
+      },
+      {
+        name: '가라아게 화이트 오므라이스',
+        image: '/asset/menu/화이트오므라이스/가라아게 화이트 오므라이스.jpg',
+      },
+      {
+        name: '새우까스 화이트 오므라이스',
+        image: '/asset/menu/화이트오므라이스/새우까스 화이트 오므라이스.jpg',
+      },
+      {
+        name: '삼겹 화이트 오므라이스',
+        image: '/asset/menu/화이트오므라이스/삼겹 화이트 오므라이스.jpg',
+      },
+      {
+        name: '우삼겹 화이트 오므라이스',
+        image: '/asset/menu/화이트오므라이스/우삼겹 화이트 오므라이스.jpg',
+      },
+      {
+        name: '스팸 화이트 오므라이스',
+        image: '/asset/menu/화이트오므라이스/스팸 화이트 오므라이스.jpg',
+      },
+      {
+        name: '소세지 화이트 오므라이스',
+        image: '/asset/menu/화이트오므라이스/소세지 화이트 오므라이스.jpg',
+      },
     ],
   },
   {
@@ -62,15 +92,42 @@ const menuCategories: MenuCategory[] = [
     emoji: 'IMG',
     color: 'from-secondary to-primary',
     items: [
-      { name: '큐브스테이크 김치 오므라이스', image: '/asset/menu/김치오므라이스/큐브스테이크 김치 오므라이스.jpg' },
-      { name: '돈까스 김치 오므라이스', image: '/asset/menu/김치오므라이스/돈까스 김치 오므라이스.jpg' },
-      { name: '떡갈비 김치 오므라이스', image: '/asset/menu/김치오므라이스/떡갈비 김치 오므라이스.jpg' },
-      { name: '가라아게 김치 오므라이스', image: '/asset/menu/김치오므라이스/가라아게 김치 오므라이스.jpg' },
-      { name: '새우까스 김치 오므라이스', image: '/asset/menu/김치오므라이스/새우까스 김치 오므라이스.jpg' },
-      { name: '삼겹 김치 오므라이스', image: '/asset/menu/김치오므라이스/삼겹 김치 오므라이스.jpg' },
-      { name: '우삼겹 김치 오므라이스', image: '/asset/menu/김치오므라이스/우삼겹 김치 오므라이스.jpg' },
-      { name: '스팸 김치 오므라이스', image: '/asset/menu/김치오므라이스/스팸 김치 오므라이스.jpg' },
-      { name: '소세지 김치 오므라이스', image: '/asset/menu/김치오므라이스/소세지 김치 오므라이스.jpg' },
+      {
+        name: '큐브스테이크 김치 오므라이스',
+        image: '/asset/menu/김치오므라이스/큐브스테이크 김치 오므라이스.jpg',
+      },
+      {
+        name: '돈까스 김치 오므라이스',
+        image: '/asset/menu/김치오므라이스/돈까스 김치 오므라이스.jpg',
+      },
+      {
+        name: '떡갈비 김치 오므라이스',
+        image: '/asset/menu/김치오므라이스/떡갈비 김치 오므라이스.jpg',
+      },
+      {
+        name: '가라아게 김치 오므라이스',
+        image: '/asset/menu/김치오므라이스/가라아게 김치 오므라이스.jpg',
+      },
+      {
+        name: '새우까스 김치 오므라이스',
+        image: '/asset/menu/김치오므라이스/새우까스 김치 오므라이스.jpg',
+      },
+      {
+        name: '삼겹 김치 오므라이스',
+        image: '/asset/menu/김치오므라이스/삼겹 김치 오므라이스.jpg',
+      },
+      {
+        name: '우삼겹 김치 오므라이스',
+        image: '/asset/menu/김치오므라이스/우삼겹 김치 오므라이스.jpg',
+      },
+      {
+        name: '스팸 김치 오므라이스',
+        image: '/asset/menu/김치오므라이스/스팸 김치 오므라이스.jpg',
+      },
+      {
+        name: '소세지 김치 오므라이스',
+        image: '/asset/menu/김치오므라이스/소세지 김치 오므라이스.jpg',
+      },
     ],
   },
   {
@@ -79,15 +136,42 @@ const menuCategories: MenuCategory[] = [
     emoji: 'IMG',
     color: 'from-accent to-secondary',
     items: [
-      { name: '큐브스테이크 화이트 김치 오므라이스', image: '/asset/menu/화이트김치오므라이스/큐브스테이크 화이트 김치 오므라이스.jpg' },
-      { name: '돈까스 화이트 김치 오므라이스', image: '/asset/menu/화이트김치오므라이스/돈까스 화이트 김치 오므라이스.jpg' },
-      { name: '떡갈비 화이트 김치 오므라이스', image: '/asset/menu/화이트김치오므라이스/떡갈비 화이트 김치 오므라이스.jpg' },
-      { name: '가라아게 화이트 김치 오므라이스', image: '/asset/menu/화이트김치오므라이스/가라아게 화이트 김치 오므라이스.jpg' },
-      { name: '새우까스 화이트 김치 오므라이스', image: '/asset/menu/화이트김치오므라이스/새우까스 화이트 김치 오므라이스.jpg' },
-      { name: '삼겹 화이트 김치 오므라이스', image: '/asset/menu/화이트김치오므라이스/삼겹 화이트 김치 오므라이스.jpg' },
-      { name: '우삼겹 화이트 김치 오므라이스', image: '/asset/menu/화이트김치오므라이스/우삼겹 화이트 김치 오므라이스.jpg' },
-      { name: '스팸 화이트 김치 오므라이스', image: '/asset/menu/화이트김치오므라이스/스팸 화이트 김치 오므라이스.jpg' },
-      { name: '소세지 화이트 김치 오므라이스', image: '/asset/menu/화이트김치오므라이스/소세지 화이트 김치 오므라이스.jpg' },
+      {
+        name: '큐브스테이크 화이트 김치 오므라이스',
+        image: '/asset/menu/화이트김치오므라이스/큐브스테이크 화이트 김치 오므라이스.jpg',
+      },
+      {
+        name: '돈까스 화이트 김치 오므라이스',
+        image: '/asset/menu/화이트김치오므라이스/돈까스 화이트 김치 오므라이스.jpg',
+      },
+      {
+        name: '떡갈비 화이트 김치 오므라이스',
+        image: '/asset/menu/화이트김치오므라이스/떡갈비 화이트 김치 오므라이스.jpg',
+      },
+      {
+        name: '가라아게 화이트 김치 오므라이스',
+        image: '/asset/menu/화이트김치오므라이스/가라아게 화이트 김치 오므라이스.jpg',
+      },
+      {
+        name: '새우까스 화이트 김치 오므라이스',
+        image: '/asset/menu/화이트김치오므라이스/새우까스 화이트 김치 오므라이스.jpg',
+      },
+      {
+        name: '삼겹 화이트 김치 오므라이스',
+        image: '/asset/menu/화이트김치오므라이스/삼겹 화이트 김치 오므라이스.jpg',
+      },
+      {
+        name: '우삼겹 화이트 김치 오므라이스',
+        image: '/asset/menu/화이트김치오므라이스/우삼겹 화이트 김치 오므라이스.jpg',
+      },
+      {
+        name: '스팸 화이트 김치 오므라이스',
+        image: '/asset/menu/화이트김치오므라이스/스팸 화이트 김치 오므라이스.jpg',
+      },
+      {
+        name: '소세지 화이트 김치 오므라이스',
+        image: '/asset/menu/화이트김치오므라이스/소세지 화이트 김치 오므라이스.jpg',
+      },
     ],
   },
   {
@@ -96,12 +180,19 @@ const menuCategories: MenuCategory[] = [
     emoji: 'IMG',
     color: 'from-secondary to-accent',
     items: [
-      { name: '큐브스테이크 김치볶음밥', image: '/asset/menu/김치볶음밥/큐브스테이크 김치볶음밥.jpg' },
+      {
+        name: '큐브스테이크 김치볶음밥',
+        image: '/asset/menu/김치볶음밥/큐브스테이크 김치볶음밥.jpg',
+      },
       { name: '돈까스 김치볶음밥', image: '/asset/menu/김치볶음밥/돈까스 김치볶음밥.jpg' },
       { name: '떡갈비 김치볶음밥', image: '/asset/menu/김치볶음밥/떡갈비 김치볶음밥.jpg' },
       { name: '가라아게 김치볶음밥', image: '/asset/menu/김치볶음밥/가라아게 김치볶음밥.jpg' },
       { name: '새우까스 김치볶음밥', image: '/asset/menu/김치볶음밥/새우까스 김치볶음밥.jpg' },
       { name: '삼겹 김치볶음밥', image: '/asset/menu/김치볶음밥/삼겹 김치볶음밥.jpg' },
+      {
+        name: '우삼겹 김치볶음밥',
+        image: '/asset/menu/김치볶음밥/우삼겹 김치볶음밥.jpg',
+      },
       { name: '스팸 김치볶음밥', image: '/asset/menu/김치볶음밥/스팸 김치볶음밥.jpg' },
       { name: '소세지 김치볶음밥', image: '/asset/menu/김치볶음밥/소세지 김치볶음밥.jpg' },
     ],
@@ -125,25 +216,28 @@ const menuCategories: MenuCategory[] = [
 ];
 
 const colorClasses = [
-  'bg-primary',
-  'bg-accent',
-  'bg-secondary',
-  'bg-accent',
-  'bg-secondary',
-  'bg-primary',
-  'bg-secondary',
+  'bg-yellow-400',
+  'bg-yellow-500',
+  'bg-yellow-600',
+  'bg-yellow-500',
+  'bg-yellow-600',
+  'bg-yellow-400',
+  'bg-yellow-600',
 ];
 
 export default function MenuSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [activeCategory, setActiveCategory] = useState(0);
-  
+
   const activeCategoryData = menuCategories[activeCategory];
 
   return (
-    <section id="menu" className="py-20 md:py-32 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50 relative overflow-hidden" ref={ref}>
-
+    <section id="menu" className="py-20 md:py-32 relative overflow-hidden" ref={ref}>
+      {/* 배경 이미지 */}
+      <div className="absolute inset-0 z-0">
+        <Image src="/asset/bg/sec6-bg.jpg" alt="배경" fill className="object-cover" quality={90} />
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           className="text-center mb-16"
@@ -151,19 +245,13 @@ export default function MenuSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2
-            className="text-4xl md:text-6xl font-bold mb-6 text-foreground"
-            
-          >
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900 [text-shadow:_2px_2px_0_#fff,_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_4px_4px_8px_rgba(255,255,255,0.8)]">
             메뉴 소개
           </h2>
-          <p
-            className="text-xl md:text-2xl text-foreground/70 mb-6"
-            
-          >
+          <p className="text-xl md:text-2xl text-gray-900 bg-white/80 px-6 py-3 rounded-2xl inline-block mb-6 font-bold shadow-xl">
             다양한 메뉴로 고객의 입맛을 사로잡습니다
           </p>
-          <div className="w-24 h-2 bg-primary mx-auto rounded-full" />
+          <div className="w-24 h-2 bg-yellow-500 mx-auto rounded-full shadow-xl" />
         </motion.div>
 
         {/* 카테고리 탭 */}
@@ -173,10 +261,10 @@ export default function MenuSection() {
               key={category.id}
               onClick={() => setActiveCategory(index)}
               className={cn(
-                "px-4 py-2 md:px-6 md:py-3 rounded-full font-bold text-sm md:text-base shadow-strong-hover transition-all duration-300",
-                activeCategory === index 
-                  ? cn(colorClasses[index], "text-white scale-105") 
-                  : "bg-white text-foreground hover:scale-105"
+                'px-4 py-2 md:px-6 md:py-3 rounded-full font-bold text-sm md:text-base transition-all duration-300 border-3',
+                activeCategory === index
+                  ? cn(colorClasses[index], 'text-white scale-105 shadow-2xl border-white')
+                  : 'bg-white text-gray-900 hover:scale-105 hover:bg-yellow-50 shadow-xl border-yellow-400'
               )}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -187,14 +275,14 @@ export default function MenuSection() {
         </div>
 
         {/* 메뉴 그리드 */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6"
           key={activeCategory}
         >
           {activeCategoryData.items.map((item, index) => (
             <motion.div
               key={item.name}
-              className="bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-strong-hover border-2 md:border-3 border-foreground/20 hover:border-primary/50 transition-colors duration-300"
+              className="bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl border-3 border-yellow-400 hover:border-yellow-500 transition-all duration-300"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
@@ -208,7 +296,7 @@ export default function MenuSection() {
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                  loading={index < 4 ? "eager" : "lazy"}
+                  loading={index < 4 ? 'eager' : 'lazy'}
                   quality={75}
                   placeholder="blur"
                   blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAQABADASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABQQGCP/EACUQAAEEAgEEAgMAAAAAAAAAAAECAwQFAAYREhMhMRRBIjJC/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAED/8QAGhEBAAMBAQEAAAAAAAAAAAAAAAECERIxQf/aAAwDAQACEQMRAD8A3VhkEK1ZTb4lOTm2ljqQW1NrBKgdghQ5BHonnnkdHLiZYy3qGLkKfDL2JW0pxa0PBKFBWj0D1CQCP5z2cV52s+5Ty/p1UsPz+f/Z"
@@ -217,10 +305,7 @@ export default function MenuSection() {
 
               {/* 메뉴 이름 */}
               <div className="p-3 md:p-4 lg:p-5">
-                <h3
-                  className="text-sm md:text-base lg:text-lg font-bold text-foreground text-center leading-tight"
-                  
-                >
+                <h3 className="text-sm md:text-base lg:text-lg font-bold text-foreground text-center leading-tight">
                   {item.name}
                 </h3>
               </div>
@@ -230,7 +315,7 @@ export default function MenuSection() {
 
         {/* 하단 안내 */}
         <motion.div
-          className="mt-16 text-center bg-white rounded-3xl p-6 md:p-8 shadow-strong"
+          className="mt-16 text-center bg-white rounded-3xl p-6 md:p-8 shadow-2xl border-4 border-yellow-400"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
@@ -246,16 +331,10 @@ export default function MenuSection() {
               quality={85}
             />
           </div>
-          <p
-            className="text-xl md:text-2xl lg:text-3xl text-foreground font-bold mb-2"
-            
-          >
+          <p className="text-xl md:text-2xl lg:text-3xl text-foreground font-bold mb-2">
             모든 메뉴 포장 & 배달 가능!
           </p>
-          <p
-            className="text-base md:text-lg lg:text-xl text-foreground/70"
-            
-          >
+          <p className="text-base md:text-lg lg:text-xl text-foreground/70">
             위 카테고리 탭을 클릭하여 다양한 메뉴를 확인하세요!
           </p>
         </motion.div>

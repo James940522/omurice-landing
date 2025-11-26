@@ -3,6 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { cn } from '@/shared/lib/utils';
+import Image from 'next/image';
 
 export default function StartupProcessSection() {
   const ref = useRef(null);
@@ -54,8 +55,11 @@ export default function StartupProcessSection() {
   ];
 
   return (
-    <section id="startup-process" className="py-20 md:py-32 bg-gradient-to-br from-pink-100 via-orange-50 to-red-50 relative overflow-hidden" ref={ref}>
-
+    <section id="startup-process" className="py-20 md:py-32 relative overflow-hidden" ref={ref}>
+      {/* 배경 이미지 */}
+      <div className="absolute inset-0 z-0">
+        <Image src="/asset/bg/sec5-bg.jpg" alt="배경" fill className="object-cover" quality={90} />
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           className="text-center mb-16"
@@ -63,19 +67,13 @@ export default function StartupProcessSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2
-            className="text-4xl md:text-6xl font-bold mb-6 text-foreground"
-            
-          >
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
             창업 프로세스
           </h2>
-          <p
-            className="text-xl md:text-2xl text-foreground/70 mb-6"
-            
-          >
+          <p className="text-xl md:text-2xl text-white mb-6 drop-shadow-md">
             상담부터 오픈까지, 체계적인 6단계 시스템
           </p>
-          <div className="w-24 h-2 bg-primary mx-auto rounded-full" />
+          <div className="w-24 h-2 bg-yellow-300 mx-auto rounded-full" />
         </motion.div>
 
         {/* 프로세스 그리드 */}
@@ -90,43 +88,39 @@ export default function StartupProcessSection() {
               whileHover={{ scale: 1.03, y: -5 }}
             >
               {/* 카드 */}
-              <div className="bg-primary/5 backdrop-blur-sm rounded-3xl p-8 shadow-strong-hover h-full relative overflow-hidden border-2 border-primary/20">
+              <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-strong-hover h-full relative overflow-hidden border-2 border-white/50">
                 {/* 배경 장식 */}
-                <div className={cn("absolute top-0 right-0 w-32 h-32 bg-gradient-to-br opacity-10 rounded-full -mr-10 -mt-10", process.color)} />
+                <div
+                  className={cn(
+                    'absolute top-0 right-0 w-32 h-32 bg-gradient-to-br opacity-10 rounded-full -mr-10 -mt-10',
+                    process.color
+                  )}
+                />
 
                 {/* STEP 번호 */}
                 <div className="mb-4">
-                  <span
-                    className="text-primary text-lg md:text-xl font-bold"
-                    
-                  >
+                  <span className="text-yellow-500 text-lg md:text-xl font-bold">
                     {process.step}
                   </span>
                 </div>
 
                 {/* 아이콘 */}
-                <div className={cn("w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br rounded-2xl flex items-center justify-center mb-6 shadow-strong", process.color)}>
-                  <span
-                    className="text-3xl md:text-4xl font-bold text-white"
-                    
-                  >
-                    {process.icon}
-                  </span>
+                <div
+                  className={cn(
+                    'w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br rounded-2xl flex items-center justify-center mb-6 shadow-strong',
+                    process.color
+                  )}
+                >
+                  <span className="text-3xl md:text-4xl font-bold text-white">{process.icon}</span>
                 </div>
 
                 {/* 제목 */}
-                <h3
-                  className="text-2xl md:text-3xl font-bold mb-4 text-foreground"
-                  
-                >
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">
                   {process.title}
                 </h3>
 
                 {/* 설명 */}
-                <p
-                  className="text-lg md:text-xl text-foreground/70 leading-relaxed whitespace-pre-line"
-                  
-                >
+                <p className="text-lg md:text-xl text-foreground/70 leading-relaxed whitespace-pre-line">
                   {process.description}
                 </p>
               </div>
@@ -136,27 +130,18 @@ export default function StartupProcessSection() {
 
         {/* 하단 안내 */}
         <motion.div
-          className="mt-16 text-center bg-gradient-to-r from-primary to-secondary rounded-3xl p-10 md:p-12 shadow-strong text-white"
+          className="mt-16 text-center bg-linear-to-r from-yellow-400 to-yellow-500 rounded-3xl p-10 md:p-12 shadow-strong text-white"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <h3
-            className="text-2xl md:text-4xl font-bold mb-4"
-            
-          >
-            상담부터 오픈까지 평균 2~3개월
-          </h3>
-          <p
-            className="text-lg md:text-xl opacity-90 mb-6"
-            
-          >
+          <h3 className="text-2xl md:text-4xl font-bold mb-4">상담부터 오픈까지 평균 2~3개월</h3>
+          <p className="text-lg md:text-xl opacity-90 mb-6">
             전담 매니저가 처음부터 끝까지 함께합니다
           </p>
           <a
             href="#contact"
-            className="inline-block bg-white text-primary px-10 py-4 rounded-full text-lg md:text-xl font-bold shadow-strong-hover hover:bg-foreground hover:text-white transition-all duration-300"
-            
+            className="inline-block bg-white text-yellow-600 px-10 py-4 rounded-full text-lg md:text-xl font-bold shadow-strong-hover hover:bg-gray-100 transition-all duration-300"
           >
             무료 상담 신청하기
           </a>

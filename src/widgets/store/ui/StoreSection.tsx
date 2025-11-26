@@ -51,23 +51,34 @@ const stores: Store[] = [
 ];
 
 const colors = [
-  'bg-secondary',
-  'bg-primary',
-  'bg-accent',
-  'bg-accent',
-  'bg-secondary',
-  'bg-primary/80',
+  'bg-yellow-400',
+  'bg-yellow-500',
+  'bg-yellow-600',
+  'bg-yellow-600',
+  'bg-yellow-400',
+  'bg-yellow-500',
 ];
 
 export default function StoreSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  
+
   // 검색 기능은 추후 Client Component로 features에 추가 예정
 
   return (
-    <section id="store" className="py-20 md:py-32 bg-gradient-to-br from-orange-50 via-yellow-50 to-amber-50 relative overflow-hidden" ref={ref}>
-
+    <section
+      id="store"
+      className="py-20 md:py-32 relative overflow-hidden"
+      ref={ref}
+      style={{
+        backgroundImage: 'url(/asset/bg/sec7-bg.jpg)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      {/* 어두운 오버레이 */}
+      <div className="absolute inset-0 bg-black/40" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           className="text-center mb-16"
@@ -76,21 +87,17 @@ export default function StoreSection() {
           transition={{ duration: 0.6 }}
         >
           <div className="inline-block mb-6">
-            <span className="text-4xl md:text-5xl font-bold text-primary">IMG</span>
+            <span className="text-4xl md:text-5xl font-bold text-yellow-300 drop-shadow-lg">
+              IMG
+            </span>
           </div>
-          <h2
-            className="text-4xl md:text-6xl font-bold mb-6 text-foreground"
-            
-          >
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
             매장 안내
           </h2>
-          <p
-            className="text-xl md:text-2xl text-foreground/70 mb-6"
-            
-          >
+          <p className="text-xl md:text-2xl text-white mb-6 drop-shadow-md">
             전국 각지에서 성공적으로 운영 중
           </p>
-          <div className="w-24 h-2 bg-primary mx-auto rounded-full" />
+          <div className="w-24 h-2 bg-yellow-300 mx-auto rounded-full" />
         </motion.div>
 
         {/* 지도 + 매장 목록 레이아웃 */}
@@ -129,35 +136,31 @@ export default function StoreSection() {
                 {stores.map((store, index) => (
                   <motion.div
                     key={store.id}
-                    className="border-2 border-foreground/10 rounded-xl p-4 hover:border-primary hover:bg-primary/5 transition-all cursor-pointer"
+                    className="border-2 border-gray-200 rounded-xl p-4 hover:border-yellow-400 hover:bg-yellow-50 transition-all cursor-pointer"
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.1 * index }}
                   >
                     {/* 지역 뱃지 */}
                     <div className="mb-2">
-                      <span className={cn(
-                        "inline-block px-3 py-1 rounded-full text-xs font-bold text-white",
-                        index === 0 ? 'bg-primary' : 'bg-secondary'
-                      )}>
+                      <span
+                        className={cn(
+                          'inline-block px-3 py-1 rounded-full text-xs font-bold text-white',
+                          index === 0 ? 'bg-yellow-500' : 'bg-yellow-400'
+                        )}
+                      >
                         {index === 0 ? '광주' : index === 1 ? '서울' : '대전'}
                       </span>
                     </div>
-                    
+
                     {/* 매장명 */}
-                    <h3 className="text-lg font-bold text-foreground mb-2">
-                      {store.name}
-                    </h3>
-                    
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">{store.name}</h3>
+
                     {/* 전화번호 */}
-                    <p className="text-base text-primary font-semibold mb-2">
-                      {store.phone}
-                    </p>
-                    
+                    <p className="text-base text-yellow-600 font-semibold mb-2">{store.phone}</p>
+
                     {/* 주소 */}
-                    <p className="text-sm text-foreground/60 leading-relaxed">
-                      {store.address}
-                    </p>
+                    <p className="text-sm text-gray-600 leading-relaxed">{store.address}</p>
                   </motion.div>
                 ))}
               </div>
@@ -233,7 +236,7 @@ export default function StoreSection() {
 
         {/* 하단 안내 */}
         <motion.div
-          className="mt-16 text-center bg-gradient-to-r from-primary to-secondary rounded-3xl p-10 md:p-12 shadow-strong text-white"
+          className="mt-16 text-center bg-linear-to-r from-yellow-400 to-yellow-500 rounded-3xl p-10 md:p-12 shadow-strong text-white"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
@@ -241,22 +244,13 @@ export default function StoreSection() {
           <div className="inline-block mb-6">
             <span className="text-4xl md:text-5xl font-bold text-white">IMG</span>
           </div>
-          <h3
-            className="text-3xl md:text-4xl font-bold mb-4"
-            
-          >
-            100개 이상의 가맹점이 성공 중!
-          </h3>
-          <p
-            className="text-lg md:text-xl opacity-90 mb-6"
-            
-          >
+          <h3 className="text-3xl md:text-4xl font-bold mb-4">100개 이상의 가맹점이 성공 중!</h3>
+          <p className="text-lg md:text-xl opacity-90 mb-6">
             당신도 오늘은 오므라이스 가족이 되어보세요
           </p>
           <a
             href="#contact"
-            className="inline-block bg-white text-primary px-10 py-4 rounded-full text-xl md:text-2xl font-bold shadow-strong-hover hover:bg-foreground hover:text-white transition-all duration-300"
-            
+            className="inline-block bg-white text-yellow-600 px-10 py-4 rounded-full text-xl md:text-2xl font-bold shadow-strong-hover hover:bg-gray-100 transition-all duration-300"
           >
             창업 문의하기
           </a>
