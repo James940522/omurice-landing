@@ -82,9 +82,7 @@ export default function FloatingInquiry() {
                 <>
                   {/* Header */}
                   <div className="bg-gradient-to-r from-primary to-secondary p-6">
-                    <h3 className="text-2xl font-bold text-white text-center">
-                      IMG 오늘은 오므라이스
-                    </h3>
+                    <h3 className="text-2xl font-bold text-white text-center">오늘은 오므라이스</h3>
                     <p className="text-white/90 text-center mt-2">지금 바로 시작하세요!</p>
                   </div>
 

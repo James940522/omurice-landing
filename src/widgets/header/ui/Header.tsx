@@ -27,11 +27,12 @@ export default function Header() {
   }, []);
 
   const navItems = [
-    { name: '브랜드', href: '#brand' },
-    { name: '창업안내', href: '#startup-guide' },
-    { name: '비용', href: '#startup-cost' },
+    { name: '브랜드 소개', href: '#brand' },
+    { name: '창업 혜택', href: '#revenue' },
+    { name: '창업 과정', href: '#startup-process' },
     { name: '메뉴', href: '#menu' },
-    { name: '매장', href: '#store' },
+    { name: '고객 리뷰', href: '#reviews' },
+    { name: '매장 안내', href: '#store' },
   ];
 
   const scrollToSection = (href: string) => {

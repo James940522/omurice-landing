@@ -32,14 +32,17 @@ export default function BrandIntroSection() {
   return (
     <section id="brand" className="relative overflow-hidden py-16 md:py-24 lg:py-32" ref={ref}>
       {/* 배경 이미지 */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/asset/menu/메뉴모음컷/메뉴모음컷 6.jpg"
-          alt="배경"
-          fill
-          className="object-cover"
-          quality={90}
-        />
+      <div className="absolute inset-0 z-0 bg-amber-400">
+        {/* 이미지 컨테이너 - 원본 크기까지만 확대 */}
+        <div className="relative w-full h-full max-w-[1920px] mx-auto">
+          <Image
+            src="/asset/menu/메뉴모음컷/메뉴모음컷 6.jpg"
+            alt="배경"
+            fill
+            className="object-cover"
+            quality={90}
+          />
+        </div>
         {/* 어두운 오버레이 */}
         <div className="absolute inset-0 bg-black/60" />
         {/* 그라데이션 오버레이 - 진중한 느낌 강화 */}
@@ -91,8 +94,7 @@ export default function BrandIntroSection() {
               <br />
               우리는 단기적인 유행보다
               <br />
-              &lsquo;꾸준히 매출이 나는 브랜드&rsquo;를 만드는 것이 외식업의 본질이라고
-              생각합니다.
+              &lsquo;꾸준히 매출이 나는 브랜드&rsquo;를 만드는 것이 외식업의 본질이라고 생각합니다.
               <br />
               <br />
               점주님과 함께 성장하는 파트너십,
@@ -123,12 +125,8 @@ export default function BrandIntroSection() {
                 <div className="text-xs text-yellow-400/90 font-semibold uppercase tracking-wider mb-2">
                   {value.subtitle}
                 </div>
-                <h3 className="text-lg md:text-xl font-bold text-white mb-2">
-                  {value.title}
-                </h3>
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  {value.description}
-                </p>
+                <h3 className="text-lg md:text-xl font-bold text-white mb-2">{value.title}</h3>
+                <p className="text-sm text-gray-300 leading-relaxed">{value.description}</p>
               </motion.div>
             ))}
           </motion.div>

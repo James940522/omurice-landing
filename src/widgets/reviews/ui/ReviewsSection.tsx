@@ -36,10 +36,17 @@ export default function ReviewsSection() {
 
   return (
     <section id="reviews" className="py-20 md:py-32 relative overflow-hidden " ref={ref}>
-      {/* 배경 장식 */}
+      {/* 배경 이미지 */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-yellow-300/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-300/20 rounded-full blur-3xl" />
+        <Image
+          src="/asset/bg/main-section10-bg.jpg"
+          alt="배경"
+          fill
+          className="object-cover"
+          quality={90}
+        />
+        {/* 밝은 오버레이 */}
+        <div className="absolute inset-0 bg-white/30" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -181,9 +188,9 @@ export default function ReviewsSection() {
             {reviewImages.map((image, index) => (
               <SwiperSlide key={index}>
                 <div className="px-4 py-8">
-                  <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-[32px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.3)] hover:shadow-[0_25px_70px_rgba(0,0,0,0.4)] transition-all duration-300 max-w-md mx-auto">
+                  <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-[32px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.3)] hover:shadow-[0_25px_70px_rgba(0,0,0,0.4)] transition-all duration-300 max-w-md mx-auto p-4">
                     {/* 리뷰 이미지 */}
-                    <div className="relative aspect-[3/4] overflow-hidden rounded-t-[28px] bg-white m-3 mb-0">
+                    <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-white">
                       <Image
                         src={image}
                         alt={`고객 리뷰 ${index + 1}`}
@@ -191,13 +198,6 @@ export default function ReviewsSection() {
                         className="object-contain p-2"
                         quality={90}
                       />
-                    </div>
-
-                    {/* 하단 라벨 */}
-                    <div className="p-5 bg-gradient-to-r from-orange-500 to-yellow-500 m-3 mt-3 rounded-[20px] shadow-lg">
-                      <p className="text-white text-center font-bold text-lg">
-                        실제 고객님의 생생한 리뷰 #{index + 1}
-                      </p>
                     </div>
                   </div>
                 </div>

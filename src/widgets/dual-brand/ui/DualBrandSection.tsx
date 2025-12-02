@@ -46,7 +46,7 @@ export default function DualBrandSection() {
             {/* 배경 이미지 */}
             <div className="relative h-80 md:h-96">
               <Image
-                src="/asset/menu/메뉴모음컷/메뉴모음컷 2.jpg"
+                src="/asset/menu/메뉴모음컷/메뉴모음컷 7.jpeg"
                 alt="오늘은 오므라이스 메뉴"
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -59,7 +59,7 @@ export default function DualBrandSection() {
             {/* 컨텐츠 */}
             <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-10">
               {/* 로고 배경 */}
-              <div className="bg-white rounded-2xl p-4 mb-4 inline-block shadow-xl">
+              {/* <div className="bg-white rounded-2xl p-4 mb-4 inline-block shadow-xl">
                 <Image
                   src="/asset/logo/오늘은_오므라이스_풀로고.jpeg"
                   alt="오늘은 오므라이스"
@@ -68,7 +68,7 @@ export default function DualBrandSection() {
                   className="h-20 md:h-24 w-auto object-contain"
                   quality={90}
                 />
-              </div>
+              </div> */}
 
               {/* 브랜드명 */}
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">오늘은 오므라이스</h3>
@@ -97,9 +97,10 @@ export default function DualBrandSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.7 }}
           >
-            동일한 레시피로 하나 더!
-            <br />
-            저희의 <span className="text-orange-500">투트랙 브랜드</span>를 소개합니다.
+            <span className="block">동일한 레시피로 하나 더!</span>
+            <span className="block mt-1">
+              저희의 <span className="text-orange-500">투트랙 브랜드</span>를 소개합니다.
+            </span>
           </motion.h2>
           <motion.div
             className="bg-gray-100/90 rounded-2xl px-6 py-4 max-w-3xl mx-auto shadow-lg mt-6"
@@ -108,9 +109,12 @@ export default function DualBrandSection() {
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             <p className="text-base md:text-lg text-gray-800 leading-relaxed">
-              <span className="font-bold">투트랙 브랜드란?</span> 메인브랜드와 동일한 레시피, 동일한
-              재료로
-              <br />
+              <span className="font-bold">투트랙 브랜드란?</span>
+              <br className="sm:hidden" />
+              <span className="hidden sm:inline"> </span>
+              메인브랜드와 동일한 레시피, 동일한 재료로
+              <br className="hidden sm:block" />
+              <span className="sm:hidden"> </span>
               브랜드만 추가해서 <span className="font-bold text-orange-500">쉽게 추가 매출</span>을
               올릴 수 있습니다.
             </p>
@@ -132,7 +136,7 @@ export default function DualBrandSection() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="bg-gray-50 rounded-2xl p-4 border-3 border-gray-200 shadow-lg">
+                <div className="bg-gray-50  shadow-lg">
                   <Image
                     src="/asset/logo/오늘은_오므라이스_풀로고.jpeg"
                     alt="오늘은 오므라이스"
@@ -145,19 +149,7 @@ export default function DualBrandSection() {
               </motion.div>
 
               <div className="flex-shrink-0">
-                <motion.div
-                  className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center shadow-lg"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                >
-                  <span className="text-white text-2xl font-bold">+</span>
-                </motion.div>
+                <span className="text-orange-500 text-5xl font-bold">+</span>
               </div>
 
               <motion.div
@@ -165,7 +157,7 @@ export default function DualBrandSection() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="bg-gray-50 rounded-2xl p-4 border-3 border-gray-200 shadow-lg">
+                <div className="bg-gray-50 rounded-2xl border-1 border-gray-200 shadow-lg">
                   <div className="relative w-full aspect-square">
                     <Image
                       src="/asset/logo/에그이츠_로고.jpeg"

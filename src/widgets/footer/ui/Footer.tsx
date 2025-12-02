@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-yellow-400 via-yellow-500 to-amber-500 text-white pt-16 pb-8">
+    <footer id="contact" className="bg-gradient-to-br from-yellow-400 via-yellow-500 to-amber-500 text-white pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 상단 영역 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
@@ -24,13 +24,20 @@ export default function Footer() {
           <div>
             <h4 className="text-xl md:text-2xl font-bold mb-4 text-white">바로가기</h4>
             <ul className="space-y-3">
-              {['브랜드', '메뉴', '배민 주문', '매장안내', '창업문의'].map((item) => (
-                <li key={item}>
+              {[
+                { name: '브랜드 소개', href: '#brand' },
+                { name: '창업 혜택', href: '#revenue' },
+                { name: '창업 과정', href: '#startup-process' },
+                { name: '메뉴', href: '#menu' },
+                { name: '고객 리뷰', href: '#reviews' },
+                { name: '매장 안내', href: '#store' },
+              ].map((item) => (
+                <li key={item.name}>
                   <a
-                    href={`#${item.toLowerCase()}`}
+                    href={item.href}
                     className="text-lg text-white/90 hover:text-white transition-colors"
                   >
-                    {item}
+                    {item.name}
                   </a>
                 </li>
               ))}
