@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-gradient-to-br from-yellow-400 via-yellow-500 to-amber-500 text-white pt-16 pb-8">
+    <footer id="contact" className="bg-amber-50 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 상단 영역 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
@@ -10,10 +10,10 @@ export default function Footer() {
           <div>
             <div className="mb-4">
               <Image
-                src="/asset/logo/회사_로고.png"
+                src="/asset/logo/Jaeyoung_F&B.png"
                 alt="오늘은 오므라이스"
-                width={250}
-                height={250}
+                width={200}
+                height={200}
                 loading="lazy"
                 quality={75}
               />
@@ -22,7 +22,7 @@ export default function Footer() {
 
           {/* 빠른 링크 */}
           <div>
-            <h4 className="text-xl md:text-2xl font-bold mb-4 text-white">바로가기</h4>
+            <h4 className="text-xl md:text-2xl font-bold mb-4 text-orange-500">바로가기</h4>
             <ul className="space-y-3">
               {[
                 { name: '브랜드 소개', href: '#brand' },
@@ -35,7 +35,7 @@ export default function Footer() {
                 <li key={item.name}>
                   <a
                     href={item.href}
-                    className="text-lg text-white/90 hover:text-white transition-colors"
+                    className="text-lg text-amber-800 hover:text-orange-500 transition-colors"
                   >
                     {item.name}
                   </a>
@@ -46,51 +46,45 @@ export default function Footer() {
 
           {/* 고객센터 */}
           <div>
-            <h4 className="text-xl md:text-2xl font-bold mb-4 text-white">고객센터</h4>
+            <h4 className="text-xl md:text-2xl font-bold mb-4 text-orange-500">고객센터</h4>
             <div className="space-y-3">
-              <p className="text-3xl font-bold text-white">1588-0000</p>
-              <p className="text-lg text-white/90">
-                평일 09:00 - 18:00
-                <br />
-                주말 및 공휴일 휴무
-              </p>
-              <p className="text-lg text-white/90">이메일: help@omurice.co.kr</p>
+              <p className="text-3xl font-bold text-amber-900">010-9923-9502</p>
+              <p className="text-lg text-amber-700">연중무휴 24시간</p>
+              <p className="text-lg text-amber-700">이메일: wochl123@naver.com</p>
             </div>
           </div>
         </div>
 
         {/* 구분선 */}
-        <div className="border-t border-white/30 my-8" />
+        <div className="border-t border-amber-200 my-8" />
 
         {/* 하단 영역 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* 회사 정보 */}
           <div>
-            <p className="text-sm text-white/90 leading-relaxed">
-              (주)오늘은오므라이스 | 대표이사: 홍길동
+            <p className="text-sm text-amber-700 leading-relaxed">
+              (주)재영에프앤비 | 대표자: 최재영, 이호남
               <br />
-              사업자등록번호: 123-45-67890
+              사업자등록번호: 576-88-03176
               <br />
-              통신판매업신고번호: 제2024-서울강남-12345호
-              <br />
-              주소: 서울특별시 강남구 테헤란로 123, 오늘은오므라이스빌딩
+              주소: 서울시 동대문구 왕산로 200 롯데캐슬 L-65 1204호
             </p>
           </div>
 
           {/* 법적 고지 */}
           <div className="md:text-right">
             <div className="flex flex-wrap gap-4 md:justify-end mb-4">
-              <button className="text-sm text-white/90 hover:text-white transition-colors">
+              <button className="text-sm text-amber-700 hover:text-orange-500 transition-colors">
                 이용약관
               </button>
-              <button className="text-sm text-white font-bold border-b-2 border-white">
+              <button className="text-sm text-orange-500 font-bold border-b-2 border-orange-500">
                 개인정보처리방침
               </button>
-              <button className="text-sm text-white/90 hover:text-white transition-colors">
+              <button className="text-sm text-amber-700 hover:text-orange-500 transition-colors">
                 가맹문의
               </button>
             </div>
-            <p className="text-sm text-white/90">© 2024 오늘은 오므라이스. All rights reserved.</p>
+            <p className="text-sm text-amber-600">© 오늘은 오므라이스. All rights reserved.</p>
           </div>
         </div>
       </div>

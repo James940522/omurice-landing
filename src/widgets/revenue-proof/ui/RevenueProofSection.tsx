@@ -92,7 +92,7 @@ export default function RevenueProofSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="revenue" className="relative overflow-hidden py-24 md:py-20 lg:py-24" ref={ref}>
+    <section className="relative overflow-hidden py-24 md:py-20 lg:py-24" ref={ref}>
       {/* 배경 이미지 - 반복 */}
       <div
         className="absolute inset-0 z-0"
@@ -210,7 +210,7 @@ export default function RevenueProofSection() {
             {[
               {
                 number: '01',
-                title: '식자재 원가 28%',
+                title: '원가 안정성',
                 desc: '매출 대비 식자재 비용 28%로 안정적인 원가율을 유지합니다. 삼성 웰스토리 대기업과 함께하는 안정감 있는 주6회 전국배송 시스템으로, 신선한 식자재를 합리적인 가격에 공급받을 수 있습니다.',
                 image: '/asset/etc/1.jpg',
               },
