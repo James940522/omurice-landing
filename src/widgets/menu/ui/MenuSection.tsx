@@ -297,9 +297,7 @@ export default function MenuSection() {
                   className="object-cover"
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
                   loading={index < 4 ? 'eager' : 'lazy'}
-                  quality={75}
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAQABADASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABQQGCP/EACUQAAEEAgEEAgMAAAAAAAAAAAECAwQFAAYREhMhMRRBIjJC/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAED/8QAGhEBAAMBAQEAAAAAAAAAAAAAAAECERIxQf/aAAwDAQACEQMRAD8A3VhkEK1ZTb4lOTm2ljqQW1NrBKgdghQ5BHonnnkdHLiZYy3qGLkKfDL2JW0pxa0PBKFBWj0D1CQCP5z2cV52s+5Ty/p1UsPz+f/Z"
+                  quality={90}
                 />
               </div>
 
@@ -311,32 +309,6 @@ export default function MenuSection() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* 하단 안내 */}
-        <motion.div
-          className="mt-16 text-center bg-white rounded-3xl p-6 md:p-8 shadow-2xl border-4 border-yellow-400"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          <div className="inline-block mb-4">
-            <Image
-              src="/asset/logo/오므라이스_로고.png"
-              alt="오므라이스"
-              width={80}
-              height={80}
-              className="w-16 md:w-20 h-auto"
-              loading="lazy"
-              quality={85}
-            />
-          </div>
-          <p className="text-xl md:text-2xl lg:text-3xl text-foreground font-bold mb-2">
-            모든 메뉴 포장 & 배달 가능!
-          </p>
-          <p className="text-base md:text-lg lg:text-xl text-foreground/70">
-            위 카테고리 탭을 클릭하여 다양한 메뉴를 확인하세요!
-          </p>
         </motion.div>
       </div>
     </section>

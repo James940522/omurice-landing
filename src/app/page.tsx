@@ -6,7 +6,7 @@ import { DualBrandSection } from '@/widgets/dual-brand';
 import { RevenueProofSection } from '@/widgets/revenue-proof';
 import { StartupProcessSection } from '@/widgets/startup-process';
 import { MenuSection } from '@/widgets/menu';
-import { BaeminOrdersSection } from '@/widgets/baemin-orders';
+import { ReviewsSection } from '@/widgets/reviews';
 import { StoreSection } from '@/widgets/store';
 import { Footer } from '@/widgets/footer';
 
@@ -23,7 +23,7 @@ export default function Home() {
       <RevenueProofSection />
       <StartupProcessSection />
       <MenuSection />
-      <BaeminOrdersSection />
+      <ReviewsSection />
       <StoreSection />
       <Footer />
       <FloatingInquiry />
