@@ -35,11 +35,7 @@ export default function ReviewsSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section
-      id="reviews"
-      className="py-20 md:py-32 relative overflow-hidden bg-gradient-to-br from-orange-50 via-yellow-50 to-orange-100"
-      ref={ref}
-    >
+    <section id="reviews" className="py-20 md:py-32 relative overflow-hidden " ref={ref}>
       {/* 배경 장식 */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-yellow-300/20 rounded-full blur-3xl" />
@@ -101,7 +97,7 @@ export default function ReviewsSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            거짓말 안 합니다!
+            거짓말 안 합니다
             <br />
             <span className="text-orange-600">실제 고객 리뷰</span>가 증명합니다
           </motion.h2>
@@ -234,46 +230,6 @@ export default function ReviewsSection() {
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
             </svg>
-          </div>
-        </motion.div>
-
-        {/* 하단 강조 메시지 */}
-        <motion.div
-          className="mt-16 relative"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 1.1 }}
-        >
-          {/* 메인 박스 */}
-          <div className="bg-gradient-to-br from-orange-500 via-orange-600 to-red-600 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
-            {/* 배경 장식 */}
-            <div className="absolute -top-10 -right-10 w-48 h-48 bg-white/10 rounded-full blur-3xl" />
-            <div className="absolute -bottom-10 -left-10 w-56 h-56 bg-white/10 rounded-full blur-3xl" />
-
-            <div className="relative z-10 text-center text-white space-y-6">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <span className="text-5xl">⭐</span>
-                <span className="text-5xl">⭐</span>
-                <span className="text-5xl">⭐</span>
-                <span className="text-5xl">⭐</span>
-                <span className="text-5xl">⭐</span>
-              </div>
-
-              <p className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                리뷰가 말해주는 진실!
-              </p>
-
-              <p className="text-xl md:text-2xl font-medium opacity-95">
-                조작 불가! 배달앱 실제 리뷰 캡쳐
-                <br />
-                <span className="text-yellow-300 font-bold">이 정도면 믿을 수밖에 없죠?</span>
-              </p>
-
-              <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 inline-block">
-                <p className="text-2xl md:text-3xl font-bold">💯 고객 만족도 최상위권</p>
-                <p className="text-lg md:text-xl mt-2">매일 쌓이는 찐 리뷰들로 입증!</p>
-              </div>
-            </div>
           </div>
         </motion.div>
       </div>

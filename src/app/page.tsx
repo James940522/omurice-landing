@@ -19,8 +19,8 @@ export default function Home() {
       <Header />
       <HeroSection />
       <BrandIntroSection />
-      <DualBrandSection />
       <RevenueProofSection />
+      <DualBrandSection />
       <StartupProcessSection />
       <MenuSection />
       <ReviewsSection />

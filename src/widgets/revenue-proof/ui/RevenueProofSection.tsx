@@ -83,16 +83,6 @@ const StrengthItem = ({ strength, index }: StrengthItemProps) => {
           <p className="text-base md:text-lg text-gray-800 leading-relaxed">{strength.desc}</p>
         </div>
       </div>
-
-      {/* 구분선 */}
-      {index < 6 && (
-        <motion.div
-          className="mt-16 md:mt-20 lg:mt-24 w-full h-px bg-linear-to-r from-transparent via-gray-300 to-transparent"
-          initial={{ scaleX: 0 }}
-          animate={isItemInView ? { scaleX: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        />
-      )}
     </motion.div>
   );
 };

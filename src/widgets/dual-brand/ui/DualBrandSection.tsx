@@ -77,7 +77,7 @@ export default function DualBrandSection() {
               <div className="space-y-1 text-white/90">
                 <p className="text-sm md:text-base font-medium">간편한 조리로 높은 수익성 달성</p>
                 <p className="text-sm md:text-base font-bold text-orange-400">
-                  월 매출 5,000만원 돌파 가맹점 다수
+                  1년만에 가맹점 100개 돌파 월매출 1억5천 신화
                 </p>
               </div>
             </div>
@@ -189,7 +189,7 @@ export default function DualBrandSection() {
 
               <div className="bg-orange-50 rounded-xl p-4 border-2 border-orange-200">
                 <p className="text-sm md:text-base text-gray-700 leading-relaxed">
-                  💡 <span className="font-bold">투트랙이 매출 2배인 이유?</span>
+                  <span className="font-bold">투트랙이 매출 2배인 이유?</span>
                   <br />
                   <span className="font-bold text-orange-500">추가 비용 0원!</span> 동일
                   재료+조리법으로
@@ -204,23 +204,6 @@ export default function DualBrandSection() {
               </div>
             </div>
           </div>
-        </motion.div>
-
-        {/* 하단 CTA */}
-        <motion.div
-          className="text-center mt-16 md:mt-20"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 1.1 }}
-        >
-          <motion.a
-            href="#contact"
-            className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 text-white px-10 py-5 md:px-12 md:py-6 rounded-full text-lg md:text-xl font-bold shadow-2xl hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            🎯 투트랙 브랜드 무료 상담받기
-          </motion.a>
         </motion.div>
       </div>
     </section>
