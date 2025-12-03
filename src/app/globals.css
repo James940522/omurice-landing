@@ -272,6 +272,22 @@ button *,
   border-radius: 5px;
 }
 
+/* 리뷰 섹션 Swiper 커스터마이징 - 어두운 배경용 */
+.reviews-swiper .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+
+.reviews-swiper .swiper-pagination-bullet-active {
+  background: #fb923c;
+  opacity: 1;
+  width: 32px;
+  border-radius: 6px;
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);

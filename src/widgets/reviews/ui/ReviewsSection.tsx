@@ -38,13 +38,7 @@ export default function ReviewsSection() {
     <section id="reviews" className="py-20 md:py-32 relative overflow-hidden " ref={ref}>
       {/* 배경 이미지 */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/asset/bg/main-section10-bg.jpg"
-          alt="배경"
-          fill
-          className="object-cover"
-          quality={90}
-        />
+        <Image src="/asset/bg/sec7-bg.jpg" alt="배경" fill className="object-cover" quality={90} />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -72,7 +66,7 @@ export default function ReviewsSection() {
             </motion.div>
 
             <motion.div
-              className="text-orange-600 text-4xl md:text-5xl font-bold"
+              className="text-orange-400 text-4xl md:text-5xl font-bold"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.4, delay: 0.3 }}
@@ -97,27 +91,25 @@ export default function ReviewsSection() {
           </div>
 
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
             거짓말 안 합니다
             <br />
-            <span className="text-orange-600">실제 고객 리뷰</span>가 증명합니다
+            <span className="text-orange-400">실제 고객 리뷰</span>가 증명합니다
           </motion.h2>
           <motion.p
-            className="text-xl md:text-2xl text-gray-700 mb-6 font-bold"
+            className="text-xl md:text-2xl text-gray-200 mb-6 font-bold leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            매일같이 쏟아지는 <span className="text-orange-600">리얼 후기</span>
-            <br />
-            이게 바로 진짜 맛집의 증거입니다
+            매일같이 쏟아지는 <span className="text-orange-400">리얼 후기</span>
           </motion.p>
           <motion.div
-            className="w-24 h-2 bg-gradient-to-r from-orange-500 to-yellow-500 mx-auto rounded-full shadow-lg"
+            className="w-24 h-2 bg-gradient-to-r from-orange-400 to-yellow-400 mx-auto rounded-full shadow-lg"
             initial={{ opacity: 0, scaleX: 0 }}
             animate={isInView ? { opacity: 1, scaleX: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.8 }}

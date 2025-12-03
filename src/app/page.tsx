@@ -7,7 +7,8 @@ import { RevenueProofSection } from '@/widgets/revenue-proof';
 import { StartupProcessSection } from '@/widgets/startup-process';
 import { MenuSection } from '@/widgets/menu';
 import { ReviewsSection } from '@/widgets/reviews';
-import { StoreSection } from '@/widgets/store';
+import { StoreMapSection } from '@/widgets/store-map';
+import { ContactFormSection } from '@/widgets/contact-form';
 import { Footer } from '@/widgets/footer';
 
 // Features
@@ -24,7 +25,8 @@ export default function Home() {
       <StartupProcessSection />
       <MenuSection />
       <ReviewsSection />
-      <StoreSection />
+      <StoreMapSection />
+      <ContactFormSection />
       <Footer />
       <FloatingInquiry />
     </main>
