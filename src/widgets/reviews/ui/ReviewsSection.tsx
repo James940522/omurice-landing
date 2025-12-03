@@ -59,7 +59,7 @@ export default function ReviewsSection() {
           {/* 배달앱 로고들 */}
           <div className="flex items-center justify-center gap-6 md:gap-10 mb-8">
             <motion.div
-              className="relative bg-white rounded-2xl md:rounded-3xl p-5 md:p-6 shadow-2xl"
+              className="relative bg-white rounded-2xl md:rounded-3xl  shadow-2xl"
               initial={{ opacity: 0, x: -30 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -67,8 +67,8 @@ export default function ReviewsSection() {
               <Image
                 src="/asset/etc/baemin-logo.png"
                 alt="배달의민족"
-                width={200}
-                height={70}
+                width={300}
+                height={300}
                 className="drop-shadow-lg h-16 md:h-20 w-auto"
               />
             </motion.div>
@@ -83,7 +83,7 @@ export default function ReviewsSection() {
             </motion.div>
 
             <motion.div
-              className="relative bg-white rounded-2xl md:rounded-3xl p-5 md:p-6 shadow-2xl"
+              className="relative bg-white rounded-2xl md:rounded-3xl shadow-2xl"
               initial={{ opacity: 0, x: 30 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -91,8 +91,8 @@ export default function ReviewsSection() {
               <Image
                 src="/asset/etc/coupang_eats.png"
                 alt="쿠팡이츠"
-                width={200}
-                height={70}
+                width={300}
+                height={300}
                 className="drop-shadow-lg h-16 md:h-20 w-auto"
               />
             </motion.div>
