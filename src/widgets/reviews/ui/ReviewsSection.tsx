@@ -45,8 +45,6 @@ export default function ReviewsSection() {
           className="object-cover"
           quality={90}
         />
-        {/* 밝은 오버레이 */}
-        <div className="absolute inset-0 bg-white/30" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

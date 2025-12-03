@@ -513,7 +513,7 @@ export default function MenuSection() {
 
         {/* 브랜드 선택 */}
         <motion.div
-          className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-12 mb-12"
+          className="flex flex justify-center items-center gap-6 sm:gap-12 mb-12"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}

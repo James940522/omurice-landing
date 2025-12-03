@@ -46,7 +46,7 @@ export default function DualBrandSection() {
             {/* 배경 이미지 */}
             <div className="relative h-80 md:h-96">
               <Image
-                src="/asset/menu/메뉴모음컷/메뉴모음컷 7.jpeg"
+                src="/asset/menu/오늘은_오므라이스/메뉴모음컷/메뉴모음컷 7.jpeg"
                 alt="오늘은 오므라이스 메뉴"
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-500"

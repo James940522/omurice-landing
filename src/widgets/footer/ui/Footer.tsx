@@ -70,22 +70,6 @@ export default function Footer() {
               주소: 서울시 동대문구 왕산로 200 롯데캐슬 L-65 1204호
             </p>
           </div>
-
-          {/* 법적 고지 */}
-          <div className="md:text-right">
-            <div className="flex flex-wrap gap-4 md:justify-end mb-4">
-              <button className="text-sm text-amber-700 hover:text-orange-500 transition-colors">
-                이용약관
-              </button>
-              <button className="text-sm text-orange-500 font-bold border-b-2 border-orange-500">
-                개인정보처리방침
-              </button>
-              <button className="text-sm text-amber-700 hover:text-orange-500 transition-colors">
-                가맹문의
-              </button>
-            </div>
-            <p className="text-sm text-amber-600">© 오늘은 오므라이스. All rights reserved.</p>
-          </div>
         </div>
       </div>
     </footer>

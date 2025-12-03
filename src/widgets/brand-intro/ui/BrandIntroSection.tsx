@@ -36,7 +36,7 @@ export default function BrandIntroSection() {
         {/* 이미지 컨테이너 - 원본 크기까지만 확대 */}
         <div className="relative w-full h-full max-w-[1920px] mx-auto">
           <Image
-            src="/asset/menu/메뉴모음컷/메뉴모음컷 6.jpg"
+            src="/asset/menu/오늘은_오므라이스/메뉴모음컷/메뉴모음컷 6.jpg"
             alt="배경"
             fill
             className="object-cover"

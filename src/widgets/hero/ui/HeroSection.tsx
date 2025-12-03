@@ -84,7 +84,7 @@ export default function HeroSection() {
         >
           <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white/40">
             <Image
-              src="/asset/menu/메뉴모음컷/화이트 메뉴모음1.jpg"
+              src="/asset/menu/오늘은_오므라이스/메뉴모음컷/화이트 메뉴모음1.jpg"
               alt="화이트 오므라이스"
               fill
               className="object-cover"
@@ -112,7 +112,7 @@ export default function HeroSection() {
         >
           <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white/40">
             <Image
-              src="/asset/menu/메뉴모음컷/메뉴모음컷 1.jpg"
+              src="/asset/menu/오늘은_오므라이스/메뉴모음컷/메뉴모음컷 1.jpg"
               alt="오므라이스 메뉴"
               fill
               className="object-cover"
@@ -140,7 +140,7 @@ export default function HeroSection() {
         >
           <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white/40">
             <Image
-              src="/asset/menu/메뉴모음컷/블랙 앤 투움바 오므라이스.jpg"
+              src="/asset/menu/오늘은_오므라이스/메뉴모음컷/블랙 앤 투움바 오므라이스.jpg"
               alt="블랙 앤 투움바 오므라이스"
               fill
               className="object-cover"
@@ -168,7 +168,7 @@ export default function HeroSection() {
         >
           <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white/40">
             <Image
-              src="/asset/menu/메뉴모음컷/화이트 메뉴모음 2.jpg"
+              src="/asset/menu/오늘은_오므라이스/메뉴모음컷/화이트 메뉴모음 2.jpg"
               alt="화이트 메뉴모음"
               fill
               className="object-cover"
@@ -227,7 +227,7 @@ export default function HeroSection() {
             <SwiperSlide>
               <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white/40">
                 <Image
-                  src="/asset/menu/메뉴모음컷/화이트 메뉴모음1.jpg"
+                  src="/asset/menu/오늘은_오므라이스/메뉴모음컷/화이트 메뉴모음1.jpg"
                   alt="화이트 오므라이스"
                   fill
                   className="object-cover"
@@ -238,7 +238,7 @@ export default function HeroSection() {
             <SwiperSlide>
               <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white/40">
                 <Image
-                  src="/asset/menu/메뉴모음컷/블랙 앤 투움바 오므라이스.jpg"
+                  src="/asset/menu/오늘은_오므라이스/메뉴모음컷/블랙 앤 투움바 오므라이스.jpg"
                   alt="블랙 앤 투움바 오므라이스"
                   fill
                   className="object-cover"
@@ -249,7 +249,7 @@ export default function HeroSection() {
             <SwiperSlide>
               <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white/40">
                 <Image
-                  src="/asset/menu/메뉴모음컷/메뉴모음컷 1.jpg"
+                  src="/asset/menu/오늘은_오므라이스/메뉴모음컷/메뉴모음컷 1.jpg"
                   alt="오므라이스 메뉴"
                   fill
                   className="object-cover"
@@ -260,7 +260,7 @@ export default function HeroSection() {
             <SwiperSlide>
               <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white/40">
                 <Image
-                  src="/asset/menu/메뉴모음컷/화이트 메뉴모음 2.jpg"
+                  src="/asset/menu/오늘은_오므라이스/메뉴모음컷/화이트 메뉴모음 2.jpg"
                   alt="화이트 메뉴모음"
                   fill
                   className="object-cover"
@@ -291,7 +291,7 @@ export default function HeroSection() {
           >
             <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src="/asset/menu/메뉴모음컷/메뉴모음컷 3 작은사이즈.jpg"
+                src="/asset/menu/오늘은_오므라이스/메뉴모음컷/메뉴모음컷 3 작은사이즈.jpg"
                 alt="오늘은 오므라이스 메뉴"
                 fill
                 className="object-cover"
