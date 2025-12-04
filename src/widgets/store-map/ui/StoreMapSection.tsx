@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { fetchStores, filterStores } from '@/lib/stores';
 import type { Store } from '@/lib/stores';
 
@@ -52,6 +52,9 @@ export default function StoreMapSection() {
   const [isMapReady, setIsMapReady] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [mapError, setMapError] = useState<string | null>(null);
+
+  // 모바일 탭 상태 ('list' | 'map')
+  const [mobileTab, setMobileTab] = useState<'list' | 'map'>('list');
 
   /**
    * 카카오맵 스크립트 동적 로드
@@ -207,7 +210,7 @@ export default function StoreMapSection() {
   /**
    * 매장 리스트를 기반으로 마커 렌더링
    */
-  const renderMarkers = (storesToRender: Store[]) => {
+  const renderMarkers = useCallback((storesToRender: Store[]) => {
     if (!mapInstanceRef.current || !geocoderRef.current) return;
 
     clearMarkers();
@@ -251,7 +254,7 @@ export default function StoreMapSection() {
         }
       });
     });
-  };
+  }, []);
 
   /**
    * 필터링된 매장 목록이 변경되면 마커 다시 렌더링
@@ -260,7 +263,21 @@ export default function StoreMapSection() {
     if (isMapReady && isDataLoaded && filteredStores.length > 0) {
       renderMarkers(filteredStores);
     }
-  }, [filteredStores, isMapReady, isDataLoaded]);
+  }, [filteredStores, isMapReady, isDataLoaded, renderMarkers]);
+
+  /**
+   * 지도 탭으로 전환 시 지도 크기 재조정
+   */
+  const handleMapTabSwitch = () => {
+    setMobileTab('map');
+
+    // 지도 크기 재조정 (DOM 업데이트 후 실행)
+    setTimeout(() => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.relayout();
+      }
+    }, 100);
+  };
 
   /**
    * 리스트에서 매장 클릭 시 해당 위치로 이동
@@ -270,20 +287,26 @@ export default function StoreMapSection() {
 
     setSelectedStoreCode(store.store_code);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    geocoderRef.current.addressSearch(store.address, (result: any, status: any) => {
-      if (status === window.kakao.maps.services.Status.OK) {
-        const position = new window.kakao.maps.LatLng(result[0].y, result[0].x);
-        mapInstanceRef.current.panTo(position);
-        mapInstanceRef.current.setLevel(FOCUSED_ZOOM_LEVEL);
+    // 모바일에서는 지도 탭으로 자동 전환
+    handleMapTabSwitch();
 
-        // 해당 매장 마커의 InfoWindow 열기
-        const content = createInfoWindowContent(store, result[0].y, result[0].x);
-        infoWindowRef.current.setContent(content);
-        infoWindowRef.current.setPosition(position);
-        infoWindowRef.current.open(mapInstanceRef.current);
-      }
-    });
+    // 지도 크기 재조정 후 위치 이동 (약간의 지연 필요)
+    setTimeout(() => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      geocoderRef.current.addressSearch(store.address, (result: any, status: any) => {
+        if (status === window.kakao.maps.services.Status.OK) {
+          const position = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+          mapInstanceRef.current.panTo(position);
+          mapInstanceRef.current.setLevel(FOCUSED_ZOOM_LEVEL);
+
+          // 해당 매장 마커의 InfoWindow 열기
+          const content = createInfoWindowContent(store, result[0].y, result[0].x);
+          infoWindowRef.current.setContent(content);
+          infoWindowRef.current.setPosition(position);
+          infoWindowRef.current.open(mapInstanceRef.current);
+        }
+      });
+    }, 150);
   };
 
   return (
@@ -320,36 +343,76 @@ export default function StoreMapSection() {
 
         {/* 지도 + 매장 목록 레이아웃 */}
         <motion.div
-          className="bg-foreground rounded-3xl overflow-hidden shadow-2xl"
+          className="bg-white rounded-3xl overflow-hidden shadow-2xl"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] min-h-[900px] lg:h-[700px]">
+          {/* 검색 박스 (모든 화면에서 상단 고정) */}
+          <div className="bg-white p-4 sm:p-6 border-b border-gray-200">
+            <div className="flex items-center gap-2 border-2 border-gray-300 rounded-xl p-3 bg-gray-50">
+              <span className="text-xl">🔍</span>
+              <input
+                type="text"
+                placeholder="지점명, 주소로 검색"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+                className="flex-1 outline-none text-base bg-transparent"
+              />
+            </div>
+
+            {/* 검색 결과 개수 */}
+            <div className="mt-3 text-sm text-gray-600 font-medium">
+              총 {filteredStores.length}개 매장
+            </div>
+          </div>
+
+          {/* 모바일 탭 버튼 (lg 미만에서만 표시) */}
+          <div className="lg:hidden flex border-b border-gray-200">
+            <button
+              onClick={() => setMobileTab('list')}
+              className={`flex-1 py-4 text-base font-bold transition-all ${
+                mobileTab === 'list'
+                  ? 'bg-yellow-400 text-gray-900'
+                  : 'bg-white text-gray-500 hover:bg-gray-50'
+              }`}
+            >
+              📋 매장 목록
+            </button>
+            <button
+              onClick={handleMapTabSwitch}
+              className={`flex-1 py-4 text-base font-bold transition-all ${
+                mobileTab === 'map'
+                  ? 'bg-yellow-400 text-gray-900'
+                  : 'bg-white text-gray-500 hover:bg-gray-50'
+              }`}
+            >
+              🗺️ 지도 보기
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] h-[600px] lg:h-[700px]">
             {/* 왼쪽: 매장 목록 */}
-            <div className="bg-white p-6 overflow-y-auto max-h-[400px] lg:max-h-none">
-              {/* 검색 박스 */}
-              <div className="mb-6">
-                <div className="flex items-center gap-2 border-2 border-foreground/20 rounded-lg p-3">
-                  <span className="text-xl">🔍</span>
-                  <input
-                    type="text"
-                    placeholder="지점명, 주소로 검색"
-                    value={keyword}
-                    onChange={(e) => setKeyword(e.target.value)}
-                    className="flex-1 outline-none text-base"
-                  />
-                </div>
-              </div>
-
-              {/* 검색 결과 개수 */}
-              <div className="mb-4 text-sm text-gray-500">{filteredStores.length}개 매장</div>
-
+            <div
+              className={`bg-white p-4 sm:p-6 overflow-y-auto h-full ${
+                mobileTab === 'list' ? 'block' : 'hidden lg:block'
+              }`}
+            >
               {/* 매장 목록 */}
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {filteredStores.length === 0 ? (
-                  <div className="text-center py-12 text-gray-500">
-                    {isDataLoaded ? '검색 결과가 없습니다.' : '매장 목록을 불러오는 중...'}
+                  <div className="text-center py-20 text-gray-500">
+                    {isDataLoaded ? (
+                      <div>
+                        <span className="text-4xl mb-4 block">🔍</span>
+                        <p className="text-lg">검색 결과가 없습니다.</p>
+                      </div>
+                    ) : (
+                      <div>
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500 mx-auto mb-4"></div>
+                        <p>매장 목록을 불러오는 중...</p>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   filteredStores.map((store, index) => (
@@ -358,18 +421,21 @@ export default function StoreMapSection() {
                       onClick={() => handleStoreClick(store)}
                       className={`border-2 rounded-xl p-4 transition-all cursor-pointer ${
                         selectedStoreCode === store.store_code
-                          ? 'border-yellow-500 bg-yellow-50'
-                          : 'border-gray-200 hover:border-yellow-400 hover:bg-yellow-50'
+                          ? 'border-yellow-500 bg-yellow-50 shadow-md'
+                          : 'border-gray-200 hover:border-yellow-400 hover:bg-yellow-50 hover:shadow-sm'
                       }`}
                       initial={{ opacity: 0, x: -20 }}
                       animate={isInView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ duration: 0.5, delay: Math.min(0.1 * index, 1) }}
+                      transition={{ duration: 0.5, delay: Math.min(0.05 * index, 0.8) }}
                     >
                       {/* 매장명 */}
-                      <h3 className="text-lg font-bold text-gray-900 mb-2">{store.branch_name}</h3>
+                      <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                        <span className="text-yellow-500">📍</span>
+                        {store.branch_name}
+                      </h3>
 
                       {/* 주소 */}
-                      <p className="text-sm text-gray-600 leading-relaxed">{store.address}</p>
+                      <p className="text-sm text-gray-600 leading-relaxed pl-6">{store.address}</p>
                     </motion.div>
                   ))
                 )}
@@ -378,7 +444,9 @@ export default function StoreMapSection() {
 
             {/* 오른쪽: 실제 카카오 지도 */}
             <motion.div
-              className="bg-gray-200 relative"
+              className={`bg-gray-200 relative h-full ${
+                mobileTab === 'map' ? 'block' : 'hidden lg:block'
+              }`}
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -388,10 +456,10 @@ export default function StoreMapSection() {
               {/* 로딩 및 에러 표시 */}
               {!isMapReady && (
                 <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-                  <div className="text-center">
+                  <div className="text-center px-4">
                     {mapError ? (
                       <>
-                        <p className="text-red-600 mb-2">❌ {mapError}</p>
+                        <p className="text-red-600 mb-2 text-lg">❌ {mapError}</p>
                         <p className="text-sm text-gray-600">
                           환경 변수와 카카오 개발자 센터 설정을 확인하세요.
                         </p>
@@ -405,6 +473,14 @@ export default function StoreMapSection() {
                   </div>
                 </div>
               )}
+
+              {/* 모바일에서 목록으로 돌아가기 버튼 */}
+              <button
+                onClick={() => setMobileTab('list')}
+                className="lg:hidden absolute top-4 left-4 bg-white px-4 py-2 rounded-lg shadow-lg font-bold text-sm flex items-center gap-2 hover:bg-gray-50 transition-all z-10"
+              >
+                ← 목록으로
+              </button>
             </motion.div>
           </div>
         </motion.div>
