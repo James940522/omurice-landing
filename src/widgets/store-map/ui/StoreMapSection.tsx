@@ -351,7 +351,6 @@ export default function StoreMapSection() {
           {/* 검색 박스 (모든 화면에서 상단 고정) */}
           <div className="bg-white p-4 sm:p-6 border-b border-gray-200">
             <div className="flex items-center gap-2 border-2 border-gray-300 rounded-xl p-3 bg-gray-50">
-              <span className="text-xl">🔍</span>
               <input
                 type="text"
                 placeholder="지점명, 주소로 검색"

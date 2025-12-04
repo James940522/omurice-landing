@@ -483,18 +483,24 @@ export default function MenuSection() {
   const currentBrand = brands[activeBrand];
   const currentCategory = currentBrand.categories[activeCategory];
 
+  const scrollToTop = () => {
+    ref.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  };
+
   const handleBrandChange = (index: number) => {
     setActiveBrand(index);
     setActiveCategory(0);
+    // 브랜드 변경 시 섹션 상단으로 스크롤
+    setTimeout(scrollToTop, 50);
+  };
 
-    // 브랜드 전환 시 섹션 상단으로 부드럽게 스크롤
-    setTimeout(() => {
-      ref.current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-        inline: 'nearest',
-      });
-    }, 100);
+  const handleCategoryChange = (index: number) => {
+    setActiveCategory(index);
+    // 카테고리 변경 시 섹션 상단으로 스크롤
+    setTimeout(scrollToTop, 50);
   };
 
   return (
@@ -584,7 +590,7 @@ export default function MenuSection() {
             {currentBrand.categories.map((category, index) => (
               <motion.button
                 key={category.id}
-                onClick={() => setActiveCategory(index)}
+                onClick={() => handleCategoryChange(index)}
                 className={cn(
                   'px-4 py-2 md:px-6 md:py-3 rounded-full font-bold text-sm md:text-base transition-all duration-300 border-2',
                   activeCategory === index
@@ -614,11 +620,11 @@ export default function MenuSection() {
         <AnimatePresence mode="wait">
           <motion.div
             key={`${activeBrand}-${activeCategory}`}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 min-h-[600px] md:min-h-[800px] lg:min-h-[900px]"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.4, ease: 'easeInOut' }}
+            transition={{ duration: 0.3 }}
           >
             {currentCategory.items.map((item, index) => (
               <motion.div
