@@ -92,7 +92,7 @@ export default function RevenueProofSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section className="relative overflow-hidden py-24 md:py-20 lg:py-24" ref={ref}>
+    <section id="revenue" className="relative overflow-hidden py-24 md:py-20 lg:py-24" ref={ref}>
       {/* 배경 이미지 - 반복 */}
       <div
         className="absolute inset-0 z-0"
@@ -201,7 +201,7 @@ export default function RevenueProofSection() {
             </h3>
             <p className="text-base md:text-lg text-gray-800 max-w-2xl mx-auto">
               실제 가맹점 손익 데이터를 분석하여
-              <br className="hidden md:block" />
+              <br />
               가장 수익성 높은 구조로 설계했습니다
             </p>
           </div>

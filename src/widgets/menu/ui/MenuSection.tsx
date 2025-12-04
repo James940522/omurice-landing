@@ -475,7 +475,7 @@ const brands: Brand[] = [
 ];
 
 export default function MenuSection() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [activeBrand, setActiveBrand] = useState(0);
   const [activeCategory, setActiveCategory] = useState(0);
@@ -486,6 +486,15 @@ export default function MenuSection() {
   const handleBrandChange = (index: number) => {
     setActiveBrand(index);
     setActiveCategory(0);
+
+    // 브랜드 전환 시 섹션 상단으로 부드럽게 스크롤
+    setTimeout(() => {
+      ref.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest',
+      });
+    }, 100);
   };
 
   return (
@@ -503,7 +512,7 @@ export default function MenuSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900 [text-shadow:_2px_2px_0_#fff,_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_4px_4px_8px_rgba(255,255,255,0.8)]">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900 [text-shadow:2px_2px_0_#fff,-2px_-2px_0_#fff,2px_-2px_0_#fff,-2px_2px_0_#fff,4px_4px_8px_rgba(255,255,255,0.8)]">
             메뉴 소개
           </h2>
           <p className="text-xl md:text-2xl text-gray-900 bg-white/80 px-6 py-3 rounded-2xl inline-block mb-6 font-bold shadow-xl">
@@ -513,7 +522,7 @@ export default function MenuSection() {
 
         {/* 브랜드 선택 */}
         <motion.div
-          className="flex flex justify-center items-center gap-6 sm:gap-12 mb-12"
+          className="flex justify-center items-center gap-6 sm:gap-12 mb-12"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -605,11 +614,11 @@ export default function MenuSection() {
         <AnimatePresence mode="wait">
           <motion.div
             key={`${activeBrand}-${activeCategory}`}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 min-h-[600px] md:min-h-[800px] lg:min-h-[900px]"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.4, ease: 'easeInOut' }}
           >
             {currentCategory.items.map((item, index) => (
               <motion.div

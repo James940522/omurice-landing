@@ -111,26 +111,26 @@ export default function ContactFormSection() {
                   />
                 </div>
               </div>
-
-              {/* 이메일 */}
-              <div>
-                <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-2">
-                  이메일 <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 outline-none transition-all"
-                  placeholder="example@email.com"
-                />
-              </div>
-
-              {/* 희망 지역 & 예산 */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* 이메일 */}
+                <div>
+                  <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-2">
+                    이메일 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 outline-none transition-all"
+                    placeholder="example@email.com"
+                  />
+                </div>
+
+                {/* 희망 지역 */}
+
                 <div>
                   <label htmlFor="region" className="block text-sm font-bold text-gray-700 mb-2">
                     희망 창업 지역 <span className="text-red-500">*</span>
@@ -145,25 +145,6 @@ export default function ContactFormSection() {
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 outline-none transition-all"
                     placeholder="서울 강남구"
                   />
-                </div>
-                <div>
-                  <label htmlFor="budget" className="block text-sm font-bold text-gray-700 mb-2">
-                    투자 가능 예산
-                  </label>
-                  <select
-                    id="budget"
-                    name="budget"
-                    value={formData.budget}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 outline-none transition-all"
-                  >
-                    <option value="">선택해주세요</option>
-                    <option value="5000">5천만원 이하</option>
-                    <option value="10000">5천만원 ~ 1억원</option>
-                    <option value="15000">1억원 ~ 1억 5천만원</option>
-                    <option value="20000">1억 5천만원 ~ 2억원</option>
-                    <option value="20000+">2억원 이상</option>
-                  </select>
                 </div>
               </div>
 
@@ -227,14 +208,14 @@ export default function ContactFormSection() {
             <p className="text-white text-lg md:text-xl font-bold mb-4">빠른 상담을 원하시나요?</p>
             <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
               <a
-                href="tel:02-1234-5678"
+                href="tel:010-9923-9502"
                 className="flex items-center gap-2 text-white text-xl md:text-2xl font-bold hover:scale-105 transition-transform"
               >
                 010-9923-9502
               </a>
               <span className="hidden md:inline text-white/60">|</span>
               <a
-                href="mailto:info@omurice.com"
+                href="wochl123@naver.com"
                 className="flex items-center gap-2 text-white text-xl md:text-2xl font-bold hover:scale-105 transition-transform"
               >
                 wochl123@naver.com
