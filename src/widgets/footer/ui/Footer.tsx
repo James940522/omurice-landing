@@ -49,7 +49,7 @@ export default function Footer() {
             <h4 className="text-xl md:text-2xl font-bold mb-4 text-orange-500">고객센터</h4>
             <div className="space-y-3">
               <p className="text-3xl font-bold text-amber-900">010-9923-9502</p>
-              <p className="text-lg text-amber-700">연중무휴 24시간</p>
+              <p className="text-lg text-amber-700">오전 08:30 ~ 오후 20:00</p>
               <p className="text-lg text-amber-700">이메일: wochl123@naver.com</p>
             </div>
           </div>
@@ -67,7 +67,7 @@ export default function Footer() {
               <br />
               사업자등록번호: 576-88-03176
               <br />
-              주소: 서울시 동대문구 왕산로 200 롯데캐슬 L-65 1204호
+              주소: 서울특별시 동대문구 왕산로 200 롯데캐슬 SKY-L65 섹션오피스 1204호
             </p>
           </div>
         </div>

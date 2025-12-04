@@ -13,6 +13,7 @@ interface MenuItem {
 interface MenuCategory {
   id: string;
   name: string;
+  isNew?: boolean;
   items: MenuItem[];
 }
 
@@ -72,6 +73,11 @@ const brands: Brand[] = [
           {
             name: '소세지 오므라이스',
             image: '/asset/menu/오늘은_오므라이스/오므라이스/소세지 오므라이스.jpg',
+          },
+          {
+            name: '블랙앤화이트 오므라이스',
+            image:
+              '/asset/menu/오늘은_오므라이스/블랙앤화이트오므라이스/블랙앤화이트오므라이스.jpg',
           },
         ],
       },
@@ -208,6 +214,54 @@ const brands: Brand[] = [
             name: '소세지 화이트 김치 오므라이스',
             image:
               '/asset/menu/오늘은_오므라이스/화이트김치오므라이스/소세지 화이트 김치 오므라이스.jpg',
+          },
+        ],
+      },
+      {
+        id: 'toowoomba',
+        name: '투움바 오므라이스',
+        isNew: true,
+        items: [
+          {
+            name: '큐브스테이크 투움바 오므라이스',
+            image:
+              '/asset/menu/오늘은_오므라이스/투움바오므라이스/큐브스테이크 투움바 오므라이스.jpg',
+          },
+          {
+            name: '돈까스 투움바 오므라이스',
+            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/돈까스 투움바 오므라이스.jpg',
+          },
+          {
+            name: '떡갈비 투움바 오므라이스',
+            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/떡갈비 투움바 오므라이스.jpg',
+          },
+          {
+            name: '가라아게 투움바 오므라이스',
+            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/가라아게 투움바 오므라이스.jpg',
+          },
+          {
+            name: '새우까스 투움바 오므라이스',
+            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/새우까스 투움바 오므라이스.jpg',
+          },
+          {
+            name: '삼겹 투움바 오므라이스',
+            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/삼겹 투움바 오므라이스.jpg',
+          },
+          {
+            name: '우삼겹 투움바 오므라이스',
+            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/우삼겹 투움바 오므라이스.jpg',
+          },
+          {
+            name: '스팸 투움바 오므라이스',
+            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/스팸 투움바 오므라이스.jpg',
+          },
+          {
+            name: '소세지 투움바 오므라이스',
+            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/소세지 투움바 오므라이스.jpg',
+          },
+          {
+            name: '블랙 앤 투움바 오므라이스',
+            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/블랙 앤 투움바 오므라이스.jpg',
           },
         ],
       },
@@ -592,7 +646,7 @@ export default function MenuSection() {
                 key={category.id}
                 onClick={() => handleCategoryChange(index)}
                 className={cn(
-                  'px-4 py-2 md:px-6 md:py-3 rounded-full font-bold text-sm md:text-base transition-all duration-300 border-2',
+                  'relative px-4 py-2 md:px-6 md:py-3 rounded-full font-bold text-sm md:text-base transition-all duration-300 border-2',
                   activeCategory === index
                     ? cn(
                         currentBrand.accentColor === 'yellow'
@@ -611,6 +665,11 @@ export default function MenuSection() {
                 whileTap={{ scale: 0.95 }}
               >
                 {category.name}
+                {category.isNew && (
+                  <span className="absolute -top-1 -right-1 inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] md:text-[10px] font-extrabold bg-red-500 text-white shadow-lg">
+                    NEW
+                  </span>
+                )}
               </motion.button>
             ))}
           </motion.div>

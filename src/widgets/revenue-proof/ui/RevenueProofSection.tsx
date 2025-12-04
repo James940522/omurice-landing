@@ -136,7 +136,7 @@ export default function RevenueProofSection() {
         </motion.div>
 
         {/* 핵심 수익 지표 */}
-        <motion.div
+        {/* <motion.div
           className="mb-32 md:mb-24 lg:mb-28"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -186,7 +186,7 @@ export default function RevenueProofSection() {
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* 손익구조 강점 - 지그재그 레이아웃 */}
         <motion.div
@@ -195,7 +195,7 @@ export default function RevenueProofSection() {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <div className="text-center mb-16 md:mb-12 lg:mb-16">
+          {/* <div className="text-center mb-16 md:mb-12 lg:mb-16">
             <h3 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
               수익구조를 <span className="text-yellow-600">최적화</span>했습니다
             </h3>
@@ -204,14 +204,14 @@ export default function RevenueProofSection() {
               <br />
               가장 수익성 높은 구조로 설계했습니다
             </p>
-          </div>
+          </div> */}
 
           <div className="space-y-16 md:space-y-20 lg:space-y-24 max-w-6xl mx-auto">
             {[
               {
                 number: '01',
                 title: '원가 안정성',
-                desc: '매출 대비 식자재 비용 28%로 안정적인 원가율을 유지합니다. 삼성 웰스토리 대기업과 함께하는 안정감 있는 주6회 전국배송 시스템으로, 신선한 식자재를 합리적인 가격에 공급받을 수 있습니다.',
+                desc: '매출 대비 식자재 비용 28% ~ 32%로 안정적인 원가율을 유지합니다. 삼성 웰스토리 대기업과 함께하는 안정감 있는 주6회 전국배송 시스템으로, 신선한 식자재를 합리적인 가격에 공급받을 수 있습니다.',
                 image: '/asset/etc/1.jpg',
               },
               {
