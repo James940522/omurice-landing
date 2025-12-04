@@ -16,7 +16,9 @@ export default function ContactFormSection() {
     message: '',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -29,11 +31,24 @@ export default function ContactFormSection() {
   };
 
   return (
-    <section
-      id="contact"
-      className="py-20 md:py-32 relative overflow-hidden bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500"
-      ref={ref}
-    >
+    <section id="contact" className="py-20 md:py-32 relative overflow-hidden bg-gray-900" ref={ref}>
+      {/* 배경 이미지 컨테이너 */}
+      <div
+        className="absolute inset-0 flex items-center justify-center"
+        style={{
+          backgroundImage: 'url(/asset/bg/sec11-bg.png)',
+          backgroundSize: 'contain',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          maxWidth: '1400px',
+          margin: '0 auto',
+          width: '100%',
+        }}
+      />
+
+      {/* 어두운 오버레이 + 블러 효과 */}
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* 헤더 */}
         <motion.div
@@ -217,14 +232,14 @@ export default function ContactFormSection() {
                 href="tel:02-1234-5678"
                 className="flex items-center gap-2 text-white text-xl md:text-2xl font-bold hover:scale-105 transition-transform"
               >
-                📞 02-1234-5678
+                010-9923-9502
               </a>
               <span className="hidden md:inline text-white/60">|</span>
               <a
                 href="mailto:info@omurice.com"
                 className="flex items-center gap-2 text-white text-xl md:text-2xl font-bold hover:scale-105 transition-transform"
               >
-                📧 info@omurice.com
+                wochl123@naver.com
               </a>
             </div>
           </div>
@@ -233,4 +248,3 @@ export default function ContactFormSection() {
     </section>
   );
 }
-

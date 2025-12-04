@@ -20,7 +20,7 @@ export type Store = {
  */
 export async function fetchStores(): Promise<Store[]> {
   try {
-    const response = await fetch('/data/omurice_kakao_stores_clean.csv');
+    const response = await fetch('/asset/csv/omurice_kakao_stores_clean.csv');
     const text = await response.text();
     
     const lines = text

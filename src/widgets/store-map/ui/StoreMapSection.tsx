@@ -360,11 +360,6 @@ export default function StoreMapSection() {
                 className="flex-1 outline-none text-base bg-transparent"
               />
             </div>
-
-            {/* 검색 결과 개수 */}
-            <div className="mt-3 text-sm text-gray-600 font-medium">
-              총 {filteredStores.length}개 매장
-            </div>
           </div>
 
           {/* 모바일 탭 버튼 (lg 미만에서만 표시) */}
@@ -377,7 +372,7 @@ export default function StoreMapSection() {
                   : 'bg-white text-gray-500 hover:bg-gray-50'
               }`}
             >
-              📋 매장 목록
+              매장 목록
             </button>
             <button
               onClick={handleMapTabSwitch}
@@ -387,7 +382,7 @@ export default function StoreMapSection() {
                   : 'bg-white text-gray-500 hover:bg-gray-50'
               }`}
             >
-              🗺️ 지도 보기
+              지도 보기
             </button>
           </div>
 
@@ -404,7 +399,6 @@ export default function StoreMapSection() {
                   <div className="text-center py-20 text-gray-500">
                     {isDataLoaded ? (
                       <div>
-                        <span className="text-4xl mb-4 block">🔍</span>
                         <p className="text-lg">검색 결과가 없습니다.</p>
                       </div>
                     ) : (
@@ -430,12 +424,11 @@ export default function StoreMapSection() {
                     >
                       {/* 매장명 */}
                       <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
-                        <span className="text-yellow-500">📍</span>
                         {store.branch_name}
                       </h3>
 
                       {/* 주소 */}
-                      <p className="text-sm text-gray-600 leading-relaxed pl-6">{store.address}</p>
+                      <p className="text-sm text-gray-600 leading-relaxed">{store.address}</p>
                     </motion.div>
                   ))
                 )}
