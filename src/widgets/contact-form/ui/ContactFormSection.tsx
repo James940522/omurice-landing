@@ -57,9 +57,7 @@ export default function ContactFormSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-block mb-6">
-            <span className="text-5xl md:text-6xl">🍳</span>
-          </div>
+          <div className="inline-block mb-6"></div>
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
             창업 문의
           </h2>
