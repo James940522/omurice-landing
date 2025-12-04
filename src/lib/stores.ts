@@ -8,7 +8,6 @@ export type Store = {
   branch_name: string;
   display_name: string;
   address: string;
-  phone: string;
 };
 
 /**
@@ -38,24 +37,23 @@ export async function fetchStores(): Promise<Store[]> {
       // CSV 라인을 콤마로 분리
       const parts = line.split(',');
       
-      // 5개의 컬럼이 있어야 함
-      if (parts.length >= 5) {
-        const [store_code, branch_name, display_name, address, phone] = parts;
+      // 4개의 컬럼이 있어야 함
+      if (parts.length >= 4) {
+        const [store_code, branch_name, display_name, ...addressParts] = parts;
+        const address = addressParts.join(','); // 주소에 콤마가 있을 수 있으므로 합침
         
         // nan 값이나 빈 값은 필터링
         if (
           store_code &&
           branch_name !== 'nan' &&
           display_name !== 'nan' &&
-          address !== 'nan' &&
-          phone !== 'nan'
+          address !== 'nan'
         ) {
           stores.push({
             store_code: store_code.trim(),
             branch_name: branch_name.trim(),
             display_name: display_name.trim(),
             address: address.trim(),
-            phone: phone.trim(),
           });
         }
       }

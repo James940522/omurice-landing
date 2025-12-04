@@ -189,11 +189,8 @@ export default function StoreMapSection() {
         <h3 style="font-size: 16px; font-weight: bold; margin-bottom: 8px;">
           ${store.display_name}
         </h3>
-        <p style="font-size: 14px; color: #666; margin-bottom: 4px;">
-          ${store.address}
-        </p>
         <p style="font-size: 14px; color: #666; margin-bottom: 12px;">
-          ${store.phone}
+          ${store.address}
         </p>
         <a
           href="${directionsUrl}"
@@ -370,9 +367,6 @@ export default function StoreMapSection() {
                     >
                       {/* 매장명 */}
                       <h3 className="text-lg font-bold text-gray-900 mb-2">{store.branch_name}</h3>
-
-                      {/* 전화번호 */}
-                      <p className="text-base text-yellow-600 font-semibold mb-2">{store.phone}</p>
 
                       {/* 주소 */}
                       <p className="text-sm text-gray-600 leading-relaxed">{store.address}</p>
