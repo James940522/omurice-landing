@@ -120,8 +120,6 @@ export default function ReviewsSection() {
                 textShadow: '2px 2px 8px rgba(0,0,0,0.3), 0 0 20px rgba(0,0,0,0.2)',
               }}
             >
-              거짓말 안 합니다
-              <br />
               <span>실제 고객 리뷰</span>가 증명합니다
             </motion.h2>
             <motion.p

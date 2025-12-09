@@ -41,11 +41,12 @@ export default function StartupProcessSection() {
   ];
 
   return (
-    <section id="startup-process" className="py-20 md:py-32 relative overflow-hidden" ref={ref}>
-      {/* 배경 이미지 */}
-      <div className="absolute inset-0 z-0">
-        <Image src="/asset/bg/sec5-bg.jpg" alt="배경" fill className="object-cover" quality={90} />
-      </div>
+    <section
+      id="startup-process"
+      className="py-20 md:py-32 relative overflow-hidden"
+      style={{ backgroundColor: '#FFF9D6' }}
+      ref={ref}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           className="text-center mb-16"
@@ -53,10 +54,8 @@ export default function StartupProcessSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
-            창업 프로세스
-          </h2>
-          <p className="text-xl md:text-2xl text-white mb-6 drop-shadow-md">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900">창업 프로세스</h2>
+          <p className="text-xl md:text-2xl text-gray-700 mb-6">
             상담부터 오픈까지, 체계적인 4단계 시스템
           </p>
           <div className="w-24 h-2 bg-yellow-300 mx-auto rounded-full" />
@@ -74,7 +73,13 @@ export default function StartupProcessSection() {
               whileHover={{ scale: 1.02, y: -8 }}
             >
               {/* 카드 */}
-              <div className="bg-white rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300 h-full">
+              <div
+                className="bg-white rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-300 h-full"
+                style={{
+                  boxShadow:
+                    '0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                }}
+              >
                 {/* 이미지 섹션 */}
                 <div className="relative h-64 md:h-72 overflow-hidden">
                   <Image
