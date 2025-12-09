@@ -316,14 +316,12 @@ export default function StoreMapSection() {
       ref={ref}
       style={{
         backgroundImage:
-          'url(/asset/etc/James_A_hyperrealistic_exterior_shot_of_a_small_delivery-focu_c7dcf40c-1f4c-4665-815f-46b7a55b79cf_3.png)',
+          'url(/asset/bg/James_soft_cream_and_pastel_yellow_gradient_background_extrem_5dec8460-2b90-4356-a8e4-451278ddf25b_3.png)',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
-      {/* 어두운 오버레이 */}
-      <div className="absolute inset-0 bg-black/60" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           className="text-center mb-16"
@@ -332,13 +330,11 @@ export default function StoreMapSection() {
           transition={{ duration: 0.6 }}
         >
           <div className="inline-block mb-6"></div>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
-            매장 안내
-          </h2>
-          <p className="text-xl md:text-2xl text-white mb-6 drop-shadow-md">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900">매장 안내</h2>
+          <p className="text-xl md:text-2xl text-gray-800 mb-6 font-semibold">
             전국 각지에서 성공적으로 운영 중
           </p>
-          <div className="w-24 h-2 bg-yellow-300 mx-auto rounded-full" />
+          <div className="w-24 h-2 bg-yellow-400 mx-auto rounded-full" />
         </motion.div>
 
         {/* 지도 + 매장 목록 레이아웃 */}

@@ -50,9 +50,9 @@ export default function BrandIntroSection() {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* 텍스트 콘텐츠 - 중앙 정렬 */}
+        {/* 텍스트 콘텐츠 - 모바일 좌측, 데스크톱 중앙 정렬 */}
         <motion.div
-          className="space-y-8 md:space-y-10 text-center"
+          className="space-y-8 md:space-y-10 text-left md:text-center"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: 'easeOut' }}
@@ -80,30 +80,24 @@ export default function BrandIntroSection() {
               <span className="text-yellow-400">오늘은 오므라이스입니다.</span>
             </motion.h2>
             <motion.p
-              className="text-base md:text-lg text-gray-200 leading-relaxed font-medium max-w-2xl mx-auto"
+              className="text-base md:text-lg text-gray-200 leading-relaxed font-medium max-w-2xl md:mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              오늘은 오므라이스는 수많은 운영 데이터를 기반으로
+              수많은 운영 데이터를 기반으로
+              <br className="hidden md:block" />
+              <span className="md:inline"> </span>누구나 안정적으로 운영할 수 있는
               <br />
-              재현성 높은 맛, 표준화된 조리 시스템, 효율적인 동선과 매장 구조를 구축해
-              <br />
-              누구나 안정적으로 매장을 운영할 수 있도록 돕고 있습니다.
-              <br />
-              <br />
-              우리는 단기적인 유행보다
-              <br />
-              &lsquo;꾸준히 매출이 나는 브랜드&rsquo;를 만드는 것이 외식업의 본질이라고 생각합니다.
+              표준화된 시스템을 구축했습니다.
               <br />
               <br />
-              점주님과 함께 성장하는 파트너십,
-              <br />
-              장기적으로 유지 가능한 운영 구조,
-              <br />
-              고객에게 신뢰받는 맛과 서비스.
-              <br />
-              <br />이 세 가지를 지키기 위해 오늘은 오므라이스는 오늘도 고민하고 움직입니다.
+              단기 유행이 아닌,
+              <br className="hidden md:block" />
+              <span className="md:inline"> </span>
+              <span className="text-yellow-400 font-bold">&lsquo;꾸준히 매출이 나는 브랜드&rsquo;</span>
+              <br className="hidden md:block" />
+              <span className="md:inline"> </span>가 외식업의 본질입니다.
             </motion.p>
           </div>
 
@@ -117,7 +111,7 @@ export default function BrandIntroSection() {
             {values.map((value, index) => (
               <motion.div
                 key={index}
-                className="p-5 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 hover:bg-white/15 transition-all duration-300"
+                className="p-5 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 hover:bg-white/15 transition-all duration-300 text-left md:text-center"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}

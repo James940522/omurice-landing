@@ -36,18 +36,12 @@ export default function ContactFormSection() {
       <div
         className="absolute inset-0 flex items-center justify-center"
         style={{
-          backgroundImage: 'url(/asset/bg/sec11-bg.png)',
-          backgroundSize: 'contain',
+          backgroundImage: 'url(/asset/bg/sec2-bg.jpg)',
+          backgroundSize: 'auto',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          maxWidth: '1400px',
-          margin: '0 auto',
-          width: '100%',
+          backgroundRepeat: 'repeat',
         }}
       />
-
-      {/* 어두운 오버레이 + 블러 효과 */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* 헤더 */}
@@ -58,13 +52,24 @@ export default function ContactFormSection() {
           transition={{ duration: 0.6 }}
         >
           <div className="inline-block mb-6"></div>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
+          <h2
+            className="text-4xl md:text-6xl font-bold mb-6 text-gray-900"
+            style={{
+              textShadow: '2px 2px 4px rgba(255,255,255,0.8), -1px -1px 2px rgba(255,255,255,0.5)',
+            }}
+          >
             창업 문의
           </h2>
-          <p className="text-xl md:text-2xl text-white mb-2 drop-shadow-md">
+          <p
+            className="text-xl md:text-2xl text-gray-800 mb-2 font-bold"
+            style={{ textShadow: '1px 1px 3px rgba(255,255,255,0.8)' }}
+          >
             100개 이상의 가맹점이 성공 중!
           </p>
-          <p className="text-lg md:text-xl text-white/90 drop-shadow-md">
+          <p
+            className="text-lg md:text-xl text-gray-800 font-semibold"
+            style={{ textShadow: '1px 1px 3px rgba(255,255,255,0.8)' }}
+          >
             당신도 오늘은 오므라이스 가족이 되어보세요
           </p>
         </motion.div>
@@ -204,19 +209,21 @@ export default function ContactFormSection() {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 inline-block">
-            <p className="text-white text-lg md:text-xl font-bold mb-4">빠른 상담을 원하시나요?</p>
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 inline-block shadow-xl">
+            <p className="text-gray-900 text-lg md:text-xl font-bold mb-4">
+              빠른 상담을 원하시나요?
+            </p>
             <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
               <a
                 href="tel:010-9923-9502"
-                className="flex items-center gap-2 text-white text-xl md:text-2xl font-bold hover:scale-105 transition-transform"
+                className="flex items-center gap-2 text-gray-900 text-xl md:text-2xl font-bold hover:scale-105 transition-transform hover:text-yellow-600"
               >
                 010-9923-9502
               </a>
-              <span className="hidden md:inline text-white/60">|</span>
+              <span className="hidden md:inline text-gray-400">|</span>
               <a
                 href="wochl123@naver.com"
-                className="flex items-center gap-2 text-white text-xl md:text-2xl font-bold hover:scale-105 transition-transform"
+                className="flex items-center gap-2 text-gray-900 text-xl md:text-2xl font-bold hover:scale-105 transition-transform hover:text-yellow-600"
               >
                 wochl123@naver.com
               </a>
