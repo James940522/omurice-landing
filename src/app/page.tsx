@@ -1,3 +1,7 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+
 // Widgets
 import { Header } from '@/widgets/header';
 import { HeroSection } from '@/widgets/hero';
@@ -13,8 +17,46 @@ import { Footer } from '@/widgets/footer';
 
 // Features
 import { FloatingInquiry } from '@/features/inquiry';
+import { WelcomeModal } from '@/features/welcome-modal';
+import { StoreStatusModal } from '@/features/store-status-modal';
 
 export default function Home() {
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+  const [showStoreModal, setShowStoreModal] = useState(false);
+
+  useEffect(() => {
+    // 페이지 로드 후 1초 뒤에 모든 모달 동시 표시
+    const timer = setTimeout(() => {
+      const hideWelcome = localStorage.getItem('hideModal_owner-recruitment');
+      const hideStore = localStorage.getItem('hideModal_store-status');
+      const now = new Date().getTime();
+
+      if (!hideWelcome || parseInt(hideWelcome) < now) {
+        setShowWelcomeModal(true);
+      }
+
+      if (!hideStore || parseInt(hideStore) < now) {
+        setShowStoreModal(true);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // 창업 문의 섹션으로 스크롤 이동 + 모든 모달 닫기
+  const handleNavigateToContact = () => {
+    setShowWelcomeModal(false);
+    setShowStoreModal(false);
+
+    // 약간의 딜레이 후 스크롤
+    setTimeout(() => {
+      const contactSection = document.getElementById('contact-form');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  };
+
   return (
     <main className="min-h-screen">
       <Header />
@@ -29,6 +71,14 @@ export default function Home() {
       <ContactFormSection />
       <Footer />
       <FloatingInquiry />
+
+      {/* 모달들 - 가로로 나란히 배치 */}
+      <WelcomeModal
+        isOpen={showWelcomeModal}
+        onClose={() => setShowWelcomeModal(false)}
+        onNavigateToContact={handleNavigateToContact}
+      />
+      <StoreStatusModal isOpen={showStoreModal} onClose={() => setShowStoreModal(false)} />
     </main>
   );
 }

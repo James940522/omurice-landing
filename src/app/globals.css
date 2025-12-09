@@ -171,6 +171,16 @@ button *,
   background: linear-gradient(180deg, #ffd700 0%, #ff8a5c 100%);
 }
 
+/* 스크롤바 숨기기 유틸리티 */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 /* 강한 그림자 효과 (톤앤매너) */
 .shadow-strong {
   box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.15);
