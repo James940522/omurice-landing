@@ -125,7 +125,8 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
       onClose={onClose}
       modalId="store-status"
       position={{
-        desktop: { left: 'sm:left-[420px]', top: 'sm:top-4' },
+        mobile: { left: 'left-[50%]', top: 'top-24', transform: 'translate-x-[-50%]' },
+        desktop: { left: 'sm:left-[420px]', top: 'sm:top-20' },
       }}
       maxHeight="max-h-[90vh]"
       className="bg-gradient-to-br from-yellow-50 via-amber-50 to-yellow-100 border-4 sm:border-[6px] border-yellow-500 rounded-3xl p-3 sm:p-6 shadow-xl"

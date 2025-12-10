@@ -16,8 +16,8 @@ export default function WelcomeModal({ isOpen, onClose, onNavigateToContact }: W
       onClose={onClose}
       modalId="owner-recruitment"
       position={{
-        mobile: { left: 'left-[50%]', top: 'top-20', transform: 'translate-x-[-50%]' },
-        desktop: { left: 'sm:left-4', top: 'sm:top-4' },
+        mobile: { left: 'left-[50%]', top: 'top-24', transform: 'translate-x-[-50%]' },
+        desktop: { left: 'sm:left-4', top: 'sm:top-20' },
       }}
       width="w-[90vw] sm:w-[400px]"
       className="bg-gradient-to-br from-yellow-50 via-amber-50 to-yellow-100 border-4 sm:border-[6px] border-yellow-500 rounded-3xl p-3 sm:p-6 shadow-xl"
