@@ -147,8 +147,8 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
       }
     >
       {/* Content - 가맹점 리스트 */}
-      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-2 sm:p-4 shadow-lg border border-yellow-200">
-        <div className="grid grid-cols-4 gap-y-1 gap-x-1 sm:gap-x-2 justify-items-center pb-2 sm:pb-4">
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-3 sm:p-4 shadow-lg border border-yellow-200">
+        <div className="grid grid-cols-4 gap-y-2 gap-x-2 sm:gap-y-3 sm:gap-x-3 justify-items-center pb-2 sm:pb-4">
           {stores.map((store, index) => (
             <StoreItem key={index} storeName={store} />
           ))}

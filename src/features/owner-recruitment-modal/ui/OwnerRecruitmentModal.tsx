@@ -3,13 +3,17 @@
 import Image from 'next/image';
 import { BaseModal } from '@/shared/ui';
 
-interface WelcomeModalProps {
+interface OwnerRecruitmentModalProps {
   isOpen: boolean;
   onClose: () => void;
   onNavigateToContact: () => void;
 }
 
-export default function WelcomeModal({ isOpen, onClose, onNavigateToContact }: WelcomeModalProps) {
+export default function OwnerRecruitmentModal({
+  isOpen,
+  onClose,
+  onNavigateToContact,
+}: OwnerRecruitmentModalProps) {
   return (
     <BaseModal
       isOpen={isOpen}
@@ -54,7 +58,7 @@ export default function WelcomeModal({ isOpen, onClose, onNavigateToContact }: W
         {/* 메뉴 이미지 */}
         <div className="relative w-full h-44 sm:h-52 rounded-2xl overflow-hidden mb-4 shadow-lg border-4 border-orange-300">
           <Image
-            src="/asset/menu/오늘은_오므라이스/메뉴모음컷/메뉴모음컷 2 작은사이즈.jpg"
+            src="/asset/menu/오늘은_오므라이스/메뉴모음컷/modal.jpg"
             alt="오늘은 오므라이스 메뉴"
             fill
             className="object-cover"
