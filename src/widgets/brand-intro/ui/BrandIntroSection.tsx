@@ -98,7 +98,6 @@ export default function BrandIntroSection() {
                 &lsquo;꾸준히 매출이 나는 브랜드&rsquo;
               </span>
               <br className="hidden md:block" />
-              <span className="md:inline"> </span>가
               <br className="md:hidden" />
               외식업의 본질입니다.
             </motion.p>
