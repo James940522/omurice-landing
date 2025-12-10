@@ -86,18 +86,21 @@ export default function BrandIntroSection() {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               수많은 운영 데이터를 기반으로
-              <br className="hidden md:block" />
-              <span className="md:inline"> </span>누구나 안정적으로 운영할 수 있는
               <br />
-              표준화된 시스템을 구축했습니다.
+              <span className="md:inline"> </span>누구나 안정적으로 운영할 수 있는
+              <br /> 표준화된 시스템을 구축했습니다.
               <br />
               <br />
               단기 유행이 아닌,
               <br className="hidden md:block" />
               <span className="md:inline"> </span>
-              <span className="text-yellow-400 font-bold">&lsquo;꾸준히 매출이 나는 브랜드&rsquo;</span>
+              <span className="text-yellow-400 font-bold">
+                &lsquo;꾸준히 매출이 나는 브랜드&rsquo;
+              </span>
               <br className="hidden md:block" />
-              <span className="md:inline"> </span>가 외식업의 본질입니다.
+              <span className="md:inline"> </span>가
+              <br className="md:hidden" />
+              외식업의 본질입니다.
             </motion.p>
           </div>
 

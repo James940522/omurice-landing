@@ -55,7 +55,7 @@ export default function BaseModal({
 
   return (
     <div
-      className={`fixed ${mobileLeft} ${mobileTop} ${mobileTransform} ${desktopLeft} ${desktopTop} ${desktopTransform} z-50 ${width} ${maxHeight || ''} flex flex-col shadow-2xl ${className}`}
+      className={`absolute ${mobileLeft} ${mobileTop} ${mobileTransform} ${desktopLeft} ${desktopTop} ${desktopTransform} z-50 ${width} ${maxHeight || ''} flex flex-col shadow-2xl ${className}`}
     >
       {/* Header */}
       {header && <div className="flex-shrink-0">{header}</div>}

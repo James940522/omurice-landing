@@ -16,6 +16,7 @@ export default function WelcomeModal({ isOpen, onClose, onNavigateToContact }: W
       onClose={onClose}
       modalId="owner-recruitment"
       position={{
+        mobile: { left: 'left-[50%]', top: 'top-20', transform: 'translate-x-[-50%]' },
         desktop: { left: 'sm:left-4', top: 'sm:top-4' },
       }}
       width="w-[90vw] sm:w-[400px]"

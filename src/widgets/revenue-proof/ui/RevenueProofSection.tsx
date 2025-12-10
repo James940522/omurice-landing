@@ -130,7 +130,7 @@ export default function RevenueProofSection() {
 
           <p className="text-lg md:text-xl text-gray-800 max-w-2xl mx-auto leading-relaxed">
             실제 가맹점 데이터를 기반으로 설계된
-            <br className="hidden md:block" />
+            <br className="" />
             수익 중심의 창업 모델입니다.
           </p>
         </motion.div>
