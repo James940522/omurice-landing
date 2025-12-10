@@ -19,29 +19,37 @@ import { Footer } from '@/widgets/footer';
 import { FloatingInquiry } from '@/features/inquiry';
 import { WelcomeModal } from '@/features/welcome-modal';
 import { StoreStatusModal } from '@/features/store-status-modal';
+import { IntroAnimation } from '@/features/intro-animation';
 
 export default function Home() {
+  const [showIntro, setShowIntro] = useState(true);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   const [showStoreModal, setShowStoreModal] = useState(false);
 
   useEffect(() => {
-    // 페이지 로드 후 1초 뒤에 모든 모달 동시 표시
-    const timer = setTimeout(() => {
-      const hideWelcome = localStorage.getItem('hideModal_owner-recruitment');
-      const hideStore = localStorage.getItem('hideModal_store-status');
-      const now = new Date().getTime();
+    // 인트로 애니메이션이 끝난 후 모달 표시
+    const checkIntro = () => {
+      if (!showIntro) {
+        const timer = setTimeout(() => {
+          const hideWelcome = localStorage.getItem('hideModal_owner-recruitment');
+          const hideStore = localStorage.getItem('hideModal_store-status');
+          const now = new Date().getTime();
 
-      if (!hideWelcome || parseInt(hideWelcome) < now) {
-        setShowWelcomeModal(true);
+          if (!hideWelcome || parseInt(hideWelcome) < now) {
+            setShowWelcomeModal(true);
+          }
+
+          if (!hideStore || parseInt(hideStore) < now) {
+            setShowStoreModal(true);
+          }
+        }, 500);
+
+        return () => clearTimeout(timer);
       }
+    };
 
-      if (!hideStore || parseInt(hideStore) < now) {
-        setShowStoreModal(true);
-      }
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
+    checkIntro();
+  }, [showIntro]);
 
   // 창업 문의 섹션으로 스크롤 이동 + 모든 모달 닫기
   const handleNavigateToContact = () => {
@@ -59,6 +67,9 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
+      {/* 인트로 애니메이션 */}
+      <IntroAnimation isVisible={showIntro} onComplete={() => setShowIntro(false)} />
+
       <Header />
       <HeroSection />
       <BrandIntroSection />
