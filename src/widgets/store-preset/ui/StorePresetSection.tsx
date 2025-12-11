@@ -114,19 +114,19 @@ export function StorePresetSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: brandIndex * 0.2 }}
             >
-              {/* 브랜드 로고 */}
+              {/* 브랜드 타이틀 */}
               <div className="flex justify-center mb-6">
-                <div className="relative w-32 h-32">
-                  <Image
-                    src={brand.logo}
-                    alt={brand.name}
-                    fill
-                    className={cn(
-                      'object-contain drop-shadow-xl',
-                      brand.id === 'egg' && 'rounded-2xl'
-                    )}
-                  />
-                </div>
+                <h3
+                  className="text-2xl font-black"
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    color: '#FFC107',
+                    textShadow:
+                      '-1.5px -1.5px 0 #FF6B00, 1.5px -1.5px 0 #FF6B00, -1.5px 1.5px 0 #FF6B00, 1.5px 1.5px 0 #FF6B00, 3px 3px 0 #FF8C00, 4px 4px 8px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 193, 7, 0.5)',
+                  }}
+                >
+                  {brand.id === 'omurice' ? '오늘은 오므라이스' : 'EGG EATS'}
+                </h3>
               </div>
 
               {/* 프리셋 옵션들 (2열) */}
@@ -176,25 +176,26 @@ export function StorePresetSection() {
 
         {/* 데스크탑 레이아웃 (모두 한 행에) */}
         <div className="hidden md:block">
-          {/* 로고 행 */}
+          {/* 브랜드 타이틀 행 */}
           <motion.div
-            className="flex justify-center gap-12 lg:gap-20 mb-8"
+            className="flex justify-center gap-16 lg:gap-24 mb-10"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
             {brandPresets.map((brand, index) => (
-              <div key={brand.id} className="relative w-32 h-32 lg:w-40 lg:h-40">
-                <Image
-                  src={brand.logo}
-                  alt={brand.name}
-                  fill
-                  className={cn(
-                    'object-contain drop-shadow-xl',
-                    brand.id === 'egg' && 'rounded-2xl'
-                  )}
-                />
-              </div>
+              <h3
+                key={brand.id}
+                className="text-3xl lg:text-4xl font-black"
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  color: '#FFC107',
+                  textShadow:
+                    '-2px -2px 0 #FF6B00, 2px -2px 0 #FF6B00, -2px 2px 0 #FF6B00, 2px 2px 0 #FF6B00, 4px 4px 0 #FF8C00, 6px 6px 0 #FF6B00, 8px 8px 12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 193, 7, 0.6)',
+                }}
+              >
+                {brand.id === 'omurice' ? '오늘은 오므라이스' : 'EGG EATS'}
+              </h3>
             ))}
           </motion.div>
 

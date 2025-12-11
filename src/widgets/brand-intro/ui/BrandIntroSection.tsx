@@ -70,7 +70,7 @@ export default function BrandIntroSection() {
               </span>
             </motion.div>
             <motion.h2
-              className="typo-h1 text-white leading-tight mb-6"
+              className="typo-h2 text-white leading-tight mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.3 }}
