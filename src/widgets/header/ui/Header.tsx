@@ -71,7 +71,7 @@ export default function Header() {
                 quality={75}
               />
               <span
-                className="relative text-sm md:text-base lg:text-lg font-black -mr-2 "
+                className="relative text-sm md:text-base lg:text-lg font-black mr-1 "
                 style={{
                   fontFamily: 'var(--font-heading)',
                   color: '#FFA500',
@@ -85,7 +85,7 @@ export default function Header() {
                 alt="에그이츠"
                 width={200}
                 height={100}
-                className="h-16 md:h-18 lg:h-22 w-auto"
+                className="h-8 md:h-10 lg:h-12 w-auto"
                 priority
                 quality={75}
               />
