@@ -53,22 +53,34 @@ export default function ContactFormSection() {
         >
           <div className="inline-block mb-6"></div>
           <h2
-            className="text-4xl md:text-6xl font-bold mb-6 text-gray-900"
+            className="text-4xl md:text-6xl font-bold mb-6"
             style={{
-              textShadow: '2px 2px 4px rgba(255,255,255,0.8), -1px -1px 2px rgba(255,255,255,0.5)',
+              fontFamily: 'var(--font-heading)',
+              color: '#FEC601',
+              textShadow:
+                '-2px -2px 0 #8B4513, 2px -2px 0 #8B4513, -2px 2px 0 #8B4513, 2px 2px 0 #8B4513, 4px 4px 8px rgba(0,0,0,0.5)',
             }}
           >
             창업 문의
           </h2>
           <p
-            className="text-xl md:text-2xl text-gray-800 mb-2 font-bold"
-            style={{ textShadow: '1px 1px 3px rgba(255,255,255,0.8)' }}
+            className="text-xl md:text-2xl mb-2 font-bold"
+            style={{
+              fontFamily: 'var(--font-heading)',
+              color: '#FFFFFF',
+              textShadow:
+                '0 0 20px rgba(254, 198, 1, 0.8), 2px 2px 4px rgba(0,0,0,0.8), -1px -1px 2px rgba(254, 198, 1, 0.5)',
+            }}
           >
             100개 이상의 가맹점이 성공 중!
           </p>
           <p
-            className="text-lg md:text-xl text-gray-800 font-semibold"
-            style={{ textShadow: '1px 1px 3px rgba(255,255,255,0.8)' }}
+            className="text-lg md:text-xl font-semibold"
+            style={{
+              fontFamily: 'var(--font-body)',
+              color: '#FFF9E6',
+              textShadow: '1px 1px 4px rgba(0,0,0,0.8), 0 0 10px rgba(254, 198, 1, 0.4)',
+            }}
           >
             당신도 오늘은 오므라이스 가족이 되어보세요
           </p>

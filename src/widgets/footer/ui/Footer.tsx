@@ -18,6 +18,25 @@ export default function Footer() {
                 quality={75}
               />
             </div>
+            <div className="space-y-2">
+              <p
+                className="text-sm text-amber-800 font-medium"
+                style={{ fontFamily: 'var(--font-body)' }}
+              >
+                (주)재영에프앤비 | 대표자: 최재영, 이호남
+              </p>
+              <p className="text-sm text-amber-700" style={{ fontFamily: 'var(--font-body)' }}>
+                사업자등록번호: 576-88-03176
+              </p>
+              <p
+                className="text-sm text-amber-700 leading-relaxed"
+                style={{ fontFamily: 'var(--font-body)' }}
+              >
+                주소: 서울특별시 동대문구 왕산로 200
+                <br />
+                롯데캐슬 SKY-L65 섹션오피스 1204호
+              </p>
+            </div>
           </div>
 
           {/* 빠른 링크 */}
@@ -52,23 +71,6 @@ export default function Footer() {
               <p className="text-lg text-amber-700">오전 08:30 ~ 오후 20:00</p>
               <p className="text-lg text-amber-700">이메일: wochl123@naver.com</p>
             </div>
-          </div>
-        </div>
-
-        {/* 구분선 */}
-        <div className="border-t border-amber-200 my-8" />
-
-        {/* 하단 영역 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* 회사 정보 */}
-          <div>
-            <p className="text-sm text-amber-700 leading-relaxed">
-              (주)재영에프앤비 | 대표자: 최재영, 이호남
-              <br />
-              사업자등록번호: 576-88-03176
-              <br />
-              주소: 서울특별시 동대문구 왕산로 200 롯데캐슬 SKY-L65 섹션오피스 1204호
-            </p>
           </div>
         </div>
       </div>

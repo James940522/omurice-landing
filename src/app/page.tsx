@@ -58,7 +58,7 @@ export default function Home() {
 
     // 약간의 딜레이 후 스크롤
     setTimeout(() => {
-      const contactSection = document.getElementById('contact-form');
+      const contactSection = document.getElementById('contact');
       if (contactSection) {
         contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
