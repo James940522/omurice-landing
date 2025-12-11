@@ -105,8 +105,8 @@ export function StorePresetSection() {
           </p>
         </motion.div>
 
-        {/* 브랜드별 프리셋 */}
-        <div className="space-y-20">
+        {/* 모바일 레이아웃 (브랜드별 세로 배치) */}
+        <div className="md:hidden space-y-12">
           {brandPresets.map((brand, brandIndex) => (
             <motion.div
               key={brand.id}
@@ -115,22 +115,22 @@ export function StorePresetSection() {
               transition={{ duration: 0.6, delay: brandIndex * 0.2 }}
             >
               {/* 브랜드 로고 */}
-              <div className="flex justify-center mb-8">
-                <div className="relative w-40 h-40 md:w-48 md:h-48">
+              <div className="flex justify-center mb-6">
+                <div className="relative w-32 h-32">
                   <Image
                     src={brand.logo}
                     alt={brand.name}
                     fill
                     className={cn(
-                      'object-contain drop-shadow-2xl',
+                      'object-contain drop-shadow-xl',
                       brand.id === 'egg' && 'rounded-2xl'
                     )}
                   />
                 </div>
               </div>
 
-              {/* 프리셋 옵션들 */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+              {/* 프리셋 옵션들 (2열) */}
+              <div className="grid grid-cols-2 gap-4">
                 {brand.options.map((option, optionIndex) => (
                   <motion.div
                     key={option.id}
@@ -141,27 +141,26 @@ export function StorePresetSection() {
                       duration: 0.5,
                       delay: brandIndex * 0.2 + optionIndex * 0.1 + 0.3,
                     }}
-                    whileHover={{ y: -8 }}
                   >
-                    <div className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border-4 border-yellow-200">
+                    <div className="bg-white rounded-2xl overflow-hidden shadow-lg border-3 border-yellow-200">
                       {/* 이미지 */}
                       <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
                         <Image
                           src={option.image}
                           alt={`${brand.name} - ${option.title}`}
                           fill
-                          className="object-contain transition-transform duration-500 group-hover:scale-105"
+                          className="object-contain"
                         />
                         {/* 오버레이 배지 */}
-                        <div className="absolute top-4 left-4 bg-yellow-400 text-gray-900 px-4 py-2 rounded-full font-bold shadow-lg">
+                        <div className="absolute top-2 left-2 bg-yellow-400 text-gray-900 px-3 py-1 rounded-full font-bold shadow-lg text-sm">
                           <span style={{ fontFamily: 'var(--font-heading)' }}>{option.title}</span>
                         </div>
                       </div>
 
                       {/* 설명 */}
-                      <div className="p-6 text-center">
+                      <div className="p-3 text-center">
                         <p
-                          className="text-lg md:text-xl font-bold text-gray-800 whitespace-pre-line leading-relaxed"
+                          className="text-xs font-bold text-gray-800 whitespace-pre-line leading-snug"
                           style={{ fontFamily: 'var(--font-heading)' }}
                         >
                           {option.description}
@@ -173,6 +172,76 @@ export function StorePresetSection() {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        {/* 데스크탑 레이아웃 (모두 한 행에) */}
+        <div className="hidden md:block">
+          {/* 로고 행 */}
+          <motion.div
+            className="flex justify-center gap-12 lg:gap-20 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            {brandPresets.map((brand, index) => (
+              <div key={brand.id} className="relative w-32 h-32 lg:w-40 lg:h-40">
+                <Image
+                  src={brand.logo}
+                  alt={brand.name}
+                  fill
+                  className={cn(
+                    'object-contain drop-shadow-xl',
+                    brand.id === 'egg' && 'rounded-2xl'
+                  )}
+                />
+              </div>
+            ))}
+          </motion.div>
+
+          {/* 이미지 행 (4개 한 줄) */}
+          <div className="grid grid-cols-4 gap-6 lg:gap-8">
+            {brandPresets.flatMap((brand) =>
+              brand.options.map((option, optionIndex) => (
+                <motion.div
+                  key={option.id}
+                  className="group"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{
+                    duration: 0.5,
+                    delay: optionIndex * 0.1 + 0.3,
+                  }}
+                  whileHover={{ y: -8 }}
+                >
+                  <div className="bg-white rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border-3 border-yellow-200">
+                    {/* 이미지 */}
+                    <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
+                      <Image
+                        src={option.image}
+                        alt={`${brand.name} - ${option.title}`}
+                        fill
+                        className="object-contain transition-transform duration-500 group-hover:scale-105"
+                      />
+                      {/* 오버레이 배지 */}
+                      <div className="absolute top-3 left-3 bg-yellow-400 text-gray-900 px-3 py-1.5 rounded-full font-bold shadow-lg text-sm">
+                        <span style={{ fontFamily: 'var(--font-heading)' }}>{option.title}</span>
+                      </div>
+                    </div>
+
+                    {/* 설명 */}
+                    <div className="p-4 lg:p-5 text-center">
+                      <p
+                        className="text-sm lg:text-base font-bold text-gray-800 whitespace-pre-line leading-snug"
+                        style={{ fontFamily: 'var(--font-heading)' }}
+                      >
+                        {option.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))
+            )}
+          </div>
         </div>
 
         {/* 하단 안내 문구 */}

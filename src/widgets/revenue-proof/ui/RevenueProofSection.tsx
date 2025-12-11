@@ -124,9 +124,9 @@ export default function RevenueProofSection() {
             </div>
           </motion.div>
 
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 md:mb-8 leading-tight">
+          {/* <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 md:mb-8 leading-tight">
             <span className="text-yellow-600">의심 마세요.</span> 확인하세요.
-          </h2>
+          </h2> */}
 
           <p className="text-lg md:text-xl text-gray-800 max-w-2xl mx-auto leading-relaxed">
             실제 가맹점 데이터를 기반으로 설계된

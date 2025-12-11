@@ -125,20 +125,27 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
       onClose={onClose}
       modalId="store-status"
       position={{
-        mobile: { left: 'left-[50%]', top: 'top-24', transform: 'translate-x-[-50%]' },
+        mobile: { left: 'left-[50%]', top: 'top-16', transform: 'translate-x-[-50%]' },
         desktop: { left: 'sm:left-[420px]', top: 'sm:top-20' },
       }}
-      width="w-[90vw] sm:w-[580px]"
+      width="w-[95vw] sm:w-[580px]"
       className="bg-gradient-to-br from-yellow-50 via-amber-50 to-yellow-100 border-4 sm:border-[6px] border-yellow-500 rounded-3xl p-3 sm:p-6 shadow-xl"
       header={
         <>
           {/* 메인 타이틀 */}
           <div className="text-center mb-4 sm:mb-5">
             <h2
-              className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 bg-clip-text text-transparent drop-shadow-sm"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-tight"
+              style={{
+                fontFamily: 'var(--font-heading)',
+                color: '#FFC107',
+                textShadow:
+                  '-2px -2px 0 #FF6B00, 2px -2px 0 #FF6B00, -2px 2px 0 #FF6B00, 2px 2px 0 #FF6B00, 4px 4px 0 #FF8C00, 6px 6px 0 #FF6B00, 8px 8px 12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 193, 7, 0.6)',
+              }}
             >
-              최단기간 100호점 달성 신화
+              최단기간 100호점
+              <br />
+              달성 신화
             </h2>
           </div>
 
@@ -148,15 +155,15 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
               className="text-lg sm:text-xl font-bold text-gray-900"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
-              전국 가맹점 현황
+              가맹점 현황
             </h3>
           </div>
         </>
       }
     >
       {/* Content - 가맹점 리스트 */}
-      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-3 sm:p-4 shadow-lg border border-yellow-200 max-h-[60vh] overflow-y-auto sm:max-h-none sm:overflow-y-visible">
-        <div className="grid grid-cols-4 sm:grid-cols-6 gap-y-2 gap-x-2 sm:gap-y-1.5 sm:gap-x-1.5 justify-items-center pb-2 sm:pb-4">
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-2 sm:p-3 shadow-lg border border-yellow-200 max-h-[60vh] overflow-y-auto sm:max-h-none sm:overflow-y-visible">
+        <div className="grid grid-cols-5 sm:grid-cols-6 gap-y-1 gap-x-1 sm:gap-y-1.5 sm:gap-x-1.5 justify-items-center pb-2 sm:pb-4">
           {stores.map((store, index) => (
             <StoreItem key={index} storeName={store} />
           ))}

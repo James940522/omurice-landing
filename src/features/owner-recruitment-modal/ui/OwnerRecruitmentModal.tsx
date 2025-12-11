@@ -20,7 +20,7 @@ export default function OwnerRecruitmentModal({
       onClose={onClose}
       modalId="owner-recruitment"
       position={{
-        mobile: { left: 'left-[50%]', top: 'top-24', transform: 'translate-x-[-50%]' },
+        mobile: { left: 'left-[50%]', top: 'top-16', transform: 'translate-x-[-50%]' },
         desktop: { left: 'sm:left-4', top: 'sm:top-20' },
       }}
       width="w-[90vw] sm:w-[400px]"
