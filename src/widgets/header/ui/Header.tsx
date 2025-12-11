@@ -71,7 +71,7 @@ export default function Header() {
                 quality={75}
               />
               <span
-                className="relative text-sm md:text-base lg:text-lg font-black ml-0.5"
+                className="relative text-sm md:text-base lg:text-lg font-black -mr-2 "
                 style={{
                   fontFamily: 'var(--font-heading)',
                   color: '#FFA500',
@@ -83,9 +83,9 @@ export default function Header() {
               <Image
                 src="/asset/logo/에그이츠_문구.png"
                 alt="에그이츠"
-                width={90}
-                height={90}
-                className="h-16 md:h-20 lg:h-22 w-auto"
+                width={200}
+                height={100}
+                className="h-16 md:h-18 lg:h-22 w-auto"
                 priority
                 quality={75}
               />
@@ -98,7 +98,7 @@ export default function Header() {
               <motion.button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className={`font-medium text-lg transition-colors duration-300 ${
+                className={`font-medium text-base transition-colors duration-300 ${
                   isScrolled
                     ? 'text-foreground hover:text-primary'
                     : 'text-foreground/90 hover:text-foreground'
@@ -111,7 +111,7 @@ export default function Header() {
             ))}
             <motion.button
               onClick={() => scrollToSection('#contact')}
-              className="bg-foreground text-white px-6 py-2 rounded-full hover:bg-primary hover:text-white transition-all duration-300 shadow-strong-hover font-bold border-2 border-foreground hover:border-primary"
+              className="bg-foreground text-white px-4 py-2 rounded-full hover:bg-primary hover:text-white transition-all duration-300 shadow-strong-hover font-bold border-2 border-foreground hover:border-primary"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
