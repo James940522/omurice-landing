@@ -20,10 +20,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <head>
-        {/* Pretendard 웹폰트 로드 (로컬) */}
-        <link rel="stylesheet" href="/fonts/pretendard/pretendard-subset.css" />
-      </head>
       <body className="antialiased">{children}</body>
     </html>
   );

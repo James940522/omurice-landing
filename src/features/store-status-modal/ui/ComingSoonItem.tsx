@@ -4,7 +4,7 @@ export default function ComingSoonItem() {
   return (
     <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center opacity-60">
       {/* 계란 배경 이미지 (회색조) */}
-      <Image src="/asset/etc/egg_item.png" alt="" fill className="object-contain grayscale" />
+      <Image src="/asset/etc/egg_item3.png" alt="" fill className="object-contain grayscale" />
 
       {/* COMING SOON 텍스트 */}
       <div className="relative z-10 text-center px-2">
