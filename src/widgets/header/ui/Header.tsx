@@ -71,7 +71,7 @@ export default function Header() {
                 quality={75}
               />
               <span
-                className="relative text-sm md:text-base lg:text-lg font-black mr-1 "
+                className="relative text-sm md:text-base lg:text-lg font-black mr-2 "
                 style={{
                   fontFamily: 'var(--font-heading)',
                   color: '#FFA500',
