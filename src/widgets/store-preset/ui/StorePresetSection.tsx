@@ -174,75 +174,74 @@ export function StorePresetSection() {
           ))}
         </div>
 
-        {/* 데스크탑 레이아웃 (모두 한 행에) */}
-        <div className="hidden md:block">
-          {/* 브랜드 타이틀 행 */}
-          <motion.div
-            className="flex justify-center gap-16 lg:gap-24 mb-10"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            {brandPresets.map((brand, index) => (
-              <h3
-                key={brand.id}
-                className="text-3xl lg:text-4xl font-black"
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  color: '#FFC107',
-                  textShadow:
-                    '-2px -2px 0 #FF6B00, 2px -2px 0 #FF6B00, -2px 2px 0 #FF6B00, 2px 2px 0 #FF6B00, 4px 4px 0 #FF8C00, 6px 6px 0 #FF6B00, 8px 8px 12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 193, 7, 0.6)',
-                }}
-              >
-                {brand.id === 'omurice' ? '오늘은 오므라이스' : 'EGG EATS'}
-              </h3>
-            ))}
-          </motion.div>
-
-          {/* 이미지 행 (4개 한 줄) */}
-          <div className="grid grid-cols-4 gap-6 lg:gap-8">
-            {brandPresets.flatMap((brand) =>
-              brand.options.map((option, optionIndex) => (
-                <motion.div
-                  key={option.id}
-                  className="group"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{
-                    duration: 0.5,
-                    delay: optionIndex * 0.1 + 0.3,
+        {/* 데스크탑 레이아웃 (브랜드별 그룹) */}
+        <div className="hidden md:grid md:grid-cols-2 gap-12 lg:gap-16">
+          {brandPresets.map((brand, brandIndex) => (
+            <motion.div
+              key={brand.id}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: brandIndex * 0.2 }}
+            >
+              {/* 브랜드 타이틀 */}
+              <div className="flex justify-center mb-8">
+                <h3
+                  className="text-3xl lg:text-4xl font-black"
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    color: '#FFC107',
+                    textShadow:
+                      '-2px -2px 0 #FF6B00, 2px -2px 0 #FF6B00, -2px 2px 0 #FF6B00, 2px 2px 0 #FF6B00, 4px 4px 0 #FF8C00, 6px 6px 0 #FF6B00, 8px 8px 12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 193, 7, 0.6)',
                   }}
-                  whileHover={{ y: -8 }}
                 >
-                  <div className="bg-white rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border-3 border-yellow-200">
-                    {/* 이미지 */}
-                    <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
-                      <Image
-                        src={option.image}
-                        alt={`${brand.name} - ${option.title}`}
-                        fill
-                        className="object-contain transition-transform duration-500 group-hover:scale-105"
-                      />
-                      {/* 오버레이 배지 */}
-                      <div className="absolute top-3 left-3 bg-yellow-400 text-gray-900 px-3 py-1.5 rounded-full font-bold shadow-lg text-sm">
-                        <span style={{ fontFamily: 'var(--font-heading)' }}>{option.title}</span>
+                  {brand.id === 'omurice' ? '오늘은 오므라이스' : 'EGG EATS'}
+                </h3>
+              </div>
+
+              {/* 이미지 2개 (A, B) */}
+              <div className="grid grid-cols-2 gap-6 lg:gap-8">
+                {brand.options.map((option, optionIndex) => (
+                  <motion.div
+                    key={option.id}
+                    className="group"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{
+                      duration: 0.5,
+                      delay: brandIndex * 0.2 + optionIndex * 0.1 + 0.3,
+                    }}
+                    whileHover={{ y: -8 }}
+                  >
+                    <div className="bg-white rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border-3 border-yellow-200">
+                      {/* 이미지 */}
+                      <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
+                        <Image
+                          src={option.image}
+                          alt={`${brand.name} - ${option.title}`}
+                          fill
+                          className="object-contain transition-transform duration-500 group-hover:scale-105"
+                        />
+                        {/* 오버레이 배지 */}
+                        <div className="absolute top-3 left-3 bg-yellow-400 text-gray-900 px-3 py-1.5 rounded-full font-bold shadow-lg text-sm">
+                          <span style={{ fontFamily: 'var(--font-heading)' }}>{option.title}</span>
+                        </div>
+                      </div>
+
+                      {/* 설명 */}
+                      <div className="p-4 lg:p-5 text-center">
+                        <p
+                          className="text-sm lg:text-base font-bold text-gray-800 whitespace-pre-line leading-snug"
+                          style={{ fontFamily: 'var(--font-heading)' }}
+                        >
+                          {option.description}
+                        </p>
                       </div>
                     </div>
-
-                    {/* 설명 */}
-                    <div className="p-4 lg:p-5 text-center">
-                      <p
-                        className="text-sm lg:text-base font-bold text-gray-800 whitespace-pre-line leading-snug"
-                        style={{ fontFamily: 'var(--font-heading)' }}
-                      >
-                        {option.description}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))
-            )}
-          </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
 
         {/* 하단 안내 문구 */}
