@@ -93,7 +93,7 @@ export function StorePresetSection() {
               textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
             }}
           >
-            매장 인테리어 프리셋
+            매장 인테리어
           </h2>
           <p
             className="typo-body text-gray-800 bg-white/80 px-6 py-3 rounded-2xl inline-block font-bold shadow-xl"
@@ -122,7 +122,7 @@ export function StorePresetSection() {
                     fontFamily: 'var(--font-heading)',
                     color: '#FFC107',
                     textShadow:
-                      '-1.5px -1.5px 0 #FF6B00, 1.5px -1.5px 0 #FF6B00, -1.5px 1.5px 0 #FF6B00, 1.5px 1.5px 0 #FF6B00, 3px 3px 0 #FF8C00, 4px 4px 8px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 193, 7, 0.5)',
+                      '-1.5px -1.5px 0 #8B4513, 1.5px -1.5px 0 #8B4513, -1.5px 1.5px 0 #8B4513, 1.5px 1.5px 0 #8B4513, 3px 3px 0 #6B3410, 4px 4px 8px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 193, 7, 0.5)',
                   }}
                 >
                   {brand.id === 'omurice' ? '오늘은 오므라이스' : 'EGG EATS'}
@@ -191,7 +191,7 @@ export function StorePresetSection() {
                     fontFamily: 'var(--font-heading)',
                     color: '#FFC107',
                     textShadow:
-                      '-2px -2px 0 #FF6B00, 2px -2px 0 #FF6B00, -2px 2px 0 #FF6B00, 2px 2px 0 #FF6B00, 4px 4px 0 #FF8C00, 6px 6px 0 #FF6B00, 8px 8px 12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 193, 7, 0.6)',
+                      '-2px -2px 0 #8B4513, 2px -2px 0 #8B4513, -2px 2px 0 #8B4513, 2px 2px 0 #8B4513, 4px 4px 0 #6B3410, 6px 6px 0 #8B4513, 8px 8px 12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 193, 7, 0.6)',
                   }}
                 >
                   {brand.id === 'omurice' ? '오늘은 오므라이스' : 'EGG EATS'}
