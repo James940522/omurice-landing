@@ -79,16 +79,16 @@ export default function OwnerRecruitmentModal({
             </p>
           </div>
 
-          <div className="bg-gray-900 rounded-lg p-2">
+          <div className="bg-gradient-to-r from-orange-700 to-orange-600 rounded-lg p-2 shadow-md">
             <p
-              className="text-xs sm:text-sm font-medium text-white"
+              className="text-xs sm:text-sm font-medium text-orange-100"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               모든 창업고민 해결
             </p>
             <a
               href="tel:010-9923-9502"
-              className="text-base sm:text-lg font-bold text-yellow-400 hover:text-yellow-300 transition-colors"
+              className="text-base sm:text-lg font-bold text-yellow-300 hover:text-yellow-200 transition-colors"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
               010-9923-9502
@@ -100,7 +100,7 @@ export default function OwnerRecruitmentModal({
       {/* Content */}
       <div className="px-4 sm:px-6 pb-4">
         {/* 메뉴 이미지 */}
-        <div className="relative w-full h-44 sm:h-52 rounded-2xl overflow-hidden mb-4 shadow-lg border-4 border-orange-300">
+        {/* <div className="relative w-full h-44 sm:h-52 rounded-2xl overflow-hidden mb-4 shadow-lg border-4 border-orange-300">
           <Image
             src="/asset/menu/오늘은_오므라이스/메뉴모음컷/modal.jpg"
             alt="오늘은 오므라이스 메뉴"
@@ -108,35 +108,43 @@ export default function OwnerRecruitmentModal({
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
-        </div>
+        </div> */}
 
-        {/* 혜택 박스들 */}
-        <div className="grid grid-cols-2 gap-3 mb-3">
-          <div className="bg-yellow-400 text-gray-900 rounded-xl p-3 sm:p-4 text-center shadow-md">
-            <p
-              className="text-sm sm:text-base font-bold"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              교육비 면제
-            </p>
-          </div>
-          <div className="bg-yellow-400 text-gray-900 rounded-xl p-3 sm:p-4 text-center shadow-md">
-            <p
-              className="text-sm sm:text-base font-bold"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              로열티 면제
-            </p>
-          </div>
-        </div>
-
-        <div className="bg-yellow-400 text-gray-900 rounded-xl p-3 sm:p-4 text-center shadow-md mb-4">
-          <p
-            className="text-sm sm:text-base font-bold"
+        {/* 혜택 박스들 - 그룹 */}
+        <div className="border-4 border-yellow-500 rounded-2xl p-4 bg-white/50 backdrop-blur-sm shadow-lg mb-4">
+          <h3
+            className="text-center text-base sm:text-lg font-bold text-yellow-700 mb-3"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
-            인테리어 자율시공
-          </p>
+            창업 특별 혜택
+          </h3>
+          <div className="grid grid-cols-2 gap-3 mb-3">
+            <div className="bg-yellow-400 text-gray-900 rounded-xl p-3 sm:p-4 text-center shadow-md">
+              <p
+                className="text-sm sm:text-base font-bold"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
+                교육비 면제
+              </p>
+            </div>
+            <div className="bg-yellow-400 text-gray-900 rounded-xl p-3 sm:p-4 text-center shadow-md">
+              <p
+                className="text-sm sm:text-base font-bold"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
+                로열티 면제
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-yellow-400 text-gray-900 rounded-xl p-3 sm:p-4 text-center shadow-md">
+            <p
+              className="text-sm sm:text-base font-bold"
+              style={{ fontFamily: 'var(--font-heading)' }}
+            >
+              인테리어 자율시공
+            </p>
+          </div>
         </div>
 
         {/* 공고 지원하기 버튼 */}

@@ -194,8 +194,10 @@ export default function DualBrandSection() {
                   <span className="font-bold text-orange-500">추가 비용 0원!</span> 동일
                   재료+조리법으로
                   <br />
-                  <span className="text-orange-600">오늘은 오므라이스 + 에그이츠</span> = 배달앱
-                  노출 2배
+                  <span className="text-orange-600 text-xl font-bold">
+                    오늘은 오므라이스 + 에그이츠
+                  </span>{' '}
+                  = 배달앱 노출 2배
                   <br />
                   <span className="typo-caption text-gray-600">
                     ※ 추가 인력, 추가 재료 없이 브랜드만 추가

@@ -58,8 +58,8 @@ export default function Header() {
           <motion.div className="shrink-0" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <a
               href="#"
-              className="flex items-center gap-2 md:gap-3"
-              aria-label="오늘은 오므라이스 홈으로 이동"
+              className="flex items-center gap-1.5 md:gap-2"
+              aria-label="오늘은 오므라이스 & 에그이츠 홈으로 이동"
             >
               <Image
                 src="/asset/logo/오므라이스_문구.png"
@@ -67,6 +67,25 @@ export default function Header() {
                 width={200}
                 height={100}
                 className="h-8 md:h-10 lg:h-12 w-auto"
+                priority
+                quality={75}
+              />
+              <span
+                className="relative text-sm md:text-base lg:text-lg font-black mx-0.5"
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  color: '#FFA500',
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.2)',
+                }}
+              >
+                ✕
+              </span>
+              <Image
+                src="/asset/logo/에그이츠_문구.png"
+                alt="에그이츠"
+                width={250}
+                height={100}
+                className="h-12 md:h-13 lg:h-14 w-auto relative -top-0.5"
                 priority
                 quality={75}
               />
