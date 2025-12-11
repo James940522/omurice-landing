@@ -10,6 +10,7 @@ import { DualBrandSection } from '@/widgets/dual-brand';
 import { RevenueProofSection } from '@/widgets/revenue-proof';
 import { StartupProcessSection } from '@/widgets/startup-process';
 import { MenuSection } from '@/widgets/menu';
+import { StorePresetSection } from '@/widgets/store-preset';
 import { ReviewsSection } from '@/widgets/reviews';
 import { StoreMapSection } from '@/widgets/store-map';
 import { ContactFormSection } from '@/widgets/contact-form';
@@ -77,6 +78,7 @@ export default function Home() {
       <DualBrandSection />
       <StartupProcessSection />
       <MenuSection />
+      <StorePresetSection />
       <ReviewsSection />
       <StoreMapSection />
       <ContactFormSection />
