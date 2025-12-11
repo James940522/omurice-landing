@@ -85,7 +85,7 @@ export default function Header() {
                 alt="에그이츠"
                 width={200}
                 height={100}
-                className="h-8 md:h-10 lg:h-12 w-auto"
+                className="h-8 md:h-10 lg:h-11 w-auto"
                 priority
                 quality={75}
               />
