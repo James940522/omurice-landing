@@ -312,6 +312,7 @@ export default function HeroSection() {
           <motion.a
             href="#contact"
             className="bg-foreground text-white px-5 py-2.5 md:px-8 md:py-3 rounded-full text-sm md:text-base lg:text-lg font-bold shadow-strong-hover hover:bg-white hover:text-foreground transition-all duration-300 text-center border-2 md:border-3 border-foreground"
+            style={{ fontFamily: 'var(--font-heading)' }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -320,6 +321,7 @@ export default function HeroSection() {
           <motion.a
             href="#menu"
             className="bg-white text-foreground border-2 md:border-3 border-foreground px-5 py-2.5 md:px-8 md:py-3 rounded-full text-sm md:text-base lg:text-lg font-bold hover:bg-foreground hover:text-white transition-all duration-300 text-center shadow-strong"
+            style={{ fontFamily: 'var(--font-heading)' }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

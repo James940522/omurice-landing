@@ -572,10 +572,10 @@ export default function MenuSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900 [text-shadow:2px_2px_0_#fff,-2px_-2px_0_#fff,2px_-2px_0_#fff,-2px_2px_0_#fff,4px_4px_8px_rgba(255,255,255,0.8)]">
+          <h2 className="typo-h1 text-gray-900 mb-6 [text-shadow:2px_2px_0_#fff,-2px_-2px_0_#fff,2px_-2px_0_#fff,-2px_2px_0_#fff,4px_4px_8px_rgba(255,255,255,0.8)]">
             메뉴 소개
           </h2>
-          <p className="text-xl md:text-2xl text-gray-900 bg-white/80 px-6 py-3 rounded-2xl inline-block mb-6 font-bold shadow-xl">
+          <p className="typo-body text-gray-900 bg-white/80 px-6 py-3 rounded-2xl inline-block mb-6 font-bold shadow-xl">
             브랜드를 선택하고 다양한 메뉴를 확인하세요
           </p>
         </motion.div>
@@ -661,6 +661,7 @@ export default function MenuSection() {
                           : 'text-orange-700 border-orange-400 hover:bg-orange-50'
                       )
                 )}
+                style={{ fontFamily: 'var(--font-heading)' }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -714,9 +715,7 @@ export default function MenuSection() {
 
                 {/* 메뉴 이름 */}
                 <div className="p-3 md:p-4 lg:p-5">
-                  <h3 className="text-sm md:text-base lg:text-lg font-bold text-foreground text-center leading-tight">
-                    {item.name}
-                  </h3>
+                  <h3 className="typo-menu-title text-foreground text-center">{item.name}</h3>
                 </div>
               </motion.div>
             ))}

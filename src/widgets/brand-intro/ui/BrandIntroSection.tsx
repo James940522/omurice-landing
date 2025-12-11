@@ -70,7 +70,7 @@ export default function BrandIntroSection() {
               </span>
             </motion.div>
             <motion.h2
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6"
+              className="typo-h1 text-white leading-tight mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -80,7 +80,7 @@ export default function BrandIntroSection() {
               <span className="text-yellow-400">오늘은 오므라이스입니다.</span>
             </motion.h2>
             <motion.p
-              className="text-base md:text-lg text-gray-200 leading-relaxed font-medium max-w-2xl md:mx-auto"
+              className="typo-body text-gray-200 max-w-2xl md:mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -121,8 +121,13 @@ export default function BrandIntroSection() {
                 <div className="text-xs text-yellow-400/90 font-semibold uppercase tracking-wider mb-2">
                   {value.subtitle}
                 </div>
-                <h3 className="text-lg md:text-xl font-bold text-white mb-2">{value.title}</h3>
-                <p className="text-sm text-gray-300 leading-relaxed">{value.description}</p>
+                <h3
+                  className="text-lg md:text-xl font-bold text-white mb-2"
+                  style={{ fontFamily: 'var(--font-heading)' }}
+                >
+                  {value.title}
+                </h3>
+                <p className="typo-body-sm text-gray-300">{value.description}</p>
               </motion.div>
             ))}
           </motion.div>

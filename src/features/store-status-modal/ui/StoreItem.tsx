@@ -15,7 +15,10 @@ export default function StoreItem({ storeName }: StoreItemProps) {
 
       {/* 가맹점 이름 텍스트 */}
       <div className="relative z-10 text-center px-2">
-        <p className="text-[10px] sm:text-xs font-black text-gray-900 drop-shadow-md leading-tight">
+        <p
+          className="text-[10px] sm:text-xs font-bold text-gray-900 drop-shadow-md leading-tight"
+          style={{ fontFamily: 'var(--font-heading)' }}
+        >
           {displayName}
         </p>
       </div>

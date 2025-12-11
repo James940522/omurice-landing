@@ -3,7 +3,41 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* GMarketSans 웹폰트 - CDN */
+@font-face {
+  font-family: 'GMarketSans';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff')
+    format('woff');
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GMarketSans';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+    format('woff');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GMarketSans';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff')
+    format('woff');
+  font-weight: 700;
+  font-display: swap;
+}
+
 :root {
+  /* Pretendard 웹폰트 설정 (본문용) */
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-body: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-pretendard: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  /* GMarketSans 웹폰트 설정 (타이틀/헤딩용) */
+  --font-heading: 'GMarketSans', 'Pretendard', system-ui, sans-serif;
+  --font-gmarket: 'GMarketSans', sans-serif;
+
   /* 메인 톤앤매너 색상 - 오므라이스 로고 기반 */
   --primary: #fec601;
   --secondary: #ff6b4a;
@@ -61,6 +95,15 @@
 }
 
 @theme inline {
+  /* Pretendard 폰트 패밀리 설정 (본문용) */
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-body: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-pretendard: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  /* GMarketSans 폰트 패밀리 설정 (타이틀/헤딩용) */
+  --font-heading: 'GMarketSans', 'Pretendard', system-ui, sans-serif;
+  --font-gmarket: 'GMarketSans', sans-serif;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
@@ -116,9 +159,9 @@ html {
 }
 
 body {
+  /* Pretendard 웹폰트 기본 적용 */
   font-family:
-    'Pretendard Variable',
-    Pretendard,
+    'Pretendard',
     -apple-system,
     BlinkMacSystemFont,
     system-ui,
@@ -337,6 +380,51 @@ button *,
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans text-[15px] leading-relaxed;
+  }
+}
+
+/* 타이포그래피 스케일 - 브랜드 폰트 시스템 */
+@layer components {
+  /* 디스플레이 (최상단 Hero 타이틀) */
+  .typo-display {
+    font-family: var(--font-heading);
+    @apply font-bold tracking-tight text-[clamp(2.5rem,5vw,3.25rem)] leading-tight;
+  }
+
+  /* H1 (페이지 섹션 타이틀: "ABOUT US", "메뉴 소개" 등) */
+  .typo-h1 {
+    font-family: var(--font-heading);
+    @apply font-bold text-[2rem] md:text-[2.5rem] leading-snug;
+  }
+
+  /* H2 (서브 타이틀: "투트랙 브랜드를 소개합니다" 등) */
+  .typo-h2 {
+    font-family: var(--font-heading);
+    @apply font-medium text-[1.5rem] md:text-[1.75rem] leading-snug;
+  }
+
+  /* 메뉴 카드 타이틀 (개별 메뉴 이름) */
+  .typo-menu-title {
+    font-family: var(--font-heading);
+    @apply font-medium text-[1.1rem] md:text-[1.2rem] leading-tight;
+  }
+
+  /* 본문 기본 */
+  .typo-body {
+    font-family: var(--font-body);
+    @apply font-medium text-[0.95rem] md:text-[1rem] leading-relaxed;
+  }
+
+  /* 본문 서브/보조 설명 */
+  .typo-body-sm {
+    font-family: var(--font-body);
+    @apply font-normal text-[0.85rem] leading-relaxed text-neutral-600;
+  }
+
+  /* 캡션/라벨 (작은 안내 텍스트) */
+  .typo-caption {
+    font-family: var(--font-body);
+    @apply font-normal text-[0.75rem] leading-snug text-neutral-500;
   }
 }

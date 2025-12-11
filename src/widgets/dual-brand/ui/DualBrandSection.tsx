@@ -24,7 +24,7 @@ export default function DualBrandSection() {
           transition={{ duration: 0.8 }}
         >
           <motion.h2
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 [text-shadow:_2px_2px_0_#fff,_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_4px_4px_8px_rgba(255,255,255,0.8)]"
+            className="typo-h1 text-gray-900 mb-3 [text-shadow:_2px_2px_0_#fff,_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_4px_4px_8px_rgba(255,255,255,0.8)]"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -71,12 +71,20 @@ export default function DualBrandSection() {
               </div> */}
 
               {/* 브랜드명 */}
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">오늘은 오므라이스</h3>
+              <h3
+                className="text-2xl md:text-3xl font-bold text-white mb-2"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
+                오늘은 오므라이스
+              </h3>
 
               {/* 설명 */}
               <div className="space-y-1 text-white/90">
-                <p className="text-sm md:text-base font-medium">간편한 조리로 높은 수익성 달성</p>
-                <p className="text-sm md:text-base font-bold text-orange-400">
+                <p className="typo-body">간편한 조리로 높은 수익성 달성</p>
+                <p
+                  className="text-sm md:text-base font-bold text-orange-400"
+                  style={{ fontFamily: 'var(--font-heading)' }}
+                >
                   1년만에 가맹점 100개 돌파 월매출 1억5천 신화
                 </p>
               </div>
@@ -92,7 +100,7 @@ export default function DualBrandSection() {
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           <motion.h2
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 [text-shadow:_2px_2px_0_#fff,_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_4px_4px_8px_rgba(255,255,255,0.8)]"
+            className="typo-h1 text-gray-900 mb-3 [text-shadow:_2px_2px_0_#fff,_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_4px_4px_8px_rgba(255,255,255,0.8)]"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.7 }}
@@ -108,7 +116,7 @@ export default function DualBrandSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <p className="text-base md:text-lg text-gray-800 leading-relaxed">
+            <p className="typo-body text-gray-800">
               <span className="font-bold">투트랙 브랜드란?</span>
               <br className="sm:hidden" />
               <span className="hidden sm:inline"> </span>
@@ -173,14 +181,14 @@ export default function DualBrandSection() {
 
             {/* 설명 */}
             <div className="text-center space-y-4">
-              <p className="text-xl md:text-2xl font-bold text-gray-900">
+              <p className="typo-h2 text-gray-900">
                 같은 주방, 같은 재료로
                 <br />
                 <span className="text-orange-500">배달앱 노출 2배 효과!</span>
               </p>
 
               <div className="bg-orange-50 rounded-xl p-4 border-2 border-orange-200">
-                <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+                <p className="typo-body text-gray-700">
                   <span className="font-bold">투트랙이 매출 2배인 이유?</span>
                   <br />
                   <span className="font-bold text-orange-500">추가 비용 0원!</span> 동일
@@ -189,7 +197,7 @@ export default function DualBrandSection() {
                   <span className="text-orange-600">오늘은 오므라이스 + 에그이츠</span> = 배달앱
                   노출 2배
                   <br />
-                  <span className="font-semibold text-gray-600 text-sm">
+                  <span className="typo-caption text-gray-600">
                     ※ 추가 인력, 추가 재료 없이 브랜드만 추가
                   </span>
                 </p>

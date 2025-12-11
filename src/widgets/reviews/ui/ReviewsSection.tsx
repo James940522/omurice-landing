@@ -55,11 +55,7 @@ export default function ReviewsSection() {
         className="py-20 md:py-32 relative overflow-hidden"
         ref={ref}
         style={{
-          backgroundImage:
-            'url(/asset/bg/James_flat_minimal_single-color_background_light_sky_blue_EAF_7737c69d-435c-4d2e-a60c-4736765caf8b_1.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundColor: '#E3F2FD',
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -87,7 +83,7 @@ export default function ReviewsSection() {
               </motion.div>
 
               <motion.div
-                className="text-white text-4xl md:text-5xl font-bold"
+                className="text-blue-900 text-4xl md:text-5xl font-bold"
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.4, delay: 0.3 }}
@@ -112,29 +108,23 @@ export default function ReviewsSection() {
             </div>
 
             <motion.h2
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-relaxed"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-blue-900 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.6 }}
-              style={{
-                textShadow: '2px 2px 8px rgba(0,0,0,0.3), 0 0 20px rgba(0,0,0,0.2)',
-              }}
             >
               <span>고객 리뷰</span>가 증명합니다
             </motion.h2>
             <motion.p
-              className="text-xl md:text-2xl text-white mb-6 font-bold leading-relaxed"
+              className="text-xl md:text-2xl text-blue-800 mb-6 font-bold leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.7 }}
-              style={{
-                textShadow: '2px 2px 6px rgba(0,0,0,0.3), 0 0 15px rgba(0,0,0,0.2)',
-              }}
             >
               매일같이 쏟아지는 <span>리얼 후기</span>
             </motion.p>
             <motion.div
-              className="w-24 h-2 bg-white mx-auto rounded-full shadow-lg"
+              className="w-24 h-2 bg-blue-900 mx-auto rounded-full shadow-lg"
               initial={{ opacity: 0, scaleX: 0 }}
               animate={isInView ? { opacity: 1, scaleX: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.8 }}

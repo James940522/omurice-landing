@@ -66,7 +66,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen font-sans">
       {/* 인트로 애니메이션 */}
       <IntroAnimation isVisible={showIntro} onComplete={() => setShowIntro(false)} />
 
