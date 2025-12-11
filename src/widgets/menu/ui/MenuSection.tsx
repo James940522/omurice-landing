@@ -715,7 +715,12 @@ export default function MenuSection() {
 
                 {/* 메뉴 이름 */}
                 <div className="p-3 md:p-4 lg:p-5">
-                  <h3 className="typo-menu-title text-foreground text-center">{item.name}</h3>
+                  <h3
+                    className="text-sm md:text-base lg:text-lg font-medium text-foreground text-center break-keep"
+                    style={{ fontFamily: 'var(--font-heading)', wordBreak: 'keep-all' }}
+                  >
+                    {item.name}
+                  </h3>
                 </div>
               </motion.div>
             ))}
