@@ -22,11 +22,12 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* 반복되는 텍스트 배경 - 상단 */}
+      {/* SEO: 반복되는 텍스트 배경 - 상단 (장식용, SEO 제외) */}
       <motion.div
         className="absolute top-1/4 left-0 w-[200%] z-0"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+        aria-hidden="true"
       >
         <div className="text-[3rem] md:text-[5rem] lg:text-[6rem] font-black text-white/20 whitespace-nowrap">
           맛있는 · 프리미엄 · 신선한 · 오므라이스 · 맛있는 · 프리미엄 · 신선한 · 오므라이스 · 맛있는
@@ -36,11 +37,12 @@ export default function HeroSection() {
         </div>
       </motion.div>
 
-      {/* 반복되는 텍스트 배경 - 중단 */}
+      {/* SEO: 반복되는 텍스트 배경 - 중단 (장식용, SEO 제외) */}
       <motion.div
         className="absolute top-1/2 left-0 w-[200%] z-0 -translate-y-1/2"
         animate={{ x: ['-50%', '0%'] }}
         transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+        aria-hidden="true"
       >
         <div className="text-[3rem] md:text-[5rem] lg:text-[6rem] font-black text-white/20 whitespace-nowrap">
           창업 · 성공 · 수익 · 가맹점 · 창업 · 성공 · 수익 · 가맹점 · 창업 · 성공 · 수익 · 가맹점 ·
@@ -49,11 +51,12 @@ export default function HeroSection() {
         </div>
       </motion.div>
 
-      {/* 반복되는 텍스트 배경 - 하단 */}
+      {/* SEO: 반복되는 텍스트 배경 - 하단 (장식용, SEO 제외) */}
       <motion.div
         className="absolute bottom-1/4 left-0 w-[200%] z-0"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+        aria-hidden="true"
       >
         <div className="text-[3rem] md:text-[5rem] lg:text-[6rem] font-black text-white/20 whitespace-nowrap">
           100호점 · 1위 · 프랜차이즈 · OMURICE · 100호점 · 1위 · 프랜차이즈 · OMURICE · 100호점 ·
@@ -177,12 +180,16 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
+        {/* SEO: H1 타이틀 (검색엔진용, 시각적으로는 숨김) */}
+        <h1 className="sr-only">오므라이스 프랜차이즈 창업, 오늘은 오므라이스 · 에그이츠</h1>
+
         {/* 1. 브랜드 로고 문구 - 최상단 */}
         <motion.div
           className="mb-4 md:mb-6 relative z-30"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
+          aria-hidden="true"
         >
           <motion.div
             className="relative w-48 md:w-64 lg:w-72 xl:w-80 h-auto"
@@ -197,7 +204,7 @@ export default function HeroSection() {
           >
             <Image
               src="/asset/logo/오므라이스_문구.png"
-              alt="오늘은 오므라이스"
+              alt=""
               width={512}
               height={256}
               className="w-full h-auto drop-shadow-2xl"
@@ -205,6 +212,29 @@ export default function HeroSection() {
               quality={75}
             />
           </motion.div>
+        </motion.div>
+
+        {/* SEO: Hero 서브 카피 */}
+        <motion.div
+          className="mb-6 text-center px-4 relative z-30"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <p
+            className="text-lg md:text-xl lg:text-2xl font-bold text-white drop-shadow-lg mb-3"
+            style={{ fontFamily: 'var(--font-heading)' }}
+          >
+            소자본 외식 창업을 고민 중이라면,
+            <br />
+            배달 매출 중심 구조로 시작하세요.
+          </p>
+          <p
+            className="text-sm md:text-base text-white/90 drop-shadow-md max-w-2xl mx-auto"
+            style={{ fontFamily: 'var(--font-body)' }}
+          >
+            오므라이스 창업을 처음 시작하는 분도 운영 동선과 조리 프로세스를 단순화했습니다.
+          </p>
         </motion.div>
 
         {/* 2. 모바일 캐러셀 - lg 미만에서만 표시 */}

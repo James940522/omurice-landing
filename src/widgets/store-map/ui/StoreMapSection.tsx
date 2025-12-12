@@ -75,8 +75,8 @@ export default function StoreMapSection() {
       return;
     }
 
-    console.log('📥 Loading Kakao Maps SDK...');
-    console.log('SDK URL:', KAKAO_SDK_URL);
+    // console.log('📥 Loading Kakao Maps SDK...');
+    // console.log('SDK URL:', KAKAO_SDK_URL);
 
     // 스크립트 태그 생성
     const script = document.createElement('script');

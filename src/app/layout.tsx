@@ -1,15 +1,71 @@
 import type { Metadata } from 'next';
 import './globals.css';
 
+// SEO: 사이트 기본 URL (환경변수 또는 Vercel 배포 URL 사용)
+const getSiteUrl = () => {
+  if (process.env.NEXT_PUBLIC_SITE_URL) {
+    return process.env.NEXT_PUBLIC_SITE_URL;
+  }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  return 'https://omurice-landing.vercel.app'; // 폴백 URL
+};
+
+const siteUrl = getSiteUrl();
+
+// SEO: Robots 설정 (preview 환경은 noindex)
+const isPreview = process.env.VERCEL_ENV === 'preview';
+
 export const metadata: Metadata = {
-  title: '오늘은 오므라이스 - 국내 1위 오므라이스 프랜차이즈',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: '오므라이스 창업 | 오늘은 오므라이스 · 에그이츠 프랜차이즈',
+    template: '%s | 오늘은 오므라이스',
+  },
   description:
-    '1년만에 가맹점 100호점 돌파! 월매출 1억 5천 실제 달성. 성공적인 창업을 함께하는 오늘은 오므라이스',
-  keywords: '오므라이스, 프랜차이즈, 창업, 배달음식, 맛집, 오늘은오므라이스',
+    '배달 중심 오므라이스 프랜차이즈. 1~2인 운영, 소형 매장 최적화, 수익 구조 공개. 오늘은 오므라이스 · 에그이츠 창업 상담 진행 중.',
+  keywords:
+    '오므라이스 창업, 오므라이스 프랜차이즈, 배달 전문점 창업, 소자본 외식 창업, 1인 운영 음식점 창업, 오므라이스 창업 비용, 오므라이스 가맹 문의, 배달 오므라이스 창업, 소형 매장 창업',
+  robots: {
+    index: !isPreview,
+    follow: !isPreview,
+    googleBot: {
+      index: !isPreview,
+      follow: !isPreview,
+    },
+  },
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: '오늘은 오므라이스 - 국내 1위 오므라이스 프랜차이즈',
-    description: '1년만에 가맹점 100호점 돌파! 월매출 1억 5천 실제 달성',
     type: 'website',
+    locale: 'ko_KR',
+    url: siteUrl,
+    siteName: '오늘은 오므라이스',
+    title: '오므라이스 창업 | 오늘은 오므라이스 · 에그이츠 프랜차이즈',
+    description:
+      '배달 중심 오므라이스 프랜차이즈. 1~2인 운영, 소형 매장 최적화, 수익 구조 공개. 오늘은 오므라이스 · 에그이츠 창업 상담 진행 중.',
+    images: [
+      {
+        url: '/og.png',
+        width: 1200,
+        height: 630,
+        alt: '오늘은 오므라이스 · 에그이츠 프랜차이즈 창업',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '오므라이스 창업 | 오늘은 오므라이스 · 에그이츠 프랜차이즈',
+    description: '배달 중심 오므라이스 프랜차이즈. 1~2인 운영, 소형 매장 최적화, 수익 구조 공개.',
+    images: ['/og.png'],
+  },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+    other: {
+      naver: process.env.NAVER_SITE_VERIFICATION || '',
+    },
   },
 };
 

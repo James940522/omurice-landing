@@ -12,18 +12,18 @@ export default function IntroAnimation({ isVisible, onComplete }: IntroAnimation
   return (
     <AnimatePresence>
       {isVisible && (
-        <div className="fixed inset-0 z-[100] overflow-hidden">
+        <div className="fixed inset-0 z-[100] overflow-hidden" style={{ height: '100dvh' }}>
           {/* 상단 절반 (위로 올라감) */}
           <motion.div
-            className="absolute top-0 left-0 right-0 h-1/2 overflow-hidden"
+            className="absolute top-0 left-0 right-0 overflow-hidden"
             initial={{ y: 0 }}
             animate={{ y: '-100%' }}
             transition={{ delay: 2.5, duration: 1, ease: 'easeInOut' }}
             onAnimationComplete={onComplete}
-            style={{ clipPath: 'inset(0 0 0 0)' }}
+            style={{ clipPath: 'inset(0 0 0 0)', height: '50dvh' }}
           >
             {/* 배경 이미지 */}
-            <div className="absolute inset-0 w-screen h-screen">
+            <div className="absolute inset-0 w-screen" style={{ height: '100dvh' }}>
               <Image
                 src="/asset/bg/sec1-bg.jpg"
                 alt="배경"
@@ -71,7 +71,10 @@ export default function IntroAnimation({ isVisible, onComplete }: IntroAnimation
             </motion.div>
 
             {/* 중앙 컨텐츠 */}
-            <div className="absolute inset-0 w-screen h-screen flex items-center justify-center">
+            <div
+              className="absolute inset-0 w-screen flex items-center justify-center"
+              style={{ height: '100dvh' }}
+            >
               <motion.div
                 className="relative"
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -155,14 +158,17 @@ export default function IntroAnimation({ isVisible, onComplete }: IntroAnimation
 
           {/* 하단 절반 (아래로 내려감) */}
           <motion.div
-            className="absolute bottom-0 left-0 right-0 h-1/2 overflow-hidden"
+            className="absolute bottom-0 left-0 right-0 overflow-hidden"
             initial={{ y: 0 }}
             animate={{ y: '100%' }}
             transition={{ delay: 2.5, duration: 1, ease: 'easeInOut' }}
-            style={{ clipPath: 'inset(0 0 0 0)' }}
+            style={{ clipPath: 'inset(0 0 0 0)', height: '50dvh' }}
           >
             {/* 배경 이미지 */}
-            <div className="absolute inset-0 w-screen h-screen -translate-y-1/2">
+            <div
+              className="absolute inset-0 w-screen -translate-y-1/2"
+              style={{ height: '100dvh' }}
+            >
               <Image
                 src="/asset/bg/sec1-bg.jpg"
                 alt="배경"
@@ -210,7 +216,10 @@ export default function IntroAnimation({ isVisible, onComplete }: IntroAnimation
             </motion.div>
 
             {/* 중앙 컨텐츠 */}
-            <div className="absolute inset-0 w-screen h-screen -translate-y-1/2 flex items-center justify-center">
+            <div
+              className="absolute inset-0 w-screen -translate-y-1/2 flex items-center justify-center"
+              style={{ height: '100dvh' }}
+            >
               <motion.div
                 className="relative"
                 initial={{ opacity: 0, scale: 0.8 }}
