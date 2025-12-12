@@ -215,7 +215,7 @@ export default function HeroSection() {
         </motion.div>
 
         {/* SEO: Hero 서브 카피 */}
-        <motion.div
+        {/* <motion.div
           className="mb-6 text-center px-4 relative z-30"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -235,7 +235,7 @@ export default function HeroSection() {
           >
             오므라이스 창업을 처음 시작하는 분도 운영 동선과 조리 프로세스를 단순화했습니다.
           </p>
-        </motion.div>
+        </motion.div> */}
 
         {/* 2. 모바일 캐러셀 - lg 미만에서만 표시 */}
         <div className="lg:hidden w-full max-w-lg mb-6 px-4 relative z-30">
