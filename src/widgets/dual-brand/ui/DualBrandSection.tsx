@@ -72,20 +72,18 @@ export default function DualBrandSection() {
 
               {/* 브랜드명 */}
               <h3
-                className="text-2xl md:text-3xl font-bold text-white mb-2 break-keep"
-                style={{ fontFamily: 'var(--font-heading)', wordBreak: 'keep-all' }}
+                className="text-2xl md:text-3xl font-bold text-white mb-2"
+                style={{ fontFamily: 'var(--font-heading)' }}
               >
                 오늘은 오므라이스
               </h3>
 
               {/* 설명 */}
               <div className="space-y-1 text-white/90">
-                <p className="typo-body break-keep" style={{ wordBreak: 'keep-all' }}>
-                  간편한 조리로 높은 수익성 달성
-                </p>
+                <p className="typo-body">간편한 조리로 높은 수익성 달성</p>
                 <p
-                  className="text-sm md:text-base font-bold text-orange-400 break-keep"
-                  style={{ fontFamily: 'var(--font-heading)', wordBreak: 'keep-all' }}
+                  className="text-sm md:text-base font-bold text-orange-400"
+                  style={{ fontFamily: 'var(--font-heading)' }}
                 >
                   1년만에 가맹점 100개 돌파 월매출 1억5천 신화
                 </p>
@@ -102,11 +100,10 @@ export default function DualBrandSection() {
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           <motion.h2
-            className="typo-h1 text-gray-900 mb-3 break-keep [text-shadow:_2px_2px_0_#fff,_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_4px_4px_8px_rgba(255,255,255,0.8)]"
+            className="typo-h1 text-gray-900 mb-3 [text-shadow:_2px_2px_0_#fff,_-2px_-2px_0_#fff,_2px_-2px_0_#fff,_-2px_2px_0_#fff,_4px_4px_8px_rgba(255,255,255,0.8)]"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.7 }}
-            style={{ wordBreak: 'keep-all' }}
           >
             <span className="block">동일한 레시피로 하나 더!</span>
             <span className="block mt-1">
@@ -119,7 +116,7 @@ export default function DualBrandSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <p className="typo-body text-gray-800 break-keep" style={{ wordBreak: 'keep-all' }}>
+            <p className="typo-body text-gray-800">
               <span className="font-bold">투트랙 브랜드란?</span>
               <br className="sm:hidden" />
               <span className="hidden sm:inline"> </span>
@@ -184,14 +181,14 @@ export default function DualBrandSection() {
 
             {/* 설명 */}
             <div className="text-center space-y-4">
-              <p className="typo-h2 text-gray-900 break-keep" style={{ wordBreak: 'keep-all' }}>
+              <p className="typo-h2 text-gray-900">
                 같은 주방, 같은 재료로
                 <br />
                 <span className="text-orange-500">배달앱 노출 2배 효과!</span>
               </p>
 
               <div className="bg-orange-50 rounded-xl p-4 border-2 border-orange-200">
-                <p className="typo-body text-gray-700 break-keep" style={{ wordBreak: 'keep-all' }}>
+                <p className="typo-body text-gray-700">
                   <span className="font-bold">투트랙이 매출 2배인 이유?</span>
                   <br />
                   <span className="font-bold text-orange-500">추가 비용 0원!</span> 동일

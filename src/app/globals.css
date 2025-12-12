@@ -460,6 +460,7 @@ button *,
   }
   body {
     @apply bg-background text-foreground font-body text-[15px] leading-relaxed text-neutral-900;
+    word-break: keep-all; /* 한글 단어 단위 줄바꿈 */
   }
 }
 
