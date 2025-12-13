@@ -27,7 +27,7 @@ export default function ContactFormSection() {
     e.preventDefault();
     // TODO: 실제 폼 제출 로직 구현
     console.log('Form submitted:', formData);
-    alert('창업 문의가 접수되었습니다. 곧 연락드리겠습니다!');
+    alert('해당 기능 준비중입니다. 하단 연락처로 문의 부탁드립니다.');
   };
 
   return (
