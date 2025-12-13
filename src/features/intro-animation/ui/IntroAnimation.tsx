@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 interface IntroAnimationProps {
   isVisible: boolean;
@@ -9,6 +10,28 @@ interface IntroAnimationProps {
 }
 
 export default function IntroAnimation({ isVisible, onComplete }: IntroAnimationProps) {
+  // 인트로 애니메이션 재생 중 스크롤 방지
+  useEffect(() => {
+    if (isVisible) {
+      // 스크롤 막기
+      document.body.style.overflow = 'hidden';
+      document.body.style.height = '100vh';
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      // 스크롤 복원
+      document.body.style.overflow = '';
+      document.body.style.height = '';
+      document.documentElement.style.overflow = '';
+    }
+
+    // 클린업: 컴포넌트 언마운트 시 스크롤 복원
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.height = '';
+      document.documentElement.style.overflow = '';
+    };
+  }, [isVisible]);
+
   return (
     <AnimatePresence>
       {isVisible && (
