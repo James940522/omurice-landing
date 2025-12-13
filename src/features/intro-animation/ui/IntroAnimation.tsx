@@ -65,8 +65,8 @@ export default function IntroAnimation({ isVisible, onComplete }: IntroAnimation
               transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
             >
               <div className="text-[2rem] sm:text-[3rem] md:text-[4rem] font-black text-white/15 whitespace-nowrap">
-                100호점 · 1위 · 프랜차이즈 · OMURICE · 100호점 · 1위 · 프랜차이즈 · OMURICE ·
-                100호점 · 1위 · 프랜차이즈 · OMURICE
+                100호점 · 1위 · 프랜차이즈 · OMURICE · 100호점 · 1위 · 프랜차이즈 · OMURICE · 오늘은
+                오므라이스 · 100호점 · 1위 · 프랜차이즈 · OMURICE · 오므라이스 · 100호점 · 1위 ·
               </div>
             </motion.div>
 

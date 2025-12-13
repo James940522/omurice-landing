@@ -31,7 +31,7 @@ export default function HeroSection() {
       >
         <div className="text-[3rem] md:text-[5rem] lg:text-[6rem] font-black text-white/20 whitespace-nowrap">
           맛있는 · 프리미엄 · 신선한 · 오므라이스 · 맛있는 · 프리미엄 · 신선한 · 오므라이스 · 맛있는
-          · 프리미엄 · 신선한 · 오므라이스 · 맛있는 · 프리미엄 · 신선한 · 오므라이스 맛있는 ·
+          · 프리미엄 · 신선한 · 오므라이스 · 맛있는 · 프리미엄 · 신선한 · 오므라이스 · 맛있는 ·
           프리미엄 · 신선한 · 오므라이스 · 맛있는 · 프리미엄 · 신선한 · 오므라이스 · 맛있는 ·
           프리미엄 · 신선한 · 오므라이스 · 맛있는 · 프리미엄 · 신선한 · 오므라이스
         </div>
