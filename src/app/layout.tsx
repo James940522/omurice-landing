@@ -5,8 +5,9 @@ import { SITE_ORIGIN, absoluteUrl } from '@/shared/config/site';
 // SEO: Robots 설정 (preview 환경은 noindex)
 const isPreview = process.env.VERCEL_ENV === 'preview';
 
-// SEO: Google Site Verification (안전한 처리)
+// SEO: 검색엔진 소유확인 (안전한 처리)
 const googleVerification = process.env.GOOGLE_SITE_VERIFICATION;
+const naverVerification = process.env.NAVER_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   // SEO: metadataBase - 모든 상대 경로의 기준 URL
@@ -83,14 +84,15 @@ export const metadata: Metadata = {
     description: '배달 중심 오므라이스 프랜차이즈. 1~2인 운영, 소형 매장 최적화, 수익 구조 공개.',
     images: [absoluteUrl('/og.png')], // 절대 URL
   },
-  // SEO: Google/Naver Site Verification (환경변수에서만 로드)
+  // SEO: Google Site Verification (built-in 지원)
   verification: {
     google: googleVerification,
-    other: {
-      ...(process.env.NAVER_SITE_VERIFICATION && {
-        naver: process.env.NAVER_SITE_VERIFICATION,
-      }),
-    },
+  },
+  // SEO: Naver Site Verification (커스텀 메타 태그)
+  other: {
+    ...(naverVerification && {
+      'naver-site-verification': naverVerification,
+    }),
   },
 };
 
