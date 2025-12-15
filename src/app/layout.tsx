@@ -1,24 +1,16 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
-
-// SEO: 사이트 기본 URL (환경변수 또는 Vercel 배포 URL 사용)
-const getSiteUrl = () => {
-  if (process.env.NEXT_PUBLIC_SITE_URL) {
-    return process.env.NEXT_PUBLIC_SITE_URL;
-  }
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`;
-  }
-  return 'https://omurice-landing.vercel.app'; // 폴백 URL
-};
-
-const siteUrl = getSiteUrl();
+import { SITE_ORIGIN, absoluteUrl } from '@/shared/config/site';
 
 // SEO: Robots 설정 (preview 환경은 noindex)
 const isPreview = process.env.VERCEL_ENV === 'preview';
 
+// SEO: Google Site Verification (안전한 처리)
+const googleVerification = process.env.GOOGLE_SITE_VERIFICATION;
+
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  // SEO: metadataBase - 모든 상대 경로의 기준 URL
+  metadataBase: new URL(SITE_ORIGIN),
   title: {
     default: '오므라이스 창업 | 오늘은 오므라이스 · 에그이츠 프랜차이즈',
     template: '%s | 오늘은 오므라이스',
@@ -63,20 +55,22 @@ export const metadata: Metadata = {
       follow: !isPreview,
     },
   },
+  // SEO: Canonical URL - 절대 경로 (GSC 필수)
   alternates: {
     canonical: '/',
   },
+  // SEO: Open Graph - 절대 URL 사용
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
-    url: siteUrl,
+    url: SITE_ORIGIN, // 절대 URL
     siteName: '오늘은 오므라이스',
     title: '오므라이스 창업 | 오늘은 오므라이스 · 에그이츠 프랜차이즈',
     description:
       '배달 중심 오므라이스 프랜차이즈. 1~2인 운영, 소형 매장 최적화, 수익 구조 공개. 오늘은 오므라이스 · 에그이츠 창업 상담 진행 중.',
     images: [
       {
-        url: '/og.png',
+        url: absoluteUrl('/og.png'), // 절대 URL
         width: 1200,
         height: 630,
         alt: '오늘은 오므라이스 · 에그이츠 프랜차이즈 창업',
@@ -87,12 +81,15 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: '오므라이스 창업 | 오늘은 오므라이스 · 에그이츠 프랜차이즈',
     description: '배달 중심 오므라이스 프랜차이즈. 1~2인 운영, 소형 매장 최적화, 수익 구조 공개.',
-    images: ['/og.png'],
+    images: [absoluteUrl('/og.png')], // 절대 URL
   },
+  // SEO: Google/Naver Site Verification (환경변수에서만 로드)
   verification: {
-    google: process.env.GOOGLE_SITE_VERIFICATION,
+    google: googleVerification,
     other: {
-      naver: process.env.NAVER_SITE_VERIFICATION || '',
+      ...(process.env.NAVER_SITE_VERIFICATION && {
+        naver: process.env.NAVER_SITE_VERIFICATION,
+      }),
     },
   },
 };

@@ -23,13 +23,8 @@ import { OwnerRecruitmentModal } from '@/features/owner-recruitment-modal';
 import { StoreStatusModal } from '@/features/store-status-modal';
 import { IntroAnimation } from '@/features/intro-animation';
 
-// SEO: 사이트 기본 URL
-const getSiteUrl = () => {
-  if (typeof window !== 'undefined') return window.location.origin;
-  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return 'https://omurice-landing.vercel.app';
-};
+// Shared Config
+import { SITE_ORIGIN, absoluteUrl } from '@/shared/config/site';
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
@@ -75,15 +70,13 @@ export default function Home() {
     }, 100);
   };
 
-  const siteUrl = getSiteUrl();
-
-  // SEO: JSON-LD Structured Data
+  // SEO: JSON-LD Structured Data (Google Search Console용)
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: '오늘은 오므라이스',
-    url: siteUrl,
-    logo: `${siteUrl}/asset/logo/오므라이스_문구.png`,
+    url: SITE_ORIGIN, // 절대 도메인 (GSC 필수)
+    logo: absoluteUrl('/asset/logo/오므라이스_문구.png'),
     brand: [
       {
         '@type': 'Brand',
