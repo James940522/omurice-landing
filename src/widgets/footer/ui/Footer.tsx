@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Footer() {
   return (
@@ -71,6 +72,28 @@ export default function Footer() {
               <p className="text-3xl font-bold text-amber-900">010-9923-9502</p>
               <p className="text-lg text-amber-700">오전 08:30 ~ 오후 20:00</p>
               <p className="text-lg text-amber-700">이메일: wochl123@naver.com</p>
+            </div>
+          </div>
+        </div>
+
+        {/* 하단 저작권 영역 (브랜드명 내부 링크 앵커) */}
+        <div className="border-t border-amber-200 pt-8 mt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-amber-700">
+            <p>
+              © 2024{' '}
+              <Link href="/" className="font-medium text-amber-900 hover:text-orange-500">
+                오늘은 오므라이스 · 에그이츠
+              </Link>
+              . All rights reserved.
+            </p>
+            <div className="flex gap-4">
+              <Link href="/#brand" className="hover:text-orange-500">
+                오늘은 오므라이스 프랜차이즈
+              </Link>
+              <span className="text-amber-300">|</span>
+              <Link href="/#contact" className="hover:text-orange-500">
+                창업 상담 문의
+              </Link>
             </div>
           </div>
         </div>

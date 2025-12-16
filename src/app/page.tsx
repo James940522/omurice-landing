@@ -79,6 +79,16 @@ export default function Home() {
     alternateName: ['재영에프앤비', '재영 F&B', 'Jaeyoung F&B', 'Jaeyoung F and B'],
     url: SITE_ORIGIN, // 절대 도메인 (GSC 필수)
     logo: absoluteUrl('/asset/logo/오므라이스_문구.png'),
+    // SEO: 공식 채널 (브랜드 엔티티 신호 강화)
+    sameAs: [
+      // TODO: 실제 공식 채널 URL로 교체 필요
+      // 'https://www.instagram.com/todayomurice',
+      // 'https://www.youtube.com/@todayomurice',
+      // 'https://place.map.kakao.com/xxxxx', // 카카오 대표 매장
+      // 'https://map.naver.com/v5/search/오늘은오므라이스', // 네이버 플레이스
+      // 'https://pf.kakao.com/_xxxxx', // 카카오톡 채널
+      // 'https://blog.naver.com/todayomurice', // 공식 블로그
+    ],
     brand: [
       {
         '@type': 'Brand',

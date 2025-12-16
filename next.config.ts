@@ -11,6 +11,51 @@ const nextConfig: NextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     qualities: [75, 85, 90],
   },
+
+  // SEO: HTTP → HTTPS 및 WWW → non-WWW 301 리다이렉트
+  async redirects() {
+    return [
+      // www.todayomurice.com → todayomurice.com
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.todayomurice.com',
+          },
+        ],
+        destination: 'https://todayomurice.com/:path*',
+        permanent: true, // 301 리다이렉트
+      },
+    ];
+  },
+
+  // SEO: 헤더 설정 (HTTPS 강제, 보안 강화)
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
