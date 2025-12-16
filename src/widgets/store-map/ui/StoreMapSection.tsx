@@ -24,13 +24,6 @@ const KAKAO_SDK_URL = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_API_
 
 export default function StoreMapSection() {
   // 환경 변수 디버깅
-  useEffect(() => {
-    console.log('=== Kakao Maps Debug ===');
-    console.log('API Key:', KAKAO_API_KEY);
-    console.log('SDK URL:', KAKAO_SDK_URL);
-    console.log('API Key exists:', !!KAKAO_API_KEY);
-    console.log('=======================');
-  }, []);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
