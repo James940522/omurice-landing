@@ -1,6 +1,12 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
-import { SITE_ORIGIN, absoluteUrl } from '@/shared/config/site';
+import {
+  SITE_ORIGIN,
+  absoluteUrl,
+  OG_IMAGE_URL,
+  OG_IMAGE_WIDTH,
+  OG_IMAGE_HEIGHT,
+} from '@/shared/config/site';
 
 // SEO: Robots 설정 (preview 환경은 noindex)
 const isPreview = process.env.VERCEL_ENV === 'preview';
@@ -61,7 +67,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
-  // SEO: Open Graph - 절대 URL 사용
+  // SEO: Open Graph - 카카오톡, 페이스북, 트위터 공유용 (절대 URL)
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
@@ -72,19 +78,20 @@ export const metadata: Metadata = {
       '재영에프앤비(Jaeyoung F&B) 운영 오므라이스 프랜차이즈. 오늘은 오므라이스·에그이츠(EGG EATS) 배달 중심 1~2인 운영, 소형 매장 최적화, 수익 구조 공개.',
     images: [
       {
-        url: absoluteUrl('/og.png'), // 절대 URL
-        width: 1200,
-        height: 630,
-        alt: '오늘은 오므라이스 · 에그이츠 프랜차이즈 창업',
+        url: OG_IMAGE_URL, // 절대 URL (site.ts에서 관리)
+        width: OG_IMAGE_WIDTH,
+        height: OG_IMAGE_HEIGHT,
+        alt: '오늘은 오므라이스 · 에그이츠 프랜차이즈 - 배달 전문 오므라이스 창업',
       },
     ],
   },
+  // SEO: Twitter Card (X 공유용)
   twitter: {
     card: 'summary_large_image',
     title: '오늘은 오므라이스 · 에그이츠 | 오므라이스 창업 프랜차이즈',
     description:
       '재영에프앤비(Jaeyoung F&B) 운영. 오늘은 오므라이스·에그이츠(EGG EATS) 배달 중심 1~2인 운영, 소형 매장 최적화.',
-    images: [absoluteUrl('/og.png')], // 절대 URL
+    images: [OG_IMAGE_URL], // 절대 URL (site.ts에서 관리)
   },
   // SEO: Google Site Verification (built-in 지원)
   verification: {
