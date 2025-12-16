@@ -9,8 +9,7 @@
         }
       ],
       "destination": "https://todayomurice.com/$1",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     }
   ],
   "headers": [
@@ -41,4 +40,3 @@
     }
   ]
 }
-
