@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     template: '%s | 오늘은 오므라이스',
   },
   description:
-    '배달 중심 오므라이스 프랜차이즈. 1~2인 운영, 소형 매장 최적화, 수익 구조 공개. 오늘은 오므라이스 · 에그이츠 창업 상담 진행 중.',
+    '재영에프앤비(Jaeyoung F&B) 운영 오므라이스 프랜차이즈. 오늘은 오므라이스·에그이츠(EGG EATS) 배달 중심 1~2인 운영, 소형 매장 최적화, 수익 구조 공개. 창업 상담 진행 중.',
   keywords:
-    '오므라이스 창업, 오므라이스 프랜차이즈, 배달 전문점 창업, 소자본 외식 창업, 1인 운영 음식점 창업, 오므라이스 창업 비용, 오므라이스 가맹 문의, 배달 오므라이스 창업, 소형 매장 창업',
+    '오므라이스 창업, 오늘은 오므라이스, 에그이츠, egg eats, EGG EATS, 재영에프앤비, 재영 F&B, Jaeyoung F&B, 오므라이스 프랜차이즈, 배달 전문점 창업, 소자본 외식 창업, 1인 운영 음식점 창업, 오므라이스 창업 비용, 오므라이스 가맹 문의, 배달 오므라이스 창업, 소형 매장 창업',
   // Favicon 설정 (모든 브라우저, 모바일, PWA 환경 지원)
   icons: {
     icon: [
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     siteName: '오늘은 오므라이스',
     title: '오므라이스 창업 | 오늘은 오므라이스 · 에그이츠 프랜차이즈',
     description:
-      '배달 중심 오므라이스 프랜차이즈. 1~2인 운영, 소형 매장 최적화, 수익 구조 공개. 오늘은 오므라이스 · 에그이츠 창업 상담 진행 중.',
+      '재영에프앤비(Jaeyoung F&B) 운영 오므라이스 프랜차이즈. 오늘은 오므라이스·에그이츠(EGG EATS) 배달 중심 1~2인 운영, 소형 매장 최적화, 수익 구조 공개.',
     images: [
       {
         url: absoluteUrl('/og.png'), // 절대 URL
@@ -81,7 +81,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: '오므라이스 창업 | 오늘은 오므라이스 · 에그이츠 프랜차이즈',
-    description: '배달 중심 오므라이스 프랜차이즈. 1~2인 운영, 소형 매장 최적화, 수익 구조 공개.',
+    description:
+      '재영에프앤비(Jaeyoung F&B) 운영. 오늘은 오므라이스·에그이츠(EGG EATS) 배달 중심 1~2인 운영, 소형 매장 최적화.',
     images: [absoluteUrl('/og.png')], // 절대 URL
   },
   // SEO: Google Site Verification (built-in 지원)

@@ -181,7 +181,10 @@ export default function HeroSection() {
         </motion.div>
 
         {/* SEO: H1 타이틀 (검색엔진용, 시각적으로는 숨김) */}
-        <h1 className="sr-only">오므라이스 프랜차이즈 창업, 오늘은 오므라이스 · 에그이츠</h1>
+        <h1 className="sr-only">
+          오므라이스 프랜차이즈 창업 | 재영에프앤비(Jaeyoung F&B) 오늘은 오므라이스 · 에그이츠(EGG
+          EATS)
+        </h1>
 
         {/* 1. 브랜드 로고 문구 - 최상단 */}
         <motion.div

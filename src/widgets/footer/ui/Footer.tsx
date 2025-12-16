@@ -23,7 +23,8 @@ export default function Footer() {
                 className="text-sm text-amber-800 font-medium"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
-                (주)재영에프앤비 | 대표자: 최재영, 이호남
+                <span itemProp="legalName">(주)재영에프앤비</span> (Jaeyoung F&B) | 대표자:{' '}
+                <span itemProp="founder">최재영, 이호남</span>
               </p>
               <p className="text-sm text-amber-700" style={{ fontFamily: 'var(--font-body)' }}>
                 사업자등록번호: 576-88-03176
