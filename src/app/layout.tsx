@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     siteName: '오늘은 오므라이스 · 에그이츠',
     title: '오늘은 오므라이스 · 에그이츠 | 오므라이스 창업 프랜차이즈',
     description:
-      '재영에프앤비(Jaeyoung F&B) 운영 오므라이스 프랜차이즈. 오늘은 오므라이스·에그이츠(EGG EATS) 배달 중심 1~2인 운영, 소형 매장 최적화, 수익 구조 공개.',
+      '대한민국 1등 오므라이스 프랜차이즈. 오늘은 오므라이스·에그이츠(EGG EATS) 배달 중심 1~2인 운영, 소형 매장 최적화, 수익 구조 공개.',
     images: [
       {
         url: OG_IMAGE_URL, // 절대 URL (site.ts에서 관리)
@@ -89,8 +89,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: '오늘은 오므라이스 · 에그이츠 | 오므라이스 창업 프랜차이즈',
-    description:
-      '재영에프앤비(Jaeyoung F&B) 운영. 오늘은 오므라이스·에그이츠(EGG EATS) 배달 중심 1~2인 운영, 소형 매장 최적화.',
+    description: '대한민국 1등 오므라이스 프랜차이즈. 배달 중심 1~2인 운영, 소형 매장 최적화.',
     images: [OG_IMAGE_URL], // 절대 URL (site.ts에서 관리)
   },
   // SEO: Google Site Verification (built-in 지원)
