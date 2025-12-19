@@ -1,8 +1,10 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { BaseModal } from '@/shared/ui';
 import StoreItem from './StoreItem';
 import ComingSoonItem from './ComingSoonItem';
+import { fetchStores } from '@/lib/stores';
 
 interface StoreStatusModalProps {
   isOpen: boolean;
@@ -10,114 +12,29 @@ interface StoreStatusModalProps {
 }
 
 export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalProps) {
-  // CSV 데이터 기반 전체 가맹점 리스트
-  const stores = [
-    '동대문점',
-    '마포점',
-    '신림점',
-    '연신내점',
-    '진주점',
-    '강동점',
-    '사하점',
-    '해운대점',
-    '중랑점',
-    '안양점',
-    '금천점',
-    '수유점',
-    '양정점',
-    '광진점',
-    '부천점',
-    '안산점',
-    '포항 북구 홍해점',
-    '포항 북구점',
-    '포항 남구 오천점',
-    '강남점',
-    '송파점',
-    '충북점',
-    '하남점',
-    '순천점',
-    '양산점 웅상점',
-    '부산기장점',
-    '대전점',
-    '세종점',
-    '구리점',
-    '세종 조치원점',
-    '충남 공주점',
-    '영등포점',
-    '양산평산점',
-    '산본점',
-    '부산 강서점',
-    '전남광양점',
-    '전남중마점',
-    '광주월계점',
-    '대구서구점',
-    '천안점',
-    '대구율하점',
-    '대구수성점',
-    '경남진해점',
-    '성신여대점',
-    '제주점',
-    '분당수내점',
-    '천안쌍용점',
-    '수원인계점',
-    '부평점',
-    '안산고잔점',
-    '경남김해점',
-    '부산대연점',
-    '전남완도점',
-    '경주안강점',
-    '경주황상점',
-    '전남여수점',
-    '진해용원점',
-    '용인수지점',
-    '아산배방점',
-    '부산사직점',
-    '화성봉담점',
-    '강원원주점',
-    '여주점',
-    '시흥점',
-    '일산점',
-    '인천검단점',
-    '서산점',
-    '당진점',
-    '익산점',
-    '칠곡점',
-    '대전서구점',
-    '평택점',
-    '의정부점',
-    '동탄점',
-    '충주점',
-    '동두천점',
-    '안성점',
-    '진해자은점',
-    '이천점',
-    '경남사천점',
-    '인천가정점',
-    '제주애월점',
-    '경북구미점',
-    '김포구래점',
-    '천안성정점',
-    '광주서구점',
-    '경북영천점',
-    '화성병점점',
-    '오산점',
-    '안동점',
-    '영주점',
-    '전주효자점',
-    '부산사상점',
-    '충북혁신도시',
-    '대전유성점',
-    '남원점',
-    '예산점',
-    '옥천점',
-    '나주점',
-    '충북음성점',
-    '계룡점',
-    '노원점',
-    '삼천포점',
-  ];
+  // CSV 데이터에서 동적으로 가맹점 리스트를 가져옴
+  const [stores, setStores] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const comingSoonCount = 2;
+  useEffect(() => {
+    // CSV에서 매장 데이터 로드
+    const loadStores = async () => {
+      try {
+        const storeData = await fetchStores();
+        // branch_name만 추출
+        const storeNames = storeData.map((store) => store.branch_name);
+        setStores(storeNames);
+      } catch (error) {
+        console.error('Failed to load stores:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadStores();
+  }, []);
+
+  const comingSoonCount = 0; // 현재 104개 매장 운영 중
 
   return (
     <BaseModal
@@ -143,7 +60,7 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
                   '-2px -2px 0 #FF6B00, 2px -2px 0 #FF6B00, -2px 2px 0 #FF6B00, 2px 2px 0 #FF6B00, 4px 4px 0 #FF8C00, 6px 6px 0 #FF6B00, 8px 8px 12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 193, 7, 0.6)',
               }}
             >
-              최단기간 100호점
+              최단기간 104호점
               <br />
               달성 신화
             </h2>
@@ -155,7 +72,7 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
               className="text-lg sm:text-xl font-bold text-gray-900"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
-              가맹점 현황
+              가맹점 현황 {!isLoading && stores.length > 0 && `(${stores.length}개 운영 중)`}
             </h3>
           </div>
         </>
@@ -163,15 +80,22 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
     >
       {/* Content - 가맹점 리스트 */}
       <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-2 sm:p-3 shadow-lg border border-yellow-200 max-h-[60vh] overflow-y-auto sm:max-h-none sm:overflow-y-visible">
-        <div className="grid grid-cols-5 sm:grid-cols-6 gap-y-1 gap-x-1 sm:gap-y-1.5 sm:gap-x-1.5 justify-items-center pb-2 sm:pb-4">
-          {stores.map((store, index) => (
-            <StoreItem key={index} storeName={store} />
-          ))}
+        {isLoading ? (
+          <div className="text-center py-8">
+            <p className="text-gray-600">매장 정보를 불러오는 중...</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-5 sm:grid-cols-6 gap-y-1 gap-x-1 sm:gap-y-1.5 sm:gap-x-1.5 justify-items-center pb-2 sm:pb-4">
+            {stores.map((store, index) => (
+              <StoreItem key={index} storeName={store} />
+            ))}
 
-          {[...Array(comingSoonCount)].map((_, index) => (
-            <ComingSoonItem key={`coming-${index}`} />
-          ))}
-        </div>
+            {comingSoonCount > 0 &&
+              [...Array(comingSoonCount)].map((_, index) => (
+                <ComingSoonItem key={`coming-${index}`} />
+              ))}
+          </div>
+        )}
       </div>
     </BaseModal>
   );
