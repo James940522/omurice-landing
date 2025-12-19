@@ -60,7 +60,7 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
                   '-2px -2px 0 #FF6B00, 2px -2px 0 #FF6B00, -2px 2px 0 #FF6B00, 2px 2px 0 #FF6B00, 4px 4px 0 #FF8C00, 6px 6px 0 #FF6B00, 8px 8px 12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 193, 7, 0.6)',
               }}
             >
-              최단기간 104호점
+              최단기간 100호점
               <br />
               달성 신화
             </h2>
