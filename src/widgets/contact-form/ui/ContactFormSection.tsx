@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useMemo } from 'react';
 
 export default function ContactFormSection() {
   const ref = useRef(null);
@@ -15,6 +15,21 @@ export default function ContactFormSection() {
     budget: '',
     message: '',
   });
+
+  // 도메인에 따라 SMS 메시지 결정
+  const smsMessage = useMemo(() => {
+    if (typeof window === 'undefined') return '홈페이지를 통해 창업 문의 드립니다.';
+
+    const hostname = window.location.hostname;
+
+    // apply.todayomurice.com인 경우
+    if (hostname === 'apply.todayomurice.com') {
+      return '[네모] 홈페이지를 통해 창업 문의 드립니다.';
+    }
+
+    // 기본 메시지 (todayomurice.com, www.todayomurice.com 등)
+    return '홈페이지를 통해 창업 문의 드립니다.';
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -227,14 +242,14 @@ export default function ContactFormSection() {
             </p>
             <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
               <a
-                href="tel:010-9923-9502"
+                href={`sms:010-9923-9502${smsMessage ? `?body=${encodeURIComponent(smsMessage)}` : ''}`}
                 className="flex items-center gap-2 text-gray-900 text-xl md:text-2xl font-bold hover:scale-105 transition-transform hover:text-yellow-600"
               >
                 010-9923-9502
               </a>
               <span className="hidden md:inline text-gray-400">|</span>
               <a
-                href="wochl123@naver.com"
+                href="mailto:wochl123@naver.com"
                 className="flex items-center gap-2 text-gray-900 text-xl md:text-2xl font-bold hover:scale-105 transition-transform hover:text-yellow-600"
               >
                 wochl123@naver.com
