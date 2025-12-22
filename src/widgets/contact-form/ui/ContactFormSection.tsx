@@ -22,6 +22,7 @@ export default function ContactFormSection() {
 
     const hostname = window.location.hostname;
 
+    console.log(hostname);
     // apply.todayomurice.com인 경우
     if (hostname === 'apply.todayomurice.com') {
       return '[네모] 홈페이지를 통해 창업 문의 드립니다.';
