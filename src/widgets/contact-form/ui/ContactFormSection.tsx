@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useMemo } from 'react';
+import { useRef, useState } from 'react';
 
 export default function ContactFormSection() {
   const ref = useRef(null);
@@ -17,20 +17,27 @@ export default function ContactFormSection() {
   });
 
   // 도메인에 따라 SMS 메시지 결정
-  const smsMessage = useMemo(() => {
-    if (typeof window === 'undefined') return '홈페이지를 통해 창업 문의 드립니다.';
+  const getSmsMessage = () => {
+    // 서버 사이드에서는 기본 메시지 반환
+    if (typeof window === 'undefined') {
+      return '홈페이지를 통해 창업 문의 드립니다.';
+    }
 
     const hostname = window.location.hostname;
+    console.log('현재 hostname:', hostname);
 
-    console.log(hostname);
     // apply.todayomurice.com인 경우
     if (hostname === 'apply.todayomurice.com') {
+      console.log('apply 도메인 감지 - [네모] 메시지 사용');
       return '[네모] 홈페이지를 통해 창업 문의 드립니다.';
     }
 
+    console.log('기본 도메인 - 일반 메시지 사용');
     // 기본 메시지 (todayomurice.com, www.todayomurice.com 등)
     return '홈페이지를 통해 창업 문의 드립니다.';
-  }, []);
+  };
+
+  const smsMessage = getSmsMessage();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
