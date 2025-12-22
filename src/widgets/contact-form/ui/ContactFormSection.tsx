@@ -1,7 +1,26 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
+
+// 도메인에 따른 SMS 메시지 생성 함수
+function getSmsMessageByDomain(): string {
+  if (typeof window === 'undefined') {
+    return '홈페이지를 통해 창업 문의 드립니다.';
+  }
+
+  const hostname = window.location.hostname;
+  console.log('🔍 현재 hostname:', hostname);
+
+  // apply.todayomurice.com 또는 localhost인 경우 [네모] 문구 추가
+  if (hostname === 'apply.todayomurice.com' || hostname === 'localhost') {
+    console.log('✅ [네모] 메시지 적용');
+    return '[네모] 홈페이지를 통해 창업 문의 드립니다.';
+  }
+
+  console.log('✅ 기본 메시지 적용');
+  return '홈페이지를 통해 창업 문의 드립니다.';
+}
 
 export default function ContactFormSection() {
   const ref = useRef(null);
@@ -16,28 +35,22 @@ export default function ContactFormSection() {
     message: '',
   });
 
-  // 도메인에 따라 SMS 메시지 결정
-  const getSmsMessage = () => {
-    // 서버 사이드에서는 기본 메시지 반환
-    if (typeof window === 'undefined') {
-      return '홈페이지를 통해 창업 문의 드립니다.';
+  // 클라이언트 마운트 상태 추적
+  const [isMounted, setIsMounted] = useState(false);
+
+  // SMS 메시지 - 항상 기본값으로 초기화 (SSR과 일치)
+  const [smsMessage, setSmsMessage] = useState('홈페이지를 통해 창업 문의 드립니다.');
+
+  // 클라이언트 마운트 후 도메인 체크
+  // SSR Hydration 에러 방지를 위해 클라이언트에서만 메시지 설정
+  useEffect(() => {
+    setIsMounted(true);
+    const message = getSmsMessageByDomain();
+    if (message !== smsMessage) {
+      setSmsMessage(message);
     }
-
-    const hostname = window.location.hostname;
-    console.log('현재 hostname:', hostname);
-
-    // apply.todayomurice.com인 경우
-    if (hostname === 'apply.todayomurice.com') {
-      console.log('apply 도메인 감지 - [네모] 메시지 사용');
-      return '[네모] 홈페이지를 통해 창업 문의 드립니다.';
-    }
-
-    console.log('기본 도메인 - 일반 메시지 사용');
-    // 기본 메시지 (todayomurice.com, www.todayomurice.com 등)
-    return '홈페이지를 통해 창업 문의 드립니다.';
-  };
-
-  const smsMessage = getSmsMessage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -250,7 +263,11 @@ export default function ContactFormSection() {
             </p>
             <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
               <a
-                href={`sms:010-9923-9502${smsMessage ? `?body=${encodeURIComponent(smsMessage)}` : ''}`}
+                href={
+                  isMounted
+                    ? `sms:010-9923-9502?body=${encodeURIComponent(smsMessage)}`
+                    : 'tel:010-9923-9502'
+                }
                 className="flex items-center gap-2 text-gray-900 text-xl md:text-2xl font-bold hover:scale-105 transition-transform hover:text-yellow-600"
               >
                 010-9923-9502
