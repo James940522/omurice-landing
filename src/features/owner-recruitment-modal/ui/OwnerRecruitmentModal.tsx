@@ -40,14 +40,14 @@ export default function OwnerRecruitmentModal({
           >
             오늘은 오므라이스
             <br />
-            창업의 마지막 기회!
+            오너 모집 시작!
           </h2>
 
           <div
             className="text-5xl sm:text-6xl font-bold text-yellow-500 mb-2 drop-shadow-md"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
-            2025
+            2026
           </div>
 
           {/* 로고 이미지 */}
