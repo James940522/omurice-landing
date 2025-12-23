@@ -41,6 +41,11 @@ export default function ContactFormSection() {
   // SMS 메시지 - 항상 기본값으로 초기화 (SSR과 일치)
   const [smsMessage, setSmsMessage] = useState('홈페이지를 통해 창업 문의 드립니다.');
 
+  // 폼 제출 관련 state
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [privacyAgree, setPrivacyAgree] = useState(false);
+  const [hp, setHp] = useState(''); // honeypot
+
   // 클라이언트 마운트 후 도메인 체크
   // SSR Hydration 에러 방지를 위해 클라이언트에서만 메시지 설정
   useEffect(() => {
@@ -59,11 +64,50 @@ export default function ContactFormSection() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: 실제 폼 제출 로직 구현
-    console.log('Form submitted:', formData);
-    alert('해당 기능 준비중입니다. 하단 연락처로 문의 부탁드립니다.');
+    if (isSubmitting) return;
+    if (!privacyAgree) return;
+
+    setIsSubmitting(true);
+    try {
+      // 현재 도메인 정보 가져오기
+      const domain = typeof window !== 'undefined' ? window.location.hostname : '';
+
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          region: formData.region,
+          message: formData.message,
+          privacyAgree: true,
+          hp,
+          domain, // 도메인 정보 전송 ([네모] 태그용)
+        }),
+      });
+
+      if (!res.ok) {
+        if (res.status === 429) {
+          alert('너무 많은 요청입니다. 잠시 후 다시 시도해주세요.');
+        } else {
+          throw new Error('SEND_FAIL');
+        }
+        return;
+      }
+
+      alert('접수 완료! 담당자가 영업일 기준 24시간 이내 연락드립니다.');
+      setFormData({ name: '', phone: '', email: '', region: '', budget: '', message: '' });
+      setPrivacyAgree(false);
+      setHp('');
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('전송 실패. 잠시 후 다시 시도해주세요.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -217,11 +261,25 @@ export default function ContactFormSection() {
                 />
               </div>
 
+              {/* Honeypot (봇 차단용) */}
+              <input
+                type="text"
+                name="hp"
+                value={hp}
+                onChange={(e) => setHp(e.target.value)}
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
+
               {/* 개인정보 동의 */}
               <div className="bg-gray-50 rounded-xl p-4">
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input
                     type="checkbox"
+                    checked={privacyAgree}
+                    onChange={(e) => setPrivacyAgree(e.target.checked)}
                     required
                     className="mt-1 w-5 h-5 text-yellow-500 border-gray-300 rounded focus:ring-yellow-500"
                   />
@@ -235,11 +293,14 @@ export default function ContactFormSection() {
               {/* 제출 버튼 */}
               <motion.button
                 type="submit"
-                className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white py-4 px-8 rounded-xl text-lg md:text-xl font-bold shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                disabled={isSubmitting}
+                className={`w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white py-4 px-8 rounded-xl text-lg md:text-xl font-bold shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 ${
+                  isSubmitting ? 'opacity-60 cursor-not-allowed' : ''
+                }`}
+                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
               >
-                창업 문의 신청하기
+                {isSubmitting ? '전송 중...' : '창업 문의 신청하기'}
               </motion.button>
 
               {/* 안내 문구 */}
