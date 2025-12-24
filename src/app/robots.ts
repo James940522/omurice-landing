@@ -3,7 +3,7 @@ import { SITE_ORIGIN, absoluteUrl } from '@/shared/config/site';
 
 /**
  * SEO: robots.txt 생성
- * 
+ *
  * - 프로덕션: index, follow
  * - Preview 환경: noindex, nofollow (GSC 인덱싱 방지)
  */
