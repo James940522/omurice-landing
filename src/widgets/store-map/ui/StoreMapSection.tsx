@@ -158,15 +158,19 @@ export default function StoreMapSection() {
   }, [isMapReady]);
 
   /**
-   * CSV 데이터 로드
+   * CSV 데이터 로드 (주소가 있는 매장만 지도에 표시)
    */
   useEffect(() => {
     const loadStores = async () => {
       try {
         const data = await fetchStores();
-        console.log(`Loaded ${data.length} stores`);
-        setStores(data);
-        setFilteredStores(data);
+        // 주소가 있는 매장만 필터링 (지도 표시용)
+        const storesWithAddress = data.filter(
+          (store) => store.address && store.address.trim() !== ''
+        );
+        console.log(`Loaded ${data.length} stores (${storesWithAddress.length} with address)`);
+        setStores(storesWithAddress);
+        setFilteredStores(storesWithAddress);
         setIsDataLoaded(true);
       } catch (error) {
         console.error('Failed to load stores:', error);

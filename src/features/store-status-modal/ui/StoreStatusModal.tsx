@@ -34,7 +34,7 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
     loadStores();
   }, []);
 
-  const comingSoonCount = 0; // 현재 104개 매장 운영 중
+  const comingSoonCount = 0; // 현재 110개 매장 (일부 오픈 준비 중)
 
   return (
     <BaseModal
