@@ -81,7 +81,7 @@ export default function Header() {
                 ✕
               </span>
               <Image
-                src="/asset/logo/에그이츠_문구.png"
+                src="/asset/logo/에그이츠_문구2.png"
                 alt="에그이츠"
                 width={200}
                 height={100}
