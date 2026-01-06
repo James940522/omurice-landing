@@ -18,25 +18,8 @@ export const absoluteUrl = (path: string): string => {
 };
 
 /**
- * Open Graph 이미지 설정 (카카오톡, 페이스북, 트위터 공유용)
- *
- * TODO: 실제 OG 이미지를 public/ 폴더에 배치 후 경로 업데이트
- * 권장: 1200x630px, JPG/PNG, 1MB 이하
- *
- * @example
- * public/og.jpg → OG_IMAGE_PATH = '/og.jpg'
- * public/og-image.png → OG_IMAGE_PATH = '/og-image.png'
+ * Open Graph 이미지 설정
  */
-export const OG_IMAGE_PATH = '/og.jpg'; // TODO: 실제 이미지 경로로 변경
-
-/**
- * Open Graph 이미지 절대 URL
- * 카카오톡, 소셜 미디어 공유 시 사용됩니다.
- */
-export const OG_IMAGE_URL = absoluteUrl(OG_IMAGE_PATH);
-
-/**
- * Open Graph 이미지 크기 (권장 비율 1200x630)
- */
+export const OG_IMAGE_URL = absoluteUrl('/og.png');
 export const OG_IMAGE_WIDTH = 1200;
 export const OG_IMAGE_HEIGHT = 630;
