@@ -69,7 +69,7 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
           {/* 서브 타이틀 */}
           <div className="text-center mb-3 sm:mb-4">
             <h3
-              className="text-lg sm:text-xl font-bold text-gray-900"
+              className="text-lg sm:text-xl font-bold text-amber-800/80"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
               가맹점 현황 {!isLoading && stores.length > 0 && `(${stores.length}개 운영 중)`}
