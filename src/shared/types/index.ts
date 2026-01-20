@@ -27,6 +27,3 @@ export interface InquiryForm {
   region: string;
   agree: boolean;
 }
-
-// Season types
-export type { Season, BrandData } from './season';

@@ -10,6 +10,7 @@ const Schema = z.object({
   email: z.string().email(),
   region: z.string().min(1),
   message: z.string().optional().default(''),
+  source: z.string().min(1), // 방문 유입 경로 (필수)
   privacyAgree: z.literal(true),
   hp: z.string().optional(), // honeypot
   domain: z.string().optional(), // 도메인 정보 (네모 태그용)
@@ -111,6 +112,7 @@ export async function POST(req: Request) {
   const email = parsed.data.email.trim();
   const region = parsed.data.region.trim();
   const message = (parsed.data.message ?? '').trim();
+  const source = parsed.data.source.trim(); // 방문 유입 경로
   const domain = parsed.data.domain || '';
 
   // apply.todayomurice.com 또는 localhost인 경우 [네모] 태그 추가
@@ -123,6 +125,7 @@ export async function POST(req: Request) {
 이름: ${name}
 이메일: ${email}
 희망지역: ${region}
+유입경로: ${source}
 
 문의내용:
 ${message || '-'}`.slice(0, 1000);

@@ -74,12 +74,12 @@ function SeasonalLogoCarousel({
 
   return (
     <div className="relative">
-      {/* 이미지 캐러셀 */}
-      <div className="relative" style={{ height: '280px' }}>
+      {/* 이미지 캐러셀 - 반응형 높이 */}
+      <div className="relative h-[200px] sm:h-[240px] md:h-[280px] lg:h-[320px] flex items-center justify-center">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
-            className="absolute inset-0"
+            className="relative inline-block max-w-full max-h-full rounded-xl overflow-hidden"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
@@ -88,23 +88,26 @@ function SeasonalLogoCarousel({
             <Image
               src={images[currentIndex]}
               alt={`계절별 로고 ${seasons[currentIndex]}`}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-contain"
+              width={500}
+              height={320}
+              sizes="(max-width: 640px) 50vw, (max-width: 768px) 45vw, (max-width: 1024px) 40vw, 35vw"
+              className="w-auto h-[200px] sm:h-[240px] md:h-[280px] lg:h-[320px] object-contain"
             />
           </motion.div>
         </AnimatePresence>
       </div>
 
       {/* 페이지네이션 dots */}
-      <div className="flex justify-center gap-2 mt-6">
+      <div className="flex justify-center gap-2 mt-4 sm:mt-5 md:mt-6">
         {images.map((_, index) => (
           <button
             key={index}
             onClick={() => onIndexChange(index)}
             aria-label={`${seasons[index]} 보기`}
             className={`transition-all duration-300 rounded-full ${
-              index === currentIndex ? 'w-10 h-2 bg-amber-500' : 'w-2 h-2 bg-gray-300 hover:bg-amber-300'
+              index === currentIndex
+                ? 'w-8 sm:w-10 h-2 bg-amber-500'
+                : 'w-2 h-2 bg-gray-300 hover:bg-amber-300'
             }`}
           />
         ))}
@@ -377,9 +380,9 @@ export function StorePresetSection() {
             </p>
           </div>
 
-          {/* 캐러셀 그리드 */}
+          {/* 캐러셀 그리드 - 항상 2열 */}
           <div
-            className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 max-w-5xl mx-auto"
+            className="grid grid-cols-2 gap-6 sm:gap-8 md:gap-12 lg:gap-16 max-w-6xl mx-auto"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
