@@ -2,6 +2,7 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { fetchStores, filterStores } from '@/lib/stores';
 import type { Store } from '@/lib/stores';
 
@@ -430,22 +431,40 @@ export default function StoreMapSection() {
                     <motion.div
                       key={store.store_code}
                       onClick={() => handleStoreClick(store)}
-                      className={`border-2 rounded-xl p-4 transition-all cursor-pointer ${
+                      className={`rounded-xl p-4 transition-all cursor-pointer ${
                         selectedStoreCode === store.store_code
-                          ? 'border-yellow-500 bg-yellow-50 shadow-md'
-                          : 'border-gray-200 hover:border-yellow-400 hover:bg-yellow-50 hover:shadow-sm'
+                          ? 'bg-yellow-50 shadow-md'
+                          : 'hover:bg-yellow-50 hover:shadow-sm'
                       }`}
                       initial={{ opacity: 0, x: -20 }}
                       animate={isInView ? { opacity: 1, x: 0 } : {}}
                       transition={{ duration: 0.5, delay: Math.min(0.05 * index, 0.8) }}
                     >
-                      {/* 매장명 */}
-                      <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
-                        {store.branch_name}
-                      </h3>
+                      <div className="flex items-center gap-4">
+                        {/* 왼쪽: 매장 로고 이미지 */}
+                        <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden">
+                          <Image
+                            src="/asset/logo/지도_가맹점.png"
+                            alt="매장 로고"
+                            width={80}
+                            height={80}
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
 
-                      {/* 주소 */}
-                      <p className="text-sm text-gray-600 leading-relaxed">{store.address}</p>
+                        {/* 오른쪽: 매장 정보 */}
+                        <div className="flex-1 min-w-0">
+                          {/* 매장명 */}
+                          <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1 truncate">
+                            {store.branch_name}
+                          </h3>
+
+                          {/* 주소 */}
+                          <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">
+                            {store.address}
+                          </p>
+                        </div>
+                      </div>
                     </motion.div>
                   ))
                 )}

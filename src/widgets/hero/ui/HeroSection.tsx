@@ -206,7 +206,7 @@ export default function HeroSection() {
             }}
           >
             <Image
-              src="/asset/logo/오므라이스_문구.png"
+              src="/asset/logo/오므라이스_문구3.png"
               alt=""
               width={512}
               height={256}

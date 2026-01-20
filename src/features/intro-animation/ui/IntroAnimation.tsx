@@ -168,7 +168,7 @@ export default function IntroAnimation({ isVisible, onComplete }: IntroAnimation
                   transition={{ delay: 0.5, duration: 0.8 }}
                 >
                   <Image
-                    src="/asset/logo/오므라이스_문구.png"
+                    src="/asset/logo/오므라이스_문구3.png"
                     alt="오늘은 오므라이스"
                     fill
                     className="object-contain drop-shadow-[0_6px_12px_rgba(0,0,0,0.5)]"
@@ -313,7 +313,7 @@ export default function IntroAnimation({ isVisible, onComplete }: IntroAnimation
                   transition={{ delay: 0.5, duration: 0.8 }}
                 >
                   <Image
-                    src="/asset/logo/오므라이스_문구.png"
+                    src="/asset/logo/오므라이스_문구3.png"
                     alt="오늘은 오므라이스"
                     fill
                     className="object-contain drop-shadow-[0_6px_12px_rgba(0,0,0,0.5)]"

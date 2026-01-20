@@ -53,7 +53,7 @@ export default function OwnerRecruitmentModal({
           {/* 로고 이미지 */}
           <div className="relative w-48 h-16 mx-auto mb-2">
             <Image
-              src="/asset/logo/오므라이스_문구.png"
+              src="/asset/logo/오므라이스_문구3.png"
               alt="오늘은 오므라이스"
               fill
               className="object-contain"

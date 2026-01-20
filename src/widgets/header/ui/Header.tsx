@@ -62,7 +62,7 @@ export default function Header() {
               aria-label="오늘은 오므라이스 & 에그이츠 홈으로 이동"
             >
               <Image
-                src="/asset/logo/오므라이스_문구.png"
+                src="/asset/logo/오므라이스_문구3.png"
                 alt="오늘은 오므라이스"
                 width={200}
                 height={100}

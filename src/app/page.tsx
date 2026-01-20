@@ -78,7 +78,7 @@ export default function Home() {
     legalName: '주식회사 재영에프앤비',
     alternateName: ['재영에프앤비', '재영 F&B', 'Jaeyoung F&B', 'Jaeyoung F and B'],
     url: SITE_ORIGIN, // 절대 도메인 (GSC 필수)
-    logo: absoluteUrl('/asset/logo/오므라이스_문구.png'),
+    logo: absoluteUrl('/asset/logo/오므라이스_문구3.png'),
     // SEO: 공식 채널 (브랜드 엔티티 신호 강화)
     sameAs: [
       // TODO: 실제 공식 채널 URL로 교체 필요
