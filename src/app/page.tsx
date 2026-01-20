@@ -8,6 +8,7 @@ import { Header } from '@/widgets/header';
 import { HeroSection } from '@/widgets/hero';
 import { BrandIntroSection } from '@/widgets/brand-intro';
 import { DualBrandSection } from '@/widgets/dual-brand';
+import { BrandUniverseSection } from '@/widgets/brand-universe';
 import { RevenueProofSection } from '@/widgets/revenue-proof';
 import { StartupProcessSection } from '@/widgets/startup-process';
 import { MenuSection } from '@/widgets/menu';
@@ -170,6 +171,7 @@ export default function Home() {
         <BrandIntroSection />
         <RevenueProofSection />
         <DualBrandSection />
+        <BrandUniverseSection />
         <StartupProcessSection />
         <MenuSection />
         <StorePresetSection />

@@ -1,7 +1,7 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { cn } from '@/shared/lib/utils';
 
@@ -60,9 +60,91 @@ const brandPresets: BrandPreset[] = [
   },
 ];
 
+// 계절별 로고 캐러셀 컴포넌트
+function SeasonalLogoCarousel({
+  images,
+  currentIndex,
+  onIndexChange,
+}: {
+  images: string[];
+  currentIndex: number;
+  onIndexChange: (index: number) => void;
+}) {
+  const seasons = ['봄', '여름', '가을', '겨울'];
+
+  return (
+    <div className="relative">
+      {/* 이미지 캐러셀 */}
+      <div className="relative" style={{ height: '280px' }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            className="absolute inset-0"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Image
+              src={images[currentIndex]}
+              alt={`계절별 로고 ${seasons[currentIndex]}`}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-contain"
+            />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* 페이지네이션 dots */}
+      <div className="flex justify-center gap-2 mt-6">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => onIndexChange(index)}
+            aria-label={`${seasons[index]} 보기`}
+            className={`transition-all duration-300 rounded-full ${
+              index === currentIndex ? 'w-10 h-2 bg-amber-500' : 'w-2 h-2 bg-gray-300 hover:bg-amber-300'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function StorePresetSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+
+  // 싱크된 캐러셀 인덱스
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const omuriceLogo = [
+    '/asset/season-logo/오므라이스_봄.jpeg',
+    '/asset/season-logo/오므라이스_여름.jpeg',
+    '/asset/season-logo/오므라이스_가을.jpeg',
+    '/asset/season-logo/오므라이스_겨울.jpeg',
+  ];
+
+  const eggEatsLogo = [
+    '/asset/season-logo/에그이츠_봄.jpeg',
+    '/asset/season-logo/에그이츠_여름.jpeg',
+    '/asset/season-logo/에그이츠_가을.jpeg',
+    '/asset/season-logo/에그이츠_겨울.jpeg',
+  ];
+
+  // 자동 회전 (싱크)
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % 4);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
   return (
     <section
@@ -114,19 +196,24 @@ export function StorePresetSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: brandIndex * 0.2 }}
             >
-              {/* 브랜드 타이틀 */}
+              {/* 브랜드 로고 */}
               <div className="flex justify-center mb-6">
-                <h3
-                  className="text-2xl font-black"
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    color: '#FFC107',
-                    textShadow:
-                      '-1.5px -1.5px 0 #8B4513, 1.5px -1.5px 0 #8B4513, -1.5px 1.5px 0 #8B4513, 1.5px 1.5px 0 #8B4513, 3px 3px 0 #6B3410, 4px 4px 8px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 193, 7, 0.5)',
-                  }}
-                >
-                  {brand.id === 'omurice' ? '오늘은 오므라이스' : 'EGG EATS'}
-                </h3>
+                <div className="relative h-16 w-auto">
+                  <Image
+                    src={
+                      brand.id === 'omurice'
+                        ? '/asset/logo/오므라이스_문구3.png'
+                        : '/asset/logo/에그이츠_문구2.png'
+                    }
+                    alt={brand.name}
+                    width={200}
+                    height={64}
+                    className="h-full w-auto object-contain"
+                    style={{
+                      filter: 'drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))',
+                    }}
+                  />
+                </div>
               </div>
 
               {/* 프리셋 옵션들 (2열) */}
@@ -183,19 +270,24 @@ export function StorePresetSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: brandIndex * 0.2 }}
             >
-              {/* 브랜드 타이틀 */}
+              {/* 브랜드 로고 */}
               <div className="flex justify-center mb-8">
-                <h3
-                  className="text-3xl lg:text-4xl font-black"
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    color: '#FFC107',
-                    textShadow:
-                      '-2px -2px 0 #8B4513, 2px -2px 0 #8B4513, -2px 2px 0 #8B4513, 2px 2px 0 #8B4513, 4px 4px 0 #6B3410, 6px 6px 0 #8B4513, 8px 8px 12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 193, 7, 0.6)',
-                  }}
-                >
-                  {brand.id === 'omurice' ? '오늘은 오므라이스' : 'EGG EATS'}
-                </h3>
+                <div className="relative h-20 lg:h-24 w-auto">
+                  <Image
+                    src={
+                      brand.id === 'omurice'
+                        ? '/asset/logo/오므라이스_문구3.png'
+                        : '/asset/logo/에그이츠_문구2.png'
+                    }
+                    alt={brand.name}
+                    width={300}
+                    height={96}
+                    className="h-full w-auto object-contain"
+                    style={{
+                      filter: 'drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.3))',
+                    }}
+                  />
+                </div>
               </div>
 
               {/* 이미지 2개 (A, B) */}
@@ -261,6 +353,60 @@ export function StorePresetSection() {
               실제 매장 상황에 따라 일부 조정될 수 있습니다
             </span>
           </p>
+        </motion.div>
+
+        {/* 계절별 로고 캐러셀 섹션 */}
+        <motion.div
+          className="mt-20 pt-16 border-t border-yellow-200"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 1 }}
+        >
+          <div className="text-center mb-12">
+            <h3
+              className="text-2xl md:text-3xl font-bold text-gray-800 mb-3"
+              style={{ fontFamily: 'var(--font-heading)' }}
+            >
+              계절별 브랜드 로고
+            </h3>
+            <p
+              className="text-base text-gray-600"
+              style={{ fontFamily: 'var(--font-body)' }}
+            >
+              사계절을 담은 브랜드 아이덴티티
+            </p>
+          </div>
+
+          {/* 캐러셀 그리드 */}
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 max-w-5xl mx-auto"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6, delay: 1.2 }}
+            >
+              <SeasonalLogoCarousel
+                images={omuriceLogo}
+                currentIndex={currentIndex}
+                onIndexChange={setCurrentIndex}
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6, delay: 1.4 }}
+            >
+              <SeasonalLogoCarousel
+                images={eggEatsLogo}
+                currentIndex={currentIndex}
+                onIndexChange={setCurrentIndex}
+              />
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>

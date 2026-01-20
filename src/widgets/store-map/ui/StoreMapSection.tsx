@@ -362,7 +362,7 @@ export default function StoreMapSection() {
 
         {/* 지도 + 매장 목록 레이아웃 */}
         <motion.div
-          className="bg-white rounded-3xl overflow-hidden shadow-2xl border-4 border-yellow-600"
+          className="bg-white rounded-3xl overflow-hidden shadow-2xl border-4 border-amber-500"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
@@ -433,8 +433,8 @@ export default function StoreMapSection() {
                       onClick={() => handleStoreClick(store)}
                       className={`rounded-xl p-4 transition-all cursor-pointer border-2 ${
                         selectedStoreCode === store.store_code
-                          ? 'bg-yellow-50 shadow-md border-yellow-600'
-                          : 'hover:bg-yellow-50 hover:shadow-sm border-yellow-500'
+                          ? 'bg-yellow-50 shadow-md border-amber-500'
+                          : 'hover:bg-yellow-50 hover:shadow-sm border-amber-400'
                       }`}
                       initial={{ opacity: 0, x: -20 }}
                       animate={isInView ? { opacity: 1, x: 0 } : {}}
