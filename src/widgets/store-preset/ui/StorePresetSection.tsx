@@ -1,9 +1,14 @@
 'use client';
 
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
 import { cn } from '@/shared/lib/utils';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 interface PresetOption {
   id: string;
@@ -71,38 +76,67 @@ function SeasonalLogoCarousel({
   onIndexChange: (index: number) => void;
 }) {
   const seasons = ['봄', '여름', '가을', '겨울'];
+  const swiperRef = useRef<SwiperType | null>(null);
+
+  // 외부 currentIndex 변경에 따라 Swiper 업데이트
+  useEffect(() => {
+    if (swiperRef.current && swiperRef.current.activeIndex !== currentIndex) {
+      swiperRef.current.slideTo(currentIndex);
+    }
+  }, [currentIndex]);
 
   return (
     <div className="relative">
-      {/* 이미지 캐러셀 - 반응형 높이 */}
-      <div className="relative h-[200px] sm:h-[240px] md:h-[280px] lg:h-[320px] flex items-center justify-center">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentIndex}
-            className="relative inline-block max-w-full max-h-full rounded-xl overflow-hidden"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Image
-              src={images[currentIndex]}
-              alt={`계절별 로고 ${seasons[currentIndex]}`}
-              width={500}
-              height={320}
-              sizes="(max-width: 640px) 50vw, (max-width: 768px) 45vw, (max-width: 1024px) 40vw, 35vw"
-              className="w-auto h-[200px] sm:h-[240px] md:h-[280px] lg:h-[320px] object-contain"
-            />
-          </motion.div>
-        </AnimatePresence>
+      {/* Swiper 캐러셀 */}
+      <div className="h-[200px] sm:h-[240px] md:h-[280px] lg:h-[320px]">
+        <Swiper
+          modules={[Autoplay, Pagination]}
+          spaceBetween={0}
+          slidesPerView={1}
+          centeredSlides={true}
+          loop={false}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+            el: '.seasonal-logo-pagination',
+          }}
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }}
+          onSlideChange={(swiper) => {
+            onIndexChange(swiper.activeIndex);
+          }}
+          className="h-full"
+        >
+          {images.map((image, index) => (
+            <SwiperSlide key={index} className="!flex !items-center !justify-center">
+              <div className="rounded-xl overflow-hidden">
+                <Image
+                  src={image}
+                  alt={`계절별 로고 ${seasons[index]}`}
+                  width={500}
+                  height={320}
+                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 45vw, (max-width: 1024px) 40vw, 35vw"
+                  className="w-auto h-[200px] sm:h-[240px] md:h-[280px] lg:h-[320px] object-contain"
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
 
-      {/* 페이지네이션 dots */}
-      <div className="flex justify-center gap-2 mt-4 sm:mt-5 md:mt-6">
+      {/* 커스텀 페이지네이션 dots */}
+      <div className="seasonal-logo-pagination flex justify-center gap-2 mt-4 sm:mt-5 md:mt-6">
         {images.map((_, index) => (
           <button
             key={index}
-            onClick={() => onIndexChange(index)}
+            onClick={() => {
+              onIndexChange(index);
+              swiperRef.current?.slideTo(index);
+            }}
             aria-label={`${seasons[index]} 보기`}
             className={`transition-all duration-300 rounded-full ${
               index === currentIndex
@@ -173,9 +207,12 @@ export function StorePresetSection() {
           transition={{ duration: 0.6 }}
         >
           <h2
-            className="typo-h1 text-gray-900 mb-6"
+            className="text-4xl md:text-6xl font-bold mb-6"
             style={{
-              textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
+              fontFamily: 'var(--font-heading)',
+              color: '#FEC601',
+              textShadow:
+                '-2px -2px 0 #8B4513, 2px -2px 0 #8B4513, -2px 2px 0 #8B4513, 2px 2px 0 #8B4513, 4px 4px 8px rgba(0,0,0,0.5)',
             }}
           >
             매장 인테리어
@@ -367,14 +404,23 @@ export function StorePresetSection() {
         >
           <div className="text-center mb-12">
             <h3
-              className="text-2xl md:text-3xl font-bold text-gray-800 mb-3"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-3xl md:text-5xl font-bold mb-4"
+              style={{
+                fontFamily: 'var(--font-heading)',
+                color: '#FEC601',
+                textShadow:
+                  '-2px -2px 0 #8B4513, 2px -2px 0 #8B4513, -2px 2px 0 #8B4513, 2px 2px 0 #8B4513, 4px 4px 8px rgba(0,0,0,0.5)',
+              }}
             >
               계절별 브랜드 로고
             </h3>
             <p
-              className="text-base text-gray-600"
-              style={{ fontFamily: 'var(--font-body)' }}
+              className="text-lg md:text-xl font-semibold"
+              style={{
+                fontFamily: 'var(--font-body)',
+                color: '#FFF9E6',
+                textShadow: '1px 1px 4px rgba(0,0,0,0.8), 0 0 10px rgba(254, 198, 1, 0.4)',
+              }}
             >
               사계절을 담은 브랜드 아이덴티티
             </p>
