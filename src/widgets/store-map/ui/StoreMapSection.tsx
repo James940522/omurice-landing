@@ -36,7 +36,7 @@ export default function StoreMapSection() {
   const markersRef = useRef<Map<string, any>>(new Map()); // eslint-disable-line @typescript-eslint/no-explicit-any
   const infoWindowRef = useRef<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
   // 커스텀 마커 이미지 캐싱용 ref
-  const markerImageRef = useRef<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
+  // const markerImageRef = useRef<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
 
   // 매장 데이터 상태
   const [stores, setStores] = useState<Store[]>([]);
@@ -144,20 +144,20 @@ export default function StoreMapSection() {
   /**
    * 커스텀 마커 이미지 생성 (캐싱)
    */
-  useEffect(() => {
-    if (!isMapReady || markerImageRef.current) return;
+  // useEffect(() => {
+  //   if (!isMapReady || markerImageRef.current) return;
 
-    try {
-      const imageSrc = '/asset/logo/cursor.png';
-      const imageSize = new window.kakao.maps.Size(40, 40);
-      const imageOption = { offset: new window.kakao.maps.Point(20, 40) };
+  //   try {
+  //     const imageSrc = '/asset/logo/cursor.png';
+  //     const imageSize = new window.kakao.maps.Size(40, 40);
+  //     const imageOption = { offset: new window.kakao.maps.Point(20, 40) };
 
-      markerImageRef.current = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-      console.log('Custom marker image created');
-    } catch (error) {
-      console.error('Failed to create custom marker image:', error);
-    }
-  }, [isMapReady]);
+  //     markerImageRef.current = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+  //     console.log('Custom marker image created');
+  //   } catch (error) {
+  //     console.error('Failed to create custom marker image:', error);
+  //   }
+  // }, [isMapReady]);
 
   /**
    * CSV 데이터 로드 (주소가 있는 매장만 지도에 표시)
@@ -249,11 +249,11 @@ export default function StoreMapSection() {
         if (status === window.kakao.maps.services.Status.OK) {
           const position = new window.kakao.maps.LatLng(result[0].y, result[0].x);
 
-          // 커스텀 마커 이미지 적용
+          // 기본 마커 사용 (커스텀 이미지 주석 처리)
           const marker = new window.kakao.maps.Marker({
             map: mapInstanceRef.current,
             position: position,
-            ...(markerImageRef.current && { image: markerImageRef.current }),
+            // ...(markerImageRef.current && { image: markerImageRef.current }),
           });
 
           window.kakao.maps.event.addListener(marker, 'click', () => {
