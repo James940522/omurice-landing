@@ -142,20 +142,29 @@ export default function StoreMapSection() {
   }, [isScriptLoaded]);
 
   /**
-   * 커스텀 마커 이미지 생성 (캐싱)
+   * 노란색 마커 이미지 생성 (SVG 사용)
    */
   // useEffect(() => {
   //   if (!isMapReady || markerImageRef.current) return;
 
   //   try {
-  //     const imageSrc = '/asset/logo/cursor.png';
-  //     const imageSize = new window.kakao.maps.Size(40, 40);
-  //     const imageOption = { offset: new window.kakao.maps.Point(20, 40) };
+  //     // 밝은 노란색 마커 SVG
+  //     const svg = `
+  //       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40">
+  //         <path fill="#FDD835" stroke="#F57C00" stroke-width="2" 
+  //               d="M16,2 C9.373,2 4,7.373 4,14 C4,21.5 16,38 16,38 S28,21.5 28,14 C28,7.373 22.627,2 16,2 Z"/>
+  //         <circle cx="16" cy="14" r="5" fill="white"/>
+  //       </svg>
+  //     `.trim();
+  //     
+  //     const imageSrc = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  //     const imageSize = new window.kakao.maps.Size(32, 40);
+  //     const imageOption = { offset: new window.kakao.maps.Point(16, 40) };
 
   //     markerImageRef.current = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-  //     console.log('Custom marker image created');
+  //     console.log('Yellow marker image created');
   //   } catch (error) {
-  //     console.error('Failed to create custom marker image:', error);
+  //     console.error('Failed to create yellow marker image:', error);
   //   }
   // }, [isMapReady]);
 
@@ -249,11 +258,10 @@ export default function StoreMapSection() {
         if (status === window.kakao.maps.services.Status.OK) {
           const position = new window.kakao.maps.LatLng(result[0].y, result[0].x);
 
-          // 기본 마커 사용 (커스텀 이미지 주석 처리)
+          // 기본 마커 사용
           const marker = new window.kakao.maps.Marker({
             map: mapInstanceRef.current,
             position: position,
-            // ...(markerImageRef.current && { image: markerImageRef.current }),
           });
 
           window.kakao.maps.event.addListener(marker, 'click', () => {

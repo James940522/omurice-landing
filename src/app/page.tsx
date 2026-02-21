@@ -21,6 +21,7 @@ import { Footer } from '@/widgets/footer';
 import { FloatingInquiry } from '@/features/inquiry';
 import { OwnerRecruitmentModal } from '@/features/owner-recruitment-modal';
 import { StoreStatusModal } from '@/features/store-status-modal';
+import { NoticeImageModal } from '@/features/notice-modal';
 import { IntroAnimation } from '@/features/intro-animation';
 
 // Shared Config
@@ -30,6 +31,8 @@ export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
   const [showRecruitmentModal, setShowRecruitmentModal] = useState(false);
   const [showStoreModal, setShowStoreModal] = useState(false);
+  const [showNoticeEggEats, setShowNoticeEggEats] = useState(false);
+  const [showNoticeBaemin, setShowNoticeBaemin] = useState(false);
 
   useEffect(() => {
     // 인트로 애니메이션이 끝난 후 모달 표시
@@ -46,6 +49,11 @@ export default function Home() {
 
           if (!hideStore || parseInt(hideStore) < now) {
             setShowStoreModal(true);
+          }
+
+          const hideNoticeEggEats = localStorage.getItem('hideModal_notice-egg-eats');
+          if (!hideNoticeEggEats || parseInt(hideNoticeEggEats) < now) {
+            setShowNoticeEggEats(true);
           }
         }, 500);
 
@@ -186,6 +194,28 @@ export default function Home() {
           onNavigateToContact={handleNavigateToContact}
         />
         <StoreStatusModal isOpen={showStoreModal} onClose={() => setShowStoreModal(false)} />
+        <NoticeImageModal
+          isOpen={showNoticeEggEats}
+          onClose={() => {
+            setShowNoticeEggEats(false);
+            // 첫 번째 공지 닫은 뒤, 두 번째 공지가 숨김 처리되지 않았으면 띄움 (모바일에서 겹침 방지)
+            const hideNoticeBaemin = localStorage.getItem('hideModal_notice-baemin');
+            const now = new Date().getTime();
+            if (!hideNoticeBaemin || parseInt(hideNoticeBaemin) < now) {
+              setShowNoticeBaemin(true);
+            }
+          }}
+          imageSrc="/asset/notice/egg_status.jpeg"
+          modalId="notice-egg-eats"
+          title="에그이츠 60호점 달성"
+        />
+        <NoticeImageModal
+          isOpen={showNoticeBaemin}
+          onClose={() => setShowNoticeBaemin(false)}
+          imageSrc="/asset/notice/rookie.jpeg"
+          modalId="notice-baemin"
+          title="배민 루키상 수상"
+        />
       </main>
     </>
   );
