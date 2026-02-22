@@ -35,8 +35,9 @@ export default function StoreMapSection() {
   // store_code를 키로 마커를 저장하는 Map
   const markersRef = useRef<Map<string, any>>(new Map()); // eslint-disable-line @typescript-eslint/no-explicit-any
   const infoWindowRef = useRef<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
-  // 커스텀 마커 이미지 캐싱용 ref
-  // const markerImageRef = useRef<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
+  // 커스텀 핀 크기 (CSS로 직접 제어 — 이 값만 바꾸면 됨)
+  const PIN_W = 34;
+  const PIN_H = 42;
 
   // 매장 데이터 상태
   const [stores, setStores] = useState<Store[]>([]);
@@ -142,33 +143,6 @@ export default function StoreMapSection() {
   }, [isScriptLoaded]);
 
   /**
-   * 노란색 마커 이미지 생성 (SVG 사용)
-   */
-  // useEffect(() => {
-  //   if (!isMapReady || markerImageRef.current) return;
-
-  //   try {
-  //     // 밝은 노란색 마커 SVG
-  //     const svg = `
-  //       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40">
-  //         <path fill="#FDD835" stroke="#F57C00" stroke-width="2" 
-  //               d="M16,2 C9.373,2 4,7.373 4,14 C4,21.5 16,38 16,38 S28,21.5 28,14 C28,7.373 22.627,2 16,2 Z"/>
-  //         <circle cx="16" cy="14" r="5" fill="white"/>
-  //       </svg>
-  //     `.trim();
-  //     
-  //     const imageSrc = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-  //     const imageSize = new window.kakao.maps.Size(32, 40);
-  //     const imageOption = { offset: new window.kakao.maps.Point(16, 40) };
-
-  //     markerImageRef.current = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-  //     console.log('Yellow marker image created');
-  //   } catch (error) {
-  //     console.error('Failed to create yellow marker image:', error);
-  //   }
-  // }, [isMapReady]);
-
-  /**
    * CSV 데이터 로드 (주소가 있는 매장만 지도에 표시)
    */
   useEffect(() => {
@@ -236,55 +210,91 @@ export default function StoreMapSection() {
   };
 
   /**
-   * 매장 리스트를 기반으로 마커 렌더링
+   * InfoWindow를 특정 위치에서 열기 (CustomOverlay용)
    */
-  const renderMarkers = useCallback((storesToRender: Store[]) => {
-    if (!mapInstanceRef.current || !geocoderRef.current) return;
-
-    clearMarkers();
-
-    if (infoWindowRef.current) {
-      infoWindowRef.current.close();
-    }
-
-    if (storesToRender.length === 0) return;
-
-    const bounds = new window.kakao.maps.LatLngBounds();
-    let geocodedCount = 0;
-
-    storesToRender.forEach((store) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      geocoderRef.current.addressSearch(store.address, (result: any, status: any) => {
-        if (status === window.kakao.maps.services.Status.OK) {
-          const position = new window.kakao.maps.LatLng(result[0].y, result[0].x);
-
-          // 기본 마커 사용
-          const marker = new window.kakao.maps.Marker({
-            map: mapInstanceRef.current,
-            position: position,
-          });
-
-          window.kakao.maps.event.addListener(marker, 'click', () => {
-            const content = createInfoWindowContent(store, result[0].y, result[0].x);
-            infoWindowRef.current.setContent(content);
-            infoWindowRef.current.open(mapInstanceRef.current, marker);
-          });
-
-          // store_code를 키로 마커 저장
-          markersRef.current.set(store.store_code, marker);
-          bounds.extend(position);
-
-          geocodedCount++;
-
-          if (geocodedCount === storesToRender.length) {
-            mapInstanceRef.current.setBounds(bounds);
-          }
-        } else {
-          console.warn(`Failed to geocode address: ${store.address}`);
-        }
+  const openInfoWindow = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (store: Store, position: any, lat: string, lng: string) => {
+      if (infoWindowRef.current) infoWindowRef.current.close();
+      const content = createInfoWindowContent(store, lat, lng);
+      infoWindowRef.current = new window.kakao.maps.InfoWindow({
+        position,
+        content,
+        zIndex: 5,
       });
-    });
-  }, []);
+      infoWindowRef.current.open(mapInstanceRef.current);
+    },
+    []
+  );
+
+  /**
+   * 매장 리스트를 기반으로 마커 렌더링 (CustomOverlay 사용 — CSS로 크기 제어)
+   */
+  const renderMarkers = useCallback(
+    (storesToRender: Store[]) => {
+      if (!mapInstanceRef.current || !geocoderRef.current) return;
+
+      clearMarkers();
+
+      if (infoWindowRef.current) infoWindowRef.current.close();
+
+      if (storesToRender.length === 0) return;
+
+      const bounds = new window.kakao.maps.LatLngBounds();
+      let geocodedCount = 0;
+
+      storesToRender.forEach((store) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        geocoderRef.current.addressSearch(store.address, (result: any, status: any) => {
+          if (status === window.kakao.maps.services.Status.OK) {
+            const position = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+
+            // 커스텀 핀 요소 생성 (크기 = PIN_W × PIN_H)
+            const el = document.createElement('div');
+            el.style.cssText = `width:${PIN_W}px; height:${PIN_H}px; cursor:pointer; position:relative;`;
+
+            const img = document.createElement('img');
+            img.src = `${window.location.origin}/asset/logo/custom-pin-Photoroom.png`;
+            img.alt = store.branch_name;
+            img.style.cssText = 'width:100%; height:100%; object-fit:contain; display:block;';
+            img.onerror = () => {
+              console.warn('Custom pin image failed to load, using fallback');
+              img.style.display = 'none';
+              const fallback = document.createElement('div');
+              fallback.style.cssText = `width:${PIN_W}px;height:${PIN_H}px;background:#FFC107;border:2px solid #FF8F00;border-radius:50% 50% 50% 0;transform:rotate(-45deg);`;
+              el.appendChild(fallback);
+            };
+            el.appendChild(img);
+
+            const overlay = new window.kakao.maps.CustomOverlay({
+              position,
+              content: el,
+              yAnchor: 1.0,
+              xAnchor: 0.5,
+              zIndex: 3,
+              map: mapInstanceRef.current,
+            });
+
+            el.addEventListener('click', () => {
+              openInfoWindow(store, position, result[0].y, result[0].x);
+            });
+
+            markersRef.current.set(store.store_code, overlay);
+            bounds.extend(position);
+            geocodedCount++;
+
+            if (geocodedCount === storesToRender.length) {
+              mapInstanceRef.current.setBounds(bounds);
+            }
+          } else {
+            console.warn(`Failed to geocode address: ${store.address}`);
+            geocodedCount++;
+          }
+        });
+      });
+    },
+    [PIN_W, PIN_H, openInfoWindow]
+  );
 
   /**
    * 필터링된 매장 목록이 변경되면 마커 다시 렌더링
@@ -322,20 +332,16 @@ export default function StoreMapSection() {
 
     // 지도 크기 재조정 후 위치 이동 (약간의 지연 필요)
     setTimeout(() => {
-      // 저장된 마커 찾기
-      const marker = markersRef.current.get(store.store_code);
+      const overlay = markersRef.current.get(store.store_code);
 
-      if (marker) {
-        const position = marker.getPosition();
+      if (overlay) {
+        const position = overlay.getPosition();
         mapInstanceRef.current.panTo(position);
         mapInstanceRef.current.setLevel(FOCUSED_ZOOM_LEVEL);
 
-        // 해당 매장 마커의 InfoWindow 열기
         const lat = position.getLat();
         const lng = position.getLng();
-        const content = createInfoWindowContent(store, lat.toString(), lng.toString());
-        infoWindowRef.current.setContent(content);
-        infoWindowRef.current.open(mapInstanceRef.current, marker);
+        openInfoWindow(store, position, lat.toString(), lng.toString());
       }
     }, 150);
   };
