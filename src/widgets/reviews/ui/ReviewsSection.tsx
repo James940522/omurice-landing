@@ -20,14 +20,13 @@ const reviewImages = [
   '/asset/review/KakaoTalk_Photo_2025-11-29-19-50-52 006.jpeg',
   '/asset/review/KakaoTalk_Photo_2025-11-29-19-50-52 007.jpeg',
   '/asset/review/KakaoTalk_Photo_2025-11-29-19-50-52 008.jpeg',
-  '/asset/review/KakaoTalk_Photo_2025-11-29-19-50-52 009.jpeg',
-  '/asset/review/KakaoTalk_Photo_2025-11-29-19-50-52 010.jpeg',
-  '/asset/review/KakaoTalk_Photo_2025-11-29-19-50-53 011.jpeg',
-  '/asset/review/KakaoTalk_Photo_2025-11-29-19-50-53 012.jpeg',
-  '/asset/review/KakaoTalk_Photo_2025-11-29-19-50-53 013.jpeg',
-  '/asset/review/KakaoTalk_Photo_2025-11-29-19-50-53 014.jpeg',
-  '/asset/review/KakaoTalk_Photo_2025-11-29-19-50-53 015.jpeg',
-  '/asset/review/KakaoTalk_Photo_2025-11-29-19-50-53 016.jpeg',
+  '/asset/review/KakaoTalk_Photo_2026-03-18-18-43-37 001.jpeg',
+  '/asset/review/KakaoTalk_Photo_2026-03-18-18-43-37 003.jpeg',
+  '/asset/review/KakaoTalk_Photo_2026-03-18-18-43-37 004.jpeg',
+  '/asset/review/KakaoTalk_Photo_2026-03-18-18-43-37 005.jpeg',
+  '/asset/review/KakaoTalk_Photo_2026-03-18-18-43-46.jpeg',
+  '/asset/review/KakaoTalk_Photo_2026-03-18-19-03-54 001.jpeg',
+  '/asset/review/KakaoTalk_Photo_2026-03-18-19-03-54 002.jpeg',
 ];
 
 export default function ReviewsSection() {
