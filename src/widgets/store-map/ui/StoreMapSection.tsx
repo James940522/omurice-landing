@@ -1,10 +1,23 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { fetchStores, filterStores } from '@/lib/stores';
 import type { Store } from '@/lib/stores';
+import { geocodeAddress, type GeocodeResult } from '@/lib/geocode';
+
+/**
+ * InfoWindow에 삽입되는 HTML에서 사용자 입력(store.display_name, store.address)을
+ * escape해 XSS 위험을 차단한다.
+ */
+const escapeHtml = (str: string): string =>
+  str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 
 /**
  * 지도 초기 설정 상수
@@ -21,7 +34,8 @@ const FOCUSED_ZOOM_LEVEL = 4;
 const KAKAO_API_KEY = process.env.NEXT_PUBLIC_KAKAO_MAP_KEY;
 
 // 카카오맵 SDK URL (반드시 https 사용)
-const KAKAO_SDK_URL = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_API_KEY}&autoload=false&libraries=services`;
+// 지오코딩은 서버 사이드 `/api/geocode`로 위임했으므로 `libraries=services`는 더 이상 필요하지 않다.
+const KAKAO_SDK_URL = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_API_KEY}&autoload=false`;
 
 export default function StoreMapSection() {
   // 환경 변수 디버깅
@@ -31,131 +45,122 @@ export default function StoreMapSection() {
   // Kakao Maps 관련 ref (Kakao Maps JS SDK 객체)
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
-  const geocoderRef = useRef<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
   // store_code를 키로 마커를 저장하는 Map
   const markersRef = useRef<Map<string, any>>(new Map()); // eslint-disable-line @typescript-eslint/no-explicit-any
   const infoWindowRef = useRef<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
+  // 같은 주소를 반복 지오코딩하지 않도록 클라이언트 캐시 (서버 캐시와 별개)
+  const geocodeCacheRef = useRef<Map<string, GeocodeResult | null>>(new Map());
+  // 비동기 렌더 race condition 방지용 generation token
+  const renderGenerationRef = useRef(0);
   // 커스텀 핀 크기 (CSS로 직접 제어 — 이 값만 바꾸면 됨)
   const PIN_W = 34;
   const PIN_H = 42;
 
   // 매장 데이터 상태
   const [stores, setStores] = useState<Store[]>([]);
-  const [filteredStores, setFilteredStores] = useState<Store[]>([]);
   const [keyword, setKeyword] = useState('');
   const [selectedStoreCode, setSelectedStoreCode] = useState<string | null>(null);
 
+  // 검색어/원본 매장 변경에 따라 파생되는 값 — derived state는 useMemo로 처리한다.
+  const filteredStores = useMemo(() => filterStores(stores, keyword), [stores, keyword]);
+
   // 로딩 상태
-  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
   const [isMapReady, setIsMapReady] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
-  const [mapError, setMapError] = useState<string | null>(null);
+  // KAKAO_API_KEY는 모듈 로드 시점에 결정되므로 lazy init으로 초기 에러 상태를 잡는다.
+  const [mapError, setMapError] = useState<string | null>(() =>
+    KAKAO_API_KEY ? null : '카카오맵 API 키가 설정되지 않았습니다'
+  );
 
   // 모바일 탭 상태 ('list' | 'map')
   const [mobileTab, setMobileTab] = useState<'list' | 'map'>('list');
 
   /**
-   * 카카오맵 스크립트 동적 로드
+   * 카카오맵 스크립트 로드 + 지도 초기화 (단일 effect)
+   *
+   * 두 단계를 별도 effect로 나누면 중간 state(`isScriptLoaded`)에 대한
+   * "effect body 동기 setState" 룰 위반이 발생하므로, 콜백 체인으로 통합한다.
+   * - 외부 시스템(window.kakao 글로벌, <script> 태그) 동기화 책임
+   * - setState는 모두 콜백 안에서만 호출되어 cascading render 없음
    */
   useEffect(() => {
-    // API 키 확인
-    if (!KAKAO_API_KEY) {
-      console.error('❌ KAKAO_API_KEY is not defined!');
-      console.error('Please check your .env.local file');
-      setMapError('카카오맵 API 키가 설정되지 않았습니다');
-      return;
-    }
+    if (!KAKAO_API_KEY) return;
 
-    // 이미 로드된 경우
-    if (window.kakao && window.kakao.maps) {
-      console.log('✅ Kakao Maps SDK already loaded');
-      setIsScriptLoaded(true);
-      return;
-    }
+    let cancelled = false;
 
-    // console.log('📥 Loading Kakao Maps SDK...');
-    // console.log('SDK URL:', KAKAO_SDK_URL);
+    const initMap = () => {
+      if (cancelled || mapInstanceRef.current) return;
 
-    // 스크립트 태그 생성
-    const script = document.createElement('script');
-    script.src = KAKAO_SDK_URL;
-    script.async = true;
-
-    script.onload = () => {
-      console.log('✅ Kakao Maps SDK loaded successfully');
-      setIsScriptLoaded(true);
-    };
-
-    script.onerror = (error) => {
-      console.error('❌ Failed to load Kakao Maps SDK');
-      console.error('Error:', error);
-      console.error('Possible causes:');
-      console.error('1. Invalid API key');
-      console.error('2. Domain not registered in Kakao Developers');
-      console.error('3. Network error');
-      setMapError('지도 스크립트 로드 실패 (콘솔 확인)');
-    };
-
-    document.head.appendChild(script);
-
-    return () => {
-      // 클린업은 하지 않음 (다른 컴포넌트에서도 사용할 수 있음)
-    };
-  }, []);
-
-  /**
-   * 카카오맵 초기화
-   */
-  useEffect(() => {
-    if (!isScriptLoaded || !mapContainerRef.current) return;
-    if (mapInstanceRef.current) return; // 이미 초기화됨
-
-    // Kakao Maps SDK 로드 대기 및 지도 초기화
-    window.kakao.maps.load(() => {
-      try {
+      window.kakao.maps.load(() => {
+        if (cancelled || mapInstanceRef.current) return;
         const container = mapContainerRef.current;
         if (!container) return;
 
-        const options = {
-          center: new window.kakao.maps.LatLng(INITIAL_CENTER.lat, INITIAL_CENTER.lng),
-          level: INITIAL_ZOOM_LEVEL,
-        };
+        try {
+          const map = new window.kakao.maps.Map(container, {
+            center: new window.kakao.maps.LatLng(INITIAL_CENTER.lat, INITIAL_CENTER.lng),
+            level: INITIAL_ZOOM_LEVEL,
+          });
+          mapInstanceRef.current = map;
+          infoWindowRef.current = new window.kakao.maps.InfoWindow({ zIndex: 1 });
+          setIsMapReady(true);
+        } catch (error) {
+          console.error('Map initialization error:', error);
+          setMapError('지도 초기화 실패');
+        }
+      });
+    };
 
-        // 지도 생성
-        const map = new window.kakao.maps.Map(container, options);
-        mapInstanceRef.current = map;
+    // 1) 이미 SDK가 로드된 경우 → 곧바로 초기화
+    if (window.kakao?.maps) {
+      initMap();
+      return () => {
+        cancelled = true;
+      };
+    }
 
-        // Geocoder 생성
-        geocoderRef.current = new window.kakao.maps.services.Geocoder();
+    // 2) 같은 SDK <script>가 이미 DOM에 있는 경우 → 로드 완료 대기
+    const existing = document.querySelector<HTMLScriptElement>(
+      `script[src="${KAKAO_SDK_URL}"]`
+    );
+    if (existing) {
+      existing.addEventListener('load', initMap, { once: true });
+      return () => {
+        cancelled = true;
+        existing.removeEventListener('load', initMap);
+      };
+    }
 
-        // InfoWindow 생성
-        infoWindowRef.current = new window.kakao.maps.InfoWindow({
-          zIndex: 1,
-        });
+    // 3) 신규 SDK 로드
+    const script = document.createElement('script');
+    script.src = KAKAO_SDK_URL;
+    script.async = true;
+    script.onload = initMap;
+    script.onerror = () => {
+      if (!cancelled) setMapError('지도 스크립트 로드 실패');
+    };
+    document.head.appendChild(script);
 
-        console.log('Map initialized successfully');
-        setIsMapReady(true);
-      } catch (error) {
-        console.error('Map initialization error:', error);
-        setMapError('지도 초기화 실패');
-      }
-    });
-  }, [isScriptLoaded]);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   /**
    * CSV 데이터 로드 (주소가 있는 매장만 지도에 표시)
    */
   useEffect(() => {
+    let cancelled = false;
+
     const loadStores = async () => {
       try {
         const data = await fetchStores();
-        // 주소가 있는 매장만 필터링 (지도 표시용)
+        if (cancelled) return;
+
         const storesWithAddress = data.filter(
           (store) => store.address && store.address.trim() !== ''
         );
-        console.log(`Loaded ${data.length} stores (${storesWithAddress.length} with address)`);
         setStores(storesWithAddress);
-        setFilteredStores(storesWithAddress);
         setIsDataLoaded(true);
       } catch (error) {
         console.error('Failed to load stores:', error);
@@ -163,15 +168,11 @@ export default function StoreMapSection() {
     };
 
     loadStores();
-  }, []);
 
-  /**
-   * 검색어 변경 시 필터링
-   */
-  useEffect(() => {
-    const filtered = filterStores(stores, keyword);
-    setFilteredStores(filtered);
-  }, [keyword, stores]);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   /**
    * 모든 마커 제거
@@ -184,18 +185,20 @@ export default function StoreMapSection() {
   };
 
   /**
-   * InfoWindow 컨텐츠 생성
+   * InfoWindow 컨텐츠 생성 — 사용자 입력은 escape하여 XSS 방어
    */
   const createInfoWindowContent = (store: Store, lat: string, lng: string): string => {
-    const directionsUrl = `https://map.kakao.com/link/to/${encodeURIComponent(store.display_name)},${lat},${lng}`;
+    const directionsUrl = `https://map.kakao.com/link/to/${encodeURIComponent(
+      store.display_name
+    )},${lat},${lng}`;
 
     return `
       <div style="padding: 16px; min-width: 250px;">
         <h3 style="font-size: 16px; font-weight: bold; margin-bottom: 8px;">
-          ${store.display_name}
+          ${escapeHtml(store.display_name)}
         </h3>
         <p style="font-size: 14px; color: #666; margin-bottom: 12px;">
-          ${store.address}
+          ${escapeHtml(store.address)}
         </p>
         <a
           href="${directionsUrl}"
@@ -228,80 +231,107 @@ export default function StoreMapSection() {
   );
 
   /**
+   * 캐시된 지오코딩 — 같은 주소는 한 번만 `/api/geocode`를 호출한다.
+   */
+  const cachedGeocode = useCallback(
+    async (address: string): Promise<GeocodeResult | null> => {
+      const cache = geocodeCacheRef.current;
+      const trimmed = address.trim();
+      if (cache.has(trimmed)) {
+        return cache.get(trimmed) ?? null;
+      }
+      const result = await geocodeAddress(trimmed);
+      cache.set(trimmed, result);
+      return result;
+    },
+    []
+  );
+
+  /**
    * 매장 리스트를 기반으로 마커 렌더링 (CustomOverlay 사용 — CSS로 크기 제어)
+   *
+   * 지오코딩은 카카오 SDK가 아닌 내부 라우트(`/api/geocode`)를 통해 서버 사이드에서 수행한다.
+   * 모든 매장 주소를 병렬로 변환한 뒤, 일괄적으로 마커를 그리고 bounds를 맞춘다.
+   *
+   * 검색어가 빠르게 바뀌어 동시에 여러 호출이 진행 중일 때
+   * 마지막 호출의 결과만 반영하도록 generation token으로 race를 차단한다.
    */
   const renderMarkers = useCallback(
-    (storesToRender: Store[]) => {
-      if (!mapInstanceRef.current || !geocoderRef.current) return;
+    async (storesToRender: Store[]) => {
+      if (!mapInstanceRef.current) return;
+
+      const generation = ++renderGenerationRef.current;
 
       clearMarkers();
-
       if (infoWindowRef.current) infoWindowRef.current.close();
 
       if (storesToRender.length === 0) return;
 
+      const results = await Promise.allSettled(
+        storesToRender.map((store) => cachedGeocode(store.address))
+      );
+
+      // 더 새로운 렌더 호출이 시작됐다면 stale 결과를 폐기
+      if (generation !== renderGenerationRef.current) return;
+      if (!mapInstanceRef.current) return;
+
       const bounds = new window.kakao.maps.LatLngBounds();
-      let geocodedCount = 0;
 
-      storesToRender.forEach((store) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        geocoderRef.current.addressSearch(store.address, (result: any, status: any) => {
-          if (status === window.kakao.maps.services.Status.OK) {
-            const position = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+      results.forEach((result, index) => {
+        if (result.status !== 'fulfilled' || !result.value) return;
 
-            // 커스텀 핀 요소 생성 (크기 = PIN_W × PIN_H)
-            const el = document.createElement('div');
-            el.style.cssText = `width:${PIN_W}px; height:${PIN_H}px; cursor:pointer; position:relative;`;
+        const store = storesToRender[index];
+        const { lat, lng } = result.value;
+        const position = new window.kakao.maps.LatLng(lat, lng);
 
-            const img = document.createElement('img');
-            img.src = `${window.location.origin}/asset/logo/custom-pin-Photoroom.png`;
-            img.alt = store.branch_name;
-            img.style.cssText = 'width:100%; height:100%; object-fit:contain; display:block;';
-            img.onerror = () => {
-              console.warn('Custom pin image failed to load, using fallback');
-              img.style.display = 'none';
-              const fallback = document.createElement('div');
-              fallback.style.cssText = `width:${PIN_W}px;height:${PIN_H}px;background:#FFC107;border:2px solid #FF8F00;border-radius:50% 50% 50% 0;transform:rotate(-45deg);`;
-              el.appendChild(fallback);
-            };
-            el.appendChild(img);
+        // 커스텀 핀 요소 생성 (크기 = PIN_W × PIN_H)
+        const el = document.createElement('div');
+        el.style.cssText = `width:${PIN_W}px; height:${PIN_H}px; cursor:pointer; position:relative;`;
 
-            const overlay = new window.kakao.maps.CustomOverlay({
-              position,
-              content: el,
-              yAnchor: 1.0,
-              xAnchor: 0.5,
-              zIndex: 3,
-              map: mapInstanceRef.current,
-            });
+        const img = document.createElement('img');
+        img.src = `${window.location.origin}/asset/logo/custom-pin-Photoroom.png`;
+        img.alt = store.branch_name;
+        img.style.cssText = 'width:100%; height:100%; object-fit:contain; display:block;';
+        img.onerror = () => {
+          console.warn('Custom pin image failed to load, using fallback');
+          img.style.display = 'none';
+          const fallback = document.createElement('div');
+          fallback.style.cssText = `width:${PIN_W}px;height:${PIN_H}px;background:#FFC107;border:2px solid #FF8F00;border-radius:50% 50% 50% 0;transform:rotate(-45deg);`;
+          el.appendChild(fallback);
+        };
+        el.appendChild(img);
 
-            el.addEventListener('click', () => {
-              openInfoWindow(store, position, result[0].y, result[0].x);
-            });
-
-            markersRef.current.set(store.store_code, overlay);
-            bounds.extend(position);
-            geocodedCount++;
-
-            if (geocodedCount === storesToRender.length) {
-              mapInstanceRef.current.setBounds(bounds);
-            }
-          } else {
-            geocodedCount++;
-          }
+        const overlay = new window.kakao.maps.CustomOverlay({
+          position,
+          content: el,
+          yAnchor: 1.0,
+          xAnchor: 0.5,
+          zIndex: 3,
+          map: mapInstanceRef.current,
         });
+
+        el.addEventListener('click', () => {
+          openInfoWindow(store, position, lat.toString(), lng.toString());
+        });
+
+        markersRef.current.set(store.store_code, overlay);
+        bounds.extend(position);
       });
+
+      if (markersRef.current.size > 0) {
+        mapInstanceRef.current.setBounds(bounds);
+      }
     },
-    [PIN_W, PIN_H, openInfoWindow]
+    [PIN_W, PIN_H, openInfoWindow, cachedGeocode]
   );
 
   /**
-   * 필터링된 매장 목록이 변경되면 마커 다시 렌더링
+   * 필터링된 매장 목록이 변경되면 마커 다시 렌더링.
+   * 결과가 0건일 때도 기존 마커는 정리해야 하므로 length 조건은 두지 않는다.
    */
   useEffect(() => {
-    if (isMapReady && isDataLoaded && filteredStores.length > 0) {
-      renderMarkers(filteredStores);
-    }
+    if (!isMapReady || !isDataLoaded) return;
+    renderMarkers(filteredStores);
   }, [filteredStores, isMapReady, isDataLoaded, renderMarkers]);
 
   /**
@@ -455,7 +485,7 @@ export default function StoreMapSection() {
                     >
                       <div className="flex items-center gap-4">
                         {/* 왼쪽: 매장 로고 이미지 */}
-                        <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden">
+                        <div className="shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden">
                           <Image
                             src="/asset/logo/지도_가맹점.png"
                             alt="매장 로고"
