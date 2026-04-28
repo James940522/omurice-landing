@@ -287,7 +287,6 @@ export default function StoreMapSection() {
               mapInstanceRef.current.setBounds(bounds);
             }
           } else {
-            console.warn(`Failed to geocode address: ${store.address}`);
             geocodedCount++;
           }
         });
