@@ -12,7 +12,7 @@ import { SITE_ORIGIN } from '@/shared/config/site';
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://todayomurice.com', // 절대 URL (GSC 필수)
+      url: SITE_ORIGIN, // 절대 URL (GSC 필수)
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1.0,

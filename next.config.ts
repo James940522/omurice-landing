@@ -12,19 +12,19 @@ const nextConfig: NextConfig = {
     qualities: [75, 85, 90],
   },
 
-  // SEO: HTTP → HTTPS 및 WWW → non-WWW 301 리다이렉트
+  // SEO: apex(todayomurice.com) → www(www.todayomurice.com) 301 리다이렉트
+  // www를 canonical 도메인으로 사용. 다른 서브도메인(apply.*, admin.* 등)은 영향 없음.
   async redirects() {
     return [
-      // www.todayomurice.com → todayomurice.com
       {
         source: '/:path*',
         has: [
           {
             type: 'host',
-            value: 'www.todayomurice.com',
+            value: 'todayomurice.com',
           },
         ],
-        destination: 'https://todayomurice.com/:path*',
+        destination: 'https://www.todayomurice.com/:path*',
         permanent: true, // 301 리다이렉트
       },
     ];

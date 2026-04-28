@@ -5,13 +5,13 @@
  * 모든 SEO 관련 설정에서 이 파일을 참조합니다.
  */
 
-// 프로덕션 도메인 (절대 변경 금지)
-export const SITE_ORIGIN = 'https://todayomurice.com';
+// 프로덕션 canonical 도메인 (www가 메인, apex는 301로 리다이렉트됨)
+export const SITE_ORIGIN = 'https://www.todayomurice.com';
 
 /**
  * 상대 경로를 절대 URL로 변환
  * @param path - 상대 경로 (예: "/sitemap.xml", "/og.png")
- * @returns 절대 URL (예: "https://todayomurice.com/sitemap.xml")
+ * @returns 절대 URL (예: "https://www.todayomurice.com/sitemap.xml")
  */
 export const absoluteUrl = (path: string): string => {
   return new URL(path, SITE_ORIGIN).toString();
