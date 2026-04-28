@@ -5,7 +5,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { fetchStores, filterStores } from '@/lib/stores';
 import type { Store } from '@/lib/stores';
-import { geocodeAddress, type GeocodeResult } from '@/lib/geocode';
 
 /**
  * InfoWindow에 삽입되는 HTML에서 사용자 입력(store.display_name, store.address)을
@@ -34,7 +33,7 @@ const FOCUSED_ZOOM_LEVEL = 4;
 const KAKAO_API_KEY = process.env.NEXT_PUBLIC_KAKAO_MAP_KEY;
 
 // 카카오맵 SDK URL (반드시 https 사용)
-// 지오코딩은 서버 사이드 `/api/geocode`로 위임했으므로 `libraries=services`는 더 이상 필요하지 않다.
+// 지오코딩은 서버 사이드 `/api/stores`에서 처리되므로 `libraries=services`는 필요하지 않다.
 const KAKAO_SDK_URL = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_API_KEY}&autoload=false`;
 
 export default function StoreMapSection() {
@@ -48,10 +47,6 @@ export default function StoreMapSection() {
   // store_code를 키로 마커를 저장하는 Map
   const markersRef = useRef<Map<string, any>>(new Map()); // eslint-disable-line @typescript-eslint/no-explicit-any
   const infoWindowRef = useRef<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
-  // 같은 주소를 반복 지오코딩하지 않도록 클라이언트 캐시 (서버 캐시와 별개)
-  const geocodeCacheRef = useRef<Map<string, GeocodeResult | null>>(new Map());
-  // 비동기 렌더 race condition 방지용 generation token
-  const renderGenerationRef = useRef(0);
   // 커스텀 핀 크기 (CSS로 직접 제어 — 이 값만 바꾸면 됨)
   const PIN_W = 34;
   const PIN_H = 42;
@@ -231,57 +226,27 @@ export default function StoreMapSection() {
   );
 
   /**
-   * 캐시된 지오코딩 — 같은 주소는 한 번만 `/api/geocode`를 호출한다.
-   */
-  const cachedGeocode = useCallback(
-    async (address: string): Promise<GeocodeResult | null> => {
-      const cache = geocodeCacheRef.current;
-      const trimmed = address.trim();
-      if (cache.has(trimmed)) {
-        return cache.get(trimmed) ?? null;
-      }
-      const result = await geocodeAddress(trimmed);
-      cache.set(trimmed, result);
-      return result;
-    },
-    []
-  );
-
-  /**
    * 매장 리스트를 기반으로 마커 렌더링 (CustomOverlay 사용 — CSS로 크기 제어)
    *
-   * 지오코딩은 카카오 SDK가 아닌 내부 라우트(`/api/geocode`)를 통해 서버 사이드에서 수행한다.
-   * 모든 매장 주소를 병렬로 변환한 뒤, 일괄적으로 마커를 그리고 bounds를 맞춘다.
-   *
-   * 검색어가 빠르게 바뀌어 동시에 여러 호출이 진행 중일 때
-   * 마지막 호출의 결과만 반영하도록 generation token으로 race를 차단한다.
+   * 매장에는 `/api/stores` 응답 시점에 lat/lng가 이미 포함되어 있으므로
+   * 별도의 비동기 지오코딩 단계 없이 동기적으로 마커를 일괄 렌더링한다.
+   * 좌표가 없는 매장(지오코딩 실패)은 스킵.
    */
   const renderMarkers = useCallback(
-    async (storesToRender: Store[]) => {
+    (storesToRender: Store[]) => {
       if (!mapInstanceRef.current) return;
-
-      const generation = ++renderGenerationRef.current;
 
       clearMarkers();
       if (infoWindowRef.current) infoWindowRef.current.close();
 
       if (storesToRender.length === 0) return;
 
-      const results = await Promise.allSettled(
-        storesToRender.map((store) => cachedGeocode(store.address))
-      );
-
-      // 더 새로운 렌더 호출이 시작됐다면 stale 결과를 폐기
-      if (generation !== renderGenerationRef.current) return;
-      if (!mapInstanceRef.current) return;
-
       const bounds = new window.kakao.maps.LatLngBounds();
 
-      results.forEach((result, index) => {
-        if (result.status !== 'fulfilled' || !result.value) return;
+      storesToRender.forEach((store) => {
+        if (typeof store.lat !== 'number' || typeof store.lng !== 'number') return;
 
-        const store = storesToRender[index];
-        const { lat, lng } = result.value;
+        const { lat, lng } = store;
         const position = new window.kakao.maps.LatLng(lat, lng);
 
         // 커스텀 핀 요소 생성 (크기 = PIN_W × PIN_H)
@@ -322,7 +287,7 @@ export default function StoreMapSection() {
         mapInstanceRef.current.setBounds(bounds);
       }
     },
-    [PIN_W, PIN_H, openInfoWindow, cachedGeocode]
+    [PIN_W, PIN_H, openInfoWindow]
   );
 
   /**

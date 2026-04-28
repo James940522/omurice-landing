@@ -1,6 +1,9 @@
 /**
  * Store 데이터 관련 타입 및 유틸리티 함수
- * CSV 파일로부터 매장 데이터를 가져와서 파싱
+ *
+ * 매장 데이터는 서버의 `/api/stores` 라우트에서 일괄 조회한다.
+ * 서버 측에서 CSV 파싱 + 카카오 지오코딩 + 캐싱(24h)이 끝난 결과를 받아오므로
+ * 클라이언트는 추가 가공 없이 lat/lng까지 포함된 매장 리스트를 즉시 사용할 수 있다.
  */
 
 export type Store = {
@@ -8,60 +11,33 @@ export type Store = {
   branch_name: string;
   display_name: string;
   address: string;
+  /** 지오코딩 실패 시 undefined — 마커는 그리지 않는다. */
+  lat?: number;
+  lng?: number;
 };
 
+interface StoresApiResponse {
+  stores: Store[];
+  total: number;
+  withCoordinates: number;
+}
+
 /**
- * CSV 파일로부터 매장 데이터를 가져옴
- * 
- * 향후 데이터가 복잡해지면 CSV 파서 라이브러리(예: papaparse) 교체 가능
- * 현재는 간단한 split 방식으로 파싱
- * 
- * @returns Store 배열
+ * 서버에서 매장 데이터(좌표 포함) 일괄 조회
+ *
+ * @returns Store 배열 (호출 실패 시 빈 배열)
  */
 export async function fetchStores(): Promise<Store[]> {
   try {
-    const response = await fetch('/asset/csv/omurice_kakao_stores_clean.csv');
-    const text = await response.text();
-    
-    const lines = text
-      .split('\n')
-      .map(line => line.trim())
-      .filter(line => line.length > 0);
-    
-    // 첫 번째 줄은 헤더이므로 제외
-    const dataLines = lines.slice(1);
-    
-    const stores: Store[] = [];
-    
-    for (const line of dataLines) {
-      // CSV 라인을 콤마로 분리
-      const parts = line.split(',');
-      
-      // 4개의 컬럼이 있어야 함
-      if (parts.length >= 4) {
-        const [store_code, branch_name, display_name, ...addressParts] = parts;
-        const address = addressParts.join(','); // 주소에 콤마가 있을 수 있으므로 합침
-        
-        // nan 값이나 빈 값은 필터링
-        if (
-          store_code &&
-          branch_name !== 'nan' &&
-          display_name !== 'nan' &&
-          address !== 'nan'
-        ) {
-          stores.push({
-            store_code: store_code.trim(),
-            branch_name: branch_name.trim(),
-            display_name: display_name.trim(),
-            address: address.trim(),
-          });
-        }
-      }
+    const response = await fetch('/api/stores');
+    if (!response.ok) {
+      console.error(`[fetchStores] /api/stores responded with ${response.status}`);
+      return [];
     }
-    
-    return stores;
+    const data = (await response.json()) as StoresApiResponse;
+    return data.stores ?? [];
   } catch (error) {
-    console.error('Failed to fetch stores:', error);
+    console.error('[fetchStores] network error:', error);
     return [];
   }
 }
@@ -69,7 +45,7 @@ export async function fetchStores(): Promise<Store[]> {
 /**
  * 검색어로 매장 필터링
  * branch_name, display_name, address를 대상으로 부분 문자열 검색
- * 
+ *
  * @param stores - 전체 매장 리스트
  * @param keyword - 검색어
  * @returns 필터링된 매장 리스트
@@ -78,14 +54,14 @@ export function filterStores(stores: Store[], keyword: string): Store[] {
   if (!keyword || keyword.trim() === '') {
     return stores;
   }
-  
+
   const lowerKeyword = keyword.toLowerCase().trim();
-  
-  return stores.filter(store => {
+
+  return stores.filter((store) => {
     const branchName = store.branch_name.toLowerCase();
     const displayName = store.display_name.toLowerCase();
     const address = store.address.toLowerCase();
-    
+
     return (
       branchName.includes(lowerKeyword) ||
       displayName.includes(lowerKeyword) ||
@@ -93,4 +69,3 @@ export function filterStores(stores: Store[], keyword: string): Store[] {
     );
   });
 }
-
