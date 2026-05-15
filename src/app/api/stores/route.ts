@@ -16,7 +16,7 @@ import path from 'path';
 
 export const runtime = 'nodejs';
 // Next.js 페이지 캐시: 24시간 (서버에서 한 번 빌드된 응답을 재사용)
-export const revalidate = 60 * 60 * 24;
+export const revalidate = 86400;
 
 const CSV_RELATIVE_PATH = 'public/asset/csv/omurice_kakao_stores_clean.csv';
 
