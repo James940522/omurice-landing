@@ -22,47 +22,38 @@ import { FloatingInquiry } from '@/features/inquiry';
 import { OwnerRecruitmentModal } from '@/features/owner-recruitment-modal';
 import { StoreStatusModal } from '@/features/store-status-modal';
 import { NoticeImageModal } from '@/features/notice-modal';
-import { IntroAnimation } from '@/features/intro-animation';
 
 // Shared Config
 import { SITE_ORIGIN, absoluteUrl } from '@/shared/config/site';
 
 export default function Home() {
-  const [showIntro, setShowIntro] = useState(true);
   const [showRecruitmentModal, setShowRecruitmentModal] = useState(false);
   const [showStoreModal, setShowStoreModal] = useState(false);
   const [showNoticeEggEats, setShowNoticeEggEats] = useState(false);
   const [showNoticeBaemin, setShowNoticeBaemin] = useState(false);
 
   useEffect(() => {
-    // 인트로 애니메이션이 끝난 후 모달 표시
-    const checkIntro = () => {
-      if (!showIntro) {
-        const timer = setTimeout(() => {
-          const hideRecruitment = localStorage.getItem('hideModal_owner-recruitment');
-          const hideStore = localStorage.getItem('hideModal_store-status');
-          const now = new Date().getTime();
+    const timer = setTimeout(() => {
+      const hideRecruitment = localStorage.getItem('hideModal_owner-recruitment');
+      const hideStore = localStorage.getItem('hideModal_store-status');
+      const now = new Date().getTime();
 
-          if (!hideRecruitment || parseInt(hideRecruitment) < now) {
-            setShowRecruitmentModal(true);
-          }
-
-          if (!hideStore || parseInt(hideStore) < now) {
-            setShowStoreModal(true);
-          }
-
-          const hideNoticeEggEats = localStorage.getItem('hideModal_notice-egg-eats');
-          if (!hideNoticeEggEats || parseInt(hideNoticeEggEats) < now) {
-            setShowNoticeEggEats(true);
-          }
-        }, 500);
-
-        return () => clearTimeout(timer);
+      if (!hideRecruitment || parseInt(hideRecruitment) < now) {
+        setShowRecruitmentModal(true);
       }
-    };
 
-    checkIntro();
-  }, [showIntro]);
+      if (!hideStore || parseInt(hideStore) < now) {
+        setShowStoreModal(true);
+      }
+
+      const hideNoticeEggEats = localStorage.getItem('hideModal_notice-egg-eats');
+      if (!hideNoticeEggEats || parseInt(hideNoticeEggEats) < now) {
+        setShowNoticeEggEats(true);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // 창업 문의 섹션으로 스크롤 이동 + 모든 모달 닫기
   const handleNavigateToContact = () => {
@@ -170,9 +161,6 @@ export default function Home() {
       />
 
       <main className="min-h-screen font-sans">
-        {/* 인트로 애니메이션 */}
-        <IntroAnimation isVisible={showIntro} onComplete={() => setShowIntro(false)} />
-
         <Header />
         <HeroSection />
         <BrandIntroSection />
