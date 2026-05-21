@@ -52,7 +52,7 @@ export default function BrandIntroSection() {
     <section
       id="brand"
       ref={ref}
-      className="relative isolate aspect-9/16 lg:aspect-1528/1029 w-full overflow-hidden bg-[#d84a00] text-white"
+      className="relative isolate aspect-9/17 w-full overflow-hidden bg-[#d84a00] text-white sm:aspect-9/16 md:aspect-4/3 lg:aspect-1528/1029"
     >
       <Image
         src="/new-asset/sec-2/rank-1-bg.webp"
