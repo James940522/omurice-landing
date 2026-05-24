@@ -52,7 +52,7 @@ export default function BrandIntroSection() {
     <section
       id="brand"
       ref={ref}
-      className="relative isolate aspect-9/17 w-full overflow-hidden bg-[#d84a00] text-white sm:aspect-9/16 md:aspect-4/3 lg:aspect-1528/1029"
+      className="relative isolate aspect-9/14 w-full overflow-hidden bg-[#d84a00] text-white sm:aspect-9/14 md:aspect-4/3 lg:aspect-1528/1029"
     >
       <Image
         src="/new-asset/sec-2/rank-1-bg.webp"
@@ -108,7 +108,7 @@ export default function BrandIntroSection() {
           </motion.div>
         </motion.div>
 
-        <div className="absolute bottom-[5.5%] left-0 right-0 h-[45%] lg:left-auto lg:right-[3%] lg:h-[43%] lg:w-[61%]">
+        <div className="absolute bottom-[5.5%] left-0 right-0 h-[54%] lg:left-auto lg:right-[3%] lg:h-[43%] lg:w-[61%]">
           <div className="absolute inset-x-0 bottom-0 z-20 flex h-full items-end gap-[1.3%] overflow-visible">
             {milestones.map((milestone, index) => (
               <motion.div

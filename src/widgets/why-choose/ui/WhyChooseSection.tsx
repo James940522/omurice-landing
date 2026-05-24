@@ -63,7 +63,16 @@ export default function WhyChooseSection() {
   }, []);
 
   return (
-    <section ref={ref} className="relative w-full bg-[#fdf6ed] py-14 md:py-20 lg:py-24">
+    <section ref={ref} className="relative w-full py-14 md:py-20 lg:py-24">
+      <Image
+        src="/new-asset/sec-3/sec-3-bg.webp"
+        alt=""
+        fill
+        sizes="100vw"
+        quality={90}
+        className="absolute inset-0 -z-10 object-cover"
+        priority={false}
+      />
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* 헤더 */}
         <motion.div
@@ -162,7 +171,7 @@ export default function WhyChooseSection() {
                 </defs>
                 <text fontSize="5.2" fill="white" fontWeight="700" letterSpacing="1.8">
                   <textPath href="#why-text-ring">
-                    Today Omurice · Today Omurice · Today Omurice · Today Omurice · Today Omurice ·
+                    Today Omurice · Today Omurice · Today Omurice · Today Omurice ·
                   </textPath>
                 </text>
               </svg>

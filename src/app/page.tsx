@@ -7,7 +7,6 @@ import Script from 'next/script';
 import { Header } from '@/widgets/header';
 import { HeroSection } from '@/widgets/hero';
 import { BrandIntroSection } from '@/widgets/brand-intro';
-import { DualBrandSection } from '@/widgets/dual-brand';
 import { WhyChooseSection } from '@/widgets/why-choose';
 import { RevenueProofSection } from '@/widgets/revenue-proof';
 import { StartupProcessSection } from '@/widgets/startup-process';
@@ -30,8 +29,7 @@ import { SITE_ORIGIN, absoluteUrl } from '@/shared/config/site';
 export default function Home() {
   const [showRecruitmentModal, setShowRecruitmentModal] = useState(false);
   const [showStoreModal, setShowStoreModal] = useState(false);
-  const [showNoticeEggEats, setShowNoticeEggEats] = useState(false);
-  const [showNoticeBaemin, setShowNoticeBaemin] = useState(false);
+  const [showNoticeRevenue, setShowNoticeRevenue] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -47,9 +45,9 @@ export default function Home() {
         setShowStoreModal(true);
       }
 
-      const hideNoticeEggEats = localStorage.getItem('hideModal_notice-egg-eats');
-      if (!hideNoticeEggEats || parseInt(hideNoticeEggEats) < now) {
-        setShowNoticeEggEats(true);
+      const hideNoticeRevenue = localStorage.getItem('hideModal_notice-revenue');
+      if (!hideNoticeRevenue || parseInt(hideNoticeRevenue) < now) {
+        setShowNoticeRevenue(true);
       }
     }, 500);
 
@@ -167,7 +165,6 @@ export default function Home() {
         <BrandIntroSection />
         <WhyChooseSection />
         <RevenueProofSection />
-        <DualBrandSection />
         <StartupProcessSection />
         <MenuSection />
         <StorePresetSection />
@@ -185,26 +182,11 @@ export default function Home() {
         />
         <StoreStatusModal isOpen={showStoreModal} onClose={() => setShowStoreModal(false)} />
         <NoticeImageModal
-          isOpen={showNoticeEggEats}
-          onClose={() => {
-            setShowNoticeEggEats(false);
-            // 첫 번째 공지 닫은 뒤, 두 번째 공지가 숨김 처리되지 않았으면 띄움 (모바일에서 겹침 방지)
-            const hideNoticeBaemin = localStorage.getItem('hideModal_notice-baemin');
-            const now = new Date().getTime();
-            if (!hideNoticeBaemin || parseInt(hideNoticeBaemin) < now) {
-              setShowNoticeBaemin(true);
-            }
-          }}
-          imageSrc="/asset/notice/egg_status.jpeg"
-          modalId="notice-egg-eats"
-          title="에그이츠 60호점 달성"
-        />
-        <NoticeImageModal
-          isOpen={showNoticeBaemin}
-          onClose={() => setShowNoticeBaemin(false)}
-          imageSrc="/asset/notice/rookie.jpeg"
-          modalId="notice-baemin"
-          title="배민 루키상 수상"
+          isOpen={showNoticeRevenue}
+          onClose={() => setShowNoticeRevenue(false)}
+          imageSrc="/new-asset/sec-3/etc/brand-competitiveness-popup.webp"
+          modalId="notice-revenue"
+          title="오므라이스 브랜드 경쟁력"
         />
       </main>
     </>
