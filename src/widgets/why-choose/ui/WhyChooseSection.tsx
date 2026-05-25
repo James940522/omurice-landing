@@ -4,6 +4,16 @@ import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
+// 마키 배너에 반복될 텍스트 아이템
+const MARQUEE_ITEMS = [
+  'Today Omurice',
+  'Best Choice',
+  'Cube Steak Omurice',
+  'Open Your Store',
+  'No.1 Omurice',
+  'Franchise Now',
+];
+
 const reasons = [
   {
     number: '01',
@@ -63,7 +73,7 @@ export default function WhyChooseSection() {
   }, []);
 
   return (
-    <section ref={ref} className="relative w-full py-14 md:py-20 lg:py-24">
+    <section ref={ref} className="relative w-full pt-20 pb-14 md:pt-28 md:pb-20 lg:pt-32 lg:pb-24">
       <Image
         src="/new-asset/sec-3/sec-3-bg.webp"
         alt=""
@@ -73,6 +83,32 @@ export default function WhyChooseSection() {
         className="absolute inset-0 -z-10 object-cover"
         priority={false}
       />
+
+      {/* 우→좌 스크롤 마키 배너 */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden bg-[#d84a00] py-2.5 z-10">
+        <motion.div
+          className="flex w-max"
+          animate={{ x: ['0%', '-50%'] }}
+          transition={{ duration: 24, repeat: Infinity, ease: 'linear' }}
+          aria-hidden="true"
+        >
+          {/* 2벌 복사하여 끊김 없이 루프 */}
+          {[0, 1].map((copy) => (
+            <div key={copy} className="flex shrink-0 items-center">
+              {MARQUEE_ITEMS.map((item, idx) => (
+                <span
+                  key={idx}
+                  className="mx-6 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-white sm:text-sm"
+                >
+                  {item}
+                  <span className="mx-2 text-white/40">·</span>
+                </span>
+              ))}
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* 헤더 */}
         <motion.div
