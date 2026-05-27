@@ -31,7 +31,9 @@ The component should reference the WebP assets, not the original PNGs.
 
 Desktop uses a two-part header: large black Korean headline on the left and small gray supporting copy on the right. Below, the two screenshots sit side by side with blue labels above each image, echoing the reference capture.
 
-Mobile stacks the header and screenshots vertically, keeps text readable, and prevents the phone images from overflowing the viewport. The provided screenshots already include phone frames, so the implementation should avoid drawing an extra device frame around them.
+Mobile stacks the header and screenshots vertically, keeps text readable, and prevents the phone images from overflowing the viewport. The provided screenshots already include phone frames, so the implementation must use the images directly and must not draw an extra device frame around them.
+
+The proof labels should be text-only. Do not add emoji icons or decorative symbols to the labels.
 
 ## Testing
 
