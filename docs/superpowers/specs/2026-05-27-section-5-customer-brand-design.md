@@ -2,7 +2,7 @@
 
 ## Goal
 
-Build a new section 5 that follows the provided reference capture: a white, spacious customer-proof section with the exact headline and supporting copy from the reference, plus two provided mobile app screenshots arranged as proof points.
+Build a new section 5 that follows the first provided capture as a layout reference only: a white, spacious customer-proof section with the exact headline and supporting copy from the reference. The only visual assets used in the section are the provided phone-framed app screenshots.
 
 ## Placement
 
@@ -20,20 +20,20 @@ Use the reference copy exactly:
 
 ## Assets
 
-Convert the two supplied PNG phone screenshots to optimized WebP files under `public/new-asset/sec-5/`:
+Convert the supplied PNG phone screenshots to optimized WebP files under `public/new-asset/sec-5/`:
 
 - `phone-rating.webp`
 - `phone-ranking.webp`
 
-The component should reference the WebP assets, not the original PNGs.
+The component should reference the WebP assets, not the original PNGs. Do not use any other image asset in this section.
 
 ## Layout
 
-Desktop uses a two-part header: large black Korean headline on the left and small gray supporting copy on the right. Below, the two screenshots sit side by side with blue labels above each image, echoing the reference capture.
+Desktop uses a two-part header: large black Korean headline on the left and small gray supporting copy on the right. Below, the supplied screenshots sit side by side with text-only blue labels above each image, echoing the reference capture.
 
 Mobile stacks the header and screenshots vertically, keeps text readable, and prevents the phone images from overflowing the viewport. The provided screenshots already include phone frames, so the implementation must use the images directly and must not draw an extra device frame around them.
 
-The proof labels should be text-only. Do not add emoji icons or decorative symbols to the labels.
+The proof labels should be text-only. Do not add emoji icons, decorative symbols, SVG waves, decorative illustration assets, background images, or any additional phone-frame drawing.
 
 ## Testing
 
