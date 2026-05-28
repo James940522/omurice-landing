@@ -2,7 +2,7 @@
 
 ## Goal
 
-Build a new section 5 that follows the first provided capture as a layout reference only: a white, spacious customer-proof section with the exact headline and supporting copy from the reference. The only visual assets used in the section are the provided phone-framed app screenshots.
+Build a new section 5 that follows the first provided capture as a layout reference only: a white, spacious customer-proof section with a brand-specific headline and supporting copy. The only visual assets used in the section are the provided phone-framed app screenshots.
 
 ## Placement
 
@@ -10,22 +10,22 @@ The section stays as `CustomerBrandSection` and appears after `ReviewsSection` a
 
 ## Content
 
-Use the reference copy exactly:
+Use this section copy:
 
 - `고객들이 선택한 브랜드`
-- `It’s your um, Eat’s your um!`
-- `배달앱 평점 5점 만점! 다양한 고객님들의 입맛을 사로잡은 리뷰를 직접 확인해보세요.`
+- `오늘도 고객이 찾는 오므라이스`
+- `배달앱 평점 5점 만점! 오늘은 오므라이스를 선택한 고객님들의 생생한 리뷰를 직접 확인해보세요.`
 - `배달앱 평점 5점 만점!`
 - `지역 맛집 랭킹 1위!`
 
 ## Assets
 
-Convert the supplied PNG phone screenshots to optimized WebP files under `public/new-asset/sec-5/`:
+Use the supplied PNG phone screenshots directly from `public/new-asset/sec-5/`:
 
-- `phone-rating.webp`
-- `phone-ranking.webp`
+- `phone-rating.png`
+- `phone-ranking.png`
 
-The component should reference the WebP assets, not the original PNGs. Do not use any other image asset in this section.
+The component should reference these PNG assets directly and render them without Next image format conversion. Do not convert them to WebP for this section and do not use any other image asset in this section.
 
 ## Layout
 

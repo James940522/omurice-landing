@@ -239,9 +239,9 @@ export default function WhyChooseSection() {
                     d="M 50,50 m -45,0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0"
                   />
                 </defs>
-                <text fontSize="5.2" fill="white" fontWeight="700" letterSpacing="1.8">
+                <text fontSize="10.4" fill="white" fontWeight="700" letterSpacing="0.8">
                   <textPath href="#why-text-ring">
-                    Today Omurice · Today Omurice · Today Omurice · Today Omurice ·
+                    Today Omurice · Today Omurice ·
                   </textPath>
                 </text>
               </svg>
