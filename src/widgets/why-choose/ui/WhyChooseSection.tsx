@@ -116,8 +116,8 @@ export default function WhyChooseSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
-          <p className="mb-2 text-sm font-black uppercase tracking-[0.3em] text-[#d84a00] md:text-sm">
-            Why?
+          <p className="mb-2 text-sm font-black uppercase tracking-[0.18em] text-[#d84a00] md:text-sm">
+            Brand Strength
           </p>
           <h2
             className="text-[2rem] font-black leading-tight text-[#1a0a00] md:text-4xl lg:text-5xl"
@@ -217,12 +217,12 @@ export default function WhyChooseSection() {
           {/* 중앙 회전 원형 이미지 */}
           <div className="absolute left-1/2 top-1/2 z-20 aspect-square w-[50%] -translate-x-1/2 -translate-y-1/2 sm:w-[28%]">
             {/* 테두리 링 */}
-            <div className="absolute inset-0 rounded-full ring-[3px] ring-[#ffd21f]" />
+            <div className="absolute inset-0 rounded-full ring-[1.5px] ring-[#ffd21f]" />
 
             <motion.div
               className="absolute inset-[3px] rounded-full"
               animate={{ rotate: 360 }}
-              transition={{ duration: 26, repeat: Infinity, ease: 'linear' }}
+              transition={{ duration: 14, repeat: Infinity, ease: 'linear' }}
             >
               {/* 주황 링 배경 */}
               <div className="absolute inset-0 rounded-full bg-[#d84a00]" />
@@ -236,18 +236,19 @@ export default function WhyChooseSection() {
                 <defs>
                   <path
                     id="why-text-ring"
-                    d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
+                    d="M 50,50 m -42.5,0 a 42.5,42.5 0 1,1 85,0 a 42.5,42.5 0 1,1 -85,0"
                   />
                 </defs>
-                <text fontSize="5" fill="white" fontWeight="700" letterSpacing="1.0">
-                  <textPath href="#why-text-ring">
-                    Today Omurice · Today Omurice · Today Omurice · Today Omurice ·
+                <text fontSize="4.3" fill="white" fontWeight="800" letterSpacing="0.62">
+                  <textPath href="#why-text-ring" startOffset="50%" textAnchor="middle">
+                    Today Omurice · Today Omurice · Today Omurice · Today Omurice · Today Omurice ·
+                    Today Omurice ·
                   </textPath>
                 </text>
               </svg>
 
               {/* 음식 이미지 */}
-              <div className="absolute inset-[18%] overflow-hidden rounded-full">
+              <div className="absolute inset-[12%] overflow-hidden rounded-full">
                 <Image
                   src="/new-asset/sec-3/omurice-cutout.webp"
                   alt="큐브스테이크 오므라이스"

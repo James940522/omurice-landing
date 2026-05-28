@@ -96,14 +96,14 @@ export default function CustomerBrandSection() {
           </motion.div>
         </div>
 
-        <div className="grid items-start justify-items-center gap-10 sm:grid-cols-2 sm:gap-8 lg:gap-16">
+        <div className="-mx-4 flex snap-x snap-mandatory items-start gap-5 overflow-x-auto px-4 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:justify-items-center sm:gap-8 sm:overflow-visible sm:px-0 sm:pb-0 lg:gap-16">
           {proofItems.map((item, index) => (
             <motion.figure
               key={item.src}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, delay: 0.25 + index * 0.15 }}
-              className="flex w-full max-w-[360px] flex-col items-center gap-5 sm:max-w-[390px] lg:max-w-[430px]"
+              className="flex w-[72vw] max-w-[310px] shrink-0 snap-center flex-col items-center gap-4 sm:w-full sm:max-w-[390px] sm:gap-5 lg:max-w-[430px]"
             >
               <figcaption className="text-center text-lg font-black text-[#1a3f9e] md:text-xl">
                 {item.label}
@@ -124,7 +124,7 @@ export default function CustomerBrandSection() {
 
       <div className="relative z-20 -mt-44 overflow-hidden pb-16 pt-18 sm:-mt-52 sm:pt-20 md:-mt-60 md:pt-22 lg:-mt-[19rem] lg:pt-24">
         <div
-          className="reviewCarouselWhiteBase pointer-events-none absolute inset-x-0 top-20 bottom-[4.75rem] bg-white"
+          className="reviewCarouselWhiteBase pointer-events-none absolute inset-x-0 top-20 bottom-[3.65rem] bg-white"
           aria-hidden="true"
         />
         <div
@@ -160,22 +160,22 @@ export default function CustomerBrandSection() {
           ))}
         </motion.div>
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-[4.75rem] overflow-hidden bg-[#2a1608]">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-[3.65rem] overflow-hidden bg-[#2a1608]">
           <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(255,248,232,0.055)_1px,transparent_1px)] bg-size-[24px_24px] opacity-35" />
           <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#f6c644]/75 to-transparent" />
           <div className="absolute inset-y-0 left-0 w-24 bg-linear-to-r from-[#2a1608] to-transparent" />
           <div className="absolute inset-y-0 right-0 w-24 bg-linear-to-l from-[#2a1608] to-transparent" />
           <motion.div
             className="absolute top-1/2 flex w-max -translate-y-1/2 items-center gap-8"
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 34, repeat: Infinity, ease: 'linear' }}
+            animate={{ x: ['-50%', '0%'] }}
+            transition={{ duration: 46, repeat: Infinity, ease: 'linear' }}
             aria-hidden="true"
           >
             {[...brandTextMarquee, ...brandTextMarquee, ...brandTextMarquee].map((item, index) => (
               <span
                 key={`${item.text}-${index}`}
                 className={[
-                  'text-[1.55rem] font-black uppercase leading-none tracking-normal sm:text-4xl md:text-5xl',
+                  'text-[1.18rem] font-black uppercase leading-none tracking-normal sm:text-3xl md:text-4xl',
                   item.variant === 'filled'
                     ? 'text-[#f6c644]/72'
                     : 'text-transparent [-webkit-text-stroke:1px_rgba(255,248,232,0.72)]',
