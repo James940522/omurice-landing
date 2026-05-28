@@ -4,13 +4,19 @@ import crypto from 'crypto';
 
 export const runtime = 'nodejs';
 
+const optionalEmailSchema = z.preprocess(
+  (value) => (typeof value === 'string' ? value.trim() : ''),
+  z.union([z.literal(''), z.string().email()])
+);
+
 const Schema = z.object({
   name: z.string().min(1),
   phone: z.string().min(8),
-  email: z.string().email(),
+  email: optionalEmailSchema,
+  storeType: z.enum(['샵인샵', '단독매장', '홀매장', '기타매장']),
   region: z.string().min(1),
+  hasStore: z.enum(['있음', '없음']),
   message: z.string().optional().default(''),
-  source: z.string().min(1), // 방문 유입 경로 (필수)
   privacyAgree: z.literal(true),
   hp: z.string().optional(), // honeypot
   domain: z.string().optional(), // 도메인 정보 (네모 태그용)
@@ -109,10 +115,11 @@ export async function POST(req: Request) {
 
   const name = parsed.data.name.trim();
   const phone = normalizePhone(parsed.data.phone);
-  const email = parsed.data.email.trim();
+  const email = parsed.data.email;
+  const storeType = parsed.data.storeType;
   const region = parsed.data.region.trim();
+  const hasStore = parsed.data.hasStore;
   const message = (parsed.data.message ?? '').trim();
-  const source = parsed.data.source.trim(); // 방문 유입 경로
   const domain = parsed.data.domain || '';
 
   // apply.todayomurice.com 또는 localhost인 경우 [네모] 태그 추가
@@ -120,14 +127,14 @@ export async function POST(req: Request) {
   const tagPrefix = isNemoTag ? '[네모] ' : '';
 
   const text = `${tagPrefix}[오늘은 오므라이스 창업문의]
-📞 문의자 연락처: ${phone}
-
 이름: ${name}
-이메일: ${email}
-희망지역: ${region}
-유입경로: ${source}
+연락처: ${phone}
+이메일: ${email || '-'}
+매장형태: ${storeType}
+창업지역: ${region}
+점포 보유 유무: ${hasStore}
 
-문의내용:
+문의내역:
 ${message || '-'}`.slice(0, 1000);
 
   const res = await fetch('https://api.solapi.com/messages/v4/send', {
@@ -153,4 +160,3 @@ ${message || '-'}`.slice(0, 1000);
 
   return NextResponse.json({ ok: true });
 }
-

@@ -126,7 +126,7 @@ export default function FranchiseCostSection() {
           </div>
 
           <div className="grid grid-cols-[0.9fr_2.15fr] items-center bg-[#32190b] px-4 py-5 text-center text-[#fff2c6] md:px-8">
-            <div className="text-sm font-black md:text-base">실 납입 합계</div>
+            <div className="text-sm font-black md:text-base">금액 합계</div>
             <div className="text-2xl font-black text-[#fec601] md:text-3xl">
               550만원
               <span className="ml-2 align-middle text-xs font-bold text-[#fff2c6]/75 md:text-sm">

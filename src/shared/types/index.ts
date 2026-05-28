@@ -24,6 +24,10 @@ export interface Store {
 export interface InquiryForm {
   name: string;
   phone: string;
+  email?: string;
+  storeType: '샵인샵' | '단독매장' | '홀매장' | '기타매장';
   region: string;
+  hasStore: '있음' | '없음';
+  message?: string;
   agree: boolean;
 }
