@@ -9,15 +9,15 @@ const proofItems = [
     label: '배달앱 평점 5점 만점!',
     src: '/new-asset/sec-5/phone-rating.png',
     alt: '오늘은 오므라이스 배달앱 평점 5점 만점 화면',
-    width: 1086,
-    height: 1449,
+    width: 666,
+    height: 1387,
   },
   {
     label: '지역 맛집 랭킹 1위!',
     src: '/new-asset/sec-5/phone-ranking.png',
     alt: '오늘은 오므라이스 지역 맛집 랭킹 1위 화면',
-    width: 1086,
-    height: 1448,
+    width: 664,
+    height: 1381,
   },
 ];
 
@@ -96,14 +96,14 @@ export default function CustomerBrandSection() {
           </motion.div>
         </div>
 
-        <div className="-mx-4 flex snap-x snap-mandatory items-start gap-5 overflow-x-auto px-4 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:justify-items-center sm:gap-8 sm:overflow-visible sm:px-0 sm:pb-0 lg:gap-16">
+        <div className="-mx-4 flex snap-x snap-mandatory items-start gap-1.5 overflow-x-auto px-3 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:justify-items-center sm:gap-8 sm:overflow-visible sm:px-0 sm:pb-0 lg:gap-16">
           {proofItems.map((item, index) => (
             <motion.figure
               key={item.src}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, delay: 0.25 + index * 0.15 }}
-              className="flex w-[72vw] max-w-[310px] shrink-0 snap-center flex-col items-center gap-4 sm:w-full sm:max-w-[390px] sm:gap-5 lg:max-w-[430px]"
+              className="flex w-[54vw] max-w-[236px] shrink-0 snap-center flex-col items-center gap-3 sm:w-full sm:max-w-[390px] sm:gap-5 lg:max-w-[430px]"
             >
               <figcaption className="text-center text-lg font-black text-[#1a3f9e] md:text-xl">
                 {item.label}
@@ -113,7 +113,7 @@ export default function CustomerBrandSection() {
                 alt={item.alt}
                 width={item.width}
                 height={item.height}
-                sizes="(max-width: 640px) 82vw, (max-width: 1024px) 38vw, 430px"
+                sizes="(max-width: 640px) 54vw, (max-width: 1024px) 38vw, 430px"
                 className="h-auto w-full"
                 unoptimized
               />
