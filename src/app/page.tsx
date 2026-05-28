@@ -9,6 +9,7 @@ import { HeroSection } from '@/widgets/hero';
 import { BrandIntroSection } from '@/widgets/brand-intro';
 import { WhyChooseSection } from '@/widgets/why-choose';
 import { RevenueProofSection } from '@/widgets/revenue-proof';
+import { FranchiseCostSection } from '@/widgets/franchise-cost';
 import { StartupProcessSection } from '@/widgets/startup-process';
 import { MenuSection } from '@/widgets/menu';
 import { StorePresetSection } from '@/widgets/store-preset';
@@ -166,6 +167,7 @@ export default function Home() {
         <BrandIntroSection />
         <WhyChooseSection />
         <RevenueProofSection />
+        <FranchiseCostSection />
         <StartupProcessSection />
         <MenuSection />
         <StorePresetSection />
