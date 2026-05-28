@@ -21,6 +21,36 @@ const proofItems = [
   },
 ];
 
+const reviewImages = [
+  'KakaoTalk_Photo_2025-11-29-19-50-51 001.jpeg',
+  'KakaoTalk_Photo_2025-11-29-19-50-51 002.jpeg',
+  'KakaoTalk_Photo_2025-11-29-19-50-51 003.jpeg',
+  'KakaoTalk_Photo_2025-11-29-19-50-51 004.jpeg',
+  'KakaoTalk_Photo_2025-11-29-19-50-52 005.jpeg',
+  'KakaoTalk_Photo_2025-11-29-19-50-52 006.jpeg',
+  'KakaoTalk_Photo_2025-11-29-19-50-52 007.jpeg',
+  'KakaoTalk_Photo_2025-11-29-19-50-52 008.jpeg',
+  'KakaoTalk_Photo_2026-03-18-18-43-37 001.jpeg',
+  'KakaoTalk_Photo_2026-03-18-18-43-37 003.jpeg',
+  'KakaoTalk_Photo_2026-03-18-18-43-37 004.jpeg',
+  'KakaoTalk_Photo_2026-03-18-18-43-37 005.jpeg',
+  'KakaoTalk_Photo_2026-03-18-18-43-46.jpeg',
+  'KakaoTalk_Photo_2026-03-18-19-03-54 001.jpeg',
+  'KakaoTalk_Photo_2026-03-18-19-03-54 002.jpeg',
+].map((fileName) => ({
+  fileName,
+  src: `/new-asset/sec-5/reviews/${fileName}`,
+}));
+
+const brandTextMarquee = [
+  { text: 'OMURICE MOMENTUM', variant: 'filled' },
+  { text: 'FIVE STAR RATING', variant: 'outline' },
+  { text: 'CUSTOMER CHOICE', variant: 'filled' },
+  { text: 'DELIVERY BRAND CONSULTING', variant: 'outline' },
+  { text: 'REVIEW PROOF', variant: 'filled' },
+  { text: 'FRANCHISE GROWTH', variant: 'outline' },
+];
+
 export default function CustomerBrandSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '0px 0px -10% 0px', amount: 0.15 });
@@ -28,7 +58,7 @@ export default function CustomerBrandSection() {
   return (
     <section
       ref={ref}
-      className="relative w-full overflow-hidden bg-white py-20 md:py-28 lg:py-32"
+      className="relative w-full overflow-hidden bg-white pt-20 md:pt-28 lg:pt-32"
     >
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-start md:justify-between md:gap-12">
@@ -39,7 +69,7 @@ export default function CustomerBrandSection() {
             className="shrink-0"
           >
             <h2
-              className="text-[2.4rem] font-black leading-[1.15] tracking-tight text-[#1a1a1a] md:text-5xl lg:text-6xl"
+              className="text-[2.4rem] font-black leading-[1.15] tracking-normal text-[#1a1a1a] md:text-5xl lg:text-6xl"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
               고객들이
@@ -56,12 +86,12 @@ export default function CustomerBrandSection() {
             className="max-w-sm md:pt-2"
           >
             <p className="mb-2 text-sm font-bold italic text-[#1a3f9e] md:text-base">
-              오늘도 고객이 찾는 오므라이스
+              한 번 주문한 고객이 다시 찾는 맛
             </p>
             <p className="text-sm leading-relaxed text-[#555] md:text-base">
-              배달앱 평점 5점 만점! 오늘은 오므라이스를 선택한
+              배달앱 평점 5점 만점으로 증명된 오늘은 오므라이스.
               <br className="hidden sm:block" />
-              고객님들의 생생한 리뷰를 직접 확인해보세요.
+              실제 고객 리뷰로 브랜드의 만족도를 확인해보세요.
             </p>
           </motion.div>
         </div>
@@ -89,6 +119,72 @@ export default function CustomerBrandSection() {
               />
             </motion.figure>
           ))}
+        </div>
+      </div>
+
+      <div className="relative z-20 -mt-44 overflow-hidden pb-16 pt-18 sm:-mt-52 sm:pt-20 md:-mt-60 md:pt-22 lg:-mt-[19rem] lg:pt-24">
+        <div
+          className="reviewCarouselWhiteBase pointer-events-none absolute inset-x-0 top-20 bottom-[4.75rem] bg-white"
+          aria-hidden="true"
+        />
+        <div
+          className="reviewOverlayGradient pointer-events-none absolute inset-x-0 -top-6 z-10 h-28 bg-linear-to-b from-white/0 to-white"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 top-18 z-10 h-16 bg-linear-to-b from-white/0 to-white/80"
+          aria-hidden="true"
+        />
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-linear-to-r from-white to-transparent md:w-24" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-linear-to-l from-white to-transparent md:w-24" />
+
+        <motion.div
+          className="relative z-20 flex w-max gap-4 px-4 sm:gap-5"
+          animate={{ x: ['0%', '-50%'] }}
+          transition={{ duration: 46, repeat: Infinity, ease: 'linear' }}
+          aria-hidden="true"
+        >
+          {[...reviewImages, ...reviewImages].map((review, index) => (
+            <figure
+              key={`${review.fileName}-${index}`}
+              className="relative h-[210px] w-[246px] shrink-0 overflow-hidden rounded-lg border border-[#f0d8b8] bg-white shadow-[0_18px_42px_rgba(94,58,24,0.12)] sm:h-[238px] sm:w-[286px] md:h-[268px] md:w-[320px]"
+            >
+              <Image
+                src={review.src}
+                alt=""
+                fill
+                sizes="(max-width: 640px) 246px, (max-width: 768px) 286px, 320px"
+                className="object-cover object-top"
+              />
+            </figure>
+          ))}
+        </motion.div>
+
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-[4.75rem] overflow-hidden bg-[#2a1608]">
+          <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(255,248,232,0.055)_1px,transparent_1px)] bg-size-[24px_24px] opacity-35" />
+          <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#f6c644]/75 to-transparent" />
+          <div className="absolute inset-y-0 left-0 w-24 bg-linear-to-r from-[#2a1608] to-transparent" />
+          <div className="absolute inset-y-0 right-0 w-24 bg-linear-to-l from-[#2a1608] to-transparent" />
+          <motion.div
+            className="absolute top-1/2 flex w-max -translate-y-1/2 items-center gap-8"
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ duration: 34, repeat: Infinity, ease: 'linear' }}
+            aria-hidden="true"
+          >
+            {[...brandTextMarquee, ...brandTextMarquee, ...brandTextMarquee].map((item, index) => (
+              <span
+                key={`${item.text}-${index}`}
+                className={[
+                  'text-[1.55rem] font-black uppercase leading-none tracking-normal sm:text-4xl md:text-5xl',
+                  item.variant === 'filled'
+                    ? 'text-[#f6c644]/72'
+                    : 'text-transparent [-webkit-text-stroke:1px_rgba(255,248,232,0.72)]',
+                ].join(' ')}
+              >
+                {item.text}
+              </span>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>

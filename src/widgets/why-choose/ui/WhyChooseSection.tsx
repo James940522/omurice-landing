@@ -57,12 +57,7 @@ const reasons = [
   },
 ];
 
-const ROUND_CLASSES = [
-  'rounded-tl-3xl',
-  'rounded-tr-3xl',
-  'rounded-bl-3xl',
-  'rounded-br-3xl',
-];
+const ROUND_CLASSES = ['rounded-tl-3xl', 'rounded-tr-3xl', 'rounded-bl-3xl', 'rounded-br-3xl'];
 
 export default function WhyChooseSection() {
   const ref = useRef(null);
@@ -77,10 +72,7 @@ export default function WhyChooseSection() {
   }, []);
 
   return (
-    <section
-      ref={ref}
-      className="relative w-full pt-24 pb-20 md:pt-28 md:pb-20 lg:pt-32 lg:pb-24"
-    >
+    <section ref={ref} className="relative w-full pt-24 pb-20 md:pt-28 md:pb-20 lg:pt-32 lg:pb-24">
       <Image
         src="/new-asset/sec-3/sec-3-bg.webp"
         alt=""
@@ -132,8 +124,16 @@ export default function WhyChooseSection() {
             style={{ fontFamily: 'var(--font-heading)' }}
           >
             왜! 예비 점주들은
-            <br />
-            <span className="text-[#d84a00]">오므라이스</span>를 선택할까요?
+            <span className="mt-1 block">
+              <Image
+                src="/asset/logo/오므라이스_문구3.png"
+                alt="오늘은 오므라이스"
+                width={220}
+                height={125}
+                className="mx-auto h-auto w-36 sm:w-44 md:w-52"
+              />
+            </span>
+            를 선택할까요?
           </h2>
         </motion.div>
 
@@ -236,18 +236,18 @@ export default function WhyChooseSection() {
                 <defs>
                   <path
                     id="why-text-ring"
-                    d="M 50,50 m -45,0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0"
+                    d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
                   />
                 </defs>
-                <text fontSize="10.4" fill="white" fontWeight="700" letterSpacing="0.8">
+                <text fontSize="5" fill="white" fontWeight="700" letterSpacing="1.0">
                   <textPath href="#why-text-ring">
-                    Today Omurice · Today Omurice ·
+                    Today Omurice · Today Omurice · Today Omurice · Today Omurice ·
                   </textPath>
                 </text>
               </svg>
 
               {/* 음식 이미지 */}
-              <div className="absolute inset-[11%] overflow-hidden rounded-full">
+              <div className="absolute inset-[18%] overflow-hidden rounded-full">
                 <Image
                   src="/new-asset/sec-3/omurice-cutout.webp"
                   alt="큐브스테이크 오므라이스"
