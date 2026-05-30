@@ -12,6 +12,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/shared/ui/sheet';
+import { CONTACT_NAV_ITEM, SITE_NAV_ITEMS } from '@/shared/config/navigation';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,15 +26,6 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const navItems = [
-    { name: '브랜드 소개', href: '#brand' },
-    { name: '수익 구조', href: '#revenue' },
-    { name: '창업 과정', href: '#startup-process' },
-    { name: '메뉴', href: '#menu' },
-    { name: '고객 리뷰', href: '#reviews' },
-    { name: '매장 안내', href: '#store' },
-  ];
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -58,8 +50,8 @@ export default function Header() {
           <motion.div className="shrink-0" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <a
               href="#"
-              className="flex items-center gap-1.5 md:gap-2"
-              aria-label="오늘은 오므라이스 & 에그이츠 홈으로 이동"
+              className="flex items-center"
+              aria-label="오늘은 오므라이스 홈으로 이동"
             >
               <Image
                 src="/asset/logo/오므라이스_문구3.png"
@@ -70,35 +62,16 @@ export default function Header() {
                 priority
                 quality={75}
               />
-              <span
-                className="relative text-sm md:text-base lg:text-lg font-black mr-2 "
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  color: '#FFA500',
-                  textShadow: '1px 1px 2px rgba(0,0,0,0.2)',
-                }}
-              >
-                ✕
-              </span>
-              <Image
-                src="/asset/logo/에그이츠_문구2.png"
-                alt="에그이츠"
-                width={200}
-                height={100}
-                className="h-8 md:h-10 lg:h-11 w-auto"
-                priority
-                quality={75}
-              />
             </a>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-4">
-            {navItems.map((item) => (
+          <nav className="hidden xl:flex items-center gap-4">
+            {SITE_NAV_ITEMS.map((item) => (
               <motion.button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className={`font-medium text-base transition-colors duration-300 ${
+                className={`whitespace-nowrap text-sm font-bold transition-colors duration-300 xl:text-base ${
                   isScrolled
                     ? 'text-foreground hover:text-primary'
                     : 'text-foreground/90 hover:text-foreground'
@@ -110,17 +83,17 @@ export default function Header() {
               </motion.button>
             ))}
             <motion.button
-              onClick={() => scrollToSection('#contact')}
+              onClick={() => scrollToSection(CONTACT_NAV_ITEM.href)}
               className="bg-foreground text-white px-4 py-2 rounded-full hover:bg-primary hover:text-white transition-all duration-300 shadow-strong-hover font-bold border-2 border-foreground hover:border-primary"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              창업문의
+              {CONTACT_NAV_ITEM.name}
             </motion.button>
           </nav>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="xl:hidden">
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
                 <button
@@ -140,7 +113,7 @@ export default function Header() {
                 {/* Navigation Items */}
                 <nav className="flex-1 overflow-y-auto pt-6">
                   <div className="space-y-4">
-                    {navItems.map((item) => (
+                    {SITE_NAV_ITEMS.map((item) => (
                       <button
                         key={item.name}
                         onClick={() => scrollToSection(item.href)}
@@ -155,10 +128,10 @@ export default function Header() {
                 {/* Sidebar Footer */}
                 <div className="absolute bottom-6 left-6 right-6 border-t-2 border-primary/20 pt-6">
                   <button
-                    onClick={() => scrollToSection('#contact')}
+                    onClick={() => scrollToSection(CONTACT_NAV_ITEM.href)}
                     className="w-full bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full hover:shadow-strong transition-all duration-300 font-bold text-xl"
                   >
-                    창업문의 하기 →
+                    {CONTACT_NAV_ITEM.name} 하기 →
                   </button>
                 </div>
               </SheetContent>

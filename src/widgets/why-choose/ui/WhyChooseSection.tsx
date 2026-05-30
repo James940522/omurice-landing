@@ -72,7 +72,11 @@ export default function WhyChooseSection() {
   }, []);
 
   return (
-    <section ref={ref} className="relative w-full pt-24 pb-20 md:pt-28 md:pb-20 lg:pt-32 lg:pb-24">
+    <section
+      id="strength"
+      ref={ref}
+      className="relative w-full pt-24 pb-20 md:pt-28 md:pb-20 lg:pt-32 lg:pb-24"
+    >
       <Image
         src="/new-asset/sec-3/sec-3-bg.webp"
         alt=""

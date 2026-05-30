@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { CONTACT_NAV_ITEM, SITE_NAV_ITEMS } from '@/shared/config/navigation';
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-amber-50 pt-16 pb-8">
+    <footer id="footer" className="bg-amber-50 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 상단 영역 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
@@ -45,14 +46,7 @@ export default function Footer() {
           <div>
             <h4 className="text-xl md:text-2xl font-bold mb-4 text-orange-500">바로가기</h4>
             <ul className="space-y-3">
-              {[
-                { name: '브랜드 소개', href: '#brand' },
-                { name: '수익 구조', href: '#revenue' },
-                { name: '창업 과정', href: '#startup-process' },
-                { name: '메뉴', href: '#menu' },
-                { name: '고객 리뷰', href: '#reviews' },
-                { name: '매장 안내', href: '#store' },
-              ].map((item) => (
+              {[...SITE_NAV_ITEMS, CONTACT_NAV_ITEM].map((item) => (
                 <li key={item.name}>
                   <a
                     href={item.href}
@@ -82,7 +76,7 @@ export default function Footer() {
             <p>
               © 2024{' '}
               <Link href="/" className="font-medium text-amber-900 hover:text-orange-500">
-                오늘은 오므라이스 · 에그이츠
+                오늘은 오므라이스
               </Link>
               . All rights reserved.
             </p>

@@ -57,7 +57,7 @@ export default function CustomerBrandSection() {
 
   return (
     <section
-      id="reviews"
+      id="customer-brand"
       ref={ref}
       className="relative w-full overflow-hidden bg-[#fff7e8] pt-20 text-[#4e2d14] md:pt-28 lg:pt-32"
     >
