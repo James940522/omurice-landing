@@ -28,8 +28,10 @@ const KAKAO_CONCURRENCY = 8;
 
 export interface StoreWithCoordinates {
   store_code: string;
+  region: string;
   branch_name: string;
   display_name: string;
+  open_date: string;
   address: string;
   /** 지오코딩 실패 시 undefined — 클라는 마커를 그리지 않는다. */
   lat?: number;
@@ -124,26 +126,74 @@ async function geocode(
 
 interface BaseStore {
   store_code: string;
+  region: string;
   branch_name: string;
   display_name: string;
+  open_date: string;
   address: string;
+}
+
+function parseCsvLine(line: string): string[] {
+  const values: string[] = [];
+  let current = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < line.length; i += 1) {
+    const char = line[i];
+    const nextChar = line[i + 1];
+
+    if (char === '"' && inQuotes && nextChar === '"') {
+      current += '"';
+      i += 1;
+      continue;
+    }
+
+    if (char === '"') {
+      inQuotes = !inQuotes;
+      continue;
+    }
+
+    if (char === ',' && !inQuotes) {
+      values.push(current.trim());
+      current = '';
+      continue;
+    }
+
+    current += char;
+  }
+
+  values.push(current.trim());
+  return values;
 }
 
 function parseCsv(text: string): BaseStore[] {
   const lines = text
-    .split('\n')
+    .replace(/^\uFEFF/, '')
+    .split(/\r?\n/)
     .map((line) => line.trim())
     .filter((line) => line.length > 0);
 
+  const headers = parseCsvLine(lines[0]).map((header) =>
+    header.replace(/^\uFEFF/, '').trim()
+  );
+  const getColumnIndex = (name: string) => headers.indexOf(name);
   const dataLines = lines.slice(1); // 헤더 제외
   const stores: BaseStore[] = [];
+  const hasRegionSchema =
+    getColumnIndex('region') !== -1 && getColumnIndex('open_date') !== -1;
 
   for (const line of dataLines) {
-    const parts = line.split(',');
+    const parts = parseCsvLine(line);
     if (parts.length < 4) continue;
 
-    const [store_code, branch_name, display_name, ...addressParts] = parts;
-    const address = addressParts.join(',');
+    const store_code = parts[getColumnIndex('store_code')] ?? parts[0];
+    const region = hasRegionSchema ? parts[getColumnIndex('region')] ?? '' : '';
+    const branch_name = parts[getColumnIndex('branch_name')] ?? parts[1];
+    const display_name = parts[getColumnIndex('display_name')] ?? parts[2];
+    const open_date = hasRegionSchema ? parts[getColumnIndex('open_date')] ?? '' : '';
+    const address = hasRegionSchema
+      ? parts[getColumnIndex('address')] ?? ''
+      : parts.slice(3).join(',');
 
     if (
       !store_code ||
@@ -156,8 +206,10 @@ function parseCsv(text: string): BaseStore[] {
 
     stores.push({
       store_code: store_code.trim(),
+      region: region.trim(),
       branch_name: branch_name.trim(),
       display_name: display_name.trim(),
+      open_date: open_date.trim(),
       address: address.trim(),
     });
   }

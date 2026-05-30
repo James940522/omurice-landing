@@ -1,19 +1,27 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { BaseModal } from '@/shared/ui';
 import StoreItem from './StoreItem';
-import ComingSoonItem from './ComingSoonItem';
 import { fetchStores } from '@/lib/stores';
+import type { Store } from '@/lib/stores';
 
 interface StoreStatusModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+
+const getSortTime = (store: Store) => {
+  const openDate = store.open_date?.trim() ?? '';
+  if (!DATE_PATTERN.test(openDate)) return 0;
+  return new Date(`${openDate}T00:00:00+09:00`).getTime();
+};
+
 export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalProps) {
   // CSV 데이터에서 동적으로 가맹점 리스트를 가져옴
-  const [stores, setStores] = useState<string[]>([]);
+  const [stores, setStores] = useState<Store[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -21,9 +29,7 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
     const loadStores = async () => {
       try {
         const storeData = await fetchStores();
-        // branch_name만 추출
-        const storeNames = storeData.map((store) => store.branch_name);
-        setStores(storeNames);
+        setStores(storeData);
       } catch (error) {
         console.error('Failed to load stores:', error);
       } finally {
@@ -34,7 +40,23 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
     loadStores();
   }, []);
 
-  const comingSoonCount = 0; // 현재 110개 매장 (일부 오픈 준비 중)
+  const sortedStores = useMemo(
+    () =>
+      [...stores].sort((a, b) => {
+        const timeDiff = getSortTime(a) - getSortTime(b);
+        if (timeDiff !== 0) return timeDiff;
+        return Number(a.store_code) - Number(b.store_code);
+      }),
+    [stores]
+  );
+  const storeCount = useMemo(
+    () =>
+      stores.reduce((count, store) => {
+        const storeCode = Number(store.store_code);
+        return Number.isFinite(storeCode) ? Math.max(count, storeCode) : count;
+      }, 0),
+    [stores]
+  );
 
   return (
     <BaseModal
@@ -45,56 +67,60 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
         mobile: { left: 'left-[50%]', top: 'top-16', transform: 'translate-x-[-50%]' },
         desktop: { left: 'sm:left-[420px]', top: 'sm:top-20' },
       }}
-      width="w-[95vw] sm:w-[580px]"
-      className="bg-gradient-to-br from-yellow-50 via-amber-50 to-yellow-100 border-4 sm:border-[6px] border-yellow-500 rounded-3xl p-3 sm:p-6 shadow-xl"
+      width="w-[95vw] sm:w-[820px]"
+      className="overflow-hidden rounded-[18px] border-4 border-[#ffb21a] bg-[#5a2c12] p-0 shadow-xl sm:border-[6px]"
       header={
-        <>
-          {/* 메인 타이틀 */}
-          <div className="text-center mb-4 sm:mb-5">
-            <h2
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-tight"
-              style={{
-                fontFamily: 'var(--font-heading)',
-                color: '#FFC107',
-                textShadow:
-                  '-2px -2px 0 #FF6B00, 2px -2px 0 #FF6B00, -2px 2px 0 #FF6B00, 2px 2px 0 #FF6B00, 4px 4px 0 #FF8C00, 6px 6px 0 #FF6B00, 8px 8px 12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 193, 7, 0.6)',
-              }}
-            >
-              최단기간 100호점
-              <br />
-              달성 신화
-            </h2>
-          </div>
+        <div className="relative overflow-hidden bg-linear-to-b from-[#6b3a17] via-[#4a260f] to-[#2f1608] px-4 py-6 text-center sm:px-8 sm:py-7">
+          <div
+            className="absolute inset-0 opacity-[0.14]"
+            style={{
+              backgroundImage:
+                'linear-gradient(rgba(255,255,255,0.72) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.72) 1px, transparent 1px)',
+              backgroundSize: '34px 34px',
+            }}
+          />
+          <div className="absolute -left-16 top-5 h-20 w-56 rotate-[-11deg] bg-[#fec601]/18" />
+          <div className="absolute -right-16 bottom-4 h-20 w-56 rotate-[10deg] bg-[#ff6b12]/22" />
 
-          {/* 서브 타이틀 */}
-          <div className="text-center mb-3 sm:mb-4">
-            <h3
-              className="text-lg sm:text-xl font-bold text-amber-800/80"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              가맹점 현황 {!isLoading && stores.length > 0 && `(${stores.length}개 운영 중)`}
-            </h3>
+          <div className="relative z-10">
+            <p className="font-heading text-lg font-black text-white/90 sm:text-2xl">
+              가맹사업 1년만에{' '}
+              <span className="text-[#fec601] drop-shadow-[0_3px_0_rgba(84,39,12,0.8)]">
+                100호점
+              </span>{' '}
+              달성!
+            </p>
+            <h2 className="mt-2 break-keep font-heading text-4xl font-black leading-none text-[#fff7e8] drop-shadow-[0_6px_0_rgba(37,18,7,0.85)] sm:text-6xl">
+              오늘은 오므라이스
+              <br className="sm:hidden" /> 오픈 현황
+            </h2>
+            <div className="mx-auto mt-4 flex w-fit items-center gap-2 rounded-full border border-[#fec601]/45 bg-[#fff7e8]/12 px-4 py-2 text-xs font-black text-[#fff1c0] sm:text-sm">
+              <span>전국 {storeCount || '-'}개 점포</span>
+              <span className="h-1.5 w-1.5 rounded-full bg-[#fec601]" />
+              <span>오픈으로 증명한 브랜드</span>
+            </div>
           </div>
-        </>
+        </div>
       }
     >
-      {/* Content - 가맹점 리스트 */}
-      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-2 sm:p-3 shadow-lg border border-yellow-200 max-h-[60vh] overflow-y-auto sm:max-h-none sm:overflow-y-visible">
+      <div className="max-h-[62vh] overflow-y-auto bg-linear-to-b from-[#3b1b0b] via-[#532a12] to-[#3b1b0b] p-3 sm:p-5">
         {isLoading ? (
-          <div className="text-center py-8">
-            <p className="text-gray-600">매장 정보를 불러오는 중...</p>
+          <div className="rounded-xl bg-[#fffaf0] py-8 text-center">
+            <p className="font-bold text-[#5a2c12]">매장 정보를 불러오는 중...</p>
           </div>
         ) : (
-          <div className="grid grid-cols-5 sm:grid-cols-6 gap-y-1 gap-x-1 sm:gap-y-1.5 sm:gap-x-1.5 justify-items-center pb-2 sm:pb-4">
-            {stores.map((store, index) => (
-              <StoreItem key={index} storeName={store} />
-            ))}
-
-            {comingSoonCount > 0 &&
-              [...Array(comingSoonCount)].map((_, index) => (
-                <ComingSoonItem key={`coming-${index}`} />
+          <>
+            <div className="mb-4 text-center">
+              <p className="break-keep font-heading text-sm font-black text-[#fff1c0] sm:text-base">
+                한 그릇의 기준이 전국으로 넓어지는 중입니다.
+              </p>
+            </div>
+            <div className="grid grid-cols-3 gap-2 sm:grid-cols-5 sm:gap-2.5 lg:grid-cols-6">
+              {sortedStores.map((store) => (
+                <StoreItem key={store.store_code} store={store} />
               ))}
-          </div>
+            </div>
+          </>
         )}
       </div>
     </BaseModal>

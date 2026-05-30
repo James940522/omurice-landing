@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 const heroImages = {
   top: '/new-asset/menu/모음컷/1.jpeg',
   lowerLeft: '/new-asset/menu/모음컷/2.jpeg',
-  lowerCenter: '/new-asset/menu/나홀로 오므라이스 세트.jpg',
   lowerRight: '/new-asset/menu/둘이서 오므라이스 세트.jpeg',
   logo: '/asset/logo/오므라이스_문구3.png',
 };
@@ -174,21 +173,6 @@ export default function FranchiseHeroSection() {
             quality={88}
           />
           <motion.div
-            initial={{ opacity: 0, y: 26, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.38 }}
-            className="absolute left-1/2 top-[35%] hidden w-[48vw] max-w-[720px] -translate-x-1/2 -translate-y-1/2 md:block"
-          >
-            <Image
-              src={heroImages.lowerCenter}
-              alt=""
-              width={760}
-              height={570}
-              className="w-full opacity-[0.88]"
-              quality={88}
-            />
-          </motion.div>
-          <motion.div
             initial={{ opacity: 0, x: 46 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.85, delay: 0.5 }}
@@ -254,7 +238,7 @@ export default function FranchiseHeroSection() {
             transition={{ duration: 0.65, delay: 0.94 }}
             className="break-keep text-xl font-black text-white md:text-2xl"
           >
-            유행이 아닌, 시장을 만드는 브랜드의 저력.
+            한 그릇의 만족이 점포의 힘이 되는 브랜드.
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
@@ -262,9 +246,9 @@ export default function FranchiseHeroSection() {
             transition={{ duration: 0.72, delay: 1.04 }}
             className="mt-5 break-keep font-heading text-4xl font-black leading-tight text-white drop-shadow-[0_5px_18px_rgba(0,0,0,0.34)] md:text-6xl"
           >
-            처음부터 만들었고,
+            배달에서 먼저 증명했고,
             <br />
-            지금도 <span className="text-[#ff6b12]">가장 잘합니다.</span>
+            <span className="text-[#ff6b12]">전국으로</span> 넓혀갑니다.
           </motion.h2>
 
           <motion.div
@@ -294,7 +278,7 @@ export default function FranchiseHeroSection() {
                 전국 매장수
               </p>
               <p className="font-heading text-5xl font-black leading-none text-white md:text-6xl">
-                150+
+                157
               </p>
             </motion.div>
           </motion.div>

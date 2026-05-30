@@ -1,32 +1,40 @@
-import Image from 'next/image';
+import type { Store } from '@/lib/stores';
 
 interface StoreItemProps {
-  storeName: string;
+  store: Store;
 }
 
-export default function StoreItem({ storeName }: StoreItemProps) {
-  // "점" 제거하고 짧은 이름으로 표시
-  const displayName = storeName.replace('점', '').replace('오늘은 오므라이스 ', '');
+const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+
+const getOpenStatus = (openDate: string) => {
+  if (!DATE_PATTERN.test(openDate)) {
+    return { label: '오픈완료', upcoming: false };
+  }
+
+  const [year, month] = openDate.split('-').map(Number);
+  if (year >= 2026) {
+    return { label: `${month}월 오픈`, upcoming: true };
+  }
+
+  return { label: '오픈완료', upcoming: false };
+};
+
+export default function StoreItem({ store }: StoreItemProps) {
+  const openDate = store.open_date?.trim() ?? '';
+  const { label, upcoming } = getOpenStatus(openDate);
+  const statusClass = upcoming ? 'bg-[#fec601] text-[#4e2d14]' : 'bg-[#ff6b12] text-white';
 
   return (
-    <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center">
-      {/* 계란 배경 이미지 */}
-      <Image src="/asset/etc/egg_item3.png" alt="" fill className="object-contain" />
-
-      {/* 가맹점 이름 텍스트 */}
-      <div className="relative z-10 text-center px-2">
-        <p
-          className="text-xs sm:text-sm font-bold leading-tight break-keep"
-          style={{
-            fontFamily: 'var(--font-heading)',
-            color: '#FEC601',
-            textShadow:
-              '-1px -1px 0 #8B4513, 1px -1px 0 #8B4513, -1px 1px 0 #8B4513, 1px 1px 0 #8B4513, 2px 2px 4px rgba(0,0,0,0.3)',
-            wordBreak: 'keep-all',
-          }}
-        >
-          {displayName}
+    <div className="flex h-[68px] w-full flex-col overflow-hidden rounded-[7px] border border-[#ffdf92]/70 bg-[#fffaf0] shadow-[0_4px_0_rgba(37,18,7,0.3)] sm:h-[76px]">
+      <div className="flex flex-1 items-center justify-center px-1.5 text-center">
+        <p className="break-keep font-heading text-[11px] font-black leading-tight text-[#301809] sm:text-[13px]">
+          {store.branch_name}
         </p>
+      </div>
+      <div
+        className={`flex h-6 items-center justify-center font-heading text-[11px] font-black leading-none sm:h-7 sm:text-[13px] ${statusClass}`}
+      >
+        {label}
       </div>
     </div>
   );
