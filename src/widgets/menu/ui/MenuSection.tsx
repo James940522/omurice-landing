@@ -3,15 +3,13 @@
 import { ChevronLeft, ChevronRight, Trophy } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface MenuItem {
   name: string;
   image: string;
   tags?: string[];
   badge?: string;
-  deliveryPrice?: string;
-  pickupPrice?: string;
 }
 
 interface MenuCategory {
@@ -61,39 +59,27 @@ const bestMenus: MenuItem[] = [
     name: '큐브 스테이크 오므라이스',
     image: img(DIR.omurice, '큐브스테이크 오므라이스.jpeg'),
     badge: '30% 쿠폰 / 무료배달',
-    deliveryPrice: '13,900원',
-    pickupPrice: '13,900원',
   },
   {
     name: '새우까스 오므라이스',
     image: img(DIR.omurice, '새우까스 오므라이스.jpeg'),
     badge: '최애메뉴',
-    deliveryPrice: '12,900원',
-    pickupPrice: '12,900원',
   },
   {
     name: '소세지 김치 오므라이스',
     image: img(DIR.kimchi, '소세지 김치 오므라이스.jpeg'),
-    deliveryPrice: '12,900원',
-    pickupPrice: '12,900원',
   },
   {
     name: '돈까스 김치 오므라이스',
     image: img(DIR.kimchi, '돈까스 김치 오므라이스.jpeg'),
-    deliveryPrice: '13,900원',
-    pickupPrice: '13,900원',
   },
   {
     name: '나홀로 오므라이스 세트',
     image: img('나홀로 오므라이스 세트.jpg'),
-    deliveryPrice: '16,900원',
-    pickupPrice: '16,900원',
   },
   {
     name: '둘이서 배터지는 강호동 세트',
     image: img('둘이서 배터지는 강호동 세트.jpg'),
-    deliveryPrice: '31,800원',
-    pickupPrice: '31,800원',
   },
 ];
 
@@ -221,16 +207,6 @@ function BestMenuCard({
         <h3 className="break-keep font-heading text-xl font-black leading-tight sm:text-2xl">
           {item.name}
         </h3>
-        <dl className="mt-4 space-y-1.5 text-sm font-bold text-white/90 sm:text-base">
-          <div className="flex gap-3">
-            <dt className="text-[#fec601]">배달</dt>
-            <dd>{item.deliveryPrice}</dd>
-          </div>
-          <div className="flex gap-3">
-            <dt className="text-[#fec601]">픽업</dt>
-            <dd>{item.pickupPrice}</dd>
-          </div>
-        </dl>
       </div>
     </article>
   );
@@ -269,22 +245,52 @@ export default function MenuSection() {
   const currentCategory =
     menuCategories.find((category) => category.id === activeCategory) ?? menuCategories[0];
 
-  const scrollBestMenus = (direction: 'prev' | 'next') => {
+  const moveBestMenu = useCallback((index: number, behavior: ScrollBehavior = 'smooth') => {
     const slider = sliderRef.current;
+    const target = slider?.children[index] as HTMLElement | undefined;
 
-    if (!slider) return;
+    if (slider && target) {
+      slider.scrollTo({ left: target.offsetLeft, behavior });
+    }
+  }, []);
+
+  const advanceBestMenu = useCallback(() => {
+    setActiveBestIndex((currentIndex) => {
+      if (currentIndex === bestMenus.length - 1) {
+        moveBestMenu(bestMenus.length);
+
+        window.setTimeout(() => {
+          moveBestMenu(0, 'auto');
+        }, 650);
+
+        return 0;
+      }
+
+      const nextIndex = currentIndex + 1;
+      moveBestMenu(nextIndex);
+
+      return nextIndex;
+    });
+  }, [moveBestMenu]);
+
+  const scrollBestMenus = (direction: 'prev' | 'next') => {
+    if (direction === 'next') {
+      advanceBestMenu();
+      return;
+    }
 
     const nextIndex =
-      direction === 'next'
-        ? (activeBestIndex + 1) % bestMenus.length
-        : (activeBestIndex - 1 + bestMenus.length) % bestMenus.length;
-    const target = slider.children[nextIndex] as HTMLElement | undefined;
+      activeBestIndex === 0 ? bestMenus.length - 1 : activeBestIndex - 1;
 
-    if (target) {
-      slider.scrollTo({ left: target.offsetLeft, behavior: 'smooth' });
-      setActiveBestIndex(nextIndex);
-    }
+    moveBestMenu(nextIndex);
+    setActiveBestIndex(nextIndex);
   };
+
+  useEffect(() => {
+    const timer = window.setInterval(advanceBestMenu, 3400);
+
+    return () => window.clearInterval(timer);
+  }, [advanceBestMenu]);
 
   return (
     <section
@@ -383,8 +389,13 @@ export default function MenuSection() {
               ref={sliderRef}
               className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
-              {bestMenus.map((item, index) => (
-                <BestMenuCard key={item.name} item={item} index={index} priority={index < 2} />
+              {[...bestMenus, ...bestMenus].map((item, index) => (
+                <BestMenuCard
+                  key={`${item.name}-${index}`}
+                  item={item}
+                  index={index % bestMenus.length}
+                  priority={index < 2}
+                />
               ))}
             </div>
           </div>
