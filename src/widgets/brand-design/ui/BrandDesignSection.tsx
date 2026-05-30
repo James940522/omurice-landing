@@ -51,15 +51,7 @@ export function BrandDesignSection() {
           <p className="mb-4 text-lg font-black text-[#8B4513]" style={{ fontFamily: 'Georgia, serif' }}>
             Brand Design
           </p>
-          <h2
-            className="mb-5 text-4xl font-black leading-tight text-[#FEC601] md:text-6xl"
-            style={{
-              fontFamily: 'var(--font-heading)',
-              WebkitTextStroke: '1px #8B4513',
-              textShadow:
-                '-2px -2px 0 #8B4513, 2px -2px 0 #8B4513, -2px 2px 0 #8B4513, 2px 2px 0 #8B4513, 4px 5px 0 rgba(139,69,19,0.34), 7px 9px 13px rgba(0,0,0,0.18)',
-            }}
-          >
+          <h2 className="mt-2 font-heading text-4xl font-black text-[#6b4423] sm:text-5xl">
             브랜드 디자인
           </h2>
           <p className="mx-auto max-w-2xl text-base font-bold leading-relaxed text-[#5a2c12] md:text-lg">

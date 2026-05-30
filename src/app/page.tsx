@@ -14,7 +14,6 @@ import { StartupProcessSection } from '@/widgets/startup-process';
 import { MenuSection } from '@/widgets/menu';
 import { BrandDesignSection } from '@/widgets/brand-design';
 import { CustomerBrandSection } from '@/widgets/customer-brand';
-import { StoreMapSection } from '@/widgets/store-map';
 import { ContactFormSection } from '@/widgets/contact-form';
 import { Footer } from '@/widgets/footer';
 
@@ -171,7 +170,6 @@ export default function Home() {
         <MenuSection />
         <BrandDesignSection />
         <CustomerBrandSection />
-        <StoreMapSection />
         <ContactFormSection />
         <Footer />
         <FloatingInquiry />

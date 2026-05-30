@@ -163,7 +163,7 @@ export default function FranchiseHeroSection() {
         </motion.div>
       </div>
 
-      <div className="relative -mt-12 min-h-[650px] overflow-hidden pt-28 md:min-h-[650px] md:pt-32 lg:min-h-[690px]">
+      <div className="relative -mt-12 min-h-[700px] overflow-hidden pb-20 pt-28 md:min-h-[720px] md:pb-24 md:pt-32 lg:min-h-[750px] lg:pb-28">
         <div className="absolute inset-0">
           <Image
             src={heroImages.lowerLeft}
