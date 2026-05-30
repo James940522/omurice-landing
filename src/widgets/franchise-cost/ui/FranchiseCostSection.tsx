@@ -27,7 +27,11 @@ export default function FranchiseCostSection() {
   const isInView = useInView(ref, { once: true, margin: '0px 0px -12% 0px', amount: 0.14 });
 
   return (
-    <section ref={ref} className="relative isolate overflow-hidden bg-[#fff8ef] pb-20 pt-28 md:pb-28 md:pt-36">
+    <section
+      id="franchise-cost"
+      ref={ref}
+      className="relative isolate overflow-hidden bg-[#fff8ef] pb-20 pt-28 md:pb-28 md:pt-36"
+    >
       <div className="pointer-events-none absolute inset-0 -z-30 bg-[#fff8ef]" />
       <div className="pointer-events-none absolute left-0 top-0 -z-20 h-full w-[7vw] bg-[#ffe4c4]/60" />
       <div className="pointer-events-none absolute right-0 top-0 -z-20 h-full w-[7vw] bg-[#ffe4c4]/60" />

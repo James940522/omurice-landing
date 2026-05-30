@@ -5,7 +5,7 @@ import Script from 'next/script';
 
 // Widgets
 import { Header } from '@/widgets/header';
-import { HeroSection } from '@/widgets/hero';
+import { FranchiseHeroSection } from '@/widgets/hero';
 import { BrandIntroSection } from '@/widgets/brand-intro';
 import { WhyChooseSection } from '@/widgets/why-choose';
 import { RevenueProofSection } from '@/widgets/revenue-proof';
@@ -162,7 +162,7 @@ export default function Home() {
 
       <main className="min-h-screen font-sans">
         <Header />
-        <HeroSection />
+        <FranchiseHeroSection />
         <BrandIntroSection />
         <WhyChooseSection />
         <RevenueProofSection />
