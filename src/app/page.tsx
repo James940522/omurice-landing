@@ -13,7 +13,6 @@ import { FranchiseCostSection } from '@/widgets/franchise-cost';
 import { StartupProcessSection } from '@/widgets/startup-process';
 import { MenuSection } from '@/widgets/menu';
 import { BrandDesignSection } from '@/widgets/brand-design';
-import { ReviewsSection } from '@/widgets/reviews';
 import { CustomerBrandSection } from '@/widgets/customer-brand';
 import { StoreMapSection } from '@/widgets/store-map';
 import { ContactFormSection } from '@/widgets/contact-form';
@@ -171,7 +170,6 @@ export default function Home() {
         <StartupProcessSection />
         <MenuSection />
         <BrandDesignSection />
-        <ReviewsSection />
         <CustomerBrandSection />
         <StoreMapSection />
         <ContactFormSection />

@@ -1,2 +1,1 @@
-export { default as ReviewsSection } from './ui/ReviewsSection';
-
+export { default as LegacyReviewsSection } from './legacy/ReviewsSection';

@@ -57,6 +57,7 @@ export default function CustomerBrandSection() {
 
   return (
     <section
+      id="reviews"
       ref={ref}
       className="relative w-full overflow-hidden bg-white pt-20 md:pt-28 lg:pt-32"
     >

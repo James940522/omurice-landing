@@ -1,731 +1,457 @@
 'use client';
 
-import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { useRef, useState } from 'react';
-import { cn } from '@/shared/lib/utils';
+import { ChevronLeft, ChevronRight, Trophy } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
+import { useRef, useState } from 'react';
 
 interface MenuItem {
   name: string;
   image: string;
+  tags?: string[];
+  badge?: string;
+  deliveryPrice?: string;
+  pickupPrice?: string;
 }
 
 interface MenuCategory {
   id: string;
   name: string;
-  isNew?: boolean;
   items: MenuItem[];
 }
 
-interface Brand {
-  id: string;
-  name: string;
-  logo: string;
-  bgColor: string;
-  accentColor: string;
-  categories: MenuCategory[];
-}
+const MENU_BASE = '/new-asset/menu';
 
-const brands: Brand[] = [
+const DIR = {
+  omurice: '오므라이스',
+  white: '화이트 오므라이스',
+  kimchi: '김치 오므라이스',
+  toowoomba: '투움바 오므라이스',
+  whiteKimchi: '화이트 김치 오므라이스',
+  bokkeumbap: '김치볶음밥',
+  half: '하프 앤 하프',
+  side: '사이드',
+} as const;
+
+const TOPPINGS = [
+  '큐브스테이크',
+  '돈까스',
+  '떡갈비',
+  '가라아게',
+  '새우까스',
+  '삼겹',
+  '우삼겹',
+  '스팸',
+  '소세지',
+];
+
+const img = (...parts: string[]) => `${MENU_BASE}/${parts.join('/')}`;
+
+const dish = (dir: string, name: string, tags?: string[]): MenuItem => ({
+  name,
+  image: img(dir, `${name}.jpeg`),
+  tags,
+});
+
+const toppingDishes = (dir: string, suffix: string): MenuItem[] =>
+  TOPPINGS.map((topping) => dish(dir, `${topping} ${suffix}`));
+
+const bestMenus: MenuItem[] = [
   {
-    id: 'omurice',
-    name: '오늘은 오므라이스',
-    logo: '/asset/logo/오늘은_오므라이스_풀로고.jpeg',
-    bgColor: 'bg-yellow-400',
-    accentColor: 'yellow',
-    categories: [
+    name: '큐브 스테이크 오므라이스',
+    image: img(DIR.omurice, '큐브스테이크 오므라이스.jpeg'),
+    badge: '30% 쿠폰 / 무료배달',
+    deliveryPrice: '13,900원',
+    pickupPrice: '13,900원',
+  },
+  {
+    name: '새우까스 오므라이스',
+    image: img(DIR.omurice, '새우까스 오므라이스.jpeg'),
+    badge: '최애메뉴',
+    deliveryPrice: '12,900원',
+    pickupPrice: '12,900원',
+  },
+  {
+    name: '소세지 김치 오므라이스',
+    image: img(DIR.kimchi, '소세지 김치 오므라이스.jpeg'),
+    deliveryPrice: '12,900원',
+    pickupPrice: '12,900원',
+  },
+  {
+    name: '돈까스 김치 오므라이스',
+    image: img(DIR.kimchi, '돈까스 김치 오므라이스.jpeg'),
+    deliveryPrice: '13,900원',
+    pickupPrice: '13,900원',
+  },
+  {
+    name: '나홀로 오므라이스 세트',
+    image: img('나홀로 오므라이스 세트.jpg'),
+    deliveryPrice: '16,900원',
+    pickupPrice: '16,900원',
+  },
+  {
+    name: '둘이서 배터지는 강호동 세트',
+    image: img('둘이서 배터지는 강호동 세트.jpg'),
+    deliveryPrice: '31,800원',
+    pickupPrice: '31,800원',
+  },
+];
+
+const menuCategories: MenuCategory[] = [
+  {
+    id: 'set',
+    name: '세트',
+    items: [
       {
-        id: 'omurice',
-        name: '오므라이스',
-        items: [
-          {
-            name: '큐브스테이크 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/오므라이스/큐브스테이크 오므라이스.jpg',
-          },
-          {
-            name: '돈까스 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/오므라이스/돈까스 오므라이스.jpg',
-          },
-          {
-            name: '떡갈비 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/오므라이스/떡갈비 오므라이스.jpg',
-          },
-          {
-            name: '가라아게 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/오므라이스/가라아게 오므라이스.jpg',
-          },
-          {
-            name: '새우까스 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/오므라이스/새우까스 오므라이스.jpg',
-          },
-          {
-            name: '삼겹 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/오므라이스/삼겹 오므라이스.jpg',
-          },
-          {
-            name: '우삼겹 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/오므라이스/우삼겹 오므라이스.jpg',
-          },
-          {
-            name: '스팸 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/오므라이스/스팸 오므라이스.jpg',
-          },
-          {
-            name: '소세지 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/오므라이스/소세지 오므라이스.jpg',
-          },
-          {
-            name: '블랙앤화이트 오므라이스',
-            image:
-              '/asset/menu/오늘은_오므라이스/블랙앤화이트오므라이스/블랙앤화이트오므라이스.jpg',
-          },
-        ],
+        name: '나홀로 오므라이스 세트',
+        image: img('나홀로 오므라이스 세트.jpg'),
       },
       {
-        id: 'white',
-        name: '화이트 오므라이스',
-        items: [
-          {
-            name: '큐브스테이크 화이트 오므라이스',
-            image:
-              '/asset/menu/오늘은_오므라이스/화이트오므라이스/큐브 스테이크 화이트 오므라이스.jpg',
-          },
-          {
-            name: '돈까스 화이트 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/화이트오므라이스/돈까스 화이트 오므라이스.jpg',
-          },
-          {
-            name: '떡갈비 화이트 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/화이트오므라이스/떡갈비 화이트 오므라이스.jpg',
-          },
-          {
-            name: '가라아게 화이트 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/화이트오므라이스/가라아게 화이트 오므라이스.jpg',
-          },
-          {
-            name: '새우까스 화이트 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/화이트오므라이스/새우까스 화이트 오므라이스.jpg',
-          },
-          {
-            name: '삼겹 화이트 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/화이트오므라이스/삼겹 화이트 오므라이스.jpg',
-          },
-          {
-            name: '우삼겹 화이트 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/화이트오므라이스/우삼겹 화이트 오므라이스.jpg',
-          },
-          {
-            name: '스팸 화이트 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/화이트오므라이스/스팸 화이트 오므라이스.jpg',
-          },
-          {
-            name: '소세지 화이트 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/화이트오므라이스/소세지 화이트 오므라이스.jpg',
-          },
-        ],
+        name: '둘이서 오므라이스 세트',
+        image: img('둘이서 오므라이스 세트.jpeg'),
       },
       {
-        id: 'kimchi',
-        name: '김치 오므라이스',
-        items: [
-          {
-            name: '큐브스테이크 김치 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/김치오므라이스/큐브스테이크 김치 오므라이스.jpg',
-          },
-          {
-            name: '돈까스 김치 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/김치오므라이스/돈까스 김치 오므라이스.jpg',
-          },
-          {
-            name: '떡갈비 김치 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/김치오므라이스/떡갈비 김치 오므라이스.jpg',
-          },
-          {
-            name: '가라아게 김치 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/김치오므라이스/가라아게 김치 오므라이스.jpg',
-          },
-          {
-            name: '새우까스 김치 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/김치오므라이스/새우까스 김치 오므라이스.jpg',
-          },
-          {
-            name: '삼겹 김치 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/김치오므라이스/삼겹 김치 오므라이스.jpg',
-          },
-          {
-            name: '우삼겹 김치 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/김치오므라이스/우삼겹 김치 오므라이스.jpg',
-          },
-          {
-            name: '스팸 김치 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/김치오므라이스/스팸 김치 오므라이스.jpg',
-          },
-          {
-            name: '소세지 김치 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/김치오므라이스/소세지 김치 오므라이스.jpg',
-          },
-        ],
-      },
-      {
-        id: 'kimchi-white',
-        name: '화이트 김치 오므라이스',
-        items: [
-          {
-            name: '큐브스테이크 화이트 김치 오므라이스',
-            image:
-              '/asset/menu/오늘은_오므라이스/화이트김치오므라이스/큐브스테이크 화이트 김치 오므라이스.jpg',
-          },
-          {
-            name: '돈까스 화이트 김치 오므라이스',
-            image:
-              '/asset/menu/오늘은_오므라이스/화이트김치오므라이스/돈까스 화이트 김치 오므라이스.jpg',
-          },
-          {
-            name: '떡갈비 화이트 김치 오므라이스',
-            image:
-              '/asset/menu/오늘은_오므라이스/화이트김치오므라이스/떡갈비 화이트 김치 오므라이스.jpg',
-          },
-          {
-            name: '가라아게 화이트 김치 오므라이스',
-            image:
-              '/asset/menu/오늘은_오므라이스/화이트김치오므라이스/가라아게 화이트 김치 오므라이스.jpg',
-          },
-          {
-            name: '새우까스 화이트 김치 오므라이스',
-            image:
-              '/asset/menu/오늘은_오므라이스/화이트김치오므라이스/새우까스 화이트 김치 오므라이스.jpg',
-          },
-          {
-            name: '삼겹 화이트 김치 오므라이스',
-            image:
-              '/asset/menu/오늘은_오므라이스/화이트김치오므라이스/삼겹 화이트 김치 오므라이스.jpg',
-          },
-          {
-            name: '우삼겹 화이트 김치 오므라이스',
-            image:
-              '/asset/menu/오늘은_오므라이스/화이트김치오므라이스/우삼겹 화이트 김치 오므라이스.jpg',
-          },
-          {
-            name: '스팸 화이트 김치 오므라이스',
-            image:
-              '/asset/menu/오늘은_오므라이스/화이트김치오므라이스/스팸 화이트 김치 오므라이스.jpg',
-          },
-          {
-            name: '소세지 화이트 김치 오므라이스',
-            image:
-              '/asset/menu/오늘은_오므라이스/화이트김치오므라이스/소세지 화이트 김치 오므라이스.jpg',
-          },
-        ],
-      },
-      {
-        id: 'toowoomba',
-        name: '투움바 오므라이스',
-        isNew: true,
-        items: [
-          {
-            name: '가라아게 투움바 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/가라아게 투움바 오므라이스.jpg',
-          },
-          {
-            name: '돈까스 투움바 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/돈까스 투움바 오므라이스.jpg',
-          },
-          {
-            name: '떡갈비 투움바 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/떡갈비 투움바 오므라이스.jpg',
-          },
-          {
-            name: '삼겹 투움바 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/삼겹 투움바 오므라이스.jpg',
-          },
-          {
-            name: '새우까스 투움바 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/새우까스 투움바 오므라이스.jpg',
-          },
-          {
-            name: '소세지 투움바 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/소세지 투움바 오므라이스.jpg',
-          },
-          {
-            name: '스팸 투움바 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/스팸 투움바 오므라이스.jpg',
-          },
-          {
-            name: '우삼겹 투움바 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/우삼겹 투움바 오므라이스.jpg',
-          },
-          {
-            name: '큐브스테이크 투움바 오므라이스',
-            image:
-              '/asset/menu/오늘은_오므라이스/투움바오므라이스/큐브스테이크 투움바 오므라이스.jpg',
-          },
-          {
-            name: '블랙 앤 투움바 오므라이스',
-            image: '/asset/menu/오늘은_오므라이스/투움바오므라이스/블랙 앤 투움바 오므라이스.jpg',
-          },
-        ],
-      },
-      {
-        id: 'bokkeumbap',
-        name: '김치 볶음밥',
-        items: [
-          {
-            name: '큐브스테이크 김치볶음밥',
-            image: '/asset/menu/오늘은_오므라이스/김치볶음밥/큐브스테이크 김치볶음밥.jpg',
-          },
-          {
-            name: '돈까스 김치볶음밥',
-            image: '/asset/menu/오늘은_오므라이스/김치볶음밥/돈까스 김치볶음밥.jpg',
-          },
-          {
-            name: '떡갈비 김치볶음밥',
-            image: '/asset/menu/오늘은_오므라이스/김치볶음밥/떡갈비 김치볶음밥.jpg',
-          },
-          {
-            name: '가라아게 김치볶음밥',
-            image: '/asset/menu/오늘은_오므라이스/김치볶음밥/가라아게 김치볶음밥.jpg',
-          },
-          {
-            name: '새우까스 김치볶음밥',
-            image: '/asset/menu/오늘은_오므라이스/김치볶음밥/새우까스 김치볶음밥.jpg',
-          },
-          {
-            name: '삼겹 김치볶음밥',
-            image: '/asset/menu/오늘은_오므라이스/김치볶음밥/삼겹 김치볶음밥.jpg',
-          },
-          {
-            name: '우삼겹 김치볶음밥',
-            image: '/asset/menu/오늘은_오므라이스/김치볶음밥/우삼겹 김치볶음밥.jpg',
-          },
-          {
-            name: '스팸 김치볶음밥',
-            image: '/asset/menu/오늘은_오므라이스/김치볶음밥/스팸 김치볶음밥.jpg',
-          },
-          {
-            name: '소세지 김치볶음밥',
-            image: '/asset/menu/오늘은_오므라이스/김치볶음밥/소세지 김치볶음밥.jpg',
-          },
-        ],
-      },
-      {
-        id: 'side',
-        name: '사이드',
-        items: [
-          { name: '감자튀김', image: '/asset/menu/오늘은_오므라이스/사이드/감자튀김.jpg' },
-          { name: '가라아게', image: '/asset/menu/오늘은_오므라이스/사이드/가라아게.jpg' },
-          { name: '버팔로윙', image: '/asset/menu/오늘은_오므라이스/사이드/버팔로윙.jpg' },
-          { name: '버팔로봉', image: '/asset/menu/오늘은_오므라이스/사이드/버팔로봉.jpg' },
-          { name: '짜장만두', image: '/asset/menu/오늘은_오므라이스/사이드/짜장만두.jpg' },
-          { name: '짬뽕만두', image: '/asset/menu/오늘은_오므라이스/사이드/짬뽕만두.jpg' },
-          { name: '대왕소세지', image: '/asset/menu/오늘은_오므라이스/사이드/대왕소세지.jpg' },
-          { name: '크림치즈볼', image: '/asset/menu/오늘은_오므라이스/사이드/치즈볼.jpg' },
-        ],
+        name: '둘이서 배터지는 강호동 세트',
+        image: img('둘이서 배터지는 강호동 세트.jpg'),
       },
     ],
   },
   {
-    id: 'eggeats',
-    name: '에그이츠',
-    logo: '/asset/logo/에그이츠_로고.jpeg',
-    bgColor: 'bg-orange-500',
-    accentColor: 'orange',
-    categories: [
+    id: 'omurice',
+    name: '오므라이스',
+    items: toppingDishes(DIR.omurice, '오므라이스'),
+  },
+  {
+    id: 'white',
+    name: '화이트',
+    items: toppingDishes(DIR.white, '화이트 오므라이스'),
+  },
+  {
+    id: 'kimchi',
+    name: '김치',
+    items: toppingDishes(DIR.kimchi, '김치 오므라이스'),
+  },
+  {
+    id: 'toowoomba',
+    name: '투움바',
+    items: toppingDishes(DIR.toowoomba, '투움바 오므라이스'),
+  },
+  {
+    id: 'white-kimchi',
+    name: '화이트 김치',
+    items: [
+      ...TOPPINGS.filter((topping) => topping !== '우삼겹').map((topping) =>
+        dish(DIR.whiteKimchi, `${topping} 화이트 김치 오므라이스`)
+      ),
       {
-        id: 'eggdeopbap',
-        name: '에그덮밥',
-        items: [
-          {
-            name: '도쿄스테이크 에그덮밥',
-            image: '/asset/menu/에그이츠/에그덮밥/도쿄스테이크 에그덮밥.jpg',
-          },
-          { name: '돈까스 에그덮밥', image: '/asset/menu/에그이츠/에그덮밥/돈까스 에그덮밥.jpg' },
-          { name: '떡갈비 에그덮밥', image: '/asset/menu/에그이츠/에그덮밥/떡갈비 에그덮밥.jpg' },
-          {
-            name: '가라아게 에그덮밥',
-            image: '/asset/menu/에그이츠/에그덮밥/가라아게 에그덮밥.jpg',
-          },
-          {
-            name: '새우까스 에그덮밥',
-            image: '/asset/menu/에그이츠/에그덮밥/새우까스 에그덮밥.jpg',
-          },
-          { name: '목살 에그덮밥', image: '/asset/menu/에그이츠/에그덮밥/목살 에그덮밥.jpg' },
-          {
-            name: '목살 김치 에그덮밥',
-            image: '/asset/menu/에그이츠/에그덮밥/목살 김치 에그덮밥.jpg',
-          },
-          { name: '삼겹 에그덮밥', image: '/asset/menu/에그이츠/에그덮밥/삼겹 에그덮밥.jpg' },
-          {
-            name: '삼겹 김치 에그덮밥',
-            image: '/asset/menu/에그이츠/에그덮밥/삼겹 김치 에그덮밥.jpg',
-          },
-          { name: '우삼겹 에그덮밥', image: '/asset/menu/에그이츠/에그덮밥/우삼겹 에그덮밥.jpg' },
-          {
-            name: '우삼겹 김치 에그덮밥',
-            image: '/asset/menu/에그이츠/에그덮밥/우삼겹 김치 에그덮밥.jpg',
-          },
-          { name: '스팸 에그덮밥', image: '/asset/menu/에그이츠/에그덮밥/스팸 에그덮밥.jpg' },
-          {
-            name: '소세지 김치 에그덮밥',
-            image: '/asset/menu/에그이츠/에그덮밥/소세지 김치 에그덮밥.jpg',
-          },
-          {
-            name: '치킨까스 에그덮밥',
-            image: '/asset/menu/에그이츠/에그덮밥/치킨까스 에그덮밥.jpg',
-          },
-        ],
+        name: '우삼겹 화이트 김치 오므라이스',
+        image: img(DIR.whiteKimchi, '우삼겸 화이트 김치 오므라이스.jpeg'),
       },
-      {
-        id: 'kimchi-pilaf',
-        name: '김치 베이컨 필라프',
-        items: [
-          {
-            name: '큐브스테이크 김치 베이컨 필라프',
-            image: '/asset/menu/에그이츠/김치 베이컨 필라프/큐브스테이크 김치 베이컨 필라프.jpg',
-          },
-          {
-            name: '돈까스 김치 베이컨 필라프',
-            image: '/asset/menu/에그이츠/김치 베이컨 필라프/돈까스 김치 베이컨 필라프.jpg',
-          },
-          {
-            name: '떡갈비 김치 베이컨 필라프',
-            image: '/asset/menu/에그이츠/김치 베이컨 필라프/떡갈비 김치 베이컨 필라프.jpg',
-          },
-          {
-            name: '가라아게 김치 베이컨 필라프',
-            image: '/asset/menu/에그이츠/김치 베이컨 필라프/가라아게 김치 베이컨 필라프.jpg',
-          },
-          {
-            name: '새우까스 김치 베이컨 필라프',
-            image: '/asset/menu/에그이츠/김치 베이컨 필라프/새우까스 김치  베이컨 필라프.jpg',
-          },
-          {
-            name: '목살 김치 베이컨 필라프',
-            image: '/asset/menu/에그이츠/김치 베이컨 필라프/목살 김치 베이컨 필라프.jpg',
-          },
-          {
-            name: '삼겹 김치 베이컨 필라프',
-            image: '/asset/menu/에그이츠/김치 베이컨 필라프/삼겹 김치 베이컨 필라프.jpg',
-          },
-          {
-            name: '우삼겹 김치 베이컨 필라프',
-            image: '/asset/menu/에그이츠/김치 베이컨 필라프/우삼겹 김치 베이컨 필라프.jpg',
-          },
-          {
-            name: '스팸 김치 베이컨 필라프',
-            image: '/asset/menu/에그이츠/김치 베이컨 필라프/스팸 김치 베이컨 필라프.jpg',
-          },
-          {
-            name: '대왕소세지 김치 베이컨 필라프',
-            image: '/asset/menu/에그이츠/김치 베이컨 필라프/대왕소세지 김치 베이컨 필라프.jpg',
-          },
-        ],
-      },
-      {
-        id: 'baek-pilaf',
-        name: '백김치 필라프',
-        items: [
-          {
-            name: '큐브스테이크 백김치 필라프',
-            image: '/asset/menu/에그이츠/백김치 필라프/큐브스테이크 백김치 필라프.jpg',
-          },
-          {
-            name: '돈까스 백김치 필라프',
-            image: '/asset/menu/에그이츠/백김치 필라프/돈까스 백김치 필라프.jpg',
-          },
-          {
-            name: '떡갈비 백김치 필라프',
-            image: '/asset/menu/에그이츠/백김치 필라프/떡갈비 백김치 필라프.jpg',
-          },
-          {
-            name: '가라아게 백김치 필라프',
-            image: '/asset/menu/에그이츠/백김치 필라프/가라아게 백김치 필라프.jpg',
-          },
-          {
-            name: '새우까스 백김치 필라프',
-            image: '/asset/menu/에그이츠/백김치 필라프/새우까스 백김치 필라프.jpg',
-          },
-          {
-            name: '목살 백김치 필라프',
-            image: '/asset/menu/에그이츠/백김치 필라프/목살 백김치 필라프.jpg',
-          },
-          {
-            name: '삼겹 백김치 필라프',
-            image: '/asset/menu/에그이츠/백김치 필라프/삼겹 백김치 필라프.jpg',
-          },
-          {
-            name: '우삼겹 백김치 필라프',
-            image: '/asset/menu/에그이츠/백김치 필라프/우삼겹 백김치 필라프.jpg',
-          },
-          {
-            name: '스팸 백김치 필라프',
-            image: '/asset/menu/에그이츠/백김치 필라프/스팸 백김치 필라프.jpg',
-          },
-          {
-            name: '대왕소세지 백김치 필라프',
-            image: '/asset/menu/에그이츠/백김치 필라프/대왕소세지 백김치 필라프.jpg',
-          },
-        ],
-      },
-      {
-        id: 'omurice',
-        name: '오므라이스',
-        items: [
-          {
-            name: '큐브스테이크 오므라이스',
-            image: '/asset/menu/에그이츠/오므라이스/큐브스테이크 오므라이스.jpg',
-          },
-          {
-            name: '돈까스 오므라이스',
-            image: '/asset/menu/에그이츠/오므라이스/돈까스 오므라이스.jpg',
-          },
-          {
-            name: '떡갈비 오므라이스',
-            image: '/asset/menu/에그이츠/오므라이스/떡갈비 오므라이스jpg.jpg',
-          },
-          {
-            name: '가라아게 오므라이스',
-            image: '/asset/menu/에그이츠/오므라이스/가라아게 오므라이스.jpg',
-          },
-          {
-            name: '새우까스 오므라이스',
-            image: '/asset/menu/에그이츠/오므라이스/새우까스 오므라이스.jpg',
-          },
-          { name: '삼겹 오므라이스', image: '/asset/menu/에그이츠/오므라이스/삼겹 오므라이스.jpg' },
-          {
-            name: '우삼겹 오므라이스',
-            image: '/asset/menu/에그이츠/오므라이스/우삼겹 오므라이스.jpg',
-          },
-          { name: '스팸 오므라이스', image: '/asset/menu/에그이츠/오므라이스/스팸 오므라이스.jpg' },
-          {
-            name: '소세지 오므라이스',
-            image: '/asset/menu/에그이츠/오므라이스/소세지 오므라이스.jpg',
-          },
-          {
-            name: '치킨치즈까스 오므라이스',
-            image: '/asset/menu/에그이츠/오므라이스/치킨치즈까스 오므라이스.jpg',
-          },
-        ],
-      },
-      {
-        id: 'side',
-        name: '사이드',
-        items: [
-          { name: '감자튀김', image: '/asset/menu/에그이츠/사이드/감자튀김.jpg' },
-          { name: '가라아게', image: '/asset/menu/에그이츠/사이드/가라아게.jpg' },
-          { name: '돈까스', image: '/asset/menu/에그이츠/사이드/돈까스.jpg' },
-          { name: '떡갈비', image: '/asset/menu/에그이츠/사이드/떡갈비.jpg' },
-          { name: '새우까스', image: '/asset/menu/에그이츠/사이드/새우까스.jpg' },
-          { name: '버팔로윙', image: '/asset/menu/에그이츠/사이드/버팔로윙.jpg' },
-          { name: '버팔로봉', image: '/asset/menu/에그이츠/사이드/버팔로봉.jpg' },
-          { name: '팝콘치킨', image: '/asset/menu/에그이츠/사이드/팝콘치킨.jpg' },
-          { name: '치킨치즈까스', image: '/asset/menu/에그이츠/사이드/치킨치즈까스.jpg' },
-          { name: '짜장만두', image: '/asset/menu/에그이츠/사이드/짜장만두.jpg' },
-          { name: '짬뽕만두', image: '/asset/menu/에그이츠/사이드/짬뽕만두.jpg' },
-          { name: '치즈볼', image: '/asset/menu/에그이츠/사이드/치즈볼.jpg' },
-        ],
-      },
+    ],
+  },
+  {
+    id: 'bokkeumbap',
+    name: '김치볶음밥',
+    items: TOPPINGS.map((topping) => dish(DIR.bokkeumbap, `${topping} 베이컨 김치볶음밥`)),
+  },
+  {
+    id: 'half',
+    name: '하프앤하프',
+    items: [dish(DIR.half, '블랙앤화이트'), dish(DIR.half, '블랙앤투움바')],
+  },
+  {
+    id: 'side',
+    name: '사이드',
+    items: [
+      { name: '가라아게', image: img(DIR.side, '가라아게.jpg') },
+      { name: '감자튀김', image: img(DIR.side, '감자튀김.jpg') },
+      { name: '대왕소세지', image: img(DIR.side, '대왕소세지.jpg') },
+      { name: '돈까스', image: img(DIR.side, '돈까스.jpeg') },
+      { name: '떡갈비', image: img(DIR.side, '떡갈비.jpeg') },
+      { name: '버팔로봉', image: img(DIR.side, '버팔로봉.jpg') },
+      { name: '버팔로윙', image: img(DIR.side, '버팔로윙.jpg') },
+      { name: '짜장만두', image: img(DIR.side, '짜장만두.jpg') },
+      { name: '짬뽕만두', image: img(DIR.side, '짬뽕만두.jpg') },
+      { name: '치즈볼', image: img(DIR.side, '치즈볼.jpg') },
+      { name: '팝콘치킨', image: img(DIR.side, '팝콘치킨.jpeg') },
     ],
   },
 ];
 
+const marqueeItems = [
+  'TODAY OMURICE',
+  'BEST MENU',
+  'RICE OMELET',
+  'FRESH TOPPING',
+  'DELIVERY FAVORITE',
+  'SIGNATURE SAUCE',
+];
+
+function BestMenuCard({
+  item,
+  priority,
+  index,
+}: {
+  item: MenuItem;
+  priority: boolean;
+  index: number;
+}) {
+  return (
+    <article className="group relative w-[78vw] max-w-[520px] shrink-0 snap-start overflow-hidden rounded-[8px] bg-[#6b4423] p-2 shadow-[0_18px_40px_rgba(107,68,35,0.2)] sm:w-[420px] lg:w-[460px] xl:w-[520px]">
+      <div className="relative aspect-[16/10] overflow-hidden rounded-[8px] bg-[#fff4df]">
+        <Image
+          src={item.image}
+          alt={item.name}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          sizes="(max-width: 640px) 78vw, (max-width: 1280px) 460px, 520px"
+          priority={priority}
+          quality={90}
+        />
+        <div className="absolute left-3 top-3 rounded-[8px] bg-[#fec601] px-3 py-2 font-heading text-xs font-black text-[#4e2d14] shadow-[0_8px_18px_rgba(78,45,20,0.16)]">
+          BEST {String(index + 1).padStart(2, '0')}
+        </div>
+      </div>
+      <div className="px-4 py-5 text-white sm:px-6">
+        {item.badge && (
+          <p className="mb-3 inline-flex rounded-[8px] bg-[#ff6b12] px-3 py-1.5 text-xs font-black text-white">
+            {item.badge}
+          </p>
+        )}
+        <h3 className="break-keep font-heading text-xl font-black leading-tight sm:text-2xl">
+          {item.name}
+        </h3>
+        <dl className="mt-4 space-y-1.5 text-sm font-bold text-white/90 sm:text-base">
+          <div className="flex gap-3">
+            <dt className="text-[#fec601]">배달</dt>
+            <dd>{item.deliveryPrice}</dd>
+          </div>
+          <div className="flex gap-3">
+            <dt className="text-[#fec601]">픽업</dt>
+            <dd>{item.pickupPrice}</dd>
+          </div>
+        </dl>
+      </div>
+    </article>
+  );
+}
+
+function MenuCard({ item, priority }: { item: MenuItem; priority: boolean }) {
+  return (
+    <article className="group overflow-hidden rounded-[8px] bg-white shadow-[0_16px_36px_rgba(107,68,35,0.12)] ring-1 ring-[#ffd68a]">
+      <div className="relative aspect-[4/3] overflow-hidden bg-[#fff4df]">
+        <Image
+          src={item.image}
+          alt={item.name}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.035]"
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          priority={priority}
+          quality={88}
+        />
+      </div>
+      <div className="flex min-h-16 items-center justify-center px-3 py-4">
+        <h3 className="break-keep text-center font-heading text-sm font-black leading-snug text-[#4e2d14] sm:text-base">
+          {item.name}
+        </h3>
+      </div>
+    </article>
+  );
+}
+
 export default function MenuSection() {
-  const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [activeBrand, setActiveBrand] = useState(0);
-  const [activeCategory, setActiveCategory] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const [activeCategory, setActiveCategory] = useState(menuCategories[0].id);
+  const [activeBestIndex, setActiveBestIndex] = useState(0);
 
-  const currentBrand = brands[activeBrand];
-  const currentCategory = currentBrand.categories[activeCategory];
+  const currentCategory =
+    menuCategories.find((category) => category.id === activeCategory) ?? menuCategories[0];
 
-  const scrollToTop = () => {
-    ref.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
-  };
+  const scrollBestMenus = (direction: 'prev' | 'next') => {
+    const slider = sliderRef.current;
 
-  const handleBrandChange = (index: number) => {
-    setActiveBrand(index);
-    setActiveCategory(0);
-    // 브랜드 변경 시 섹션 상단으로 스크롤
-    setTimeout(scrollToTop, 50);
-  };
+    if (!slider) return;
 
-  const handleCategoryChange = (index: number) => {
-    setActiveCategory(index);
-    // 카테고리 변경 시 섹션 상단으로 스크롤
-    setTimeout(scrollToTop, 50);
+    const nextIndex =
+      direction === 'next'
+        ? (activeBestIndex + 1) % bestMenus.length
+        : (activeBestIndex - 1 + bestMenus.length) % bestMenus.length;
+    const target = slider.children[nextIndex] as HTMLElement | undefined;
+
+    if (target) {
+      slider.scrollTo({ left: target.offsetLeft, behavior: 'smooth' });
+      setActiveBestIndex(nextIndex);
+    }
   };
 
   return (
-    <section id="menu" className="py-20 md:py-32 relative overflow-hidden" ref={ref}>
-      {/* 배경 이미지 */}
-      <div className="absolute inset-0 z-0">
-        <Image src="/asset/bg/sec6-bg.jpg" alt="배경" fill className="object-cover" quality={90} />
+    <section
+      id="menu"
+      ref={sectionRef}
+      className="relative overflow-hidden bg-[#fff7e8] py-20 text-[#4e2d14] md:py-28"
+    >
+      <style jsx global>{`
+        @keyframes menu-marquee {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+
+        .menu-marquee-track {
+          animation: menu-marquee 28s linear infinite;
+        }
+      `}</style>
+
+      <div
+        className="pointer-events-none absolute inset-0 opacity-70"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,198,1,0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(255,198,1,0.18) 1px, transparent 1px)',
+          backgroundSize: '44px 44px',
+        }}
+      />
+      <div className="pointer-events-none absolute -left-28 top-28 h-28 w-[46vw] rotate-[-7deg] bg-[#fec601]/20" />
+      <div className="pointer-events-none absolute -right-20 top-52 h-24 w-[40vw] rotate-[7deg] bg-[#ff6b12]/12" />
+      <div
+        className="pointer-events-none absolute right-0 top-10 h-14 w-[46vw] opacity-25"
+        style={{
+          backgroundImage:
+            'linear-gradient(45deg, #ff6b12 25%, transparent 25%), linear-gradient(-45deg, #ff6b12 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ff6b12 75%), linear-gradient(-45deg, transparent 75%, #ff6b12 75%)',
+          backgroundPosition: '0 0, 0 18px, 18px -18px, -18px 0',
+          backgroundSize: '36px 36px',
+        }}
+      />
+      <div className="pointer-events-none absolute left-4 top-[390px] hidden -rotate-90 font-heading text-7xl font-black text-[#6b4423]/5 lg:block">
+        TODAY OMURICE
+      </div>
+      <div className="pointer-events-none absolute left-1/2 top-[45%] h-[420px] w-[980px] -translate-x-1/2 rounded-t-full bg-white/60" />
+
+      <div className="relative z-10 mx-auto max-w-[1480px] px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="grid items-center gap-10 lg:grid-cols-[320px_minmax(0,1fr)] lg:gap-14"
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.65 }}
+        >
+          <div className="max-w-sm">
+            <div className="mb-6 flex h-11 w-11 items-center justify-center rounded-[8px] bg-[#ff6b12] text-white shadow-[0_12px_24px_rgba(255,107,18,0.24)]">
+              <Trophy size={24} strokeWidth={2.6} />
+            </div>
+            <p className="font-heading text-sm font-black uppercase text-[#ff6b12]">
+              Today Omurice
+            </p>
+            <h2 className="mt-3 font-heading text-5xl font-black leading-[1.02] text-[#6b4423] sm:text-6xl">
+              Best
+              <br />
+              Menu
+            </h2>
+            <p className="mt-5 break-keep text-lg font-bold leading-relaxed text-[#4e2d14]">
+              배달앱에서 먼저 찾는 인기 메뉴와 세트 구성을 보기 좋게 모았습니다.
+            </p>
+            <div className="mt-8 flex gap-2">
+              <button
+                type="button"
+                aria-label="이전 베스트 메뉴 보기"
+                onClick={() => scrollBestMenus('prev')}
+                className="flex h-12 w-12 items-center justify-center rounded-[8px] bg-[#6b4423] text-white transition hover:bg-[#4e2d14]"
+              >
+                <ChevronLeft size={26} strokeWidth={2.8} />
+              </button>
+              <button
+                type="button"
+                aria-label="다음 베스트 메뉴 보기"
+                onClick={() => scrollBestMenus('next')}
+                className="flex h-12 w-12 items-center justify-center rounded-[8px] bg-[#ff6b12] text-white transition hover:bg-[#df590a]"
+              >
+                <ChevronRight size={26} strokeWidth={2.8} />
+              </button>
+            </div>
+          </div>
+
+          <div className="relative min-w-0">
+            <div className="pointer-events-none absolute -left-8 -top-9 z-20 hidden h-32 w-32 rotate-[-18deg] items-center justify-center rounded-full border-4 border-[#ff6b12] bg-[#fec601] text-center font-heading text-sm font-black uppercase leading-tight text-[#6b4423] shadow-[0_18px_35px_rgba(255,107,18,0.24)] md:flex">
+              Best
+              <br />
+              Menu
+            </div>
+            <div
+              ref={sliderRef}
+              className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {bestMenus.map((item, index) => (
+                <BestMenuCard key={item.name} item={item} index={index} priority={index < 2} />
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* 타이틀 */}
+      <div className="relative z-10 mt-20 overflow-hidden bg-[#fec601] py-3 text-[#6b4423] shadow-[inset_0_1px_0_rgba(255,255,255,0.45),inset_0_-1px_0_rgba(107,68,35,0.08)]">
+        <div className="menu-marquee-track flex w-max gap-10 whitespace-nowrap font-heading text-lg font-black uppercase sm:text-xl">
+          {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, index) => (
+            <span key={`${item}-${index}`} className="flex items-center gap-10">
+              {item}
+              <span className="h-2 w-2 rounded-full bg-[#ff6b12]" />
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-6xl px-4 pt-16 sm:px-6 lg:px-8">
         <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 50 }}
+          className="text-center"
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.12 }}
         >
-          <h2 className="typo-h1 text-gray-900 mb-6 [text-shadow:2px_2px_0_#fff,-2px_-2px_0_#fff,2px_-2px_0_#fff,-2px_2px_0_#fff,4px_4px_8px_rgba(255,255,255,0.8)]">
-            메뉴 소개
+          <p className="font-heading text-sm font-black uppercase text-[#ff6b12]">All Menu</p>
+          <h2 className="mt-2 font-heading text-4xl font-black text-[#6b4423] sm:text-5xl">
+            전체 메뉴 안내
           </h2>
-          <p className="typo-body text-gray-900 bg-white/80 px-6 py-3 rounded-2xl inline-block mb-6 font-bold shadow-xl">
-            브랜드를 선택하고 다양한 메뉴를 확인하세요
+          <p className="mt-4 break-keep text-base font-bold text-[#6b4423] sm:text-lg">
+            오므라이스부터 사이드까지, 오늘은 오므라이스의 메뉴를 한눈에 확인하세요.
           </p>
         </motion.div>
 
-        {/* 브랜드 선택 */}
-        <motion.div
-          className="flex justify-center items-center gap-6 sm:gap-12 mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {brands.map((brand, index) => (
-            <motion.button
-              key={brand.id}
-              onClick={() => handleBrandChange(index)}
-              className={cn(
-                'relative transition-all duration-300 overflow-hidden',
-                // 에그이츠만 rounded 배경 적용
-                brand.id === 'eggeats' && 'rounded-2xl',
-                activeBrand === index ? 'scale-110' : 'opacity-50 hover:opacity-80 hover:scale-105'
-              )}
-              whileHover={{ scale: activeBrand === index ? 1.1 : 1.05 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              {/* 로고 */}
-              <div className="relative flex items-center justify-center h-20 sm:h-28">
-                <Image
-                  src={brand.logo}
-                  alt={brand.name}
-                  width={220}
-                  height={100}
-                  className={cn(
-                    'h-full w-auto object-contain',
-                    // 에그이츠만 rounded
-                    brand.id === 'eggeats' && 'rounded-2xl'
-                  )}
-                  quality={90}
-                />
-              </div>
+        <div className="mx-auto mt-9 max-w-5xl overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex min-w-max gap-2 rounded-[8px] bg-[#6b4423] p-2 shadow-[0_18px_34px_rgba(107,68,35,0.16)]">
+            {menuCategories.map((category) => {
+              const isActive = category.id === activeCategory;
 
-              {/* 선택 표시 - 하단 인디케이터 */}
-              {activeBrand === index && (
-                <motion.div
-                  className={cn(
-                    'absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 rounded-full',
-                    brand.accentColor === 'yellow' ? 'bg-yellow-500' : 'bg-orange-500'
-                  )}
-                  layoutId="brandIndicator"
-                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                />
-              )}
-            </motion.button>
+              return (
+                <button
+                  key={category.id}
+                  type="button"
+                  onClick={() => setActiveCategory(category.id)}
+                  className={`rounded-[8px] px-4 py-3 text-sm font-black transition sm:px-6 ${
+                    isActive
+                      ? 'bg-[#fec601] text-[#4e2d14] shadow-[0_8px_18px_rgba(254,198,1,0.28)]'
+                      : 'text-white/90 hover:bg-white/10'
+                  }`}
+                >
+                  {category.name}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <motion.div
+          key={currentCategory.id}
+          className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+        >
+          {currentCategory.items.map((item, index) => (
+            <MenuCard key={`${currentCategory.id}-${item.name}`} item={item} priority={index < 4} />
           ))}
         </motion.div>
-
-        {/* 카테고리 탭 */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeBrand}
-            className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-          >
-            {currentBrand.categories.map((category, index) => (
-              <motion.button
-                key={category.id}
-                onClick={() => handleCategoryChange(index)}
-                className={cn(
-                  'relative px-4 py-2 md:px-6 md:py-3 rounded-full font-bold text-sm md:text-base transition-all duration-300 border-2',
-                  activeCategory === index
-                    ? cn(
-                        currentBrand.accentColor === 'yellow'
-                          ? 'bg-yellow-500 border-yellow-600'
-                          : 'bg-orange-500 border-orange-600',
-                        'text-white scale-105 shadow-xl'
-                      )
-                    : cn(
-                        'bg-white shadow-lg',
-                        currentBrand.accentColor === 'yellow'
-                          ? 'text-yellow-700 border-yellow-400 hover:bg-yellow-50'
-                          : 'text-orange-700 border-orange-400 hover:bg-orange-50'
-                      )
-                )}
-                style={{ fontFamily: 'var(--font-heading)' }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {category.name}
-                {category.isNew && (
-                  <span className="absolute -top-1 -right-1 inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] md:text-[10px] font-extrabold bg-red-500 text-white shadow-lg">
-                    NEW
-                  </span>
-                )}
-              </motion.button>
-            ))}
-          </motion.div>
-        </AnimatePresence>
-
-        {/* 메뉴 그리드 */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`${activeBrand}-${activeCategory}`}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.3 }}
-          >
-            {currentCategory.items.map((item, index) => (
-              <motion.div
-                key={item.name}
-                className={cn(
-                  'bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl border-3 transition-all duration-300',
-                  currentBrand.accentColor === 'yellow'
-                    ? 'border-yellow-400 hover:border-yellow-500'
-                    : 'border-orange-400 hover:border-orange-500'
-                )}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.03 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-              >
-                {/* 메뉴 이미지 */}
-                <div className="aspect-square relative overflow-hidden bg-gray-100">
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                    loading={index < 5 ? 'eager' : 'lazy'}
-                    quality={90}
-                  />
-                </div>
-
-                {/* 메뉴 이름 */}
-                <div className="p-3 md:p-4 lg:p-5">
-                  <h3
-                    className="text-sm md:text-base lg:text-lg font-medium text-foreground text-center break-keep"
-                    style={{ fontFamily: 'var(--font-heading)', wordBreak: 'keep-all' }}
-                  >
-                    {item.name}
-                  </h3>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
       </div>
     </section>
   );
