@@ -1,462 +1,117 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
-import type { Swiper as SwiperType } from 'swiper';
-import { cn } from '@/shared/lib/utils';
-import 'swiper/css';
-import 'swiper/css/pagination';
+import { useRef } from 'react';
 
-interface PresetOption {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-}
-
-interface BrandPreset {
-  id: string;
-  name: string;
-  logo: string;
-  options: PresetOption[];
-}
-
-const brandPresets: BrandPreset[] = [
+const storeDesigns = [
   {
-    id: 'omurice',
-    name: '오늘은 오므라이스',
-    logo: '/asset/logo/오늘은_오므라이스_풀로고.jpeg',
-    options: [
-      {
-        id: 'omu_a',
-        title: 'A',
-        description: '밝고 활기찬\n모던한 분위기',
-        image: '/asset/store/omu_a.jpeg',
-      },
-      {
-        id: 'omu_b',
-        title: 'B',
-        description: '따뜻하고\n아늑한 분위기',
-        image: '/asset/store/omu_b.jpeg',
-      },
-    ],
+    id: 'design-a',
+    label: 'DESIGN A',
+    title: '디자인 A',
+    description: '밝고 정돈된 무드의 오늘은 오므라이스 매장 디자인입니다.',
+    image: '/new-asset/store-interior/design-b.webp',
   },
   {
-    id: 'egg',
-    name: '에그이츠',
-    logo: '/asset/logo/에그이츠_로고.jpeg',
-    options: [
-      {
-        id: 'egg_a',
-        title: 'A',
-        description: '세련된\n모던 인테리어',
-        image: '/asset/store/egg_a.jpeg',
-      },
-      {
-        id: 'egg_b',
-        title: 'B',
-        description: '포근한\n클래식 인테리어',
-        image: '/asset/store/egg_b.jpeg',
-      },
-    ],
+    id: 'design-b',
+    label: 'DESIGN B',
+    title: '디자인 B',
+    description: '브랜드 컬러가 또렷하게 드러나는 오늘은 오므라이스 매장 디자인입니다.',
+    image: '/new-asset/store-interior/design-a.webp',
   },
 ];
-
-// 계절별 로고 캐러셀 컴포넌트
-function SeasonalLogoCarousel({
-  images,
-  currentIndex,
-  onIndexChange,
-}: {
-  images: string[];
-  currentIndex: number;
-  onIndexChange: (index: number) => void;
-}) {
-  const seasons = ['봄', '여름', '가을', '겨울'];
-  const swiperRef = useRef<SwiperType | null>(null);
-
-  // 외부 currentIndex 변경에 따라 Swiper 업데이트
-  useEffect(() => {
-    if (swiperRef.current && swiperRef.current.activeIndex !== currentIndex) {
-      swiperRef.current.slideTo(currentIndex);
-    }
-  }, [currentIndex]);
-
-  return (
-    <div className="relative">
-      {/* Swiper 캐러셀 */}
-      <div className="h-[200px] sm:h-[240px] md:h-[280px] lg:h-[320px]">
-        <Swiper
-          modules={[Autoplay, Pagination]}
-          spaceBetween={0}
-          slidesPerView={1}
-          centeredSlides={true}
-          loop={false}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
-          pagination={{
-            clickable: true,
-            el: '.seasonal-logo-pagination',
-          }}
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-          }}
-          onSlideChange={(swiper) => {
-            onIndexChange(swiper.activeIndex);
-          }}
-          className="h-full"
-        >
-          {images.map((image, index) => (
-            <SwiperSlide key={index} className="!flex !items-center !justify-center">
-              <div className="rounded-xl overflow-hidden">
-                <Image
-                  src={image}
-                  alt={`계절별 로고 ${seasons[index]}`}
-                  width={500}
-                  height={320}
-                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 45vw, (max-width: 1024px) 40vw, 35vw"
-                  className="w-auto h-[200px] sm:h-[240px] md:h-[280px] lg:h-[320px] object-contain"
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-
-      {/* 커스텀 페이지네이션 dots */}
-      <div className="seasonal-logo-pagination flex justify-center gap-2 mt-4 sm:mt-5 md:mt-6">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => {
-              onIndexChange(index);
-              swiperRef.current?.slideTo(index);
-            }}
-            aria-label={`${seasons[index]} 보기`}
-            className={`transition-all duration-300 rounded-full ${
-              index === currentIndex
-                ? 'w-8 sm:w-10 h-2 bg-amber-500'
-                : 'w-2 h-2 bg-gray-300 hover:bg-amber-300'
-            }`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export function StorePresetSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
-  // 싱크된 캐러셀 인덱스
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  const omuriceLogo = [
-    '/asset/season-logo/오므라이스_봄.jpeg',
-    '/asset/season-logo/오므라이스_여름.jpeg',
-    '/asset/season-logo/오므라이스_가을.jpeg',
-    '/asset/season-logo/오므라이스_겨울.jpeg',
-  ];
-
-  const eggEatsLogo = [
-    '/asset/season-logo/에그이츠_봄.jpeg',
-    '/asset/season-logo/에그이츠_여름.jpeg',
-    '/asset/season-logo/에그이츠_가을.jpeg',
-    '/asset/season-logo/에그이츠_겨울.jpeg',
-  ];
-
-  // 자동 회전 (싱크)
-  useEffect(() => {
-    if (isPaused) return;
-
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % 4);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [isPaused]);
-
   return (
-    <section
-      id="store-preset"
-      className="py-20 md:py-32 relative overflow-hidden"
-      ref={ref}
-      style={{
-        background: 'linear-gradient(180deg, #FFFBF0 0%, #FFF9E6 100%)',
-      }}
-    >
-      {/* 배경 장식 */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-yellow-400 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-40 h-40 bg-orange-400 rounded-full blur-3xl" />
+    <section id="store-preset" ref={ref} className="relative isolate overflow-hidden bg-[#fff8ef] py-20 md:py-28">
+      <div className="pointer-events-none absolute inset-0 -z-20 opacity-[0.13] [background-image:linear-gradient(90deg,rgba(85,58,31,0.16)_1px,transparent_1px),linear-gradient(0deg,rgba(85,58,31,0.1)_1px,transparent_1px)] [background-size:10px_10px]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-px bg-linear-to-r from-transparent via-[#ff6b12]/60 to-transparent" />
+      <div className="pointer-events-none absolute left-1/2 top-16 -z-10 hidden -translate-x-1/2 select-none whitespace-nowrap text-[clamp(4rem,12vw,11rem)] font-black leading-none tracking-[0.08em] text-[#ff6b12]/[0.055] md:block">
+        STORE DESIGN
       </div>
+      <div className="pointer-events-none absolute inset-x-[-12%] bottom-[-9rem] -z-10 h-72 rounded-t-[100%] bg-white/68 md:h-96" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* 섹션 헤더 */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
+          className="mb-12 text-center md:mb-14"
+          initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
+          <p className="mb-4 text-lg font-black text-[#8B4513]" style={{ fontFamily: 'Georgia, serif' }}>
+            Store Interior
+          </p>
           <h2
-            className="text-4xl md:text-6xl font-bold mb-6"
+            className="mb-5 text-4xl font-black leading-tight text-[#FEC601] md:text-6xl"
             style={{
               fontFamily: 'var(--font-heading)',
-              color: '#FEC601',
+              WebkitTextStroke: '1px #8B4513',
               textShadow:
-                '-2px -2px 0 #8B4513, 2px -2px 0 #8B4513, -2px 2px 0 #8B4513, 2px 2px 0 #8B4513, 4px 4px 8px rgba(0,0,0,0.5)',
+                '-2px -2px 0 #8B4513, 2px -2px 0 #8B4513, -2px 2px 0 #8B4513, 2px 2px 0 #8B4513, 4px 5px 0 rgba(139,69,19,0.34), 7px 9px 13px rgba(0,0,0,0.18)',
             }}
           >
             매장 인테리어
           </h2>
-          <p
-            className="typo-body text-gray-800 bg-white/80 px-6 py-3 rounded-2xl inline-block font-bold shadow-xl"
-            style={{
-              textShadow: '1px 1px 2px rgba(0,0,0,0.05)',
-            }}
-          >
-            브랜드별로 선택 가능한 2가지 디자인
+          <p className="mx-auto max-w-2xl text-base font-bold leading-relaxed text-[#5a2c12] md:text-lg">
+            오늘은 오므라이스의 브랜드 컬러를 담은 두 가지 매장 디자인을 만나보세요.
+            공간과 운영 방식에 맞춰 A/B 타입으로 적용할 수 있습니다.
           </p>
         </motion.div>
 
-        {/* 모바일 레이아웃 (브랜드별 세로 배치) */}
-        <div className="md:hidden space-y-12">
-          {brandPresets.map((brand, brandIndex) => (
-            <motion.div
-              key={brand.id}
-              initial={{ opacity: 0, y: 30 }}
+        <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
+          {storeDesigns.map((design, index) => (
+            <motion.article
+              key={design.id}
+              className="group overflow-hidden rounded-[8px] border border-[#f4c47d]/85 bg-white shadow-[0_26px_70px_rgba(84,45,10,0.14)]"
+              initial={{ opacity: 0, y: 34 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: brandIndex * 0.2 }}
+              transition={{ duration: 0.65, delay: 0.12 + index * 0.12 }}
+              whileHover={{ y: -6 }}
             >
-              {/* 브랜드 로고 */}
-              <div className="flex justify-center mb-6">
-                <div className="relative h-16 w-auto">
-                  <Image
-                    src={
-                      brand.id === 'omurice'
-                        ? '/asset/logo/오므라이스_문구3.png'
-                        : '/asset/logo/에그이츠_문구2.png'
-                    }
-                    alt={brand.name}
-                    width={200}
-                    height={64}
-                    className="h-full w-auto object-contain"
-                    style={{
-                      filter: 'drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))',
-                    }}
-                  />
+              <div className="relative aspect-[4/3] overflow-hidden bg-[#fff2dc]">
+                <Image
+                  src={design.image}
+                  alt={`오늘은 오므라이스 ${design.label} 매장 인테리어`}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover transition duration-700 group-hover:scale-[1.035]"
+                  quality={90}
+                />
+                <div className="absolute left-4 top-4 border border-[#fff2c6] bg-[#ff6b12] px-3 py-1.5 text-xs font-black tracking-[0.08em] text-white shadow-[0_8px_18px_rgba(255,107,18,0.24)]">
+                  {design.label}
                 </div>
               </div>
 
-              {/* 프리셋 옵션들 (2열) */}
-              <div className="grid grid-cols-2 gap-4">
-                {brand.options.map((option, optionIndex) => (
-                  <motion.div
-                    key={option.id}
-                    className="group"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{
-                      duration: 0.5,
-                      delay: brandIndex * 0.2 + optionIndex * 0.1 + 0.3,
-                    }}
-                  >
-                    <div className="bg-white rounded-2xl overflow-hidden shadow-lg border-3 border-yellow-200">
-                      {/* 이미지 */}
-                      <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
-                        <Image
-                          src={option.image}
-                          alt={`${brand.name} - ${option.title}`}
-                          fill
-                          className="object-contain"
-                        />
-                        {/* 오버레이 배지 */}
-                        <div className="absolute top-2 left-2 bg-yellow-400 text-gray-900 px-3 py-1 rounded-full font-bold shadow-lg text-sm">
-                          <span style={{ fontFamily: 'var(--font-heading)' }}>{option.title}</span>
-                        </div>
-                      </div>
-
-                      {/* 설명 */}
-                      <div className="p-3 text-center">
-                        <p
-                          className="text-xs font-bold text-gray-800 whitespace-pre-line leading-snug"
-                          style={{ fontFamily: 'var(--font-heading)' }}
-                        >
-                          {option.description}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* 데스크탑 레이아웃 (브랜드별 그룹) */}
-        <div className="hidden md:grid md:grid-cols-2 gap-12 lg:gap-16">
-          {brandPresets.map((brand, brandIndex) => (
-            <motion.div
-              key={brand.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: brandIndex * 0.2 }}
-            >
-              {/* 브랜드 로고 */}
-              <div className="flex justify-center mb-8">
-                <div className="relative h-20 lg:h-24 w-auto">
-                  <Image
-                    src={
-                      brand.id === 'omurice'
-                        ? '/asset/logo/오므라이스_문구3.png'
-                        : '/asset/logo/에그이츠_문구2.png'
-                    }
-                    alt={brand.name}
-                    width={300}
-                    height={96}
-                    className="h-full w-auto object-contain"
-                    style={{
-                      filter: 'drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.3))',
-                    }}
-                  />
+              <div className="border-t border-[#f4c47d]/70 bg-[#fffef8] p-5 md:p-6">
+                <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                  <div>
+                    <h3 className="text-2xl font-black text-[#32190b] md:text-3xl">
+                      {design.title}
+                    </h3>
+                    <p className="mt-2 max-w-xl text-sm font-semibold leading-relaxed text-[#6b4222] md:text-base">
+                      {design.description}
+                    </p>
+                  </div>
+                  <span className="shrink-0 text-4xl font-black leading-none text-[#ff6b12]/25 md:text-5xl">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
                 </div>
               </div>
-
-              {/* 이미지 2개 (A, B) */}
-              <div className="grid grid-cols-2 gap-6 lg:gap-8">
-                {brand.options.map((option, optionIndex) => (
-                  <motion.div
-                    key={option.id}
-                    className="group"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{
-                      duration: 0.5,
-                      delay: brandIndex * 0.2 + optionIndex * 0.1 + 0.3,
-                    }}
-                    whileHover={{ y: -8 }}
-                  >
-                    <div className="bg-white rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border-3 border-yellow-200">
-                      {/* 이미지 */}
-                      <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
-                        <Image
-                          src={option.image}
-                          alt={`${brand.name} - ${option.title}`}
-                          fill
-                          className="object-contain transition-transform duration-500 group-hover:scale-105"
-                        />
-                        {/* 오버레이 배지 */}
-                        <div className="absolute top-3 left-3 bg-yellow-400 text-gray-900 px-3 py-1.5 rounded-full font-bold shadow-lg text-sm">
-                          <span style={{ fontFamily: 'var(--font-heading)' }}>{option.title}</span>
-                        </div>
-                      </div>
-
-                      {/* 설명 */}
-                      <div className="p-4 lg:p-5 text-center">
-                        <p
-                          className="text-sm lg:text-base font-bold text-gray-800 whitespace-pre-line leading-snug"
-                          style={{ fontFamily: 'var(--font-heading)' }}
-                        >
-                          {option.description}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
 
-        {/* 하단 안내 문구 */}
-        <motion.div
-          className="mt-16 text-center"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
-          <p
-            className="typo-body text-gray-700 bg-gradient-to-r from-yellow-50 to-orange-50 px-8 py-4 rounded-2xl inline-block shadow-md border-2 border-yellow-200"
-            style={{ fontFamily: 'var(--font-body)' }}
-          >
-            💡 창업 시 선택 가능한 인테리어 디자인입니다
-            <br />
-            <span className="text-sm text-gray-600">
-              실제 매장 상황에 따라 일부 조정될 수 있습니다
-            </span>
-          </p>
-        </motion.div>
-
-        {/* 계절별 로고 캐러셀 섹션 */}
-        <motion.div
-          className="mt-20 pt-16 border-t border-yellow-200"
-          initial={{ opacity: 0, y: 20 }}
+        <motion.p
+          className="mx-auto mt-10 max-w-3xl rounded-[8px] border border-[#f4c47d]/70 bg-white/86 px-5 py-4 text-center text-sm font-bold leading-relaxed text-[#6b4222] shadow-[0_14px_36px_rgba(84,45,10,0.1)] md:text-base"
+          initial={{ opacity: 0, y: 18 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 1 }}
+          transition={{ duration: 0.55, delay: 0.42 }}
         >
-          <div className="text-center mb-12">
-            <h3
-              className="text-3xl md:text-5xl font-bold mb-4"
-              style={{
-                fontFamily: 'var(--font-heading)',
-                color: '#FEC601',
-                textShadow:
-                  '-2px -2px 0 #8B4513, 2px -2px 0 #8B4513, -2px 2px 0 #8B4513, 2px 2px 0 #8B4513, 4px 4px 8px rgba(0,0,0,0.5)',
-              }}
-            >
-              계절별 브랜드 로고
-            </h3>
-            <p
-              className="text-lg md:text-xl font-semibold"
-              style={{
-                fontFamily: 'var(--font-body)',
-                color: '#FFF9E6',
-                textShadow: '1px 1px 4px rgba(0,0,0,0.8), 0 0 10px rgba(254, 198, 1, 0.4)',
-              }}
-            >
-              사계절을 담은 브랜드 아이덴티티
-            </p>
-          </div>
-
-          {/* 캐러셀 그리드 - 항상 2열 */}
-          <div
-            className="grid grid-cols-2 gap-6 sm:gap-8 md:gap-12 lg:gap-16 max-w-6xl mx-auto"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-          >
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 1.2 }}
-            >
-              <SeasonalLogoCarousel
-                images={omuriceLogo}
-                currentIndex={currentIndex}
-                onIndexChange={setCurrentIndex}
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 1.4 }}
-            >
-              <SeasonalLogoCarousel
-                images={eggEatsLogo}
-                currentIndex={currentIndex}
-                onIndexChange={setCurrentIndex}
-              />
-            </motion.div>
-          </div>
-        </motion.div>
+          실제 시공 사양은 매장 면적, 입지, 건물 조건에 따라 조정될 수 있으며 상담 시 최적의 타입을 안내드립니다.
+        </motion.p>
       </div>
     </section>
   );
