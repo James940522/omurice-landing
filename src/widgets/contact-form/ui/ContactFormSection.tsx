@@ -2,6 +2,7 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
+import { useStoreCount } from '@/lib/use-store-count';
 
 // 도메인에 따른 SMS 메시지 생성 함수
 function getSmsMessageByDomain(): string {
@@ -35,6 +36,8 @@ const storeOwnershipOptions = ['있음', '없음'];
 export default function ContactFormSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const storeCount = useStoreCount();
+  const storeCountLabel = storeCount?.toLocaleString('ko-KR') ?? null;
 
   const [formData, setFormData] = useState(initialFormData);
 
@@ -186,7 +189,9 @@ export default function ContactFormSection() {
               textShadow: '1px 1px 2px rgba(0,0,0,0.05)',
             }}
           >
-            100호점이 선택한 배달 오므라이스 브랜드.
+            {storeCountLabel
+              ? `${storeCountLabel}개 점포가 선택한 오므라이스 브랜드.`
+              : '전국 점포가 선택한 오므라이스 브랜드.'}
             <br />
             작은 공간에서도 안정적으로 시작할 수 있도록 상담부터 오픈까지 함께합니다.
           </p>

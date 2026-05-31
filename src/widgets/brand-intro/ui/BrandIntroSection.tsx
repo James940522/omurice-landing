@@ -3,6 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { useRef } from 'react';
+import { useStoreCount } from '@/lib/use-store-count';
 
 const milestones = [
   {
@@ -39,7 +40,7 @@ const milestones = [
     date: '2026년',
     month: '5월',
     value: '10호점 오픈',
-    subValue: '150호점 달성',
+    subValue: '전국 확장 중',
     height: 92,
   },
 ];
@@ -47,26 +48,39 @@ const milestones = [
 export default function BrandIntroSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '0px 0px -15% 0px', amount: 0.08 });
+  const storeCount = useStoreCount();
+  const storeCountLabel = storeCount?.toLocaleString('ko-KR') ?? null;
+  const dynamicMilestones = milestones.map((milestone, index) =>
+    index === milestones.length - 1
+      ? {
+          ...milestone,
+          subValue: storeCountLabel ? `${storeCountLabel}호점 달성` : '전국 확장 중',
+        }
+      : milestone
+  );
 
   return (
     <section
       id="brand"
-      ref={ref}
-      className="relative isolate aspect-9/14 w-full overflow-hidden bg-[#d84a00] text-white sm:aspect-9/14 md:aspect-4/3 lg:aspect-1528/1029"
+      className="relative isolate w-full overflow-hidden bg-[#d84a00] text-white"
     >
-      <Image
-        src="/new-asset/sec-2/rank-1-bg.webp"
-        alt=""
-        fill
-        sizes="100vw"
-        quality={90}
-        className="absolute inset-0 -z-30 object-cover object-left lg:object-center"
-        priority={false}
-      />
-      <div className="absolute inset-0 -z-20 bg-linear-to-r from-black/0 via-[#cf3d00]/8 to-[#9d2a00]/22" />
-      <div className="absolute inset-0 -z-10 bg-linear-to-b from-black/45 via-black/15 to-[#b73400]/18 lg:from-black/4 lg:via-transparent" />
+      <div
+        ref={ref}
+        className="relative mx-auto aspect-9/14 w-full max-w-[1528px] overflow-hidden sm:aspect-9/14 md:aspect-4/3 lg:aspect-1528/1029"
+      >
+        <Image
+          src="/new-asset/sec-2/rank-1-bg.webp"
+          alt=""
+          fill
+          sizes="(min-width: 1528px) 1528px, 100vw"
+          quality={90}
+          className="absolute inset-0 -z-30 object-cover object-left lg:object-center"
+          priority={false}
+        />
+        <div className="absolute inset-0 -z-20 bg-linear-to-r from-black/0 via-[#cf3d00]/8 to-[#9d2a00]/22" />
+        <div className="absolute inset-0 -z-10 bg-linear-to-b from-black/45 via-black/15 to-[#b73400]/18 lg:from-black/4 lg:via-transparent" />
 
-      <div className="absolute inset-0">
+        <div className="absolute inset-0">
         <motion.div
           className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[90%] text-center lg:left-auto lg:translate-x-0 lg:right-[7%] lg:top-[7%] lg:w-[52%]"
           initial={{ opacity: 0, y: 32 }}
@@ -97,7 +111,9 @@ export default function BrandIntroSection() {
             </p>
             <p>
               1년 반만에
-              <span className="mx-1 font-black text-[#ffd21f]">150호점</span>
+              <span className="mx-1 font-black text-[#ffd21f]">
+                {storeCountLabel ? `${storeCountLabel}호점` : '전국 확장'}
+              </span>
               돌파
             </p>
             <p>
@@ -110,7 +126,7 @@ export default function BrandIntroSection() {
 
         <div className="absolute bottom-[5.5%] left-0 right-0 h-[54%] lg:left-auto lg:right-[3%] lg:h-[43%] lg:w-[61%]">
           <div className="absolute inset-x-0 bottom-0 z-20 flex h-full items-end gap-[1.3%] overflow-visible">
-            {milestones.map((milestone, index) => (
+            {dynamicMilestones.map((milestone, index) => (
               <motion.div
                 key={`${milestone.date}-${milestone.month}-${milestone.value}`}
                 className="relative h-full min-w-0 flex-1"
@@ -153,6 +169,7 @@ export default function BrandIntroSection() {
               </motion.div>
             ))}
           </div>
+        </div>
         </div>
       </div>
     </section>

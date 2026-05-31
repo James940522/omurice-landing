@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useStoreCount } from '@/lib/use-store-count';
 
 const heroImages = {
   top: '/new-asset/menu/모음컷/1.jpeg',
@@ -12,23 +13,26 @@ const heroImages = {
 
 const marqueeWords = [
   'TODAY OMURICE',
-  'DELIVERY BRAND',
+  'FRANCHISE POWER',
   'BEST MENU',
   'START SIMPLE',
-  'FRANCHISE',
+  'NO.1 OMURICE',
   'OWNER FIRST',
 ];
 
 const ribbonWords = [
   'TODAY OMURICE',
   'FRESH OMELET RICE',
-  'DELIVERY FIRST BRAND',
+  'NO.1 OMURICE BRAND',
   'START SMALL',
   'GROW STRONG',
   'OWNER FIRST',
 ];
 
 export default function FranchiseHeroSection() {
+  const storeCount = useStoreCount();
+  const storeCountLabel = storeCount?.toLocaleString('ko-KR') ?? null;
+
   return (
     <section className="relative mt-14 overflow-hidden bg-[#2b160a] text-white md:mt-16">
       <style jsx global>{`
@@ -79,7 +83,7 @@ export default function FranchiseHeroSection() {
             transition={{ duration: 0.65, delay: 0.1 }}
             className="font-heading text-sm font-black uppercase tracking-[0.24em] text-[#fec601]"
           >
-            Korea Omurice Brand
+            Omurice Franchise No.1
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 20, scale: 0.96 }}
@@ -87,7 +91,7 @@ export default function FranchiseHeroSection() {
             transition={{ duration: 0.75, delay: 0.2 }}
             className="mt-4 font-heading text-5xl font-black leading-none text-white drop-shadow-[0_5px_18px_rgba(0,0,0,0.34)] md:text-7xl"
           >
-            대한민국 대표 오므라이스
+            오므라이스 창업의 기준
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -95,7 +99,9 @@ export default function FranchiseHeroSection() {
             transition={{ duration: 0.65, delay: 0.34 }}
             className="mt-4 break-keep text-lg font-bold text-white/90 md:text-2xl"
           >
-            배달로 검증된 한 그릇, 창업의 기준이 되다
+            {storeCountLabel
+              ? `${storeCountLabel}개 점포가 증명한 오늘은 오므라이스의 힘`
+              : '전국 점포가 증명한 오늘은 오므라이스의 힘'}
           </motion.p>
         </div>
       </div>
@@ -226,9 +232,9 @@ export default function FranchiseHeroSection() {
             className="mb-8 flex w-full max-w-[520px] items-center gap-4 text-sm font-black text-white/86 md:text-base"
           >
             <span className="h-px flex-1 bg-white/35" />
-            <span>더 간편하게,</span>
+            <span>작게 시작해,</span>
             <span className="h-px flex-1 bg-white/35" />
-            <span>더 맛있게.</span>
+            <span>크게 증명하다.</span>
             <span className="h-px flex-1 bg-white/35" />
           </motion.div>
 
@@ -238,7 +244,7 @@ export default function FranchiseHeroSection() {
             transition={{ duration: 0.65, delay: 0.94 }}
             className="break-keep text-xl font-black text-white md:text-2xl"
           >
-            한 그릇의 만족이 점포의 힘이 되는 브랜드.
+            유행이 아닌, 시장을 만드는 브랜드의 저력.
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
@@ -246,9 +252,9 @@ export default function FranchiseHeroSection() {
             transition={{ duration: 0.72, delay: 1.04 }}
             className="mt-5 break-keep font-heading text-4xl font-black leading-tight text-white drop-shadow-[0_5px_18px_rgba(0,0,0,0.34)] md:text-6xl"
           >
-            배달에서 먼저 증명했고,
+            처음부터 만들었고,
             <br />
-            <span className="text-[#ff6b12]">전국으로</span> 넓혀갑니다.
+            지금도 <span className="text-[#ff6b12]">가장 잘합니다.</span>
           </motion.h2>
 
           <motion.div
@@ -278,7 +284,7 @@ export default function FranchiseHeroSection() {
                 전국 매장수
               </p>
               <p className="font-heading text-5xl font-black leading-none text-white md:text-6xl">
-                157
+                {storeCountLabel ?? '-'}
               </p>
             </motion.div>
           </motion.div>

@@ -7,6 +7,7 @@ export const SITE_NAV_ITEMS = [
   { name: '메뉴 안내', href: '#menu' },
   { name: '브랜드 디자인', href: '#brand-design' },
   { name: '고객 선택 브랜드', href: '#customer-brand' },
+  { name: '업종 변경', href: '#business-change' },
 ] as const;
 
 export const CONTACT_NAV_ITEM = { name: '창업 문의', href: '#contact' } as const;

@@ -89,7 +89,7 @@ export default function StartupProcessSection() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {processes.map((process, index) => (
               <motion.div
                 key={index}
@@ -100,11 +100,11 @@ export default function StartupProcessSection() {
                 whileHover={{ y: -6 }}
               >
                 <article className="group relative h-full overflow-hidden rounded-[8px] border border-[#e9b46b]/75 bg-[#fffef8] shadow-[0_22px_55px_rgba(84,45,10,0.13)]">
-                  <div className="absolute left-4 top-4 z-20 border border-[#fff2c6] bg-[#ff6b12] px-3 py-1 text-xs font-black tracking-[0.08em] text-white shadow-[0_8px_18px_rgba(255,107,18,0.24)]">
+                  <div className="absolute left-3 top-3 z-20 border border-[#fff2c6] bg-[#ff6b12] px-2 py-1 text-[0.62rem] font-black tracking-[0.08em] text-white shadow-[0_8px_18px_rgba(255,107,18,0.24)] sm:left-4 sm:top-4 sm:px-3 sm:text-xs">
                     {process.step}
                   </div>
 
-                  <div className="relative h-56 overflow-hidden sm:h-64 lg:h-60">
+                  <div className="relative h-36 overflow-hidden sm:h-64 lg:h-60">
                     <Image
                       src={process.image}
                       alt={process.title}
@@ -115,18 +115,18 @@ export default function StartupProcessSection() {
                     <div className="absolute inset-0 bg-linear-to-t from-[#fffef8] via-[#fffef8]/12 to-transparent" />
                   </div>
 
-                  <div className="relative p-5 md:p-6">
-                    <span className="absolute right-5 top-4 text-5xl font-black leading-none text-[#ff6b12]/10">
+                  <div className="relative p-3 sm:p-5 md:p-6">
+                    <span className="absolute right-3 top-3 text-4xl font-black leading-none text-[#ff6b12]/10 sm:right-5 sm:top-4 sm:text-5xl">
                       {String(index + 1).padStart(2, '0')}
                     </span>
 
-                    <h3 className="relative text-2xl font-black text-[#32190b] md:text-[1.65rem]">
+                    <h3 className="relative text-lg font-black text-[#32190b] sm:text-2xl md:text-[1.65rem]">
                       {process.title}
                     </h3>
 
-                    <div className="my-5 h-px bg-linear-to-r from-[#ff6b12] via-[#fec601]/70 to-transparent" />
+                    <div className="my-3 h-px bg-linear-to-r from-[#ff6b12] via-[#fec601]/70 to-transparent sm:my-5" />
 
-                    <p className="relative whitespace-pre-line text-sm font-semibold leading-relaxed text-[#6b4222]/82 md:text-base">
+                    <p className="relative whitespace-pre-line text-[0.72rem] font-semibold leading-relaxed text-[#6b4222]/82 sm:text-sm md:text-base">
                       {process.description}
                     </p>
                   </div>

@@ -24,6 +24,11 @@ interface StoresApiResponse {
   withCoordinates: number;
 }
 
+interface StoreCountApiResponse {
+  total: number;
+  maxStoreCode: number;
+}
+
 /**
  * 서버에서 매장 데이터(좌표 포함) 일괄 조회
  *
@@ -41,6 +46,26 @@ export async function fetchStores(): Promise<Store[]> {
   } catch (error) {
     console.error('[fetchStores] network error:', error);
     return [];
+  }
+}
+
+/**
+ * CSV 기준 매장 수만 가볍게 조회
+ *
+ * @returns CSV 데이터 행 수 (호출 실패 시 null)
+ */
+export async function fetchStoreCount(): Promise<number | null> {
+  try {
+    const response = await fetch('/api/stores/count');
+    if (!response.ok) {
+      console.error(`[fetchStoreCount] /api/stores/count responded with ${response.status}`);
+      return null;
+    }
+    const data = (await response.json()) as StoreCountApiResponse;
+    return Number.isFinite(data.total) ? data.total : null;
+  } catch (error) {
+    console.error('[fetchStoreCount] network error:', error);
+    return null;
   }
 }
 

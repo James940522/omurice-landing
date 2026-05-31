@@ -5,6 +5,7 @@ import { BaseModal } from '@/shared/ui';
 import StoreItem from './StoreItem';
 import { fetchStores } from '@/lib/stores';
 import type { Store } from '@/lib/stores';
+import { useStoreCount } from '@/lib/use-store-count';
 
 interface StoreStatusModalProps {
   isOpen: boolean;
@@ -22,6 +23,7 @@ const getSortTime = (store: Store) => {
 export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalProps) {
   // CSV 데이터에서 동적으로 가맹점 리스트를 가져옴
   const [stores, setStores] = useState<Store[]>([]);
+  const storeCount = useStoreCount();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -49,14 +51,7 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
       }),
     [stores]
   );
-  const storeCount = useMemo(
-    () =>
-      stores.reduce((count, store) => {
-        const storeCode = Number(store.store_code);
-        return Number.isFinite(storeCode) ? Math.max(count, storeCode) : count;
-      }, 0),
-    [stores]
-  );
+  const displayStoreCount = storeCount ?? stores.length;
 
   return (
     <BaseModal
@@ -95,7 +90,7 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
               <br className="sm:hidden" /> 오픈 현황
             </h2>
             <div className="mx-auto mt-4 flex w-fit items-center gap-2 rounded-full border border-[#fec601]/45 bg-[#fff7e8]/12 px-4 py-2 text-xs font-black text-[#fff1c0] sm:text-sm">
-              <span>전국 {storeCount || '-'}개 점포</span>
+              <span>전국 {displayStoreCount || '-'}개 점포</span>
               <span className="h-1.5 w-1.5 rounded-full bg-[#fec601]" />
               <span>오픈으로 증명한 브랜드</span>
             </div>
