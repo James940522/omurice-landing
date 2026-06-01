@@ -20,53 +20,44 @@ import { Footer } from '@/widgets/footer';
 
 // Features
 import { FloatingInquiry } from '@/features/inquiry';
-import { OwnerRecruitmentModal } from '@/features/owner-recruitment-modal';
 import { StoreStatusModal } from '@/features/store-status-modal';
-import { NoticeImageModal } from '@/features/notice-modal';
+import { BrandLetterModal } from '@/features/brand-letter-modal';
 
 // Shared Config
 import { SITE_ORIGIN, absoluteUrl } from '@/shared/config/site';
 
 export default function Home() {
-  const [showRecruitmentModal, setShowRecruitmentModal] = useState(false);
   const [showStoreModal, setShowStoreModal] = useState(false);
-  const [showNoticeRevenue, setShowNoticeRevenue] = useState(false);
+  const [showBrandLetterModal, setShowBrandLetterModal] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      const hideRecruitment = localStorage.getItem('hideModal_owner-recruitment');
       const hideStore = localStorage.getItem('hideModal_store-status');
+      const hideBrandLetter = localStorage.getItem('hideModal_brand-letter');
       const now = new Date().getTime();
+      const shouldShowBrandLetter = !hideBrandLetter || parseInt(hideBrandLetter) < now;
 
-      if (!hideRecruitment || parseInt(hideRecruitment) < now) {
-        setShowRecruitmentModal(true);
+      if (shouldShowBrandLetter) {
+        setShowBrandLetterModal(true);
+        return;
       }
 
       if (!hideStore || parseInt(hideStore) < now) {
         setShowStoreModal(true);
-      }
-
-      const hideNoticeRevenue = localStorage.getItem('hideModal_notice-revenue');
-      if (!hideNoticeRevenue || parseInt(hideNoticeRevenue) < now) {
-        setShowNoticeRevenue(true);
       }
     }, 500);
 
     return () => clearTimeout(timer);
   }, []);
 
-  // 창업 문의 섹션으로 스크롤 이동 + 모든 모달 닫기
-  const handleNavigateToContact = () => {
-    setShowRecruitmentModal(false);
-    setShowStoreModal(false);
+  const handleBrandLetterClose = () => {
+    setShowBrandLetterModal(false);
 
-    // 약간의 딜레이 후 스크롤
-    setTimeout(() => {
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 100);
+    const hideStore = localStorage.getItem('hideModal_store-status');
+    const now = new Date().getTime();
+    if (!hideStore || parseInt(hideStore) < now) {
+      setShowStoreModal(true);
+    }
   };
 
   // SEO: JSON-LD Structured Data (Google Search Console용)
@@ -176,20 +167,8 @@ export default function Home() {
         <Footer />
         <FloatingInquiry />
 
-        {/* 모달들 - 가로로 나란히 배치 */}
-        <OwnerRecruitmentModal
-          isOpen={showRecruitmentModal}
-          onClose={() => setShowRecruitmentModal(false)}
-          onNavigateToContact={handleNavigateToContact}
-        />
         <StoreStatusModal isOpen={showStoreModal} onClose={() => setShowStoreModal(false)} />
-        <NoticeImageModal
-          isOpen={showNoticeRevenue}
-          onClose={() => setShowNoticeRevenue(false)}
-          imageSrc="/new-asset/sec-3/etc/brand-competitiveness-popup.webp"
-          modalId="notice-revenue"
-          title="오므라이스 브랜드 경쟁력"
-        />
+        <BrandLetterModal isOpen={showBrandLetterModal} onClose={handleBrandLetterClose} />
       </main>
     </>
   );

@@ -1,15 +1,12 @@
 'use client';
 
-import { ChevronLeft, ChevronRight, Trophy } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 interface MenuItem {
   name: string;
   image: string;
-  tags?: string[];
-  badge?: string;
 }
 
 interface MenuCategory {
@@ -45,63 +42,24 @@ const TOPPINGS = [
 
 const img = (...parts: string[]) => `${MENU_BASE}/${parts.join('/')}`;
 
-const dish = (dir: string, name: string, tags?: string[]): MenuItem => ({
+const dish = (dir: string, name: string): MenuItem => ({
   name,
   image: img(dir, `${name}.jpeg`),
-  tags,
 });
 
 const toppingDishes = (dir: string, suffix: string): MenuItem[] =>
   TOPPINGS.map((topping) => dish(dir, `${topping} ${suffix}`));
 
-const bestMenus: MenuItem[] = [
-  {
-    name: '큐브 스테이크 오므라이스',
-    image: img(DIR.omurice, '큐브스테이크 오므라이스.jpeg'),
-    badge: '30% 쿠폰 / 무료배달',
-  },
-  {
-    name: '새우까스 오므라이스',
-    image: img(DIR.omurice, '새우까스 오므라이스.jpeg'),
-    badge: '최애메뉴',
-  },
-  {
-    name: '소세지 김치 오므라이스',
-    image: img(DIR.kimchi, '소세지 김치 오므라이스.jpeg'),
-  },
-  {
-    name: '돈까스 김치 오므라이스',
-    image: img(DIR.kimchi, '돈까스 김치 오므라이스.jpeg'),
-  },
-  {
-    name: '나홀로 오므라이스 세트',
-    image: img('나홀로 오므라이스 세트.jpg'),
-  },
-  {
-    name: '둘이서 배터지는 강호동 세트',
-    image: img('둘이서 배터지는 강호동 세트.jpg'),
-  },
-];
+const bestMenuNames = new Set([
+  '큐브스테이크 오므라이스',
+  '새우까스 오므라이스',
+  '소세지 김치 오므라이스',
+  '돈까스 김치 오므라이스',
+  '나홀로 오므라이스 세트',
+  '둘이서 배터지는 호동이 세트',
+]);
 
 const menuCategories: MenuCategory[] = [
-  {
-    id: 'set',
-    name: '세트',
-    items: [
-      {
-        name: '나홀로 오므라이스 세트',
-        image: img('나홀로 오므라이스 세트.jpg'),
-      },
-      {
-        name: '둘이서 오므라이스 세트',
-        image: img('둘이서 오므라이스 세트.jpeg'),
-      },
-      {
-        name: '둘이서 배터지는 강호동 세트',
-        image: img('둘이서 배터지는 강호동 세트.jpg'),
-      },
-    ],
-  },
   {
     id: 'omurice',
     name: '오므라이스',
@@ -146,6 +104,24 @@ const menuCategories: MenuCategory[] = [
     items: [dish(DIR.half, '블랙앤화이트'), dish(DIR.half, '블랙앤투움바')],
   },
   {
+    id: 'set',
+    name: '세트',
+    items: [
+      {
+        name: '나홀로 오므라이스 세트',
+        image: img('나홀로 오므라이스 세트.jpg'),
+      },
+      {
+        name: '둘이서 오므라이스 세트',
+        image: img('둘이서 오므라이스 세트.jpeg'),
+      },
+      {
+        name: '둘이서 배터지는 호동이 세트',
+        image: img('둘이서 배터지는 호동이 세트.jpg'),
+      },
+    ],
+  },
+  {
     id: 'side',
     name: '사이드',
     items: [
@@ -166,55 +142,29 @@ const menuCategories: MenuCategory[] = [
 
 const marqueeItems = [
   'TODAY OMURICE',
-  'BEST MENU',
+  'SIGNATURE PICKS',
   'RICE OMELET',
   'FRESH TOPPING',
   'DELIVERY FAVORITE',
   'SIGNATURE SAUCE',
 ];
 
-function BestMenuCard({
-  item,
-  priority,
-  index,
-}: {
-  item: MenuItem;
-  priority: boolean;
-  index: number;
-}) {
-  return (
-    <article className="group relative w-[78vw] max-w-[520px] shrink-0 snap-start overflow-hidden rounded-[8px] bg-[#6b4423] p-2 shadow-[0_18px_40px_rgba(107,68,35,0.2)] sm:w-[420px] lg:w-[460px] xl:w-[520px]">
-      <div className="relative aspect-[16/10] overflow-hidden rounded-[8px] bg-[#fff4df]">
-        <Image
-          src={item.image}
-          alt={item.name}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-          sizes="(max-width: 640px) 78vw, (max-width: 1280px) 460px, 520px"
-          priority={priority}
-          quality={90}
-        />
-        <div className="absolute left-3 top-3 rounded-[8px] bg-[#fec601] px-3 py-2 font-heading text-xs font-black text-[#4e2d14] shadow-[0_8px_18px_rgba(78,45,20,0.16)]">
-          BEST {String(index + 1).padStart(2, '0')}
-        </div>
-      </div>
-      <div className="px-4 py-5 text-white sm:px-6">
-        {item.badge && (
-          <p className="mb-3 inline-flex rounded-[8px] bg-[#ff6b12] px-3 py-1.5 text-xs font-black text-white">
-            {item.badge}
-          </p>
-        )}
-        <h3 className="break-keep font-heading text-xl font-black leading-tight sm:text-2xl">
-          {item.name}
-        </h3>
-      </div>
-    </article>
-  );
-}
-
 function MenuCard({ item, priority }: { item: MenuItem; priority: boolean }) {
+  const isBest = bestMenuNames.has(item.name);
+
   return (
-    <article className="group overflow-hidden rounded-[8px] bg-white shadow-[0_16px_36px_rgba(107,68,35,0.12)] ring-1 ring-[#ffd68a]">
+    <article
+      className={`group relative overflow-hidden rounded-[8px] border-2 bg-white shadow-[0_16px_36px_rgba(107,68,35,0.12)] ${
+        isBest
+          ? 'border-[#e32d1f] shadow-[0_18px_42px_rgba(227,45,31,0.2)]'
+          : 'border-[#ffd68a]'
+      }`}
+    >
+      {isBest && (
+        <div className="absolute left-3 top-3 z-20 rounded-full bg-[#e32d1f] px-3 py-1.5 font-heading text-xs font-black tracking-wide text-white shadow-[0_8px_18px_rgba(227,45,31,0.28)]">
+          BEST
+        </div>
+      )}
       <div className="relative aspect-[4/3] overflow-hidden bg-[#fff4df]">
         <Image
           src={item.image}
@@ -237,60 +187,11 @@ function MenuCard({ item, priority }: { item: MenuItem; priority: boolean }) {
 
 export default function MenuSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const sliderRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
   const [activeCategory, setActiveCategory] = useState(menuCategories[0].id);
-  const [activeBestIndex, setActiveBestIndex] = useState(0);
 
   const currentCategory =
     menuCategories.find((category) => category.id === activeCategory) ?? menuCategories[0];
-
-  const moveBestMenu = useCallback((index: number, behavior: ScrollBehavior = 'smooth') => {
-    const slider = sliderRef.current;
-    const target = slider?.children[index] as HTMLElement | undefined;
-
-    if (slider && target) {
-      slider.scrollTo({ left: target.offsetLeft, behavior });
-    }
-  }, []);
-
-  const advanceBestMenu = useCallback(() => {
-    setActiveBestIndex((currentIndex) => {
-      if (currentIndex === bestMenus.length - 1) {
-        moveBestMenu(bestMenus.length);
-
-        window.setTimeout(() => {
-          moveBestMenu(0, 'auto');
-        }, 650);
-
-        return 0;
-      }
-
-      const nextIndex = currentIndex + 1;
-      moveBestMenu(nextIndex);
-
-      return nextIndex;
-    });
-  }, [moveBestMenu]);
-
-  const scrollBestMenus = (direction: 'prev' | 'next') => {
-    if (direction === 'next') {
-      advanceBestMenu();
-      return;
-    }
-
-    const nextIndex =
-      activeBestIndex === 0 ? bestMenus.length - 1 : activeBestIndex - 1;
-
-    moveBestMenu(nextIndex);
-    setActiveBestIndex(nextIndex);
-  };
-
-  useEffect(() => {
-    const timer = window.setInterval(advanceBestMenu, 3400);
-
-    return () => window.clearInterval(timer);
-  }, [advanceBestMenu]);
 
   return (
     <section
@@ -337,72 +238,7 @@ export default function MenuSection() {
       </div>
       <div className="pointer-events-none absolute left-1/2 top-[45%] h-[420px] w-[980px] -translate-x-1/2 rounded-t-full bg-white/60" />
 
-      <div className="relative z-10 mx-auto max-w-[1480px] px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="grid items-center gap-10 lg:grid-cols-[320px_minmax(0,1fr)] lg:gap-14"
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.65 }}
-        >
-          <div className="max-w-sm">
-            <div className="mb-6 flex h-11 w-11 items-center justify-center rounded-[8px] bg-[#ff6b12] text-white shadow-[0_12px_24px_rgba(255,107,18,0.24)]">
-              <Trophy size={24} strokeWidth={2.6} />
-            </div>
-            <p className="font-heading text-sm font-black uppercase text-[#ff6b12]">
-              Today Omurice
-            </p>
-            <h2 className="mt-3 font-heading text-5xl font-black leading-[1.02] text-[#6b4423] sm:text-6xl">
-              Best
-              <br />
-              Menu
-            </h2>
-            <p className="mt-5 break-keep text-lg font-bold leading-relaxed text-[#4e2d14]">
-              배달앱에서 먼저 찾는 인기 메뉴와 세트 구성을 보기 좋게 모았습니다.
-            </p>
-            <div className="mt-8 flex gap-2">
-              <button
-                type="button"
-                aria-label="이전 베스트 메뉴 보기"
-                onClick={() => scrollBestMenus('prev')}
-                className="flex h-12 w-12 items-center justify-center rounded-[8px] bg-[#6b4423] text-white transition hover:bg-[#4e2d14]"
-              >
-                <ChevronLeft size={26} strokeWidth={2.8} />
-              </button>
-              <button
-                type="button"
-                aria-label="다음 베스트 메뉴 보기"
-                onClick={() => scrollBestMenus('next')}
-                className="flex h-12 w-12 items-center justify-center rounded-[8px] bg-[#ff6b12] text-white transition hover:bg-[#df590a]"
-              >
-                <ChevronRight size={26} strokeWidth={2.8} />
-              </button>
-            </div>
-          </div>
-
-          <div className="relative min-w-0">
-            <div className="pointer-events-none absolute -left-8 -top-9 z-20 hidden h-32 w-32 rotate-[-18deg] items-center justify-center rounded-full border-4 border-[#ff6b12] bg-[#fec601] text-center font-heading text-sm font-black uppercase leading-tight text-[#6b4423] shadow-[0_18px_35px_rgba(255,107,18,0.24)] md:flex">
-              Best
-              <br />
-              Menu
-            </div>
-            <div
-              ref={sliderRef}
-              className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            >
-              {[...bestMenus, ...bestMenus].map((item, index) => (
-                <BestMenuCard
-                  key={`${item.name}-${index}`}
-                  item={item}
-                  index={index % bestMenus.length}
-                  priority={index < 2}
-                />
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      </div>
-
-      <div className="relative z-10 mt-20 overflow-hidden bg-[#fec601] py-3 text-[#6b4423] shadow-[inset_0_1px_0_rgba(255,255,255,0.45),inset_0_-1px_0_rgba(107,68,35,0.08)]">
+      <div className="relative z-10 overflow-hidden bg-[#fec601] py-3 text-[#6b4423] shadow-[inset_0_1px_0_rgba(255,255,255,0.45),inset_0_-1px_0_rgba(107,68,35,0.08)]">
         <div className="menu-marquee-track flex w-max gap-10 whitespace-nowrap font-heading text-lg font-black uppercase sm:text-xl">
           {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, index) => (
             <span key={`${item}-${index}`} className="flex items-center gap-10">

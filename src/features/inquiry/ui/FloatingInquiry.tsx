@@ -1,56 +1,192 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+
+const initialFormData = {
+  name: '',
+  phone: '',
+  region: '',
+};
 
 export default function FloatingInquiry() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isContactInView, setIsContactInView] = useState(false);
+  const [formData, setFormData] = useState(initialFormData);
+  const [privacyAgree, setPrivacyAgree] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hp, setHp] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => {
-      // 화면 높이의 80% 이상 스크롤하면 버튼 표시 (두 번째 섹션 시작)
-      const scrollPosition = window.scrollY;
-      const triggerPosition = window.innerHeight * 0.8;
-      setIsVisible(scrollPosition > triggerPosition);
-    };
+    const contactSection = document.getElementById('contact');
+    const observer = contactSection
+      ? new IntersectionObserver(
+          ([entry]) => {
+            setIsContactInView(entry.isIntersecting);
+          },
+          { threshold: 0.12 }
+        )
+      : null;
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // 초기 상태 체크
+    if (contactSection && observer) observer.observe(contactSection);
+    setIsVisible(true);
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => observer?.disconnect();
   }, []);
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const shouldShow = isVisible && !isContactInView;
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (isSubmitting) return;
+
+    if (!formData.name.trim() || !formData.phone.trim() || !formData.region.trim()) {
+      alert('성함, 연락처, 희망지역을 입력해주세요.');
+      return;
+    }
+
+    if (!privacyAgree) {
+      alert('개인정보 수집 및 이용에 동의해주세요.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const domain = typeof window !== 'undefined' ? window.location.hostname : '';
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: '',
+          storeType: '기타매장',
+          region: formData.region,
+          hasStore: '없음',
+          message: '하단 빠른 가맹문의 바에서 접수되었습니다.',
+          privacyAgree: true,
+          hp,
+          domain,
+        }),
+      });
+
+      if (!res.ok) {
+        if (res.status === 429) {
+          alert('너무 많은 요청입니다. 잠시 후 다시 시도해주세요.');
+          return;
+        }
+
+        throw new Error('SEND_FAIL');
+      }
+
+      alert('가맹문의가 접수되었습니다. 순차적으로 연락드리겠습니다.');
+      setFormData(initialFormData);
+      setPrivacyAgree(false);
+      setHp('');
+    } catch (error) {
+      console.error('Floating inquiry submission error:', error);
+      alert('전송 실패. 잠시 후 다시 시도해주세요.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <AnimatePresence>
-      {isVisible && (
-        <motion.button
-          onClick={scrollToContact}
-          className="fixed bottom-8 right-8 z-50 w-16 h-16 md:w-20 md:h-20 bg-white rounded-full shadow-strong-hover flex items-center justify-center font-black text-sm md:text-base border-4 border-orange-500"
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1, y: [0, -10, 0] }}
-          exit={{ opacity: 0, scale: 0.5 }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          transition={{
-            y: {
-              duration: 2,
-              repeat: Infinity,
-            },
-          }}
+      {shouldShow && (
+        <motion.aside
+          className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-[#fec601] bg-[#4a260f] shadow-[0_-14px_34px_rgba(32,14,4,0.26)]"
+          initial={{ opacity: 0, y: 90 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 90 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+          aria-label="빠른 가맹문의"
         >
-          <span className="text-center leading-tight text-orange-600">
-            창업
-            <br />
-            문의
-          </span>
-        </motion.button>
+          <div className="h-1 bg-linear-to-r from-[#ff6b12] via-[#fec601] to-[#ff6b12]" />
+          <form
+            onSubmit={handleSubmit}
+            className="mx-auto flex max-w-7xl items-center gap-2 overflow-x-auto px-3 py-2 [scrollbar-width:none] sm:gap-3 sm:px-5 [&::-webkit-scrollbar]:hidden"
+          >
+            <div className="flex min-w-[112px] shrink-0 items-center gap-2 sm:min-w-[210px]">
+              <p className="font-heading text-base font-black leading-none text-white sm:text-lg">
+                빠른 가맹문의
+              </p>
+              <a
+                href="tel:010-9923-9502"
+                className="hidden font-heading text-2xl font-black tracking-tight text-[#fec601] sm:block"
+              >
+                010-9923-9502
+              </a>
+            </div>
+
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="h-9 w-[104px] shrink-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 sm:w-[128px]"
+              placeholder="성함"
+              autoComplete="name"
+            />
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className="h-9 w-[128px] shrink-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 sm:w-[150px]"
+              placeholder="연락처"
+              autoComplete="tel"
+            />
+            <input
+              type="text"
+              name="region"
+              value={formData.region}
+              onChange={handleChange}
+              className="h-9 w-[118px] shrink-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 sm:w-[142px]"
+              placeholder="희망지역"
+            />
+
+            <input
+              type="text"
+              name="hp"
+              value={hp}
+              onChange={(event) => setHp(event.target.value)}
+              className="hidden"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+            />
+
+            <label className="flex min-w-[132px] shrink-0 cursor-pointer items-center gap-2 text-xs font-black leading-tight text-white sm:min-w-[152px]">
+              <input
+                type="checkbox"
+                checked={privacyAgree}
+                onChange={(event) => setPrivacyAgree(event.target.checked)}
+                className="h-4 w-4 rounded border-white/60 text-[#ff6b12] focus:ring-[#fec601]"
+              />
+              개인정보 동의
+            </label>
+
+            <motion.button
+              type="submit"
+              disabled={isSubmitting}
+              className={`h-9 min-w-[112px] shrink-0 rounded-[6px] bg-[#fec601] px-4 text-sm font-black text-[#32190b] shadow-[0_8px_18px_rgba(0,0,0,0.18)] transition hover:bg-[#ffdd39] sm:h-10 sm:min-w-[154px] sm:text-base ${
+                isSubmitting ? 'cursor-not-allowed opacity-60' : ''
+              }`}
+              whileHover={{ scale: isSubmitting ? 1 : 1.03 }}
+              whileTap={{ scale: isSubmitting ? 1 : 0.97 }}
+            >
+              {isSubmitting ? '접수 중' : '가맹문의 신청'}
+            </motion.button>
+          </form>
+        </motion.aside>
       )}
     </AnimatePresence>
   );

@@ -115,6 +115,29 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
                 <StoreItem key={store.store_code} store={store} />
               ))}
             </div>
+            <div className="mt-5 rounded-2xl border-2 border-[#ffb21a]/70 bg-[#fffaf0] px-4 py-4 shadow-[0_10px_24px_rgba(34,14,4,0.24)] sm:px-6 sm:py-5">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-7">
+                <div className="flex items-center justify-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#1346a0] bg-white text-xs font-black text-[#1346a0] sm:h-12 sm:w-12">
+                    TEL
+                  </span>
+                  <a
+                    href="tel:010-9923-9502"
+                    className="font-heading text-3xl font-black tracking-tight text-[#1346a0] sm:text-4xl"
+                  >
+                    010-9923-9502
+                  </a>
+                </div>
+                <p className="break-keep text-center text-sm font-bold leading-relaxed text-[#2f1608] sm:text-left sm:text-base">
+                  <mark className="rounded bg-[#fec601]/70 px-1 font-black text-[#4a260f]">
+                    가맹문의 폭주
+                  </mark>
+                  로 인하여 상담이 지연될 수 있습니다.
+                  <br />
+                  순차적으로 연락드리고 있으니, 너른 양해 부탁드립니다.
+                </p>
+              </div>
+            </div>
           </>
         )}
       </div>
