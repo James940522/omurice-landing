@@ -102,7 +102,7 @@ export default function FloatingInquiry() {
     <AnimatePresence>
       {shouldShow && (
         <motion.aside
-          className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-[#fec601] bg-[#4a260f] shadow-[0_-14px_34px_rgba(32,14,4,0.26)]"
+          className="fixed inset-x-0 bottom-0 z-[2147483647] border-t-2 border-[#fec601] bg-[#4a260f] shadow-[0_-14px_34px_rgba(32,14,4,0.26)]"
           initial={{ opacity: 0, y: 90 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 90 }}

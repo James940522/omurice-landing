@@ -131,7 +131,7 @@ export default function Header() {
                     onClick={() => scrollToSection(CONTACT_NAV_ITEM.href)}
                     className="w-full bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full hover:shadow-strong transition-all duration-300 font-bold text-xl"
                   >
-                    {CONTACT_NAV_ITEM.name} 하기 →
+                    창업 문의하기 →
                   </button>
                 </div>
               </SheetContent>

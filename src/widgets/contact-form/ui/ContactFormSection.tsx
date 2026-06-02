@@ -131,64 +131,41 @@ export default function ContactFormSection() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-[#fff8ef] py-14 md:py-20"
+      className="relative overflow-hidden bg-[#fec601] py-12 md:py-16"
       ref={ref}
     >
       <div
-        className="absolute inset-0 lg:hidden"
+        className="absolute inset-0"
         style={{
-          backgroundImage: 'url(/new-asset/contact/contact-bg-mobile.webp)',
-          backgroundSize: '100% 100%',
+          backgroundImage: 'url(/new-asset/contact/contact-bg-yellow.webp)',
+          backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
         }}
       />
-      <div
-        className="absolute inset-0 hidden lg:block"
-        style={{
-          backgroundImage: 'url(/new-asset/contact/contact-bg.webp)',
-          backgroundSize: '100% 100%',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_42%,rgba(255,255,255,0.36),transparent_34%),linear-gradient(90deg,rgba(255,246,212,0.58)_0%,rgba(255,218,30,0.1)_46%,rgba(255,123,0,0.16)_100%)]" />
 
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-[0.86fr_1.08fr] lg:px-8">
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-6 px-4 sm:px-6 lg:grid-cols-[0.9fr_1fr] lg:px-8">
         <motion.div
-          className="text-left"
+          className="max-w-xl rounded-[18px] border-2 border-[#ff8a00]/45 bg-[#fff7df]/86 px-5 py-6 text-left shadow-[0_22px_48px_rgba(90,44,18,0.18)] backdrop-blur-[2px] md:px-7 md:py-8 lg:bg-[#fff7df]/76"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
           <p
-            className="mb-3 text-lg font-black text-[#8B4513] md:text-xl"
+            className="mb-3 inline-flex rounded-full bg-[#4a260f] px-4 py-1.5 text-sm font-black uppercase tracking-[0.08em] text-[#fec601] md:text-base"
             style={{
-              fontFamily: 'Georgia, serif',
-              textShadow:
-                '-1px -1px 0 #FFF9E6, 1px -1px 0 #FFF9E6, -1px 1px 0 #FFF9E6, 1px 1px 0 #FFF9E6, 2px 2px 6px rgba(0,0,0,0.24)',
+              fontFamily: 'var(--font-heading)',
             }}
           >
             Today Omurice
           </p>
-          <h2
-            className="mb-5 text-4xl font-black leading-[1.08] text-[#FEC601] md:text-[4.25rem]"
-            style={{
-              fontFamily: 'var(--font-heading)',
-              WebkitTextStroke: '1px #8B4513',
-              textShadow:
-                '-2px -2px 0 #8B4513, 2px -2px 0 #8B4513, -2px 2px 0 #8B4513, 2px 2px 0 #8B4513, 5px 6px 0 rgba(139,69,19,0.38), 8px 10px 14px rgba(0,0,0,0.24)',
-            }}
-          >
+          <h2 className="mb-4 break-keep font-heading text-4xl font-black leading-[1.08] tracking-normal text-[#3a1b09] drop-shadow-[0_3px_0_rgba(255,255,255,0.62)] md:text-[4rem]">
             성공 창업,
             <br />
-            오늘은 오므라이스입니다.
+            <span className="text-[#e94f0b]">오늘은 오므라이스</span>입니다.
           </h2>
-          <p
-            className="inline-block max-w-md rounded-[8px] bg-white/86 px-4 py-3 text-base font-black leading-relaxed text-[#32190b] shadow-[0_12px_34px_rgba(84,45,10,0.13)] md:text-lg"
-            style={{
-              textShadow: '1px 1px 2px rgba(0,0,0,0.05)',
-            }}
-          >
+          <p className="max-w-md break-keep text-base font-black leading-relaxed text-[#4a260f] md:text-lg">
             {storeCountLabel
               ? `${storeCountLabel}개 점포가 선택한 오므라이스 브랜드.`
               : '전국 점포가 선택한 오므라이스 브랜드.'}
@@ -201,29 +178,23 @@ export default function ContactFormSection() {
                 ? `sms:010-9923-9502?body=${encodeURIComponent(smsMessage)}`
                 : 'tel:010-9923-9502'
             }
-            className="mt-6 inline-flex text-4xl font-black text-[#FEC601] transition hover:text-[#ff6b12] md:text-5xl"
-            style={{
-              fontFamily: 'var(--font-heading)',
-              WebkitTextStroke: '1px #8B4513',
-              textShadow:
-                '-2px -2px 0 #8B4513, 2px -2px 0 #8B4513, -2px 2px 0 #8B4513, 2px 2px 0 #8B4513, 4px 5px 0 rgba(139,69,19,0.34), 7px 9px 13px rgba(0,0,0,0.22)',
-            }}
+            className="mt-6 inline-flex rounded-[12px] bg-[#3a1b09] px-5 py-3 font-heading text-3xl font-black tracking-tight text-[#fec601] shadow-[0_14px_28px_rgba(58,27,9,0.24)] transition hover:bg-[#ff6b12] hover:text-white md:text-4xl"
           >
             010-9923-9502
           </a>
         </motion.div>
 
         <motion.div
-          className="mx-auto w-full max-w-[34rem] lg:ml-auto"
+          className="mx-auto w-full max-w-[32rem] lg:ml-auto"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="rounded-[8px] border border-[#f4c47d]/80 bg-white p-5 shadow-[0_22px_60px_rgba(84,45,10,0.16)] md:p-6">
+          <div className="rounded-[18px] border-2 border-[#ff8a00] bg-[#fffaf0] p-4 shadow-[0_24px_60px_rgba(90,44,18,0.24)] md:p-5">
             <form onSubmit={handleSubmit} className="space-y-3">
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                 <div>
-                  <label htmlFor="name" className="mb-1.5 block text-xs font-black text-[#32190b] md:text-sm">
+                  <label htmlFor="name" className="mb-1.5 block text-xs font-black text-[#4a260f] md:text-sm">
                     이름 <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -233,12 +204,12 @@ export default function ContactFormSection() {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full rounded-[6px] border border-[#f2d6b8] bg-[#fffaf5] px-4 py-2.5 text-sm font-bold text-[#32190b] outline-none transition focus:border-[#ff6b12] focus:ring-2 focus:ring-[#fec601]/30"
+                    className="w-full rounded-[8px] border-2 border-[#f2c26b] bg-white px-4 py-2.5 text-sm font-bold text-[#32190b] outline-none transition placeholder:text-[#9c7a5e] focus:border-[#ff6b12] focus:ring-2 focus:ring-[#fec601]/40"
                     placeholder="홍길동"
                   />
                 </div>
                 <div>
-                  <label htmlFor="phone" className="mb-1.5 block text-xs font-black text-[#32190b] md:text-sm">
+                  <label htmlFor="phone" className="mb-1.5 block text-xs font-black text-[#4a260f] md:text-sm">
                     연락처 <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -248,7 +219,7 @@ export default function ContactFormSection() {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full rounded-[6px] border border-[#f2d6b8] bg-[#fffaf5] px-4 py-2.5 text-sm font-bold text-[#32190b] outline-none transition focus:border-[#ff6b12] focus:ring-2 focus:ring-[#fec601]/30"
+                    className="w-full rounded-[8px] border-2 border-[#f2c26b] bg-white px-4 py-2.5 text-sm font-bold text-[#32190b] outline-none transition placeholder:text-[#9c7a5e] focus:border-[#ff6b12] focus:ring-2 focus:ring-[#fec601]/40"
                     placeholder="010-1234-5678"
                   />
                 </div>
@@ -256,7 +227,7 @@ export default function ContactFormSection() {
 
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                 <div>
-                  <label htmlFor="email" className="mb-1.5 block text-xs font-black text-[#32190b] md:text-sm">
+                  <label htmlFor="email" className="mb-1.5 block text-xs font-black text-[#4a260f] md:text-sm">
                     이메일 <span className="text-[#8a6848]">(선택)</span>
                   </label>
                   <input
@@ -265,12 +236,12 @@ export default function ContactFormSection() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full rounded-[6px] border border-[#f2d6b8] bg-[#fffaf5] px-4 py-2.5 text-sm font-bold text-[#32190b] outline-none transition focus:border-[#ff6b12] focus:ring-2 focus:ring-[#fec601]/30"
+                    className="w-full rounded-[8px] border-2 border-[#f2c26b] bg-white px-4 py-2.5 text-sm font-bold text-[#32190b] outline-none transition placeholder:text-[#9c7a5e] focus:border-[#ff6b12] focus:ring-2 focus:ring-[#fec601]/40"
                     placeholder="example@email.com"
                   />
                 </div>
                 <div>
-                  <label htmlFor="storeType" className="mb-1.5 block text-xs font-black text-[#32190b] md:text-sm">
+                  <label htmlFor="storeType" className="mb-1.5 block text-xs font-black text-[#4a260f] md:text-sm">
                     매장형태 <span className="text-red-500">*</span>
                   </label>
                   <select
@@ -279,7 +250,7 @@ export default function ContactFormSection() {
                     required
                     value={formData.storeType}
                     onChange={handleChange}
-                    className="w-full rounded-[6px] border border-[#f2d6b8] bg-[#fffaf5] px-4 py-2.5 text-sm font-bold text-[#32190b] outline-none transition focus:border-[#ff6b12] focus:ring-2 focus:ring-[#fec601]/30"
+                    className="w-full rounded-[8px] border-2 border-[#f2c26b] bg-white px-4 py-2.5 text-sm font-bold text-[#32190b] outline-none transition focus:border-[#ff6b12] focus:ring-2 focus:ring-[#fec601]/40"
                   >
                     <option value="">선택</option>
                     {storeTypeOptions.map((option) => (
@@ -293,7 +264,7 @@ export default function ContactFormSection() {
 
               <div className="grid grid-cols-1 gap-3 md:grid-cols-[1fr_0.85fr]">
                 <div>
-                  <label htmlFor="region" className="mb-1.5 block text-xs font-black text-[#32190b] md:text-sm">
+                  <label htmlFor="region" className="mb-1.5 block text-xs font-black text-[#4a260f] md:text-sm">
                     창업지역 <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -303,12 +274,12 @@ export default function ContactFormSection() {
                     required
                     value={formData.region}
                     onChange={handleChange}
-                    className="w-full rounded-[6px] border border-[#f2d6b8] bg-[#fffaf5] px-4 py-2.5 text-sm font-bold text-[#32190b] outline-none transition focus:border-[#ff6b12] focus:ring-2 focus:ring-[#fec601]/30"
+                    className="w-full rounded-[8px] border-2 border-[#f2c26b] bg-white px-4 py-2.5 text-sm font-bold text-[#32190b] outline-none transition placeholder:text-[#9c7a5e] focus:border-[#ff6b12] focus:ring-2 focus:ring-[#fec601]/40"
                     placeholder="서울 강남구"
                   />
                 </div>
                 <div>
-                  <span className="mb-1.5 block text-xs font-black text-[#32190b] md:text-sm">
+                  <span className="mb-1.5 block text-xs font-black text-[#4a260f] md:text-sm">
                     점포 보유 유무 <span className="text-red-500">*</span>
                   </span>
                   <div className="grid grid-cols-2 gap-2">
@@ -317,8 +288,8 @@ export default function ContactFormSection() {
                         key={option}
                         className={`flex cursor-pointer items-center justify-center rounded-[6px] border px-3 py-2.5 text-sm font-black transition ${
                           formData.hasStore === option
-                            ? 'border-[#ff6b12] bg-[#ff6b12] text-white'
-                            : 'border-[#f2d6b8] bg-[#fffaf5] text-[#6b4222] hover:border-[#ff6b12]/70'
+                            ? 'border-[#4a260f] bg-[#4a260f] text-[#fec601]'
+                            : 'border-[#f2c26b] bg-white text-[#6b4222] hover:border-[#ff6b12]/70'
                         }`}
                       >
                         <input
@@ -338,7 +309,7 @@ export default function ContactFormSection() {
               </div>
 
               <div>
-                <label htmlFor="message" className="mb-1.5 block text-xs font-black text-[#32190b] md:text-sm">
+                <label htmlFor="message" className="mb-1.5 block text-xs font-black text-[#4a260f] md:text-sm">
                   문의내역 <span className="text-[#8a6848]">(선택)</span>
                 </label>
                 <textarea
@@ -347,7 +318,7 @@ export default function ContactFormSection() {
                   rows={3}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full resize-none rounded-[6px] border border-[#f2d6b8] bg-[#fffaf5] px-4 py-2.5 text-sm font-bold text-[#32190b] outline-none transition focus:border-[#ff6b12] focus:ring-2 focus:ring-[#fec601]/30"
+                  className="w-full resize-none rounded-[8px] border-2 border-[#f2c26b] bg-white px-4 py-2.5 text-sm font-bold text-[#32190b] outline-none transition placeholder:text-[#9c7a5e] focus:border-[#ff6b12] focus:ring-2 focus:ring-[#fec601]/40"
                   placeholder="창업에 대해 궁금하신 점을 자유롭게 작성해주세요."
                 />
               </div>
@@ -363,16 +334,16 @@ export default function ContactFormSection() {
                 aria-hidden="true"
               />
 
-              <div className="rounded-[6px] bg-[#fff8ef] p-3">
+              <div className="rounded-[10px] border border-[#f2c26b]/70 bg-[#fff3cf] p-3">
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={privacyAgree}
                     onChange={(e) => setPrivacyAgree(e.target.checked)}
                     required
-                    className="mt-1 h-5 w-5 rounded border-[#f2d6b8] text-[#ff6b12] focus:ring-[#fec601]"
+                    className="mt-1 h-5 w-5 rounded border-[#f2c26b] text-[#ff6b12] focus:ring-[#fec601]"
                   />
-                  <span className="text-xs leading-relaxed text-[#6b4222] md:text-sm">
+                  <span className="text-xs font-bold leading-relaxed text-[#5a2c12] md:text-sm">
                     개인정보 수집 및 이용에 동의합니다. 수집된 정보는 창업 상담 목적으로만 사용되며,
                     관련 법령에 따라 안전하게 관리됩니다.
                   </span>
@@ -382,7 +353,7 @@ export default function ContactFormSection() {
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full rounded-[8px] bg-[#ff6b12] px-8 py-3.5 text-lg font-black text-white shadow-[0_16px_32px_rgba(255,107,18,0.25)] transition-all duration-300 hover:scale-[1.02] hover:bg-[#e75c0b] hover:shadow-[0_18px_38px_rgba(255,107,18,0.3)] ${
+                className={`w-full rounded-[12px] bg-[#ff6b12] px-8 py-3.5 text-lg font-black text-white shadow-[0_16px_32px_rgba(255,107,18,0.28)] transition-all duration-300 hover:scale-[1.02] hover:bg-[#4a260f] hover:text-[#fec601] hover:shadow-[0_18px_38px_rgba(74,38,15,0.25)] ${
                   isSubmitting ? 'opacity-60 cursor-not-allowed' : ''
                 }`}
                 whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
@@ -391,7 +362,7 @@ export default function ContactFormSection() {
                 {isSubmitting ? '전송 중...' : '창업 문의 신청하기'}
               </motion.button>
 
-              <p className="mt-3 text-center text-xs text-gray-500 md:text-sm">
+              <p className="mt-3 text-center text-xs font-bold text-[#6b4222] md:text-sm">
                 영업일 기준 24시간 이내에 담당자가 연락드립니다.
               </p>
             </form>

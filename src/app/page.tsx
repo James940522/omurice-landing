@@ -26,9 +26,11 @@ import { BrandLetterModal } from '@/features/brand-letter-modal';
 // Shared Config
 import { SITE_ORIGIN, absoluteUrl } from '@/shared/config/site';
 
+type LandingModalId = 'brand-letter' | 'store-status';
+
 export default function Home() {
-  const [showStoreModal, setShowStoreModal] = useState(false);
-  const [showBrandLetterModal, setShowBrandLetterModal] = useState(false);
+  const [landingModalQueue, setLandingModalQueue] = useState<LandingModalId[]>([]);
+  const activeLandingModal = landingModalQueue[0] ?? null;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -36,28 +38,21 @@ export default function Home() {
       const hideBrandLetter = localStorage.getItem('hideModal_brand-letter');
       const now = new Date().getTime();
       const shouldShowBrandLetter = !hideBrandLetter || parseInt(hideBrandLetter) < now;
+      const shouldShowStore = !hideStore || parseInt(hideStore) < now;
 
-      if (shouldShowBrandLetter) {
-        setShowBrandLetterModal(true);
-        return;
-      }
-
-      if (!hideStore || parseInt(hideStore) < now) {
-        setShowStoreModal(true);
-      }
+      setLandingModalQueue(
+        [
+          shouldShowBrandLetter ? 'brand-letter' : null,
+          shouldShowStore ? 'store-status' : null,
+        ].filter(Boolean) as LandingModalId[]
+      );
     }, 500);
 
     return () => clearTimeout(timer);
   }, []);
 
-  const handleBrandLetterClose = () => {
-    setShowBrandLetterModal(false);
-
-    const hideStore = localStorage.getItem('hideModal_store-status');
-    const now = new Date().getTime();
-    if (!hideStore || parseInt(hideStore) < now) {
-      setShowStoreModal(true);
-    }
+  const handleLandingModalClose = () => {
+    setLandingModalQueue((queue) => queue.slice(1));
   };
 
   // SEO: JSON-LD Structured Data (Google Search Console용)
@@ -167,8 +162,14 @@ export default function Home() {
         <Footer />
         <FloatingInquiry />
 
-        <StoreStatusModal isOpen={showStoreModal} onClose={() => setShowStoreModal(false)} />
-        <BrandLetterModal isOpen={showBrandLetterModal} onClose={handleBrandLetterClose} />
+        <BrandLetterModal
+          isOpen={activeLandingModal === 'brand-letter'}
+          onClose={handleLandingModalClose}
+        />
+        <StoreStatusModal
+          isOpen={activeLandingModal === 'store-status'}
+          onClose={handleLandingModalClose}
+        />
       </main>
     </>
   );

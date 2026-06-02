@@ -60,12 +60,12 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
       modalId="store-status"
       position={{
         mobile: { left: 'left-[50%]', top: 'top-16', transform: 'translate-x-[-50%]' },
-        desktop: { left: 'sm:left-[420px]', top: 'sm:top-20' },
+        desktop: { left: 'sm:left-4', top: 'sm:top-20' },
       }}
       width="w-[95vw] sm:w-[820px]"
       className="overflow-hidden rounded-[18px] border-4 border-[#ffb21a] bg-[#5a2c12] p-0 shadow-xl sm:border-[6px]"
       header={
-        <div className="relative overflow-hidden bg-linear-to-b from-[#6b3a17] via-[#4a260f] to-[#2f1608] px-4 py-6 text-center sm:px-8 sm:py-7">
+        <div className="relative overflow-hidden bg-linear-to-b from-[#6b3a17] via-[#4a260f] to-[#2f1608] px-3 py-5 text-center sm:px-8 sm:py-7">
           <div
             className="absolute inset-0 opacity-[0.14]"
             style={{
@@ -78,16 +78,17 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
           <div className="absolute -right-16 bottom-4 h-20 w-56 rotate-[10deg] bg-[#ff6b12]/22" />
 
           <div className="relative z-10">
-            <p className="font-heading text-lg font-black text-white/90 sm:text-2xl">
+            <p className="font-heading text-base font-black text-white/90 sm:text-2xl">
               가맹사업 1년만에{' '}
               <span className="text-[#fec601] drop-shadow-[0_3px_0_rgba(84,39,12,0.8)]">
                 100호점
               </span>{' '}
               달성!
             </p>
-            <h2 className="mt-2 break-keep font-heading text-4xl font-black leading-none text-[#fff7e8] drop-shadow-[0_6px_0_rgba(37,18,7,0.85)] sm:text-6xl">
+            <h2 className="mt-2 break-keep font-heading text-[2.45rem] font-black leading-none text-[#fff7e8] drop-shadow-[0_6px_0_rgba(37,18,7,0.85)] sm:text-6xl">
               오늘은 오므라이스
-              <br className="sm:hidden" /> 오픈 현황
+              <br className="sm:hidden" />
+              오픈 현황
             </h2>
             <div className="mx-auto mt-4 flex w-fit items-center gap-2 rounded-full border border-[#fec601]/45 bg-[#fff7e8]/12 px-4 py-2 text-xs font-black text-[#fff1c0] sm:text-sm">
               <span>전국 {displayStoreCount || '-'}개 점포</span>
@@ -110,31 +111,29 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
                 한 그릇의 기준이 전국으로 넓어지는 중입니다.
               </p>
             </div>
-            <div className="grid grid-cols-3 gap-2 sm:grid-cols-5 sm:gap-2.5 lg:grid-cols-6">
+            <div className="grid grid-cols-5 gap-1 sm:gap-2.5 lg:grid-cols-6">
               {sortedStores.map((store) => (
                 <StoreItem key={store.store_code} store={store} />
               ))}
             </div>
-            <div className="mt-5 rounded-2xl border-2 border-[#ffb21a]/70 bg-[#fffaf0] px-4 py-4 shadow-[0_10px_24px_rgba(34,14,4,0.24)] sm:px-6 sm:py-5">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-7">
-                <div className="flex items-center justify-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#1346a0] bg-white text-xs font-black text-[#1346a0] sm:h-12 sm:w-12">
+            <div className="mt-5 rounded-2xl border-2 border-[#fec601] bg-[#fff7e8] px-3 py-3 shadow-[0_10px_24px_rgba(34,14,4,0.24)] sm:px-5">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-center sm:gap-5">
+                <div className="flex shrink-0 items-center justify-center gap-2 sm:gap-3">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-[#ff6b12] bg-white text-[11px] font-black text-[#ff6b12] sm:h-10 sm:w-10">
                     TEL
                   </span>
                   <a
                     href="tel:010-9923-9502"
-                    className="font-heading text-3xl font-black tracking-tight text-[#1346a0] sm:text-4xl"
+                    className="whitespace-nowrap font-heading text-[clamp(1.75rem,7.2vw,2.25rem)] font-black tracking-tight text-[#ff6b12] drop-shadow-[0_2px_0_rgba(90,44,18,0.18)] sm:text-4xl"
                   >
                     010-9923-9502
                   </a>
                 </div>
-                <p className="break-keep text-center text-sm font-bold leading-relaxed text-[#2f1608] sm:text-left sm:text-base">
-                  <mark className="rounded bg-[#fec601]/70 px-1 font-black text-[#4a260f]">
+                <p className="break-keep text-center text-xs font-black leading-snug text-[#4a260f] sm:text-left sm:text-sm lg:whitespace-nowrap">
+                  <mark className="rounded bg-[#fec601] px-1.5 py-0.5 font-black text-[#32190b]">
                     가맹문의 폭주
                   </mark>
-                  로 인하여 상담이 지연될 수 있습니다.
-                  <br />
-                  순차적으로 연락드리고 있으니, 너른 양해 부탁드립니다.
+                  로 인하여 상담이 지연될 수 있습니다. 순차적으로 연락드리고 있으니, 너른 양해 부탁드립니다.
                 </p>
               </div>
             </div>
