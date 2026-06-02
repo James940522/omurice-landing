@@ -117,19 +117,19 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
               ))}
             </div>
             <div className="mt-5 rounded-2xl border-2 border-[#fec601] bg-[#fff7e8] px-3 py-3 shadow-[0_10px_24px_rgba(34,14,4,0.24)] sm:px-5">
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-center sm:gap-5">
-                <div className="flex shrink-0 items-center justify-center gap-2 sm:gap-3">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-[#ff6b12] bg-white text-[11px] font-black text-[#ff6b12] sm:h-10 sm:w-10">
+              <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center sm:justify-center sm:gap-4 lg:gap-5">
+                <div className="flex min-w-0 shrink items-center justify-center gap-2 sm:gap-3">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-[#ff6b12] bg-white text-[10px] font-black text-[#ff6b12] sm:h-10 sm:w-10 sm:text-[11px]">
                     TEL
                   </span>
                   <a
                     href="tel:010-9923-9502"
-                    className="whitespace-nowrap font-heading text-[clamp(1.75rem,7.2vw,2.25rem)] font-black tracking-tight text-[#ff6b12] drop-shadow-[0_2px_0_rgba(90,44,18,0.18)] sm:text-4xl"
+                    className="min-w-0 whitespace-nowrap font-heading text-[clamp(1.32rem,6.2vw,2rem)] font-black tracking-[-0.04em] text-[#ff6b12] drop-shadow-[0_2px_0_rgba(90,44,18,0.18)] sm:text-[2rem] md:text-4xl"
                   >
                     010-9923-9502
                   </a>
                 </div>
-                <p className="break-keep text-center text-xs font-black leading-snug text-[#4a260f] sm:text-left sm:text-sm lg:whitespace-nowrap">
+                <p className="min-w-0 break-keep text-center text-[11px] font-black leading-snug text-[#4a260f] sm:text-left sm:text-sm lg:whitespace-nowrap">
                   <mark className="rounded bg-[#fec601] px-1.5 py-0.5 font-black text-[#32190b]">
                     가맹문의 폭주
                   </mark>

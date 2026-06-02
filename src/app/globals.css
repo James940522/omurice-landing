@@ -246,7 +246,7 @@ body {
     system-ui,
     sans-serif;
   cursor:
-    url('/asset/logo/cursor.png') 16 16,
+    url('/new-asset/cursor/cursor.png') 4 1,
     auto;
   overflow-x: hidden;
 }
@@ -256,22 +256,26 @@ body {
 *::after {
   box-sizing: border-box;
   cursor:
-    url('/asset/logo/cursor.png') 16 16,
+    url('/new-asset/cursor/cursor.png') 4 1,
     auto;
 }
 
-/* 커스텀 커서 스타일 */
-a,
-button,
-[role='button'],
-input[type='submit'],
-input[type='button'],
-a *,
-button *,
-[role='button'] * {
+input:not([type='submit']):not([type='button']):not([type='checkbox']):not([type='radio']),
+textarea {
   cursor:
-    url('/asset/logo/cursor.png') 16 16,
-    pointer !important;
+    url('/new-asset/cursor/text.png') 7 15,
+    text !important;
+}
+
+/* 마우스를 누르고 있는 순간에는 페이지 어디서든 클릭 커서로 전환 */
+html:active,
+body:active,
+body:active *,
+*:active,
+*:active * {
+  cursor:
+    url('/new-asset/cursor/click.png') 10 1,
+    auto !important;
 }
 
 /* 스크롤바 커스터마이징 */

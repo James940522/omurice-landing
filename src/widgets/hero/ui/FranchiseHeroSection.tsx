@@ -91,7 +91,8 @@ export default function FranchiseHeroSection() {
             transition={{ duration: 0.75, delay: 0.2 }}
             className="mt-4 font-heading text-5xl font-black leading-none text-white drop-shadow-[0_5px_18px_rgba(0,0,0,0.34)] md:text-7xl"
           >
-            오므라이스 창업의 기준
+            <span className="block sm:inline">오므라이스</span>
+            <span className="block sm:ml-3 sm:inline">창업의 기준</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -163,7 +164,7 @@ export default function FranchiseHeroSection() {
         >
           <span className="flex flex-col items-center justify-center text-center font-heading text-xs font-black uppercase leading-none text-white">
             <span>Since</span>
-            <span className="mt-1">2019</span>
+            <span className="mt-1">2024</span>
           </span>
         </motion.div>
       </div>
@@ -272,7 +273,7 @@ export default function FranchiseHeroSection() {
                 Since
               </p>
               <p className="font-heading text-5xl font-black leading-none text-white md:text-6xl">
-                2019
+                2024
               </p>
             </motion.div>
             <motion.div

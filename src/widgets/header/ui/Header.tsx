@@ -37,20 +37,27 @@ export default function Header() {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-[110] transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-strong' : 'bg-white/95 backdrop-blur-sm shadow-md'
+      className={`fixed top-0 left-0 right-0 z-[110] overflow-hidden border-b transition-all duration-300 ${
+        isScrolled
+          ? 'border-[#fec601] bg-[#4a260f]/96 shadow-[0_12px_34px_rgba(32,14,4,0.26)] backdrop-blur-md'
+          : 'border-[#fec601]/85 bg-[#4a260f]/92 shadow-[0_10px_28px_rgba(32,14,4,0.22)] backdrop-blur-md'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14 md:h-16">
+      <div className="pointer-events-none absolute inset-x-0 top-0 hidden h-1 bg-linear-to-r from-[#ff6b12] via-[#fec601] to-[#ff6b12] xl:block" />
+      <div className="pointer-events-none absolute left-0 top-1 hidden h-px w-full bg-linear-to-r from-transparent via-white/35 to-transparent xl:block" />
+      <div className="pointer-events-none absolute -left-20 top-3 hidden h-20 w-72 rotate-[-8deg] bg-[#ff6b12]/20 xl:block" />
+      <div className="pointer-events-none absolute -right-24 bottom-0 hidden h-20 w-80 rotate-[7deg] bg-[#fec601]/20 xl:block" />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:max-w-[1480px] xl:px-10">
+        <div className="flex h-14 items-center justify-between md:h-16 xl:h-[84px]">
           {/* Logo */}
-          <motion.div className="shrink-0" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <motion.div className="shrink-0" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.96 }}>
             <a
               href="#"
-              className="flex items-center"
+              className="flex items-center rounded-full border border-[#fec601]/55 bg-[#fff8ea] px-3 py-1.5 shadow-[0_10px_24px_rgba(20,8,2,0.22)] xl:px-4 xl:py-2"
               aria-label="오늘은 오므라이스 홈으로 이동"
             >
               <Image
@@ -58,7 +65,7 @@ export default function Header() {
                 alt="오늘은 오므라이스"
                 width={200}
                 height={100}
-                className="h-8 md:h-10 lg:h-12 w-auto"
+                className="h-7 w-auto md:h-9 lg:h-10 xl:h-[46px]"
                 priority
                 quality={75}
               />
@@ -66,30 +73,33 @@ export default function Header() {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden xl:flex items-center gap-4">
-            {SITE_NAV_ITEMS.map((item) => (
+          <nav className="hidden items-center xl:flex">
+            <div className="flex items-center rounded-full border border-[#fec601]/55 bg-[#32190b]/88 px-2 py-2 shadow-[0_12px_28px_rgba(20,8,2,0.24),inset_0_1px_0_rgba(255,255,255,0.10)]">
+              {SITE_NAV_ITEMS.map((item, index) => (
+                <div key={item.name} className="flex items-center">
+                  {index > 0 && <span className="mx-1.5 h-1.5 w-1.5 rounded-full bg-[#fec601]/85" />}
+                  <motion.button
+                    onClick={() => scrollToSection(item.href)}
+                    className="whitespace-nowrap rounded-full px-3 py-2 text-sm font-black text-[#fff8ea] transition-all duration-300 hover:bg-[#fff8ea] hover:text-[#4a260f]"
+                    whileHover={{ y: -1 }}
+                    whileTap={{ scale: 0.96 }}
+                  >
+                    {item.name}
+                  </motion.button>
+                </div>
+              ))}
+
+              <span className="mx-2 h-6 w-px bg-[#fec601]/45" />
               <motion.button
-                key={item.name}
-                onClick={() => scrollToSection(item.href)}
-                className={`whitespace-nowrap text-sm font-bold transition-colors duration-300 xl:text-base ${
-                  isScrolled
-                    ? 'text-foreground hover:text-primary'
-                    : 'text-foreground/90 hover:text-foreground'
-                }`}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+                onClick={() => scrollToSection(CONTACT_NAV_ITEM.href)}
+                className="relative overflow-hidden rounded-full bg-[#fec601] px-5 py-2.5 font-black text-[#32190b] shadow-[0_8px_18px_rgba(254,198,1,0.22)] transition-all duration-300 hover:bg-[#ffdd39]"
+                whileHover={{ y: -1, scale: 1.02 }}
+                whileTap={{ scale: 0.96 }}
               >
-                {item.name}
+                <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/70" />
+                {CONTACT_NAV_ITEM.name}
               </motion.button>
-            ))}
-            <motion.button
-              onClick={() => scrollToSection(CONTACT_NAV_ITEM.href)}
-              className="bg-foreground text-white px-4 py-2 rounded-full hover:bg-primary hover:text-white transition-all duration-300 shadow-strong-hover font-bold border-2 border-foreground hover:border-primary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {CONTACT_NAV_ITEM.name}
-            </motion.button>
+            </div>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -97,7 +107,7 @@ export default function Header() {
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
                 <button
-                  className="text-foreground text-3xl hover:text-primary transition-colors"
+                  className="text-3xl text-[#fff8ea] transition-colors hover:text-[#fec601]"
                   type="button"
                   aria-label="메뉴 열기"
                 >

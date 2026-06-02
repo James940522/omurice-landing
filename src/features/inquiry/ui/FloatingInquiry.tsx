@@ -102,7 +102,7 @@ export default function FloatingInquiry() {
     <AnimatePresence>
       {shouldShow && (
         <motion.aside
-          className="fixed inset-x-0 bottom-0 z-[2147483647] border-t-2 border-[#fec601] bg-[#4a260f] shadow-[0_-14px_34px_rgba(32,14,4,0.26)]"
+          className="fixed inset-x-0 bottom-0 z-[2147483647] overflow-hidden border-t-2 border-[#fec601] bg-[#4a260f] shadow-[0_-14px_34px_rgba(32,14,4,0.26)] lg:border-t-[3px]"
           initial={{ opacity: 0, y: 90 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 90 }}
@@ -110,17 +110,20 @@ export default function FloatingInquiry() {
           aria-label="빠른 가맹문의"
         >
           <div className="h-1 bg-linear-to-r from-[#ff6b12] via-[#fec601] to-[#ff6b12]" />
+          <div className="pointer-events-none absolute left-0 top-1 hidden h-px w-full bg-linear-to-r from-transparent via-white/45 to-transparent lg:block" />
+          <div className="pointer-events-none absolute -left-20 top-2 hidden h-20 w-80 rotate-[-6deg] bg-[#ff6b12]/20 lg:block" />
+          <div className="pointer-events-none absolute -right-24 bottom-0 hidden h-20 w-96 rotate-[5deg] bg-[#fec601]/20 lg:block" />
           <form
             onSubmit={handleSubmit}
-            className="mx-auto flex max-w-7xl items-center gap-2 overflow-x-auto px-3 py-2 [scrollbar-width:none] sm:gap-3 sm:px-5 [&::-webkit-scrollbar]:hidden"
+            className="relative mx-auto flex max-w-7xl items-center gap-2 overflow-x-auto px-3 py-2 [scrollbar-width:none] sm:gap-3 sm:px-5 lg:max-w-[1480px] lg:gap-4 lg:overflow-visible lg:px-10 lg:py-3 [&::-webkit-scrollbar]:hidden"
           >
-            <div className="flex min-w-[112px] shrink-0 items-center gap-2 sm:min-w-[210px]">
-              <p className="font-heading text-base font-black leading-none text-white sm:text-lg">
+            <div className="flex min-w-[112px] shrink-0 items-center gap-2 sm:min-w-[210px] lg:min-w-[318px] lg:gap-3">
+              <p className="font-heading text-base font-black leading-none text-white sm:text-lg lg:text-xl">
                 빠른 가맹문의
               </p>
               <a
                 href="tel:010-9923-9502"
-                className="hidden font-heading text-2xl font-black tracking-tight text-[#fec601] sm:block"
+                className="hidden whitespace-nowrap font-heading text-2xl font-black tracking-tight text-[#fec601] sm:block lg:text-[2.25rem]"
               >
                 010-9923-9502
               </a>
@@ -131,7 +134,7 @@ export default function FloatingInquiry() {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="h-9 w-[104px] shrink-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 sm:w-[128px]"
+              className="h-9 w-[104px] shrink-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 sm:w-[128px] lg:h-12 lg:w-[172px] lg:rounded-[10px] lg:px-4 lg:text-base"
               placeholder="성함"
               autoComplete="name"
             />
@@ -140,7 +143,7 @@ export default function FloatingInquiry() {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="h-9 w-[128px] shrink-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 sm:w-[150px]"
+              className="h-9 w-[128px] shrink-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 sm:w-[150px] lg:h-12 lg:w-[190px] lg:rounded-[10px] lg:px-4 lg:text-base"
               placeholder="연락처"
               autoComplete="tel"
             />
@@ -149,7 +152,7 @@ export default function FloatingInquiry() {
               name="region"
               value={formData.region}
               onChange={handleChange}
-              className="h-9 w-[118px] shrink-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 sm:w-[142px]"
+              className="h-9 w-[118px] shrink-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 sm:w-[142px] lg:h-12 lg:w-[182px] lg:rounded-[10px] lg:px-4 lg:text-base"
               placeholder="희망지역"
             />
 
@@ -164,12 +167,12 @@ export default function FloatingInquiry() {
               aria-hidden="true"
             />
 
-            <label className="flex min-w-[132px] shrink-0 cursor-pointer items-center gap-2 text-xs font-black leading-tight text-white sm:min-w-[152px]">
+            <label className="flex min-w-[132px] shrink-0 cursor-pointer items-center gap-2 text-xs font-black leading-tight text-white sm:min-w-[152px] lg:min-w-[172px] lg:text-sm">
               <input
                 type="checkbox"
                 checked={privacyAgree}
                 onChange={(event) => setPrivacyAgree(event.target.checked)}
-                className="h-4 w-4 rounded border-white/60 text-[#ff6b12] focus:ring-[#fec601]"
+                className="h-4 w-4 rounded border-white/60 text-[#ff6b12] focus:ring-[#fec601] lg:h-5 lg:w-5"
               />
               개인정보 동의
             </label>
@@ -177,7 +180,7 @@ export default function FloatingInquiry() {
             <motion.button
               type="submit"
               disabled={isSubmitting}
-              className={`h-9 min-w-[112px] shrink-0 rounded-[6px] bg-[#fec601] px-4 text-sm font-black text-[#32190b] shadow-[0_8px_18px_rgba(0,0,0,0.18)] transition hover:bg-[#ffdd39] sm:h-10 sm:min-w-[154px] sm:text-base ${
+              className={`h-9 min-w-[112px] shrink-0 rounded-[6px] bg-[#fec601] px-4 text-sm font-black text-[#32190b] shadow-[0_8px_18px_rgba(0,0,0,0.18)] transition hover:bg-[#ffdd39] sm:h-10 sm:min-w-[154px] sm:text-base lg:h-12 lg:min-w-[190px] lg:rounded-[10px] lg:text-lg ${
                 isSubmitting ? 'cursor-not-allowed opacity-60' : ''
               }`}
               whileHover={{ scale: isSubmitting ? 1 : 1.03 }}

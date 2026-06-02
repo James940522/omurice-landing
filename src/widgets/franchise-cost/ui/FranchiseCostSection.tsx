@@ -1,13 +1,13 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 const costRows = [
-  { item: '가맹비', amount: '300만원', result: '무료', waived: true },
-  { item: '교육비', amount: '200만원', result: '현장 교육 무료', waived: true },
-  { item: '보증금', amount: '200만원', result: '무료', waived: true },
-  { item: '로열티', amount: '20만원', result: '무료', waived: true },
+  { item: '가맹비', amount: '300만원', result: '무료', note: '브랜드 사용 권리', waived: true },
+  { item: '교육비', amount: '200만원', result: '현장 교육 무료', note: '오픈 교육 지원', waived: true },
+  { item: '보증금', amount: '200만원', result: '무료', note: '초기 부담 절감', waived: true },
+  { item: '로열티', amount: '20만원', result: '무료', note: '매월 고정비 절감', waived: true },
   { item: '인테리어', amount: '자율시공', result: '자율시공' },
   { item: '간판', amount: '자율시공', result: '자율시공' },
   { item: '주방설비 / 집기', amount: '450만원', result: '필수 장비 기준' },
@@ -22,9 +22,49 @@ const marqueeWords = [
   'OWNER FIRST SYSTEM',
 ];
 
+const waivedCount = costRows.filter((row) => row.waived).length;
+
+function FreeStamp({ label, delay }: { label: string; delay: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 2.3, rotate: -18, y: -18, filter: 'blur(2px)' }}
+      animate={{
+        opacity: 1,
+        scale: [2.3, 0.86, 1.08, 1],
+        rotate: [-18, -7, -4, -5],
+        y: [-18, 3, -1, 0],
+        filter: ['blur(2px)', 'blur(0px)', 'blur(0px)', 'blur(0px)'],
+      }}
+      transition={{ duration: 0.62, delay, ease: [0.2, 0.8, 0.2, 1] }}
+      className="relative inline-flex h-11 min-w-[76px] items-center justify-center border-[3px] border-[#ff3f16] bg-[#fff7ed]/90 px-3 font-heading text-base font-black text-[#ff3f16] shadow-[0_10px_24px_rgba(255,63,22,0.18)] md:h-12 md:min-w-[86px] md:text-lg"
+    >
+      <motion.span
+        className="absolute inset-[-5px] border border-[#ff3f16]/45"
+        initial={{ opacity: 0, scale: 0.75 }}
+        animate={{ opacity: [0, 0.75, 0], scale: [0.75, 1.18, 1.32] }}
+        transition={{ duration: 0.52, delay: delay + 0.08, ease: 'easeOut' }}
+      />
+      <motion.span
+        className="absolute -right-2 -top-2 size-2 rounded-full bg-[#ff3f16]"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: [0, 1, 0.7], scale: [0, 1.5, 1] }}
+        transition={{ duration: 0.38, delay: delay + 0.2 }}
+      />
+      <motion.span
+        className="absolute -bottom-2 left-2 size-1.5 rounded-full bg-[#ff3f16]/70"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: [0, 0.9, 0.55], scale: [0, 1.4, 1] }}
+        transition={{ duration: 0.38, delay: delay + 0.25 }}
+      />
+      {label}
+    </motion.div>
+  );
+}
+
 export default function FranchiseCostSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '0px 0px -12% 0px', amount: 0.14 });
+  const [activeRow, setActiveRow] = useState<number | null>(null);
 
   return (
     <section
@@ -98,7 +138,7 @@ export default function FranchiseCostSection() {
                   Waived
                 </p>
                 <p className="mt-1 font-heading text-3xl font-black text-white">
-                  4개 항목
+                  {waivedCount}개 항목
                 </p>
                 <p className="mt-1 text-xs font-bold text-[#fff2c6]/75">
                   가맹비 · 교육비 · 보증금 · 로열티
@@ -136,54 +176,80 @@ export default function FranchiseCostSection() {
           </div>
 
           <div className="space-y-2 bg-[#fff8ef] px-3 py-3 md:px-6 md:py-5">
-            {costRows.map((row, index) => (
-              <div
-                key={row.item}
-                className={`grid grid-cols-[0.8fr_1fr_1.1fr] items-center rounded-[12px] border px-3 py-3 text-center text-xs font-bold text-[#43210d] shadow-[0_8px_18px_rgba(84,45,10,0.06)] md:px-5 md:text-sm ${
-                  row.waived
-                    ? 'border-[#ff6b12]/45 bg-white'
-                    : 'border-[#f4c47d]/75 bg-[#fffdf8]'
-                }`}
-              >
-                <div className="font-heading text-sm font-black md:text-base">{row.item}</div>
-                <div className="flex min-h-8 items-center justify-center">
-                  {row.waived ? (
-                    <span className="relative inline-flex items-center justify-center px-1 text-[#8a6848]/70">
-                      {row.amount}
-                      <motion.span
-                        className="absolute left-0 top-1/2 h-[2px] w-full origin-left -translate-y-1/2 bg-[#ff4f1f]"
-                        initial={{ scaleX: 0 }}
-                        animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-                        transition={{ duration: 0.5, delay: 0.42 + index * 0.07, ease: 'easeOut' }}
-                      />
-                    </span>
-                  ) : (
-                    <span>{row.amount}</span>
+            {costRows.map((row, index) => {
+              const delay = 0.48 + index * 0.08;
+              const isActive = activeRow === index;
+
+              return (
+                <motion.div
+                  key={row.item}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+                  transition={{ duration: 0.45, delay: 0.16 + index * 0.045, ease: 'easeOut' }}
+                  whileHover={{ y: -3 }}
+                  onMouseEnter={() => setActiveRow(index)}
+                  onMouseLeave={() => setActiveRow(null)}
+                  className={`group relative grid grid-cols-[0.8fr_1fr_1.1fr] items-center overflow-hidden rounded-[12px] border px-3 py-3 text-center text-xs font-bold text-[#43210d] shadow-[0_8px_18px_rgba(84,45,10,0.06)] transition-all duration-300 md:px-5 md:text-sm ${
+                    row.waived
+                      ? 'border-[#ff6b12]/45 bg-white hover:border-[#ff3f16] hover:shadow-[0_18px_34px_rgba(255,107,18,0.17)]'
+                      : 'border-[#f4c47d]/75 bg-[#fffdf8] hover:border-[#fec601] hover:shadow-[0_18px_34px_rgba(84,45,10,0.10)]'
+                  }`}
+                >
+                  <div className="pointer-events-none absolute inset-0 bg-linear-to-r from-[#fec601]/0 via-[#fec601]/0 to-[#ff6b12]/0 transition duration-300 group-hover:via-[#fec601]/10 group-hover:to-[#ff6b12]/5" />
+                  {row.waived && (
+                    <motion.div
+                      className="pointer-events-none absolute bottom-0 left-0 top-0 w-1 bg-[#ff6b12]"
+                      initial={{ scaleY: 0 }}
+                      animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
+                      transition={{ duration: 0.42, delay, ease: 'easeOut' }}
+                    />
                   )}
-                </div>
-                <div className="flex min-h-8 items-center justify-center">
-                  {row.waived ? (
-                    <div className="flex flex-col items-center gap-1">
+                  <div className="relative font-heading text-sm font-black md:text-base">
+                    {row.item}
+                    {row.waived && row.note && (
                       <motion.span
-                        initial={{ opacity: 0, rotate: -8, scale: 0.9 }}
-                        animate={isInView ? { opacity: 1, rotate: -3, scale: 1 } : {}}
-                        transition={{ duration: 0.38, delay: 0.7 + index * 0.07, ease: 'easeOut' }}
-                        className="inline-flex min-w-16 justify-center rounded-[4px] border-2 border-[#ff4f1f] bg-[#fff7ed] px-3 py-1 font-heading text-sm font-black text-[#ff4f1f] shadow-[0_0_18px_rgba(255,79,31,0.16)] md:text-base"
+                        className="mt-1 hidden text-[10px] font-black text-[#ff6b12] sm:block"
+                        initial={{ opacity: 0 }}
+                        animate={
+                          isActive || isInView ? { opacity: isActive ? 1 : 0.72 } : { opacity: 0 }
+                        }
                       >
-                        0원
+                        {row.note}
                       </motion.span>
-                      <span className="text-[11px] font-black text-[#6b4222] md:text-xs">
+                    )}
+                  </div>
+                  <div className="flex min-h-8 items-center justify-center">
+                    {row.waived ? (
+                      <span className="relative inline-flex items-center justify-center px-1 text-[#8a6848]/70">
+                        {row.amount}
+                        <motion.span
+                          className="absolute left-0 top-1/2 h-[2px] w-full origin-left -translate-y-1/2 bg-[#ff4f1f]"
+                          initial={{ scaleX: 0 }}
+                          animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+                          transition={{ duration: 0.5, delay: delay + 0.05, ease: 'easeOut' }}
+                        />
+                      </span>
+                    ) : (
+                      <span>{row.amount}</span>
+                    )}
+                  </div>
+                  <div className="flex min-h-8 items-center justify-center">
+                    {row.waived ? (
+                      <div className="flex flex-col items-center gap-1">
+                        {isInView && <FreeStamp label="0원" delay={delay + 0.26} />}
+                        <span className="text-[11px] font-black text-[#6b4222] md:text-xs">
+                          {row.result}
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="rounded-full bg-[#fff0d2] px-3 py-1.5 text-xs font-black text-[#6b4222] md:text-sm">
                         {row.result}
                       </span>
-                    </div>
-                  ) : (
-                    <span className="rounded-full bg-[#fff0d2] px-3 py-1.5 text-xs font-black text-[#6b4222] md:text-sm">
-                      {row.result}
-                    </span>
-                  )}
-                </div>
-              </div>
-            ))}
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
 
           <div className="bg-[#32190b] px-4 py-6 text-center text-[#fff2c6] md:px-8">
