@@ -13,6 +13,8 @@ const beforeItems = [
   '같은 노동 강도라도 더 좋은 업종을 찾으시는 사장님',
 ];
 
+const afterImpactItems = ['주문 유입', '메뉴 경쟁력', '재구매 설계'];
+
 export default function BusinessChangeSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '0px 0px -12% 0px', amount: 0.18 });
@@ -27,6 +29,9 @@ export default function BusinessChangeSection() {
         .business-change-word,
         .business-change-copy,
         .business-change-stat,
+        .business-change-after-panel,
+        .business-change-after-chip,
+        .business-change-growth-badge,
         .business-change-list li {
           transition:
             color 0.3s ease,
@@ -84,6 +89,35 @@ export default function BusinessChangeSection() {
           color: #4b1603;
         }
 
+        .business-change-after:hover .business-change-growth-badge {
+          transform: translateY(-3px) scale(1.06) rotate(-2deg);
+          box-shadow:
+            0 0 22px rgba(255, 255, 255, 0.72),
+            0 12px 28px rgba(120, 41, 0, 0.22);
+        }
+
+        .business-change-after:hover .business-change-after-panel {
+          transform: translateY(-6px);
+          background-color: rgba(255, 248, 210, 0.38);
+          box-shadow:
+            0 0 24px rgba(255, 255, 255, 0.38),
+            0 18px 36px rgba(116, 44, 0, 0.18);
+        }
+
+        .business-change-after:hover .business-change-after-chip {
+          transform: translateX(-5px);
+          background-color: rgba(255, 255, 255, 0.52);
+          color: #3a1404;
+        }
+
+        .business-change-after:hover .business-change-after-chip:nth-child(2) {
+          transform: translateX(-10px);
+        }
+
+        .business-change-after:hover .business-change-after-chip:nth-child(3) {
+          transform: translateX(-15px);
+        }
+
         .business-change-after:hover .business-change-word {
           color: #fff7d6;
           opacity: 0.5;
@@ -102,6 +136,11 @@ export default function BusinessChangeSection() {
           .business-change-side:hover .business-change-word,
           .business-change-side:hover .business-change-copy,
           .business-change-side:hover .business-change-stat,
+          .business-change-after:hover .business-change-growth-badge,
+          .business-change-after:hover .business-change-after-panel,
+          .business-change-after:hover .business-change-after-chip,
+          .business-change-after:hover .business-change-after-chip:nth-child(2),
+          .business-change-after:hover .business-change-after-chip:nth-child(3),
           .business-change-before:hover .business-change-list li,
           .business-change-before:hover .business-change-list li:nth-child(2n) {
             transform: none;
@@ -233,11 +272,31 @@ export default function BusinessChangeSection() {
                 만원
               </span>
             </p>
-            <p className="business-change-copy mt-4 block break-keep rounded-[8px] border border-[#8e2107]/25 bg-white/20 px-2.5 py-2 text-center text-[0.58rem] font-black leading-relaxed text-[#6f2309] shadow-[0_10px_22px_rgba(97,39,0,0.12)] min-[390px]:text-[0.68rem] md:mt-5 md:px-5 md:py-3 md:text-base">
-              업종은 간단하게 바꾸고,
-              <br />
-              수익 구조는 더 크게 설계합니다.
-            </p>
+            <div className="business-change-after-panel mt-3 rounded-[9px] border border-[#8e2107]/28 bg-white/24 px-2.5 py-2.5 text-left shadow-[0_10px_22px_rgba(97,39,0,0.12)] min-[390px]:mt-4 min-[390px]:px-3 min-[390px]:py-3 md:mt-6 md:w-[28vw] md:max-w-[430px] md:px-5 md:py-4">
+              <div className="flex items-center justify-between gap-2">
+                <p className="business-change-copy break-keep text-[0.52rem] font-black leading-tight text-[#4b1603] min-[390px]:text-[0.62rem] md:text-base">
+                  전환 후 매출 구조
+                </p>
+                <span className="business-change-growth-badge shrink-0 rounded-full bg-[#4b1603] px-2 py-1 font-heading text-[0.52rem] font-black leading-none text-[#fec601] shadow-[0_6px_16px_rgba(80,28,0,0.2)] min-[390px]:text-[0.62rem] md:px-3 md:py-1.5 md:text-sm">
+                  2.5배 성장
+                </span>
+              </div>
+              <p className="mt-2 break-keep text-[0.52rem] font-black leading-snug text-[#6f2309] min-[390px]:text-[0.61rem] md:mt-3 md:text-base md:leading-relaxed">
+                간판은 바꾸고,
+                <br />
+                주문과 재구매는 오므라이스 시스템으로 채웁니다.
+              </p>
+              <div className="mt-2 grid gap-1 min-[390px]:mt-3 md:grid-cols-3 md:gap-2">
+                {afterImpactItems.map((item) => (
+                  <span
+                    key={item}
+                    className="business-change-after-chip rounded-full border border-[#7d2607]/22 bg-white/30 px-2 py-1 text-center text-[0.5rem] font-black leading-none text-[#6f2309] min-[390px]:text-[0.58rem] md:px-3 md:py-2 md:text-sm"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>

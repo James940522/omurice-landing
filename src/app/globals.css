@@ -353,6 +353,40 @@ body:active *,
   animation: wiggle 1s ease-in-out infinite;
 }
 
+@keyframes omurice-marquee-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-33.333%, 0, 0);
+  }
+}
+
+@keyframes omurice-marquee-right {
+  from {
+    transform: translate3d(-33.333%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.omurice-marquee-left {
+  animation: omurice-marquee-left var(--duration, 32s) linear infinite;
+}
+
+.omurice-marquee-right {
+  animation: omurice-marquee-right var(--duration, 32s) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .omurice-marquee-left,
+  .omurice-marquee-right {
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+  }
+}
+
 /* Swiper 커스터마이징 */
 .baemin-swiper .swiper-button-next,
 .baemin-swiper .swiper-button-prev {

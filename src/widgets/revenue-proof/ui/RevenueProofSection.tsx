@@ -4,6 +4,35 @@ import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { useRef } from 'react';
 
+const featuredRevenue = {
+  region: '서울 OO점',
+  code: 'SL',
+  amount: '150,000,000',
+};
+
+const revenueItems = [
+  {
+    region: '서울 OO점',
+    code: 'GS',
+    amount: '67,963,500',
+  },
+  {
+    region: '경기 OO점',
+    code: 'SW',
+    amount: '86,744,300',
+  },
+  {
+    region: '충남 OO점',
+    code: 'SY',
+    amount: '100,900,000',
+  },
+  {
+    region: '서울 OO점',
+    code: 'SP',
+    amount: '92,800,000',
+  },
+];
+
 export default function RevenueProofSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '0px 0px -12% 0px', amount: 0.12 });
@@ -12,107 +41,119 @@ export default function RevenueProofSection() {
     <section
       id="revenue"
       ref={ref}
-      className="relative isolate overflow-hidden bg-[#fef9f0] py-20 md:py-28 lg:py-32"
+      className="relative isolate overflow-hidden bg-[#fff5d7] py-20 text-[#3b1707] md:py-28 lg:py-32"
     >
-      {/* 우상단 오렌지 장식 */}
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_16%_18%,rgba(255,107,18,0.22),transparent_30%),radial-gradient(circle_at_86%_16%,rgba(254,198,1,0.26),transparent_34%),linear-gradient(180deg,#fff9e8_0%,#ffe9a8_100%)]" />
       <div
-        className="pointer-events-none absolute right-0 top-0 -z-10 h-[48%] w-[16%]"
-        style={{ background: '#f5a623', clipPath: 'polygon(32% 0, 100% 0, 100% 100%, 0% 100%)' }}
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.16]"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(90,44,18,0.32) 1px, transparent 1px), linear-gradient(90deg, rgba(90,44,18,0.32) 1px, transparent 1px)',
+          backgroundSize: '42px 42px',
+        }}
       />
-      {/* 우하단 오렌지 장식 */}
-      <div
-        className="pointer-events-none absolute bottom-0 right-0 -z-10 h-[48%] w-[16%]"
-        style={{ background: '#f5a623', clipPath: 'polygon(0% 0, 100% 0, 100% 100%, 32% 100%)' }}
-      />
+      <div className="pointer-events-none absolute right-0 top-0 -z-10 h-48 w-36 bg-[#ff6b12]" style={{ clipPath: 'polygon(40% 0, 100% 0, 100% 100%, 0 100%)' }} />
+      <div className="pointer-events-none absolute bottom-0 left-0 -z-10 h-44 w-40 bg-[#fec601]/70" style={{ clipPath: 'polygon(0 0, 100% 32%, 62% 100%, 0 100%)' }} />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
-          {/* 좌: 텍스트 */}
-          <motion.div
-            initial={{ opacity: 0, x: -32 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-          >
-            <h2
-              className="text-3xl font-black leading-[1.22] text-[#1a1a1a] sm:text-4xl md:text-5xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              오늘은 오므라이스는
-              <br />
-              <span className="text-[#f5a623]">신규 출점 제한지역</span>을 보장해
-              <br />
-              상권 충돌을 최소화합니다.
-            </h2>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.65, ease: 'easeOut' }}
+          className="mx-auto max-w-4xl text-center"
+        >
+          <p className="font-heading text-sm font-black uppercase tracking-[0.22em] text-[#ff6b12]">
+            Revenue Proof
+          </p>
+          <h2 className="mt-4 break-keep font-heading text-[clamp(2.7rem,6.2vw,5.8rem)] font-black leading-[1.02] tracking-[-0.04em] text-[#3b1707]">
+            숫자로 증명된 매출,
+            <br className="sm:hidden" />
+            <span className="text-[#ff6b12] drop-shadow-[0_4px_0_rgba(74,38,15,0.14)]">
+              {' '}
+              매일 기대되는 운영
+            </span>
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl break-keep text-base font-bold leading-relaxed text-[#6a3515] sm:text-lg">
+            오늘은 오므라이스는 실제 운영 현장의 성과를 기준으로, 예비 점주님이 확인해야 할 매출 흐름을 보여드립니다.
+          </p>
+        </motion.div>
 
-            <div className="my-7 h-[3px] w-14 rounded-full bg-[#f5a623]" />
+        <motion.div
+          initial={{ opacity: 0, y: 36, scale: 0.98 }}
+          animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+          transition={{ duration: 0.72, delay: 0.1, ease: 'easeOut' }}
+          className="relative mt-12 overflow-hidden rounded-[26px] border-2 border-[#5a2c12]/24 bg-[#fffaf0] shadow-[0_26px_70px_rgba(122,52,0,0.18)] sm:mt-14"
+        >
+          <div className="absolute inset-x-0 bottom-0 h-[38%] bg-[#4a260f]" />
+          <div className="absolute inset-x-0 bottom-[33%] h-8 bg-[#ff6b12]" />
+          <div className="absolute left-1/2 top-8 h-72 w-72 -translate-x-1/2 rounded-full bg-[#fec601]/26 blur-3xl" />
+          <div
+            className="absolute inset-0 opacity-[0.11]"
+            style={{
+              backgroundImage:
+                'linear-gradient(rgba(74,38,15,0.32) 1px, transparent 1px), linear-gradient(90deg, rgba(74,38,15,0.32) 1px, transparent 1px)',
+              backgroundSize: '34px 34px',
+            }}
+          />
 
-            <p
-              className="text-2xl font-black text-[#1a1a1a] sm:text-3xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              같은동네, 같은 프랜차이즈{' '}
-              <span className="font-black">✕</span>
+          <div className="relative z-10 mx-auto flex min-h-[500px] max-w-6xl flex-col items-center px-5 pt-10 text-center sm:min-h-[610px] sm:px-8 sm:pt-14 lg:min-h-[660px]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#8a3b0d]/22 bg-[#fff3c6]/88 px-4 py-2 font-heading text-xs font-black text-[#5a2c12] shadow-[0_8px_20px_rgba(122,52,0,0.12)] sm:text-sm">
+              월 최고 매출액
+              <span className="h-1.5 w-1.5 rounded-full bg-[#ff6b12]" />
+              {featuredRevenue.region} ({featuredRevenue.code})
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-end justify-center gap-x-3 gap-y-1">
+              <span className="font-heading text-[clamp(3.4rem,12vw,9.4rem)] font-black leading-none tracking-[-0.07em] text-[#180904] drop-shadow-[0_6px_0_rgba(255,255,255,0.72)]">
+                {featuredRevenue.amount}
+              </span>
+              <span className="mb-2 rounded-full bg-[#ff6b12] px-4 py-2 font-heading text-xl font-black text-white shadow-[0_8px_20px_rgba(255,107,18,0.28)] sm:mb-5 sm:text-3xl">
+                원 달성
+              </span>
+            </div>
+
+            <p className="mt-5 max-w-2xl break-keep rounded-2xl border border-[#8a3b0d]/16 bg-white/58 px-5 py-3 text-sm font-black leading-relaxed text-[#5a2c12] backdrop-blur-sm sm:text-base">
+              단순한 출점 수가 아닌, 실제 매장에서 반복되는 매출 성과로 브랜드의 경쟁력을 확인하세요.
             </p>
 
-            <p className="mt-5 text-sm font-medium leading-relaxed text-[#5a4a3a] md:text-base">
-              무분별한 확장이 아닌 가맹점의 매출과
-              <br />
-              철저한 상권 보장을 진행하고 있습니다.
-            </p>
+            <Image
+              src="/new-asset/revenue-proof/omurice-sales-plate.webp"
+              alt="오늘은 오므라이스 대표 메뉴"
+              width={1672}
+              height={941}
+              className="absolute bottom-[-5%] left-1/2 z-10 w-[138%] max-w-none -translate-x-1/2 drop-shadow-[0_34px_44px_rgba(32,12,0,0.42)] sm:bottom-[-7%] sm:w-[112%] lg:bottom-[-9%] lg:w-[92%]"
+              sizes="(max-width: 640px) 138vw, (max-width: 1024px) 112vw, 92vw"
+              priority={false}
+              quality={92}
+            />
+          </div>
+        </motion.div>
 
-            <p className="mt-10 text-[0.7rem] font-medium leading-relaxed text-[#5a4a3a]/65 sm:text-xs">
-              *상권 및 배달 구역은 지역, 계약 조건, 배달 플랫폼
-              <br />
-              운영 환경에 따라 세부 기준이 달라질 수 있습니다.
-            </p>
-          </motion.div>
-
-          {/* 우: 지도 이미지 */}
-          <motion.div
-            initial={{ opacity: 0, x: 32 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.15, ease: 'easeOut' }}
-            className="overflow-hidden rounded-2xl bg-white shadow-[0_20px_60px_rgba(0,0,0,0.14)]"
-          >
-            {/* 지도 이미지 + VS 뱃지 */}
-            <div className="relative">
-              <Image
-                src="/new-asset/sec-4/territory-map.webp"
-                alt="오늘은 오므라이스 상권 보호 지도"
-                width={1448}
-                height={1086}
-                className="h-auto w-full"
-                sizes="(max-width: 1024px) 100vw, 55vw"
-                quality={90}
-              />
-              {/* VS 뱃지 */}
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full border-[3px] border-[#f5a623] bg-white text-lg font-black text-[#1a1a1a] shadow-[0_6px_24px_rgba(0,0,0,0.18)] sm:h-16 sm:w-16 sm:text-xl md:h-20 md:w-20 md:text-2xl">
-                  VS
+        <div className="relative z-20 -mt-8 overflow-x-auto pb-2 sm:-mt-10 lg:overflow-visible">
+          <div className="flex min-w-max gap-3 px-1 lg:grid lg:min-w-0 lg:grid-cols-4">
+            {revenueItems.map((item, index) => (
+              <motion.div
+                key={`${item.region}-${item.code}`}
+                initial={{ opacity: 0, y: 22 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.52, delay: 0.18 + index * 0.08, ease: 'easeOut' }}
+                className="w-[250px] shrink-0 overflow-hidden rounded-[14px] border border-[#5a2c12]/24 bg-[#fffaf0] shadow-[0_18px_36px_rgba(122,52,0,0.14)] lg:w-auto"
+              >
+                <div className="bg-[#4a260f] px-5 py-4 text-center text-[#fff3c6]">
+                  <p className="font-heading text-sm font-black">
+                    {item.region} ({item.code})
+                  </p>
+                  <p className="mt-1 text-xs font-bold text-[#fec601]">월 매출 실적</p>
                 </div>
-              </div>
-            </div>
-
-            {/* 하단 라벨 */}
-            <div className="grid grid-cols-2 divide-x divide-white/30">
-              <div className="bg-[#5a3e28] px-4 py-3 text-center text-white sm:py-4">
-                <p className="text-sm font-black tracking-tight sm:text-base md:text-lg">
-                  일반브랜드
-                </p>
-                <p className="mt-0.5 text-[0.65rem] font-medium opacity-75 sm:text-xs md:text-sm">
-                  복수 지점 경쟁
-                </p>
-              </div>
-              <div className="bg-[#f5a623] px-4 py-3 text-center text-white sm:py-4">
-                <p className="text-sm font-black tracking-tight sm:text-base md:text-lg">
-                  오늘은 오므라이스
-                </p>
-                <p className="mt-0.5 text-[0.65rem] font-medium opacity-90 sm:text-xs md:text-sm">
-                  배달 상권 보장
-                </p>
-              </div>
-            </div>
-          </motion.div>
+                <div className="px-5 py-6 text-center">
+                  <p className="font-heading text-3xl font-black leading-none tracking-[-0.04em] text-[#ff6b12] sm:text-4xl">
+                    {item.amount}
+                  </p>
+                  <p className="mt-2 font-heading text-sm font-black text-[#5a2c12]">원</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

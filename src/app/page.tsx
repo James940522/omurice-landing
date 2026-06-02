@@ -6,6 +6,8 @@ import Script from 'next/script';
 // Widgets
 import { Header } from '@/widgets/header';
 import { FranchiseHeroSection } from '@/widgets/hero';
+import { AchievementRankSection } from '@/widgets/achievement-rank';
+import { FranchiseMomentumSection } from '@/widgets/franchise-momentum';
 import { BrandIntroSection } from '@/widgets/brand-intro';
 import { WhyChooseSection } from '@/widgets/why-choose';
 import { RevenueProofSection } from '@/widgets/revenue-proof';
@@ -149,6 +151,8 @@ export default function Home() {
       <main className="min-h-screen font-sans">
         <Header />
         <FranchiseHeroSection />
+        <AchievementRankSection />
+        <FranchiseMomentumSection />
         <BrandIntroSection />
         <WhyChooseSection />
         <RevenueProofSection />
