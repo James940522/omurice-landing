@@ -148,9 +148,7 @@ export default function RevenueProofSection() {
                 className="w-[76vw] max-w-[300px] shrink-0 snap-center overflow-hidden rounded-[14px] border border-[#5a2c12]/24 bg-[#fffaf0] shadow-[0_18px_36px_rgba(122,52,0,0.14)] sm:w-[300px] lg:w-auto lg:max-w-none"
               >
                 <div className="bg-[#4a260f] px-5 py-4 text-center text-[#fff3c6]">
-                  <p className="font-heading text-sm font-black">
-                    {item.region} ({item.code})
-                  </p>
+                  <p className="font-heading text-sm font-black">{item.region}</p>
                   <p className="mt-1 text-xs font-bold text-[#fec601]">월 매출 실적</p>
                 </div>
                 <div className="px-5 py-6 text-center">
