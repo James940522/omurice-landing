@@ -107,7 +107,7 @@ export default function RevenueProofSection() {
             <div className="inline-flex items-center gap-2 rounded-full border border-[#8a3b0d]/22 bg-[#fff3c6]/88 px-4 py-2 font-heading text-xs font-black text-[#5a2c12] shadow-[0_8px_20px_rgba(122,52,0,0.12)] sm:text-sm">
               월 최고 매출액
               <span className="h-1.5 w-1.5 rounded-full bg-[#ff6b12]" />
-              {featuredRevenue.region} ({featuredRevenue.code})
+              {featuredRevenue.region}
             </div>
 
             <div className="relative z-20 mt-6 flex flex-wrap items-end justify-center gap-x-3 gap-y-1">
