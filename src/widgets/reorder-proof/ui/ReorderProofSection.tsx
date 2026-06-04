@@ -40,6 +40,103 @@ const chartCards = [
 
 const proofTags = ['재구매 경쟁력', '실제 주문 데이터', '브랜드 충성도'];
 
+function TrophyBadgeIcon() {
+  return (
+    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-[#2a1305] shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_10px_22px_rgba(74,38,15,0.22)]">
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 64 64"
+        className="h-9 w-9 drop-shadow-[0_3px_0_rgba(0,0,0,0.18)]"
+      >
+        <defs>
+          <linearGradient id="reorder-trophy-gold" x1="12" x2="52" y1="8" y2="58">
+            <stop offset="0" stopColor="#fff5b5" />
+            <stop offset="0.32" stopColor="#fec601" />
+            <stop offset="0.72" stopColor="#ff8a12" />
+            <stop offset="1" stopColor="#d96a00" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M20 15h24v9c0 9.2-5.2 15.4-12 15.4S20 33.2 20 24v-9Z"
+          fill="url(#reorder-trophy-gold)"
+          stroke="#fff0a6"
+          strokeWidth="2.4"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M20 19H10v5.4c0 7.3 5 12.6 12.2 12.6M44 19h10v5.4c0 7.3-5 12.6-12.2 12.6"
+          fill="none"
+          stroke="url(#reorder-trophy-gold)"
+          strokeWidth="5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path d="M29 39h6v8h-6z" fill="#ffb21a" />
+        <path
+          d="M22 51h20l3 7H19l3-7Z"
+          fill="url(#reorder-trophy-gold)"
+          stroke="#fff0a6"
+          strokeWidth="2"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M27.4 25.6 31 20l3.6 5.6 6.4 1.7-4.2 5.1.4 6.6-6.2-2.4-6.2 2.4.4-6.6-4.2-5.1 6.4-1.7Z"
+          fill="#fff7c6"
+          opacity="0.82"
+        />
+      </svg>
+    </span>
+  );
+}
+
+function DataChartIcon() {
+  return (
+    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#fec601] shadow-[inset_0_1px_0_rgba(255,255,255,0.42),0_8px_18px_rgba(0,0,0,0.22)]">
+      <svg aria-hidden="true" viewBox="0 0 48 48" className="h-6 w-6">
+        <defs>
+          <linearGradient id="reorder-chart-line" x1="7" x2="40" y1="39" y2="10">
+            <stop offset="0" stopColor="#5a270d" />
+            <stop offset="0.45" stopColor="#ff6b12" />
+            <stop offset="1" stopColor="#fff2a8" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M9 37h31"
+          fill="none"
+          stroke="#4a260f"
+          strokeLinecap="round"
+          strokeWidth="3"
+          opacity="0.72"
+        />
+        <path
+          d="M12 33v-9M22 33V17M32 33V12"
+          fill="none"
+          stroke="#4a260f"
+          strokeLinecap="round"
+          strokeWidth="5"
+          opacity="0.88"
+        />
+        <path
+          d="M10 29.5 19 22l7 4 11-14"
+          fill="none"
+          stroke="url(#reorder-chart-line)"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="4"
+        />
+        <path
+          d="M34 12h4v4"
+          fill="none"
+          stroke="#fff4bd"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="3"
+        />
+      </svg>
+    </span>
+  );
+}
+
 export default function ReorderProofSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '0px 0px -12% 0px', amount: 0.12 });
@@ -131,9 +228,7 @@ export default function ReorderProofSection() {
               <div className="absolute right-6 top-6 h-8 w-8 rotate-12 border-r-4 border-t-4 border-white/72" />
             </div>
             <div className="flex gap-4 px-6 py-5 sm:px-8">
-              <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-[#2a1305] font-heading text-xl font-black text-[#fec601]">
-                1
-              </div>
+              <TrophyBadgeIcon />
               <p className="break-keep text-sm font-black leading-relaxed text-[#3b1707] sm:text-base">
                 여러 매장에서 반복되는 재주문 패턴이 안정적인 매출 구조를 보여줍니다.
               </p>
@@ -174,9 +269,7 @@ export default function ReorderProofSection() {
           className="mx-auto mt-8 flex max-w-5xl flex-col gap-4 rounded-full border border-[#fec601]/28 bg-[#1c0f06]/86 px-5 py-4 text-sm font-bold text-[#fff3d1] shadow-[0_18px_48px_rgba(0,0,0,0.24)] sm:flex-row sm:items-center sm:justify-between sm:px-7"
         >
           <div className="flex items-center gap-3">
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#fec601] font-heading text-sm font-black text-[#2a1305]">
-              DATA
-            </span>
+            <DataChartIcon />
             <span className="break-keep">6개 매장의 최근 7일간 실제 주문 데이터를 분석한 결과입니다.</span>
           </div>
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-[#ffe6a3] sm:justify-end">

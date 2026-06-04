@@ -18,6 +18,7 @@ import { MenuSection } from '@/widgets/menu';
 import { BrandDesignSection } from '@/widgets/brand-design';
 import { CustomerBrandSection } from '@/widgets/customer-brand';
 import { BusinessChangeSection } from '@/widgets/business-change';
+import { SectionMarquee } from '@/widgets/section-marquee';
 import { ContactFormSection } from '@/widgets/contact-form';
 import { Footer } from '@/widgets/footer';
 
@@ -163,11 +164,12 @@ export default function Home() {
         <RevenueProofSection />
         <ReorderProofSection />
         <FranchiseCostSection />
-        <StartupProcessSection />
+        <BusinessChangeSection />
         <MenuSection />
         <BrandDesignSection />
         <CustomerBrandSection />
-        <BusinessChangeSection />
+        <StartupProcessSection />
+        <SectionMarquee />
         <ContactFormSection />
         <Footer />
         <FloatingInquiry />
