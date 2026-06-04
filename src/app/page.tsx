@@ -151,9 +151,9 @@ export default function Home() {
       <main className="min-h-screen font-sans">
         <Header />
         <FranchiseHeroSection />
+        <BrandIntroSection />
         <AchievementRankSection />
         <FranchiseMomentumSection />
-        <BrandIntroSection />
         <WhyChooseSection />
         <RevenueProofSection />
         <FranchiseCostSection />
