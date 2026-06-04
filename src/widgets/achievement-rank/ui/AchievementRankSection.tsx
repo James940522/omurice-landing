@@ -83,17 +83,17 @@ export default function AchievementRankSection() {
 
         <motion.div
           aria-hidden
-          initial={{ opacity: 0, x: -70, y: 44, scale: 0.94 }}
+          initial={{ opacity: 0, x: -64, y: 38, scale: 0.96 }}
           animate={isInView ? { opacity: 1, x: 0, y: 0, scale: 1 } : {}}
           transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
-          className="pointer-events-none absolute bottom-[15%] left-[26%] right-[-6%] top-[25%] hidden md:block"
+          className="pointer-events-none absolute bottom-[8%] left-[16%] right-[1.5%] top-[5%] hidden opacity-95 md:block"
         >
           <Image
             src="/new-asset/achievement-rank/pc-arrow.webp"
             alt=""
             fill
-            sizes="70vw"
-            className="object-contain object-right"
+            sizes="84vw"
+            className="object-fill"
             quality={92}
           />
         </motion.div>
