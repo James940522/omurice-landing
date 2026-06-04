@@ -4,7 +4,7 @@ import { CONTACT_NAV_ITEM, SITE_NAV_ITEMS } from '@/shared/config/navigation';
 
 export default function Footer() {
   return (
-    <footer id="footer" className="bg-amber-50 pt-16 pb-8">
+    <footer id="footer" className="bg-amber-50 pt-16 pb-8 font-bold">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 상단 영역 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
@@ -22,17 +22,20 @@ export default function Footer() {
             </div>
             <div className="space-y-2">
               <p
-                className="text-sm text-amber-800 font-medium"
+                className="text-sm font-bold text-amber-800"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
                 <span itemProp="legalName">(주)재영에프앤비</span> (Jaeyoung F&B) | 대표자:{' '}
                 <span itemProp="founder">최재영, 이호남</span>
               </p>
-              <p className="text-sm text-amber-700" style={{ fontFamily: 'var(--font-body)' }}>
+              <p
+                className="text-sm font-bold text-amber-700"
+                style={{ fontFamily: 'var(--font-body)' }}
+              >
                 사업자등록번호: 576-88-03176
               </p>
               <p
-                className="text-sm text-amber-700 leading-relaxed"
+                className="text-sm font-bold leading-relaxed text-amber-700"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
                 주소: 서울특별시 동대문구 왕산로 200
@@ -44,13 +47,13 @@ export default function Footer() {
 
           {/* 빠른 링크 */}
           <div>
-            <h4 className="text-xl md:text-2xl font-bold mb-4 text-orange-500">바로가기</h4>
+            <h4 className="mb-4 text-xl font-black text-orange-500 md:text-2xl">바로가기</h4>
             <ul className="space-y-3">
               {[...SITE_NAV_ITEMS, CONTACT_NAV_ITEM].map((item) => (
                 <li key={item.name}>
                   <a
                     href={item.href}
-                    className="text-lg text-amber-800 hover:text-orange-500 transition-colors"
+                    className="text-lg font-black text-amber-800 transition-colors hover:text-orange-500"
                   >
                     {item.name}
                   </a>
@@ -61,31 +64,31 @@ export default function Footer() {
 
           {/* 고객센터 */}
           <div>
-            <h4 className="text-xl md:text-2xl font-bold mb-4 text-orange-500">고객센터</h4>
+            <h4 className="mb-4 text-xl font-black text-orange-500 md:text-2xl">고객센터</h4>
             <div className="space-y-3">
-              <p className="text-3xl font-bold text-amber-900">010-9923-9502</p>
-              <p className="text-lg text-amber-700">오전 08:30 ~ 오후 20:00</p>
-              <p className="text-lg text-amber-700">이메일: wochl123@naver.com</p>
+              <p className="text-3xl font-black text-amber-900">010-9923-9502</p>
+              <p className="text-lg font-bold text-amber-700">오전 08:30 ~ 오후 20:00</p>
+              <p className="text-lg font-bold text-amber-700">이메일: wochl123@naver.com</p>
             </div>
           </div>
         </div>
 
         {/* 하단 저작권 영역 (브랜드명 내부 링크 앵커) */}
         <div className="border-t border-amber-200 pt-8 mt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-amber-700">
+          <div className="flex flex-col items-center justify-between gap-4 text-sm font-bold text-amber-700 md:flex-row">
             <p>
               © 2024{' '}
-              <Link href="/" className="font-medium text-amber-900 hover:text-orange-500">
+              <Link href="/" className="font-black text-amber-900 hover:text-orange-500">
                 오늘은 오므라이스
               </Link>
               . All rights reserved.
             </p>
             <div className="flex gap-4">
-              <Link href="/#brand" className="hover:text-orange-500">
+              <Link href="/#brand" className="font-black hover:text-orange-500">
                 오늘은 오므라이스 프랜차이즈
               </Link>
               <span className="text-amber-300">|</span>
-              <Link href="/#contact" className="hover:text-orange-500">
+              <Link href="/#contact" className="font-black hover:text-orange-500">
                 창업 상담 문의
               </Link>
             </div>

@@ -300,15 +300,15 @@ export default function FloatingInquiry() {
           <div className="pointer-events-none absolute -right-24 bottom-0 hidden h-20 w-96 rotate-[5deg] bg-[#fec601]/20 lg:block" />
           <form
             onSubmit={handleSubmit}
-            className="relative mx-auto grid w-full max-w-7xl grid-cols-2 items-center gap-2 px-3 py-3 sm:grid-cols-[auto_1fr_1fr_1fr] sm:gap-3 sm:px-5 lg:flex lg:max-w-[1480px] lg:gap-4 lg:px-10 lg:py-3"
+            className="relative mx-auto grid w-full max-w-7xl grid-cols-2 items-center gap-2 px-3 py-3 sm:grid-cols-[auto_1fr_1fr_1fr] sm:gap-3 sm:px-5 lg:flex lg:max-w-[1480px] lg:justify-center lg:gap-[clamp(0.45rem,0.8vw,0.75rem)] lg:px-[clamp(0.9rem,1.8vw,2.5rem)] lg:py-3"
           >
-            <div className="col-span-2 flex min-w-0 items-center justify-between gap-2 sm:col-span-1 sm:min-w-[190px] sm:flex-col sm:items-start sm:justify-center lg:min-w-[318px] lg:flex-row lg:items-center lg:gap-3">
-              <p className="shrink-0 font-heading text-base font-black leading-none text-white sm:text-lg lg:text-xl">
+            <div className="col-span-2 flex min-w-0 items-center justify-between gap-2 sm:col-span-1 sm:min-w-[190px] sm:flex-col sm:items-start sm:justify-center lg:min-w-[clamp(238px,22vw,318px)] lg:flex-row lg:items-center lg:gap-[clamp(0.35rem,0.7vw,0.75rem)]">
+              <p className="shrink-0 font-heading text-base font-black leading-none text-white sm:text-lg lg:text-[clamp(0.86rem,1.25vw,1.25rem)]">
                 빠른 가맹문의
               </p>
               <a
                 href="tel:010-9923-9502"
-                className="whitespace-nowrap font-heading text-[clamp(1.12rem,6.4vw,1.45rem)] font-black leading-none tracking-tight text-[#fec601] sm:text-xl lg:text-[2.25rem]"
+                className="whitespace-nowrap font-heading text-[clamp(1.12rem,6.4vw,1.45rem)] font-black leading-none tracking-tight text-[#fec601] sm:text-xl lg:text-[clamp(1.32rem,2.05vw,2.1rem)]"
               >
                 010-9923-9502
               </a>
@@ -319,7 +319,7 @@ export default function FloatingInquiry() {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="h-10 min-w-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 lg:h-12 lg:w-[172px] lg:shrink-0 lg:rounded-[10px] lg:px-4 lg:text-base"
+              className="h-10 min-w-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 lg:h-12 lg:w-[clamp(120px,10.2vw,164px)] lg:shrink-0 lg:rounded-[10px] lg:px-3 lg:text-[clamp(0.78rem,0.9vw,0.95rem)] xl:px-4"
               placeholder="성함"
               autoComplete="name"
             />
@@ -328,7 +328,7 @@ export default function FloatingInquiry() {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="h-10 min-w-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 lg:h-12 lg:w-[190px] lg:shrink-0 lg:rounded-[10px] lg:px-4 lg:text-base"
+              className="h-10 min-w-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 lg:h-12 lg:w-[clamp(128px,11vw,178px)] lg:shrink-0 lg:rounded-[10px] lg:px-3 lg:text-[clamp(0.78rem,0.9vw,0.95rem)] xl:px-4"
               placeholder="연락처"
               autoComplete="tel"
             />
@@ -337,7 +337,7 @@ export default function FloatingInquiry() {
               name="region"
               value={formData.region}
               onChange={handleChange}
-              className="h-10 min-w-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 lg:h-12 lg:w-[182px] lg:shrink-0 lg:rounded-[10px] lg:px-4 lg:text-base"
+              className="h-10 min-w-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 lg:h-12 lg:w-[clamp(120px,10.8vw,170px)] lg:shrink-0 lg:rounded-[10px] lg:px-3 lg:text-[clamp(0.78rem,0.9vw,0.95rem)] xl:px-4"
               placeholder="희망지역"
             />
 
@@ -352,12 +352,12 @@ export default function FloatingInquiry() {
               aria-hidden="true"
             />
 
-            <label className="flex min-w-0 cursor-pointer items-center justify-center gap-2 text-xs font-black leading-tight text-white sm:justify-start lg:min-w-[172px] lg:shrink-0 lg:text-sm">
+            <label className="flex min-w-0 cursor-pointer items-center justify-center gap-2 text-xs font-black leading-tight text-white sm:justify-start lg:min-w-[clamp(104px,9vw,144px)] lg:shrink-0 lg:text-[clamp(0.68rem,0.82vw,0.86rem)]">
               <input
                 type="checkbox"
                 checked={privacyAgree}
                 onChange={(event) => setPrivacyAgree(event.target.checked)}
-                className="h-4 w-4 rounded border-white/60 text-[#ff6b12] focus:ring-[#fec601] lg:h-5 lg:w-5"
+                className="h-4 w-4 shrink-0 rounded border-white/60 text-[#ff6b12] focus:ring-[#fec601] lg:h-5 lg:w-5"
               />
               개인정보 동의
             </label>
@@ -365,7 +365,7 @@ export default function FloatingInquiry() {
             <motion.button
               type="submit"
               disabled={isSubmitting}
-              className={`h-10 min-w-0 break-keep rounded-[6px] bg-[#fec601] px-3 text-sm font-black leading-tight text-[#32190b] shadow-[0_8px_18px_rgba(0,0,0,0.18)] transition hover:bg-[#ffdd39] sm:h-10 sm:text-base lg:h-12 lg:min-w-[190px] lg:shrink-0 lg:rounded-[10px] lg:text-lg ${
+              className={`h-10 min-w-0 break-keep rounded-[6px] bg-[#fec601] px-3 text-sm font-black leading-tight text-[#32190b] shadow-[0_8px_18px_rgba(0,0,0,0.18)] transition hover:bg-[#ffdd39] sm:h-10 sm:text-base lg:h-12 lg:min-w-[clamp(136px,11.5vw,184px)] lg:shrink-0 lg:rounded-[10px] lg:text-[clamp(0.84rem,1vw,1.08rem)] ${
                 isSubmitting ? 'cursor-not-allowed opacity-60' : ''
               }`}
               whileHover={{ scale: isSubmitting ? 1 : 1.03 }}

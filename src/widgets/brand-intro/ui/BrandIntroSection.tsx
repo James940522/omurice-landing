@@ -8,20 +8,17 @@ const values = [
   {
     title: '점주님과의 상생',
     subtitle: 'Partnership',
-    description:
-      '점주님의 성공이 곧 저희의 성공입니다. 모든 매장이 함께 성장할 수 있도록 끊임없이 고민하고 지원합니다.',
+    description: '가맹점의 성장을 기준으로 운영과 관리를 함께합니다.',
   },
   {
     title: '진심을 담은 한 그릇',
     subtitle: 'Sincerity',
-    description:
-      '맛있는 오므라이스 한 그릇으로 고객님께 행복을 전합니다. 품질과 정성을 절대 타협하지 않습니다.',
+    description: '맛과 품질, 정성을 담아 오래 찾는 한 그릇을 만듭니다.',
   },
   {
     title: '지속 가능한 성장',
     subtitle: 'Sustainability',
-    description:
-      '단기 수익이 아닌 장기적 관점에서 안정적이고 지속 가능한 프랜차이즈 시스템을 만들어갑니다.',
+    description: '작게 시작해도 오래 운영할 수 있는 구조를 만듭니다.',
   },
 ];
 
@@ -81,25 +78,22 @@ export default function BrandIntroSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              수많은 운영 데이터를 기반으로
+              실제 운영 데이터를 기반으로
               <br />
-              누구나 안정적으로 운영할 수 있는
-              <br /> 표준화된 시스템을 구축했습니다.
+              누구나 안정적으로 운영할 수 있는 시스템을 만들었습니다.
               <br />
               <br />
-              단기 유행이 아닌,
-              <br className="hidden md:block" />
               <span className="text-yellow-400 font-bold">
-                &lsquo;꾸준히 매출이 나는 브랜드&rsquo;
+                &lsquo;꾸준히 선택받는 브랜드&rsquo;
               </span>
               <br className="hidden md:block" />
               <br className="md:hidden" />
-              외식업의 본질입니다.
+              오늘은 오므라이스가 지키는 기준입니다.
             </motion.p>
           </div>
 
           <motion.div
-            className="grid grid-cols-1 gap-4 pt-4 md:grid-cols-3"
+            className="grid grid-cols-3 gap-2 pt-2 sm:gap-3 sm:pt-3 md:gap-4 md:pt-4"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.5 }}
@@ -107,21 +101,23 @@ export default function BrandIntroSection() {
             {values.map((value, index) => (
               <motion.div
                 key={value.title}
-                className="rounded-2xl border border-white/20 bg-white/10 p-5 text-left backdrop-blur-md transition-all duration-300 hover:bg-white/15 md:text-center"
+                className="min-w-0 rounded-xl border border-white/20 bg-white/10 p-2.5 text-center backdrop-blur-md transition-all duration-300 hover:bg-white/15 sm:p-4 md:rounded-2xl md:p-5"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
               >
-                <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-yellow-400/90">
+                <div className="mb-1 truncate text-[0.52rem] font-semibold uppercase tracking-[0.08em] text-yellow-400/90 sm:mb-2 sm:text-[0.65rem] md:text-xs md:tracking-wider">
                   {value.subtitle}
                 </div>
                 <h3
-                  className="mb-2 text-lg font-bold text-white md:text-xl"
+                  className="mb-1 text-[0.78rem] font-bold leading-tight text-white sm:text-base md:mb-2 md:text-xl"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
                   {value.title}
                 </h3>
-                <p className="typo-body-sm text-gray-300">{value.description}</p>
+                <p className="text-[0.58rem] font-medium leading-snug text-gray-300 sm:text-xs md:text-sm">
+                  {value.description}
+                </p>
               </motion.div>
             ))}
           </motion.div>

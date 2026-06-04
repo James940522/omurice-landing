@@ -183,7 +183,7 @@ export default function BusinessChangeSection() {
         }
       `}</style>
 
-      <div className="relative mx-auto aspect-[941/1672] w-full overflow-hidden md:aspect-[1672/941]">
+      <div className="relative mx-auto aspect-[941/1560] w-full overflow-hidden md:aspect-[1672/941]">
         <Image
           src="/new-asset/business-change/business-change-desktop.webp"
           alt=""
@@ -207,14 +207,14 @@ export default function BusinessChangeSection() {
           initial={{ opacity: 0, y: 28 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.72, ease: 'easeOut' }}
-          className="business-change-center absolute left-1/2 top-[9%] z-20 w-[72%] -translate-x-1/2 text-center min-[390px]:w-[76%] md:top-[22%] md:w-[42%]"
+          className="business-change-center absolute left-1/2 top-[7.5%] z-20 w-[74%] -translate-x-1/2 text-center min-[390px]:w-[76%] md:top-[22%] md:w-[42%]"
         >
-          <p className="business-change-title break-keep font-heading text-[clamp(1.08rem,4.9vw,1.88rem)] font-black leading-[1.05] tracking-normal text-black transition duration-300 min-[390px]:text-[clamp(1.22rem,5.3vw,2.08rem)] md:text-[clamp(2.6rem,4vw,4.4rem)] md:leading-[1.08]">
+          <p className="business-change-title break-keep font-heading text-[clamp(1.08rem,4.9vw,1.88rem)] font-black leading-[0.98] tracking-normal text-black transition duration-300 min-[390px]:text-[clamp(1.22rem,5.3vw,2.08rem)] md:text-[clamp(2.6rem,4vw,4.4rem)] md:leading-[1.08]">
             간판만 변경하시고
             <br />
             <span className="text-[#c43912]">오므라이스</span> 하세요!
           </p>
-          <p className="mt-2 break-keep text-[0.62rem] font-black leading-snug text-[#32190b] min-[390px]:text-[0.7rem] md:mt-4 md:text-xl">
+          <p className="mt-1.5 break-keep text-[0.62rem] font-black leading-snug text-[#32190b] min-[390px]:text-[0.7rem] md:mt-4 md:text-xl">
             실제 업종 변경으로 증명한 매출 성장 사례
           </p>
         </motion.div>
@@ -223,7 +223,7 @@ export default function BusinessChangeSection() {
           initial={{ opacity: 0, x: -34 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.75, delay: 0.12, ease: 'easeOut' }}
-          className="business-change-side business-change-before absolute left-0 top-0 z-10 h-full w-[55%] cursor-default overflow-hidden px-3 pt-[25%] min-[390px]:px-4 md:w-1/2 md:overflow-visible md:px-[4.2vw] md:pt-[14%]"
+          className="business-change-side business-change-before absolute left-0 top-0 z-10 h-full w-[55%] cursor-default overflow-hidden px-3 pt-[22.5%] min-[390px]:px-4 md:w-1/2 md:overflow-visible md:px-[4.2vw] md:pt-[14%]"
         >
           <p className="business-change-word pointer-events-none absolute left-2 top-[2.6%] max-w-full overflow-hidden font-heading text-[8.4vw] font-black uppercase leading-none tracking-[-0.04em] text-[#1b0c03]/30 min-[390px]:left-3 md:left-[2.3vw] md:top-[4%] md:text-[8.2vw] md:tracking-normal md:text-white/45">
             BEFORE
@@ -254,7 +254,7 @@ export default function BusinessChangeSection() {
           initial={{ opacity: 0, x: 34 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.75, delay: 0.2, ease: 'easeOut' }}
-          className="business-change-side business-change-after absolute right-0 top-0 z-10 h-full w-[45%] cursor-default overflow-hidden px-3 pt-[26%] text-right min-[390px]:px-4 md:w-1/2 md:overflow-visible md:px-[4.2vw] md:pt-[15%]"
+          className="business-change-side business-change-after absolute right-0 top-0 z-10 h-full w-[45%] cursor-default overflow-hidden px-3 pt-[23%] text-right min-[390px]:px-4 md:w-1/2 md:overflow-visible md:px-[4.2vw] md:pt-[15%]"
         >
           <p className="business-change-word pointer-events-none absolute right-2 top-[2.6%] max-w-full overflow-hidden font-heading text-[8.4vw] font-black uppercase leading-none tracking-[-0.04em] text-[#fff7d6]/50 min-[390px]:right-3 md:right-[3vw] md:top-[4%] md:text-[8.4vw] md:tracking-normal md:text-white/30">
             AFTER

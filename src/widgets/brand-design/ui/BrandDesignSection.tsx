@@ -59,7 +59,7 @@ export function BrandDesignSection() {
           </p>
         </motion.div>
 
-        <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
+        <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:gap-8">
           {brandDesignItems.map((design, index) => (
             <motion.article
               key={design.id}
@@ -74,26 +74,26 @@ export function BrandDesignSection() {
                   src={design.image}
                   alt={`오늘은 오므라이스 ${design.label} 매장 인테리어`}
                   fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 1024px) 50vw, 50vw"
                   className="object-cover transition duration-700 group-hover:scale-[1.035]"
                   quality={90}
                 />
-                <div className="absolute left-4 top-4 border border-[#fff2c6] bg-[#ff6b12] px-3 py-1.5 text-xs font-black tracking-[0.08em] text-white shadow-[0_8px_18px_rgba(255,107,18,0.24)]">
+                <div className="absolute left-2 top-2 border border-[#fff2c6] bg-[#ff6b12] px-2 py-1 text-[0.58rem] font-black tracking-[0.06em] text-white shadow-[0_8px_18px_rgba(255,107,18,0.24)] sm:left-4 sm:top-4 sm:px-3 sm:py-1.5 sm:text-xs sm:tracking-[0.08em]">
                   {design.label}
                 </div>
               </div>
 
-              <div className="border-t border-[#f4c47d]/70 bg-[#fffef8] p-5 md:p-6">
+              <div className="border-t border-[#f4c47d]/70 bg-[#fffef8] p-3 sm:p-5 md:p-6">
                 <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                   <div>
-                    <h3 className="text-2xl font-black text-[#32190b] md:text-3xl">
+                    <h3 className="break-keep text-base font-black leading-tight text-[#32190b] sm:text-2xl md:text-3xl">
                       {design.title}
                     </h3>
-                    <p className="mt-2 max-w-xl text-sm font-semibold leading-relaxed text-[#6b4222] md:text-base">
+                    <p className="mt-2 hidden max-w-xl text-sm font-semibold leading-relaxed text-[#6b4222] sm:block md:text-base">
                       {design.description}
                     </p>
                   </div>
-                  <span className="shrink-0 text-4xl font-black leading-none text-[#ff6b12]/25 md:text-5xl">
+                  <span className="hidden shrink-0 text-4xl font-black leading-none text-[#ff6b12]/25 sm:block md:text-5xl">
                     {String(index + 1).padStart(2, '0')}
                   </span>
                 </div>

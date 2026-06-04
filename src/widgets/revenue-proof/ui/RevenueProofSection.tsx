@@ -37,56 +37,47 @@ function CountingAmount({
   value,
   active,
   className,
-  duration = 1.45,
-  stagger = 0.18,
-  baseDelay = 0.12,
 }: {
   value: string;
   active: boolean;
   className?: string;
-  duration?: number;
-  stagger?: number;
-  baseDelay?: number;
 }) {
-  let digitOrder = -1;
-
   return (
     <span
       aria-label={value}
-      className={`inline-flex max-w-full items-baseline whitespace-nowrap tabular-nums [font-variant-numeric:tabular-nums] ${className ?? ''}`}
+      className={`inline-flex items-baseline whitespace-nowrap tabular-nums [font-variant-numeric:tabular-nums] ${className ?? ''}`}
     >
       {value.split('').map((character, index) => {
         if (!/\d/.test(character)) {
           return (
-            <span key={`${character}-${index}`} aria-hidden="true" className="inline-block w-[0.24em] text-center">
+            <span
+              key={`${character}-${index}`}
+              aria-hidden="true"
+              className="inline-block w-[0.24em] text-center"
+            >
               {character}
             </span>
           );
         }
 
-        digitOrder += 1;
-
         return (
           <span
             key={`${character}-${index}`}
             aria-hidden="true"
-            className="relative inline-block h-[1.12em] w-[0.58em] overflow-hidden text-center align-baseline leading-none"
+            className="relative inline-block h-[1em] w-[0.58em] overflow-hidden text-center align-baseline leading-none"
           >
             <motion.span
-              className="absolute left-0 top-0 flex w-full flex-col items-center leading-none"
+              className="absolute left-0 top-0 flex w-full flex-col items-center"
               initial={{ y: '0em' }}
-              animate={active ? { y: '-11.2em' } : { y: '0em' }}
+              animate={active ? { y: '-10em' } : { y: '0em' }}
               transition={{
-                duration,
-                delay: baseDelay + digitOrder * stagger,
+                duration: 0.88 + index * 0.04,
+                delay: 0.1 + index * 0.035,
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
               {[...digitReel, character].map((number, reelIndex) => (
-                <span
-                  key={`${number}-${reelIndex}`}
-                  className="flex h-[1.12em] w-full items-center justify-center leading-none"
-                >
+                <span key={`${number}-${reelIndex}`} className="block h-[1em] w-full leading-none">
                   {number}
                 </span>
               ))}
@@ -175,16 +166,13 @@ export default function RevenueProofSection() {
               {featuredRevenue.region}
             </div>
 
-            <div className="relative z-20 mt-6 flex w-full max-w-full flex-col items-center justify-center gap-3 overflow-visible sm:flex-row sm:items-end sm:gap-x-3">
+            <div className="relative z-20 mt-6 flex flex-wrap items-end justify-center gap-x-3 gap-y-1">
               <CountingAmount
                 value={featuredRevenue.amount}
                 active={isInView}
-                duration={1.55}
-                stagger={0.2}
-                baseDelay={0.16}
-                className="justify-center overflow-visible font-heading text-[clamp(2.35rem,10.4vw,7.8rem)] font-black leading-none tracking-[-0.055em] text-[#180904] drop-shadow-[0_6px_0_rgba(255,255,255,0.72)]"
+                className="font-heading text-[clamp(3rem,12vw,9.1rem)] font-black leading-none tracking-[-0.07em] text-[#180904] drop-shadow-[0_6px_0_rgba(255,255,255,0.72)]"
               />
-              <span className="rounded-full bg-[#ff6b12] px-4 py-2 font-heading text-lg font-black text-white shadow-[0_8px_20px_rgba(255,107,18,0.28)] sm:mb-5 sm:text-3xl">
+              <span className="mb-1 rounded-full bg-[#ff6b12] px-4 py-2 font-heading text-lg font-black text-white shadow-[0_8px_20px_rgba(255,107,18,0.28)] sm:mb-5 sm:text-3xl">
                 원 달성
               </span>
             </div>
@@ -208,7 +196,10 @@ export default function RevenueProofSection() {
         </motion.div>
 
         <div className="relative z-20 -mx-4 -mt-6 overflow-hidden px-4 pb-3 sm:-mx-6 sm:-mt-8 sm:px-6 lg:mx-0 lg:px-0">
-          <div className="omurice-marquee-left flex w-max" style={{ '--duration': '24s' } as CSSProperties}>
+          <div
+            className="omurice-marquee-left flex w-max"
+            style={{ '--duration': '24s' } as CSSProperties}
+          >
             {revenueCarouselGroups.map((groupIndex) => (
               <div
                 key={`revenue-carousel-group-${groupIndex}`}
@@ -235,10 +226,7 @@ export default function RevenueProofSection() {
                       <CountingAmount
                         value={item.amount}
                         active={isInView}
-                        duration={1.35}
-                        stagger={0.14}
-                        baseDelay={0.2 + index * 0.08}
-                        className="justify-center overflow-visible font-heading text-[clamp(1.6rem,7.2vw,2.25rem)] font-black leading-none tracking-[-0.035em] text-[#ff6b12] sm:text-[2.3rem]"
+                        className="justify-center font-heading text-[clamp(1.75rem,8vw,2.5rem)] font-black leading-none tracking-[-0.04em] text-[#ff6b12] sm:text-4xl"
                       />
                       <p className="mt-2 font-heading text-sm font-black text-[#5a2c12]">원</p>
                     </div>

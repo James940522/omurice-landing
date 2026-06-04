@@ -236,7 +236,7 @@ export default function ReorderProofSection() {
           </motion.div>
         </div>
 
-        <div className="mt-10 grid gap-3 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-2 gap-2.5 sm:mt-12 sm:gap-3 lg:grid-cols-3">
           {chartCards.map((card, index) => (
             <motion.article
               key={card.src}
@@ -245,17 +245,17 @@ export default function ReorderProofSection() {
               transition={{ duration: 0.52, delay: 0.14 + index * 0.055, ease: 'easeOut' }}
               className="group relative overflow-visible"
             >
-              <span className="absolute -left-1 -top-2 z-20 rounded-full bg-[#ff6b12] px-3 py-1 font-heading text-sm font-black text-white shadow-[0_8px_18px_rgba(255,107,18,0.32)]">
+              <span className="absolute -left-1 -top-1.5 z-20 rounded-full bg-[#ff6b12] px-2 py-0.5 font-heading text-[10px] font-black text-white shadow-[0_8px_18px_rgba(255,107,18,0.32)] sm:-top-2 sm:px-3 sm:py-1 sm:text-sm">
                 {String(index + 1).padStart(2, '0')}
               </span>
-              <div className="overflow-hidden rounded-[14px] border border-[#ffb13b]/45 bg-white shadow-[0_18px_34px_rgba(0,0,0,0.24)] transition-transform duration-300 group-hover:-translate-y-1">
+              <div className="overflow-hidden rounded-[10px] border border-[#ffb13b]/45 bg-white shadow-[0_10px_22px_rgba(0,0,0,0.2)] transition-transform duration-300 group-hover:-translate-y-1 sm:rounded-[14px] sm:shadow-[0_18px_34px_rgba(0,0,0,0.24)]">
                 <Image
                   src={card.src}
                   alt={`최근 7일 신규 주문과 재주문 그래프 ${index + 1}`}
                   width={card.width}
                   height={card.height}
                   className="aspect-[1.9/1] h-auto w-full bg-white object-contain"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
                 />
               </div>
             </motion.article>

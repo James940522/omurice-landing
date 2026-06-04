@@ -75,7 +75,7 @@ export default function WhyChooseSection() {
     <section
       id="strength"
       ref={ref}
-      className="relative w-full pt-24 pb-20 md:pt-28 md:pb-20 lg:pt-32 lg:pb-24"
+      className="relative w-full pt-14 pb-10 sm:pt-20 sm:pb-14 md:pt-28 md:pb-20 lg:pt-32 lg:pb-24"
     >
       <Image
         src="/new-asset/sec-3/sec-3-bg.webp"
@@ -115,16 +115,16 @@ export default function WhyChooseSection() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* 헤더 */}
         <motion.div
-          className="mb-10 text-center md:mb-12"
+          className="mb-5 text-center sm:mb-8 md:mb-12"
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
-          <p className="mb-2 text-sm font-black uppercase tracking-[0.18em] text-[#d84a00] md:text-sm">
+          <p className="mb-1 text-[0.68rem] font-black uppercase tracking-[0.18em] text-[#d84a00] sm:text-xs md:mb-2 md:text-sm">
             Brand Strength
           </p>
           <h2
-            className="text-[2rem] font-black leading-tight text-[#1a0a00] md:text-4xl lg:text-5xl"
+            className="text-[1.5rem] font-black leading-tight text-[#1a0a00] sm:text-[2rem] md:text-4xl lg:text-5xl"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
             왜! 예비 점주들은
@@ -134,7 +134,7 @@ export default function WhyChooseSection() {
                 alt="오늘은 오므라이스"
                 width={220}
                 height={125}
-                className="mx-auto h-auto w-36 sm:w-44 md:w-52"
+                className="mx-auto h-auto w-28 sm:w-44 md:w-52"
               />
             </span>
             를 선택할까요?
@@ -154,9 +154,9 @@ export default function WhyChooseSection() {
               <div
                 key={item.number}
                 className={[
-                  'relative isolate flex min-h-[275px] flex-col justify-between overflow-hidden px-5 py-5 sm:min-h-[220px] sm:p-6 md:min-h-60 md:p-8 lg:min-h-[290px] lg:p-10',
+                  'relative isolate flex min-h-[156px] flex-col justify-between overflow-hidden px-3 py-3 sm:min-h-[220px] sm:p-6 md:min-h-60 md:p-8 lg:min-h-[290px] lg:p-10',
                   'transition-colors duration-700',
-                  index < 2 ? 'pb-24 sm:pb-6' : 'pt-24 sm:pt-6',
+                  index < 2 ? 'pb-12 sm:pb-6' : 'pt-12 sm:pt-6',
                   isActive ? 'text-white' : 'text-[#1a0a00]',
                   item.align === 'right' ? 'items-end text-right' : 'items-start text-left',
                   ROUND_CLASSES[index],
@@ -191,22 +191,22 @@ export default function WhyChooseSection() {
                 <div className="relative z-10 drop-shadow-[0_1px_2px_rgba(255,255,255,0.45)]">
                   <span
                     className={[
-                      'block text-4xl font-black transition-colors duration-700 sm:text-3xl md:text-4xl',
+                      'block text-2xl font-black transition-colors duration-700 sm:text-3xl md:text-4xl',
                       isActive ? 'text-[#ffd21f]' : 'text-[#d84a00]',
                     ].join(' ')}
                   >
                     {item.number}
                   </span>
-                  <h3 className="mt-2 text-lg font-black leading-snug sm:text-base md:text-lg lg:text-xl">
+                  <h3 className="mt-1 text-[0.82rem] font-black leading-tight sm:mt-2 sm:text-base md:text-lg lg:text-xl">
                     {item.title}
                   </h3>
                 </div>
-                <ul className="relative z-10 mt-4 space-y-1.5 drop-shadow-[0_1px_2px_rgba(255,255,255,0.4)]">
+                <ul className="relative z-10 mt-2 space-y-1 drop-shadow-[0_1px_2px_rgba(255,255,255,0.4)] sm:mt-4 sm:space-y-1.5">
                   {item.bullets.map((bullet) => (
                     <li
                       key={bullet}
                       className={[
-                        'text-[0.74rem] font-semibold leading-snug transition-colors duration-700 sm:text-xs md:text-sm',
+                        'text-[0.58rem] font-semibold leading-[1.28] transition-colors duration-700 sm:text-xs sm:leading-snug md:text-sm',
                         isActive ? 'text-white/78' : 'text-[#6b4423]',
                       ].join(' ')}
                     >
@@ -219,7 +219,7 @@ export default function WhyChooseSection() {
           })}
 
           {/* 중앙 회전 원형 이미지 */}
-          <div className="absolute left-1/2 top-1/2 z-20 aspect-square w-[50%] -translate-x-1/2 -translate-y-1/2 sm:w-[28%]">
+          <div className="absolute left-1/2 top-1/2 z-20 aspect-square w-[36%] max-w-[132px] -translate-x-1/2 -translate-y-1/2 sm:w-[28%] sm:max-w-none">
             {/* 테두리 링 */}
             <div className="absolute inset-0 rounded-full ring-[1.5px] ring-[#ffd21f]" />
 

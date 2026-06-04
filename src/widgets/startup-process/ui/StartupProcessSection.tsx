@@ -32,6 +32,33 @@ const processes = [
   },
 ];
 
+const processGridVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.12,
+    },
+  },
+};
+
+const processCardVariants = {
+  hidden: {
+    opacity: 0,
+    x: -46,
+    filter: 'blur(10px)',
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.68,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 export default function StartupProcessSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
@@ -106,14 +133,17 @@ export default function StartupProcessSection() {
             ))}
           </div>
 
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-6">
+          <motion.div
+            className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-6"
+            variants={processGridVariants}
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+          >
             {processes.map((process, index) => (
               <motion.div
                 key={index}
                 className="relative"
-                initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.15 * index }}
+                variants={processCardVariants}
                 whileHover={{ y: -6 }}
               >
                 <article className="group relative h-full overflow-hidden rounded-[8px] border border-[#4a260f]/25 bg-[#fffaf0] shadow-[0_22px_55px_rgba(84,35,0,0.24)] ring-1 ring-white/40">
@@ -156,7 +186,7 @@ export default function StartupProcessSection() {
                 )}
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
