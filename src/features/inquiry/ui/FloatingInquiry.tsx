@@ -13,10 +13,30 @@ const initialFormData = {
 export default function FloatingInquiry() {
   const [isVisible, setIsVisible] = useState(false);
   const [isContactInView, setIsContactInView] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isMobileExpanded, setIsMobileExpanded] = useState(false);
+  const [hasUserCollapsed, setHasUserCollapsed] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
   const [privacyAgree, setPrivacyAgree] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hp, setHp] = useState('');
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    const handleMediaChange = () => {
+      const matches = mediaQuery.matches;
+      setIsMobile(matches);
+      if (!matches) {
+        setIsMobileExpanded(false);
+        setHasUserCollapsed(false);
+      }
+    };
+
+    handleMediaChange();
+    mediaQuery.addEventListener('change', handleMediaChange);
+
+    return () => mediaQuery.removeEventListener('change', handleMediaChange);
+  }, []);
 
   useEffect(() => {
     const contactSection = document.getElementById('contact');
@@ -35,7 +55,51 @@ export default function FloatingInquiry() {
     return () => observer?.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const heroSection = document.getElementById('hero');
+    if (!heroSection) {
+      setIsMobileExpanded(!hasUserCollapsed);
+      return;
+    }
+
+    const syncMobileExpandedState = () => {
+      const heroRect = heroSection.getBoundingClientRect();
+      const heroAlmostLeft = heroRect.bottom <= window.innerHeight * 0.18;
+
+      if (!heroAlmostLeft) {
+        setIsMobileExpanded(false);
+        setHasUserCollapsed(false);
+        return;
+      }
+
+      if (!hasUserCollapsed) {
+        setIsMobileExpanded(true);
+      }
+    };
+
+    syncMobileExpandedState();
+    window.addEventListener('scroll', syncMobileExpandedState, { passive: true });
+    window.addEventListener('resize', syncMobileExpandedState);
+
+    return () => {
+      window.removeEventListener('scroll', syncMobileExpandedState);
+      window.removeEventListener('resize', syncMobileExpandedState);
+    };
+  }, [hasUserCollapsed, isMobile]);
+
   const shouldShow = isVisible && !isContactInView;
+
+  const handleMobileOpen = () => {
+    setIsMobileExpanded(true);
+    setHasUserCollapsed(false);
+  };
+
+  const handleMobileCollapse = () => {
+    setIsMobileExpanded(false);
+    setHasUserCollapsed(true);
+  };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -100,9 +164,130 @@ export default function FloatingInquiry() {
 
   return (
     <AnimatePresence>
-      {shouldShow && (
+      {shouldShow && isMobile && !isMobileExpanded && (
+        <motion.button
+          type="button"
+          onClick={handleMobileOpen}
+          className="fixed inset-x-3 bottom-3 z-[2147483647] flex items-center justify-between gap-3 rounded-full border-2 border-[#fec601] bg-[#4a260f] px-4 py-3 text-left shadow-[0_14px_30px_rgba(32,14,4,0.32)] md:hidden"
+          initial={{ opacity: 0, y: 70 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 70 }}
+          transition={{ duration: 0.25, ease: 'easeOut' }}
+          aria-label="빠른 가맹문의 다시 열기"
+        >
+          <span className="min-w-0">
+            <span className="block font-heading text-sm font-black leading-none text-white">
+              빠른 가맹문의
+            </span>
+            <span className="mt-1 block whitespace-nowrap font-heading text-lg font-black leading-none text-[#fec601]">
+              010-9923-9502
+            </span>
+          </span>
+          <span className="shrink-0 rounded-full bg-[#fec601] px-4 py-2 font-black text-[#32190b]">
+            열기
+          </span>
+        </motion.button>
+      )}
+
+      {shouldShow && isMobile && isMobileExpanded && (
         <motion.aside
-          className="fixed inset-x-0 bottom-0 z-[2147483647] overflow-hidden border-t-2 border-[#fec601] bg-[#4a260f] shadow-[0_-14px_34px_rgba(32,14,4,0.26)] lg:border-t-[3px]"
+          className="fixed inset-x-0 bottom-0 z-[2147483647] overflow-hidden rounded-t-[22px] border-t-2 border-[#fec601] bg-[#4a260f] shadow-[0_-16px_36px_rgba(32,14,4,0.32)] md:hidden"
+          initial={{ opacity: 0, y: 120 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 120 }}
+          transition={{ duration: 0.28, ease: 'easeOut' }}
+          aria-label="빠른 가맹문의"
+        >
+          <div className="h-1 bg-linear-to-r from-[#ff6b12] via-[#fec601] to-[#ff6b12]" />
+          <form
+            onSubmit={handleSubmit}
+            className="relative mx-auto flex w-full max-w-[440px] flex-col gap-2 px-4 pb-[calc(env(safe-area-inset-bottom)+12px)] pt-2"
+          >
+            <button
+              type="button"
+              onClick={handleMobileCollapse}
+              className="mx-auto mb-1 flex h-8 items-center justify-center rounded-full border border-[#fec601]/55 bg-[#32190b]/75 px-5 text-xs font-black text-[#fff8ea]"
+            >
+              접기
+            </button>
+
+            <div className="flex items-center justify-between gap-2 rounded-[12px] border border-[#fec601]/28 bg-[#32190b]/62 px-3 py-3 min-[380px]:gap-3 min-[380px]:px-4">
+              <p className="shrink-0 font-heading text-sm font-black leading-none text-white min-[380px]:text-base">
+                빠른 가맹문의
+              </p>
+              <a
+                href="tel:010-9923-9502"
+                className="whitespace-nowrap font-heading text-[clamp(1.02rem,5.2vw,1.25rem)] font-black leading-none tracking-tight text-[#fec601]"
+              >
+                010-9923-9502
+              </a>
+            </div>
+
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="h-11 w-full rounded-[10px] border border-[#f7c88b] bg-white px-4 text-base font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40"
+              placeholder="성함"
+              autoComplete="name"
+            />
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className="h-11 w-full rounded-[10px] border border-[#f7c88b] bg-white px-4 text-base font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40"
+              placeholder="연락처"
+              autoComplete="tel"
+            />
+            <input
+              type="text"
+              name="region"
+              value={formData.region}
+              onChange={handleChange}
+              className="h-11 w-full rounded-[10px] border border-[#f7c88b] bg-white px-4 text-base font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40"
+              placeholder="희망지역"
+            />
+
+            <input
+              type="text"
+              name="hp"
+              value={hp}
+              onChange={(event) => setHp(event.target.value)}
+              className="hidden"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+            />
+
+            <label className="flex min-w-0 cursor-pointer items-center justify-center gap-2 rounded-[10px] border border-[#fec601]/22 bg-[#32190b]/62 px-4 py-3 text-sm font-black leading-tight text-white">
+              <input
+                type="checkbox"
+                checked={privacyAgree}
+                onChange={(event) => setPrivacyAgree(event.target.checked)}
+                className="h-5 w-5 rounded border-white/60 text-[#ff6b12] focus:ring-[#fec601]"
+              />
+              개인정보 동의
+            </label>
+
+            <motion.button
+              type="submit"
+              disabled={isSubmitting}
+              className={`h-12 w-full rounded-[12px] bg-[#fec601] px-4 text-base font-black leading-tight text-[#32190b] shadow-[0_10px_22px_rgba(0,0,0,0.18)] transition active:bg-[#ffdd39] ${
+                isSubmitting ? 'cursor-not-allowed opacity-60' : ''
+              }`}
+              whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+            >
+              {isSubmitting ? '접수 중' : '가맹문의 신청'}
+            </motion.button>
+          </form>
+        </motion.aside>
+      )}
+
+      {shouldShow && !isMobile && (
+        <motion.aside
+          className="fixed inset-x-0 bottom-0 z-[2147483647] hidden overflow-hidden border-t-2 border-[#fec601] bg-[#4a260f] shadow-[0_-14px_34px_rgba(32,14,4,0.26)] md:block lg:border-t-[3px]"
           initial={{ opacity: 0, y: 90 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 90 }}

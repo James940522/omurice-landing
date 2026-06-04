@@ -34,7 +34,7 @@ export default function FranchiseHeroSection() {
   const storeCountLabel = storeCount?.toLocaleString('ko-KR') ?? null;
 
   return (
-    <section className="relative mt-14 overflow-hidden bg-[#2b160a] text-white md:mt-16">
+    <section id="hero" className="relative mt-14 overflow-hidden bg-[#2b160a] text-white md:mt-16">
       <style jsx global>{`
         @keyframes franchise-hero-ribbon {
           from {
