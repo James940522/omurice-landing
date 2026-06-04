@@ -2,6 +2,7 @@
 
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
+import type { CSSProperties } from 'react';
 import { useRef } from 'react';
 
 const featuredRevenue = {
@@ -28,6 +29,8 @@ const revenueItems = [
   },
 ];
 
+const revenueCarouselGroups = [0, 1, 2];
+
 export default function RevenueProofSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '0px 0px -12% 0px', amount: 0.12 });
@@ -48,7 +51,7 @@ export default function RevenueProofSection() {
         }}
       />
       <div
-        className="pointer-events-none absolute right-0 top-0 -z-10 h-48 w-36 bg-[#ff6b12]"
+        className="pointer-events-none absolute right-0 top-0 -z-10 h-44 w-32 bg-[#fec601]/60 shadow-[0_20px_60px_rgba(255,107,18,0.18)]"
         style={{ clipPath: 'polygon(40% 0, 100% 0, 100% 100%, 0 100%)' }}
       />
       <div
@@ -66,10 +69,10 @@ export default function RevenueProofSection() {
           <p className="font-heading text-sm font-black uppercase tracking-[0.22em] text-[#ff6b12]">
             Revenue Proof
           </p>
-          <h2 className="mt-4 break-keep font-heading text-[clamp(2.7rem,6.2vw,5.8rem)] font-black leading-[1.02] tracking-[-0.04em] text-[#3b1707]">
+          <h2 className="relative z-10 mt-4 break-keep font-heading text-[clamp(2.7rem,6.2vw,5.8rem)] font-black leading-[1.02] tracking-[-0.04em] text-[#3b1707]">
             숫자로 증명된 매출,
             <br className="sm:hidden" />
-            <span className="text-[#ff6b12] drop-shadow-[0_4px_0_rgba(74,38,15,0.14)]">
+            <span className="text-[#7a2d0c] drop-shadow-[0_5px_0_rgba(254,198,1,0.78)]">
               {' '}
               매일 기대되는 운영
             </span>
@@ -132,27 +135,39 @@ export default function RevenueProofSection() {
           </div>
         </motion.div>
 
-        <div className="relative z-20 -mx-4 -mt-6 overflow-x-auto px-4 pb-3 [scrollbar-width:none] sm:-mx-6 sm:-mt-8 sm:px-6 lg:mx-0 lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden">
-          <div className="flex w-max snap-x snap-mandatory gap-3 lg:grid lg:w-auto lg:snap-none lg:grid-cols-4">
-            {revenueItems.map((item, index) => (
-              <motion.div
-                key={`${item.region}-${item.code}`}
-                initial={{ opacity: 0, y: 22 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.52, delay: 0.18 + index * 0.08, ease: 'easeOut' }}
-                className="w-[76vw] max-w-[300px] shrink-0 snap-center overflow-hidden rounded-[14px] border border-[#5a2c12]/24 bg-[#fffaf0] shadow-[0_18px_36px_rgba(122,52,0,0.14)] sm:w-[300px] lg:w-auto lg:max-w-none"
+        <div className="relative z-20 -mx-4 -mt-6 overflow-hidden px-4 pb-3 sm:-mx-6 sm:-mt-8 sm:px-6 lg:mx-0 lg:px-0">
+          <div className="omurice-marquee-left flex w-max" style={{ '--duration': '24s' } as CSSProperties}>
+            {revenueCarouselGroups.map((groupIndex) => (
+              <div
+                key={`revenue-carousel-group-${groupIndex}`}
+                aria-hidden={groupIndex > 0}
+                className="flex shrink-0 gap-3 pr-3"
               >
-                <div className="bg-[#4a260f] px-5 py-4 text-center text-[#fff3c6]">
-                  <p className="font-heading text-sm font-black">{item.region}</p>
-                  <p className="mt-1 text-xs font-bold text-[#fec601]">월 매출 실적</p>
-                </div>
-                <div className="px-5 py-6 text-center">
-                  <p className="font-heading text-[clamp(1.75rem,8vw,2.5rem)] font-black leading-none tracking-[-0.04em] text-[#ff6b12] sm:text-4xl">
-                    {item.amount}
-                  </p>
-                  <p className="mt-2 font-heading text-sm font-black text-[#5a2c12]">원</p>
-                </div>
-              </motion.div>
+                {revenueItems.map((item, index) => (
+                  <motion.div
+                    key={`${item.region}-${item.code}-${groupIndex}`}
+                    initial={{ opacity: 0, y: 22 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{
+                      duration: 0.52,
+                      delay: 0.18 + index * 0.08,
+                      ease: 'easeOut',
+                    }}
+                    className="w-[74vw] max-w-[300px] shrink-0 overflow-hidden rounded-[14px] border border-[#5a2c12]/24 bg-[#fffaf0] shadow-[0_18px_36px_rgba(122,52,0,0.14)] sm:w-[300px] lg:w-[300px]"
+                  >
+                    <div className="bg-[#4a260f] px-5 py-4 text-center text-[#fff3c6]">
+                      <p className="font-heading text-sm font-black">{item.region}</p>
+                      <p className="mt-1 text-xs font-bold text-[#fec601]">월 매출 실적</p>
+                    </div>
+                    <div className="px-5 py-6 text-center">
+                      <p className="font-heading text-[clamp(1.75rem,8vw,2.5rem)] font-black leading-none tracking-[-0.04em] text-[#ff6b12] sm:text-4xl">
+                        {item.amount}
+                      </p>
+                      <p className="mt-2 font-heading text-sm font-black text-[#5a2c12]">원</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             ))}
           </div>
         </div>
