@@ -35,7 +35,10 @@ export default function IntroAnimation({ isVisible, onComplete }: IntroAnimation
   return (
     <AnimatePresence>
       {isVisible && (
-        <div className="fixed inset-0 z-[100] overflow-hidden" style={{ height: '100dvh' }}>
+        <div
+          className="fixed inset-0 z-[2147483647] overflow-hidden"
+          style={{ height: '100dvh' }}
+        >
           {/* 상단 절반 (위로 올라감) */}
           <motion.div
             className="absolute top-0 left-0 right-0 overflow-hidden"

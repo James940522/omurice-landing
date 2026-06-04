@@ -11,6 +11,7 @@ import { FranchiseMomentumSection } from '@/widgets/franchise-momentum';
 import { BrandIntroSection } from '@/widgets/brand-intro';
 import { WhyChooseSection } from '@/widgets/why-choose';
 import { RevenueProofSection } from '@/widgets/revenue-proof';
+import { ReorderProofSection } from '@/widgets/reorder-proof';
 import { FranchiseCostSection } from '@/widgets/franchise-cost';
 import { StartupProcessSection } from '@/widgets/startup-process';
 import { MenuSection } from '@/widgets/menu';
@@ -22,6 +23,7 @@ import { Footer } from '@/widgets/footer';
 
 // Features
 import { FloatingInquiry } from '@/features/inquiry';
+import { IntroAnimation } from '@/features/intro-animation';
 import { StoreStatusModal } from '@/features/store-status-modal';
 import { BrandLetterModal } from '@/features/brand-letter-modal';
 
@@ -31,10 +33,13 @@ import { SITE_ORIGIN, absoluteUrl } from '@/shared/config/site';
 type LandingModalId = 'brand-letter' | 'store-status';
 
 export default function Home() {
+  const [showIntro, setShowIntro] = useState(true);
   const [landingModalQueue, setLandingModalQueue] = useState<LandingModalId[]>([]);
   const activeLandingModal = landingModalQueue[0] ?? null;
 
   useEffect(() => {
+    if (showIntro) return;
+
     const timer = setTimeout(() => {
       const hideStore = localStorage.getItem('hideModal_store-status');
       const hideBrandLetter = localStorage.getItem('hideModal_brand-letter');
@@ -51,7 +56,7 @@ export default function Home() {
     }, 500);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [showIntro]);
 
   const handleLandingModalClose = () => {
     setLandingModalQueue((queue) => queue.slice(1));
@@ -156,6 +161,7 @@ export default function Home() {
         <FranchiseMomentumSection />
         <WhyChooseSection />
         <RevenueProofSection />
+        <ReorderProofSection />
         <FranchiseCostSection />
         <StartupProcessSection />
         <MenuSection />
@@ -174,6 +180,7 @@ export default function Home() {
           isOpen={activeLandingModal === 'store-status'}
           onClose={handleLandingModalClose}
         />
+        <IntroAnimation isVisible={showIntro} onComplete={() => setShowIntro(false)} />
       </main>
     </>
   );

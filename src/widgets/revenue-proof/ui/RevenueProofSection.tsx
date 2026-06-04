@@ -31,6 +31,60 @@ const revenueItems = [
 
 const revenueCarouselGroups = [0, 1, 2];
 
+const digitReel = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+function CountingAmount({
+  value,
+  active,
+  className,
+}: {
+  value: string;
+  active: boolean;
+  className?: string;
+}) {
+  return (
+    <span
+      aria-label={value}
+      className={`inline-flex items-baseline whitespace-nowrap tabular-nums [font-variant-numeric:tabular-nums] ${className ?? ''}`}
+    >
+      {value.split('').map((character, index) => {
+        if (!/\d/.test(character)) {
+          return (
+            <span key={`${character}-${index}`} aria-hidden="true" className="inline-block w-[0.24em] text-center">
+              {character}
+            </span>
+          );
+        }
+
+        return (
+          <span
+            key={`${character}-${index}`}
+            aria-hidden="true"
+            className="relative inline-block h-[1em] w-[0.58em] overflow-hidden text-center align-baseline leading-none"
+          >
+            <motion.span
+              className="absolute left-0 top-0 flex w-full flex-col items-center"
+              initial={{ y: '0em' }}
+              animate={active ? { y: '-10em' } : { y: '0em' }}
+              transition={{
+                duration: 0.88 + index * 0.04,
+                delay: 0.1 + index * 0.035,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
+              {[...digitReel, character].map((number, reelIndex) => (
+                <span key={`${number}-${reelIndex}`} className="block h-[1em] w-full leading-none">
+                  {number}
+                </span>
+              ))}
+            </motion.span>
+          </span>
+        );
+      })}
+    </span>
+  );
+}
+
 export default function RevenueProofSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '0px 0px -12% 0px', amount: 0.12 });
@@ -109,9 +163,11 @@ export default function RevenueProofSection() {
             </div>
 
             <div className="relative z-20 mt-6 flex flex-wrap items-end justify-center gap-x-3 gap-y-1">
-              <span className="font-heading text-[clamp(3rem,12vw,9.1rem)] font-black leading-none tracking-[-0.07em] text-[#180904] drop-shadow-[0_6px_0_rgba(255,255,255,0.72)]">
-                {featuredRevenue.amount}
-              </span>
+              <CountingAmount
+                value={featuredRevenue.amount}
+                active={isInView}
+                className="font-heading text-[clamp(3rem,12vw,9.1rem)] font-black leading-none tracking-[-0.07em] text-[#180904] drop-shadow-[0_6px_0_rgba(255,255,255,0.72)]"
+              />
               <span className="mb-1 rounded-full bg-[#ff6b12] px-4 py-2 font-heading text-lg font-black text-white shadow-[0_8px_20px_rgba(255,107,18,0.28)] sm:mb-5 sm:text-3xl">
                 원 달성
               </span>
@@ -160,9 +216,11 @@ export default function RevenueProofSection() {
                       <p className="mt-1 text-xs font-bold text-[#fec601]">월 매출 실적</p>
                     </div>
                     <div className="px-5 py-6 text-center">
-                      <p className="font-heading text-[clamp(1.75rem,8vw,2.5rem)] font-black leading-none tracking-[-0.04em] text-[#ff6b12] sm:text-4xl">
-                        {item.amount}
-                      </p>
+                      <CountingAmount
+                        value={item.amount}
+                        active={isInView}
+                        className="justify-center font-heading text-[clamp(1.75rem,8vw,2.5rem)] font-black leading-none tracking-[-0.04em] text-[#ff6b12] sm:text-4xl"
+                      />
                       <p className="mt-2 font-heading text-sm font-black text-[#5a2c12]">원</p>
                     </div>
                   </motion.div>
