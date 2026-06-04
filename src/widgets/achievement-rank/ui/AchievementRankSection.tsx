@@ -98,23 +98,6 @@ export default function AchievementRankSection() {
           />
         </motion.div>
 
-        <motion.div
-          aria-hidden
-          initial={{ opacity: 0, x: -36, y: 64, scale: 0.94 }}
-          animate={isInView ? { opacity: 1, x: 0, y: 0, scale: 1 } : {}}
-          transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
-          className="pointer-events-none absolute bottom-[15%] right-[-17%] top-[44%] w-[78%] md:hidden"
-        >
-          <Image
-            src="/new-asset/achievement-rank/mo-arrow.webp"
-            alt=""
-            fill
-            sizes="78vw"
-            className="object-contain object-right"
-            quality={92}
-          />
-        </motion.div>
-
         <div className="absolute bottom-[7%] left-[35%] right-[5%] hidden h-[36%] items-end justify-between gap-[1.1vw] md:flex">
           {milestones.map((item, index) => (
             <motion.div
