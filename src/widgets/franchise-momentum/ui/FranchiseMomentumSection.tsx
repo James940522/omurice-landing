@@ -212,7 +212,7 @@ export default function FranchiseMomentumSection() {
         <QuoteCarousel items={topQuotes} direction="left" duration="54s" />
       </div>
 
-      <div className="pointer-events-none absolute -right-12 top-[15%] z-20 h-12 w-[114%] rotate-[6deg] overflow-hidden sm:h-14 lg:h-16">
+      <div className="pointer-events-none absolute -right-24 top-0 z-20 h-11 w-[calc(100vw+10rem)] rotate-[6deg] overflow-hidden sm:-right-28 sm:-top-1 sm:h-12 lg:-right-36 lg:-top-2 lg:h-14 lg:w-[calc(100vw+18rem)]">
         <RibbonMarquee direction="left" duration="25s" />
       </div>
 
@@ -235,7 +235,7 @@ export default function FranchiseMomentumSection() {
         <QuoteCarousel items={bottomQuotes} direction="right" duration="58s" />
       </div>
 
-      <div className="pointer-events-none absolute -left-12 bottom-[15%] z-20 h-12 w-[114%] -rotate-[6deg] overflow-hidden sm:h-14 lg:h-16">
+      <div className="pointer-events-none absolute -left-24 bottom-0 z-20 h-11 w-[calc(100vw+10rem)] rotate-[6deg] overflow-hidden sm:-bottom-1 sm:-left-28 sm:h-12 lg:-bottom-2 lg:-left-36 lg:h-14 lg:w-[calc(100vw+18rem)]">
         <RibbonMarquee direction="right" duration="27s" />
       </div>
     </section>
