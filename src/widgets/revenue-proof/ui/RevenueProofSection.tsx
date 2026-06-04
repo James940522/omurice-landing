@@ -22,11 +22,6 @@ const revenueItems = [
     amount: '86,744,300',
   },
   {
-    region: '충남 OO점',
-    code: 'SY',
-    amount: '100,900,000',
-  },
-  {
     region: '서울 OO점',
     code: 'SP',
     amount: '92,800,000',
