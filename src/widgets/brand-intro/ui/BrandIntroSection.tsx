@@ -34,7 +34,7 @@ export default function BrandIntroSection() {
       <div className="absolute inset-0 z-0 bg-amber-400">
         <div className="relative mx-auto h-full w-full max-w-[1920px]">
           <Image
-            src="/asset/menu/오늘은_오므라이스/메뉴모음컷/메뉴모음컷 6.jpg"
+            src="/new-asset/brand-intro/brand-intro-bg.webp"
             alt="오늘은 오므라이스 메뉴"
             fill
             className="object-cover"

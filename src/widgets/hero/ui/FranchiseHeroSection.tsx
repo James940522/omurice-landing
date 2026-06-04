@@ -91,8 +91,8 @@ export default function FranchiseHeroSection() {
             transition={{ duration: 0.75, delay: 0.2 }}
             className="mt-4 font-heading text-5xl font-black leading-none text-white drop-shadow-[0_5px_18px_rgba(0,0,0,0.34)] md:text-7xl"
           >
-            <span className="block sm:inline">오므라이스</span>
-            <span className="block sm:ml-3 sm:inline">창업의 기준</span>
+            <span className="block sm:inline">독보적인</span>
+            <span className="block sm:ml-3 sm:inline">오므라이스</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -253,9 +253,9 @@ export default function FranchiseHeroSection() {
             transition={{ duration: 0.72, delay: 1.04 }}
             className="mt-5 break-keep font-heading text-4xl font-black leading-tight text-white drop-shadow-[0_5px_18px_rgba(0,0,0,0.34)] md:text-6xl"
           >
-            처음부터 만들었고,
+            대한민국 오므라이스의 기준
             <br />
-            지금도 <span className="text-[#ff6b12]">가장 잘합니다.</span>
+            <span className="text-[#ff6b12]">오늘은 오므라이스</span>
           </motion.h2>
 
           <motion.div

@@ -25,6 +25,18 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
   const [stores, setStores] = useState<Store[]>([]);
   const storeCount = useStoreCount();
   const [isLoading, setIsLoading] = useState(true);
+  const [currentOpenMonth, setCurrentOpenMonth] = useState<{
+    year: number;
+    month: number;
+  } | null>(null);
+
+  useEffect(() => {
+    const now = new Date(Date.now());
+    setCurrentOpenMonth({
+      year: now.getFullYear(),
+      month: now.getMonth() + 1,
+    });
+  }, []);
 
   useEffect(() => {
     // CSV에서 매장 데이터 로드
@@ -113,7 +125,11 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
             </div>
             <div className="grid grid-cols-5 gap-1 sm:gap-2.5 lg:grid-cols-6">
               {sortedStores.map((store) => (
-                <StoreItem key={store.store_code} store={store} />
+                <StoreItem
+                  key={store.store_code}
+                  store={store}
+                  currentOpenMonth={currentOpenMonth}
+                />
               ))}
             </div>
             <div className="mt-5 rounded-2xl border-2 border-[#fec601] bg-[#fff7e8] px-3 py-3 shadow-[0_10px_24px_rgba(34,14,4,0.24)] sm:px-5">

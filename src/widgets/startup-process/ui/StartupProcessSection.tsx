@@ -39,22 +39,17 @@ export default function StartupProcessSection() {
   return (
     <section
       id="startup-process"
-      className="relative overflow-hidden bg-[#fff8ef] py-20 md:py-32"
+      className="relative overflow-hidden bg-[#f7a900] py-20 md:py-32"
       ref={ref}
     >
-      <div className="pointer-events-none absolute inset-x-[-14%] bottom-[-9rem] h-72 rounded-t-[100%] bg-white/60 md:h-96" />
-      <div className="pointer-events-none absolute inset-0 opacity-[0.13] [background-image:linear-gradient(90deg,rgba(85,58,31,0.16)_1px,transparent_1px),linear-gradient(0deg,rgba(85,58,31,0.1)_1px,transparent_1px)] [background-size:10px_10px]" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#ff6b12]/60 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-[6vw] top-0 h-full border-x border-[#ff6b12]/25" />
-      <div
-        className="pointer-events-none absolute left-1/2 top-16 hidden -translate-x-1/2 select-none whitespace-nowrap text-[clamp(4rem,13vw,12rem)] font-black leading-none tracking-[0.06em] text-[#ff6b12]/[0.07] [text-shadow:0_1px_0_rgba(255,255,255,0.7)] md:block"
-        aria-hidden="true"
-      >
-        STARTUP PROCESS
-      </div>
-      <div className="pointer-events-none absolute left-[7vw] top-28 hidden h-20 w-20 border-l border-t border-[#ff6b12]/25 md:block" />
-      <div className="pointer-events-none absolute right-[8vw] bottom-24 hidden h-24 w-24 border-b border-r border-[#fec601]/45 md:block" />
-      <div className="pointer-events-none absolute right-[12vw] top-32 hidden h-2 w-24 bg-linear-to-r from-[#ff6b12]/65 to-transparent lg:block" />
+      <Image
+        src="/new-asset/startup-process/process-bg.webp"
+        alt=""
+        fill
+        sizes="100vw"
+        className="pointer-events-none absolute inset-0 z-0 object-cover"
+        quality={90}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
