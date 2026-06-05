@@ -88,7 +88,7 @@ export default function WhyChooseSection() {
       />
 
       {/* 우→좌 스크롤 마키 배너 */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden bg-[#d84a00] py-2.5 z-10">
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden bg-[#d84a00] py-2.5 z-10">
         <motion.div
           className="flex w-max"
           animate={{ x: ['0%', '-50%'] }}

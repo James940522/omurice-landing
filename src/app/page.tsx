@@ -162,7 +162,9 @@ export default function Home() {
         <SectionMarquee variant="signature" />
         <BusinessChangeSection />
         <MenuSection />
+        <SectionMarquee variant="franchise" />
         <BrandDesignSection />
+        <SectionMarquee variant="signature" />
         <CustomerBrandSection />
         <StartupProcessSection />
         <SectionMarquee variant="franchise" />

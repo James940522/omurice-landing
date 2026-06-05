@@ -26,13 +26,7 @@ type MarqueeLineProps = {
   dotClassName: string;
 };
 
-function MarqueeLine({
-  items,
-  direction,
-  duration,
-  className,
-  dotClassName,
-}: MarqueeLineProps) {
+function MarqueeLine({ items, direction, duration, className, dotClassName }: MarqueeLineProps) {
   const animationClass = direction === 'right' ? 'omurice-marquee-right' : 'omurice-marquee-left';
 
   return (
@@ -70,7 +64,7 @@ export function SectionMarquee({ variant = 'all' }: SectionMarqueeProps) {
   return (
     <div
       aria-hidden="true"
-      className="relative z-10 overflow-hidden border-y border-[#4a260f]/10 bg-[#fff7df]"
+      className="relative z-10 overflow-hidden border-[#4a260f]/10 bg-[#fff7df]"
     >
       {showFranchise ? (
         <MarqueeLine

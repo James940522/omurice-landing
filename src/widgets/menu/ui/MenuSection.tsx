@@ -155,9 +155,7 @@ function MenuCard({ item, priority }: { item: MenuItem; priority: boolean }) {
   return (
     <article
       className={`group relative overflow-hidden rounded-[8px] border-2 bg-white shadow-[0_16px_36px_rgba(107,68,35,0.12)] ${
-        isBest
-          ? 'border-[#e32d1f] shadow-[0_18px_42px_rgba(227,45,31,0.2)]'
-          : 'border-[#ffd68a]'
+        isBest ? 'border-[#e32d1f] shadow-[0_18px_42px_rgba(227,45,31,0.2)]' : 'border-[#ffd68a]'
       }`}
     >
       {isBest && (
@@ -238,7 +236,7 @@ export default function MenuSection() {
       </div>
       <div className="pointer-events-none absolute left-1/2 top-[45%] h-[420px] w-[980px] -translate-x-1/2 rounded-t-full bg-white/60" />
 
-      <div className="relative z-10 overflow-hidden bg-[#fec601] py-3 text-[#6b4423] shadow-[inset_0_1px_0_rgba(255,255,255,0.45),inset_0_-1px_0_rgba(107,68,35,0.08)]">
+      {/* <div className="relative z-10 overflow-hidden bg-[#fec601] py-3 text-[#6b4423] shadow-[inset_0_1px_0_rgba(255,255,255,0.45),inset_0_-1px_0_rgba(107,68,35,0.08)]">
         <div className="menu-marquee-track flex w-max gap-10 whitespace-nowrap font-heading text-lg font-black uppercase sm:text-xl">
           {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, index) => (
             <span key={`${item}-${index}`} className="flex items-center gap-10">
@@ -247,7 +245,7 @@ export default function MenuSection() {
             </span>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 pt-16 sm:px-6 lg:px-8">
         <motion.div

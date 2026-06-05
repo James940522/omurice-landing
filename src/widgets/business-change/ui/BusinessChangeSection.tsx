@@ -152,8 +152,18 @@ export default function BusinessChangeSection() {
             opacity: 1;
           }
 
+          .business-change-before .business-change-word {
+            color: rgba(74, 37, 15, 0.5);
+            text-shadow: 0 1px 0 rgba(255, 245, 215, 0.48);
+          }
+
+          .business-change-after .business-change-word {
+            color: rgba(255, 247, 214, 0.58);
+            text-shadow: 0 1px 0 rgba(105, 38, 0, 0.18);
+          }
+
           .business-change-before:hover .business-change-word {
-            color: rgba(27, 12, 3, 0.3);
+            color: rgba(74, 37, 15, 0.5);
           }
 
           .business-change-before:hover .business-change-copy,
@@ -238,22 +248,24 @@ export default function BusinessChangeSection() {
             BEFORE
           </p>
           <div className="relative z-10 mt-0 md:mt-[10%]">
-            <h3 className="business-change-copy flex w-fit items-center gap-2 whitespace-nowrap border-b border-[#32190b]/50 pb-1.5 text-[0.88rem] font-black leading-none min-[390px]:gap-3 min-[390px]:text-[1.02rem] md:block md:pb-2 md:text-[2.1vw]">
+            <h3 className="business-change-copy flex w-fit items-center gap-2 whitespace-nowrap border-b border-[#32190b]/50 pb-1 text-[0.82rem] font-black leading-none min-[390px]:gap-3 min-[390px]:text-[0.96rem] md:block md:pb-2 md:text-[2.1vw]">
               <span>업종변경 전</span>
               <span className="hidden h-px w-9 border-t border-dotted border-[#32190b]/55 min-[390px]:block md:hidden" />
             </h3>
-            <p className="business-change-copy mt-3 text-[0.65rem] font-bold leading-none min-[390px]:text-[0.72rem] md:mt-6 md:text-[1.15vw]">
+            <p className="business-change-copy mt-2.5 text-[0.6rem] font-bold leading-none min-[390px]:text-[0.68rem] md:mt-6 md:text-[1.15vw]">
               월매출
             </p>
-            <p className="business-change-stat mt-1 whitespace-nowrap font-heading text-[1.64rem] font-black leading-none tracking-normal text-black min-[390px]:text-[1.95rem] md:text-[4.4vw]">
+            <p className="business-change-stat mt-1 whitespace-nowrap font-heading text-[1.52rem] font-black leading-none tracking-normal text-black min-[390px]:text-[1.84rem] md:text-[4.4vw]">
               6000
               <span className="ml-1 text-[0.8rem] min-[390px]:text-[1rem] md:text-[1.85vw]">
                 만원
               </span>
             </p>
-            <ul className="business-change-list mt-4 space-y-2 text-[0.56rem] font-bold leading-snug text-[#9a3a19] min-[390px]:mt-5 min-[390px]:space-y-2.5 min-[390px]:text-[0.66rem] md:mt-6 md:block md:space-y-3 md:text-[1.02vw] md:leading-relaxed md:text-[#9a3a19]">
-              {beforeItems.map((item) => (
-                <li key={item}># {item}</li>
+            <ul className="business-change-list mt-3 space-y-1.5 text-[0.54rem] font-bold leading-snug text-[#9a3a19] min-[390px]:mt-4 min-[390px]:space-y-2 min-[390px]:text-[0.61rem] md:mt-6 md:block md:space-y-3 md:text-[1.02vw] md:leading-relaxed md:text-[#9a3a19]">
+              {beforeItems.map((item, index) => (
+                <li key={item} className={index >= 4 ? 'hidden md:list-item' : undefined}>
+                  # {item}
+                </li>
               ))}
             </ul>
           </div>
@@ -269,19 +281,19 @@ export default function BusinessChangeSection() {
             AFTER
           </p>
           <div className="relative z-10 ml-auto mt-0 w-fit md:mt-[13%]">
-            <h3 className="business-change-copy ml-auto w-fit whitespace-nowrap border-b border-[#32190b]/55 pb-1.5 text-[0.98rem] font-black leading-none min-[390px]:text-[1.1rem] md:pb-2 md:text-[2.1vw]">
+            <h3 className="business-change-copy ml-auto w-fit whitespace-nowrap border-b border-[#32190b]/55 pb-1 text-[0.92rem] font-black leading-none min-[390px]:text-[1.04rem] md:pb-2 md:text-[2.1vw]">
               업종변경 후
             </h3>
-            <p className="business-change-copy mt-4 text-[0.65rem] font-bold leading-none min-[390px]:text-[0.72rem] md:mt-6 md:text-[1.15vw]">
+            <p className="business-change-copy mt-3 text-[0.6rem] font-bold leading-none min-[390px]:text-[0.68rem] md:mt-6 md:text-[1.15vw]">
               월매출
             </p>
-            <p className="business-change-stat mt-1 whitespace-nowrap font-heading text-[1.32rem] font-black leading-none tracking-normal text-[#9e260b] min-[390px]:text-[1.72rem] md:text-[4.2vw]">
+            <p className="business-change-stat mt-1 whitespace-nowrap font-heading text-[1.24rem] font-black leading-none tracking-normal text-[#9e260b] min-[390px]:text-[1.58rem] md:text-[4.2vw]">
               1억5000
               <span className="ml-1 text-[0.64rem] min-[390px]:text-[0.82rem] md:text-[1.65vw]">
                 만원
               </span>
             </p>
-            <div className="business-change-after-panel mt-3 rounded-[9px] border border-[#8e2107]/28 bg-white/24 px-2.5 py-2.5 text-left shadow-[0_10px_22px_rgba(97,39,0,0.12)] min-[390px]:mt-4 min-[390px]:px-3 min-[390px]:py-3 md:mt-6 md:w-[28vw] md:max-w-[430px] md:px-5 md:py-4">
+            <div className="business-change-after-panel mt-2.5 rounded-[9px] border border-[#8e2107]/28 bg-white/24 px-2.5 py-2 text-left shadow-[0_10px_22px_rgba(97,39,0,0.12)] min-[390px]:mt-3 min-[390px]:px-3 min-[390px]:py-2.5 md:mt-6 md:w-[28vw] md:max-w-[430px] md:px-5 md:py-4">
               <div className="flex items-center justify-between gap-2">
                 <p className="business-change-copy break-keep text-[0.52rem] font-black leading-tight text-[#4b1603] min-[390px]:text-[0.62rem] md:text-base">
                   전환 후 매출 구조
