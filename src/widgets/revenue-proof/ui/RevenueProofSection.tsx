@@ -1,9 +1,9 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { animate, motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import type { CSSProperties } from 'react';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const featuredRevenue = {
   region: '서울 OO점',
@@ -31,15 +31,6 @@ const revenueItems = [
 
 const revenueCarouselGroups = [0, 1, 2];
 
-const digitReel = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-const DIGIT_REEL_STEP_EM = 1.3;
-const DIGIT_REEL_STEP = `${DIGIT_REEL_STEP_EM}em`;
-const DIGIT_REEL_TARGET_Y = `-${DIGIT_REEL_STEP_EM * digitReel.length}em`;
-const digitCellStyle: CSSProperties = {
-  height: DIGIT_REEL_STEP,
-  lineHeight: DIGIT_REEL_STEP,
-};
-
 function CountingAmount({
   value,
   active,
@@ -49,62 +40,30 @@ function CountingAmount({
   active: boolean;
   className?: string;
 }) {
+  const [displayAmount, setDisplayAmount] = useState(0);
+  const targetAmount = Number(value.replace(/[^\d]/g, ''));
+
+  useEffect(() => {
+    if (!active) {
+      setDisplayAmount(0);
+      return;
+    }
+
+    const controls = animate(0, targetAmount, {
+      duration: 1.1,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: setDisplayAmount,
+    });
+
+    return () => controls.stop();
+  }, [active, targetAmount]);
+
   return (
     <span
       aria-label={value}
       className={`inline-flex w-auto max-w-none items-baseline whitespace-nowrap tabular-nums [font-variant-numeric:tabular-nums] ${className ?? ''}`}
     >
-      {value.split('').map((character, index) => {
-        if (!/\d/.test(character)) {
-          return (
-            <span
-              key={`${character}-${index}`}
-              aria-hidden="true"
-              className="inline-block text-center align-baseline"
-              style={digitCellStyle}
-            >
-              {character}
-            </span>
-          );
-        }
-
-        return (
-          <span
-            key={`${character}-${index}`}
-            aria-hidden="true"
-            className="relative inline-grid overflow-hidden text-center align-baseline"
-            style={digitCellStyle}
-          >
-            <span
-              aria-hidden="true"
-              className="invisible col-start-1 row-start-1 block"
-              style={digitCellStyle}
-            >
-              8
-            </span>
-            <motion.span
-              className="absolute left-0 top-0 flex min-w-full flex-col items-center"
-              initial={{ y: '0em' }}
-              animate={active ? { y: DIGIT_REEL_TARGET_Y } : { y: '0em' }}
-              transition={{
-                duration: 0.88 + index * 0.04,
-                delay: 0.1 + index * 0.035,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              {[...digitReel, character].map((number, reelIndex) => (
-                <span
-                  key={`${number}-${reelIndex}`}
-                  className="block w-full"
-                  style={digitCellStyle}
-                >
-                  {number}
-                </span>
-              ))}
-            </motion.span>
-          </span>
-        );
-      })}
+      {Math.floor(displayAmount).toLocaleString('ko-KR')}
     </span>
   );
 }
