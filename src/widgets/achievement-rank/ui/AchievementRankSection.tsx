@@ -87,25 +87,30 @@ export default function AchievementRankSection() {
 
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_28%,rgba(255,214,94,0.12),transparent_32%),linear-gradient(180deg,rgba(36,13,4,0.02),rgba(36,13,4,0.3))] md:hidden" />
 
-        <div className="absolute bottom-[4.5%] left-[42%] right-[7%] hidden h-[46%] items-end justify-between gap-[0.85vw] md:flex">
+        <div
+          data-achievement-chart="desktop"
+          className="absolute bottom-[4.5%] left-[42%] right-[7%] hidden h-[46%] items-end justify-between gap-[0.85vw] md:flex"
+        >
           {milestones.map((item, index) => (
             <motion.div
               key={`${item.year}-${item.month}`}
               initial={{ opacity: 0, y: 28 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
               transition={{ duration: 0.55, delay: 0.36 + index * 0.08, ease: 'easeOut' }}
               className="relative flex h-full min-w-0 flex-1 flex-col items-center justify-end"
             >
               <motion.div
+                data-achievement-marker="desktop"
                 initial={{ scale: 0 }}
-                animate={isInView ? { scale: 1 } : {}}
+                animate={isInView ? { scale: 1 } : { scale: 0 }}
                 transition={{ duration: 0.38, delay: 0.72 + index * 0.08, ease: 'backOut' }}
                 className="absolute z-20 h-5 w-5 rounded-full border border-[#fff3a8] bg-[radial-gradient(circle_at_35%_28%,#fff7b9_0,#ffd442_34%,#e48500_78%)] shadow-[0_0_18px_rgba(255,202,28,0.96)] lg:h-6 lg:w-6 xl:h-7 xl:w-7"
                 style={{ bottom: `${item.desktopHeight}%` }}
               />
               <motion.div
+                data-achievement-bar="desktop"
                 initial={{ scaleY: 0 }}
-                animate={isInView ? { scaleY: 1 } : {}}
+                animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
                 transition={{ duration: 0.72, delay: 0.48 + index * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 className="relative w-full max-w-[112px] origin-bottom rounded-t-[22px] border border-[#fff2a2]/80 bg-[linear-gradient(180deg,#fff3b8_0%,#ffd876_44%,#fff0bb_100%)] shadow-[0_0_22px_rgba(255,190,34,0.56),inset_0_0_18px_rgba(255,255,255,0.46)]"
                 style={{ height: `${item.desktopHeight}%` }}
@@ -129,25 +134,30 @@ export default function AchievementRankSection() {
           ))}
         </div>
 
-        <div className="absolute bottom-[7%] left-[34%] right-[4%] grid h-[32%] grid-cols-6 items-end gap-[2.2vw] md:hidden">
+        <div
+          data-achievement-chart="mobile"
+          className="absolute inset-x-0 bottom-[7%] grid h-[32%] grid-cols-6 items-end gap-[2.2vw] px-[4%] md:hidden"
+        >
           {milestones.map((item, index) => (
             <motion.div
               key={`${item.year}-${item.month}-mobile`}
               initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.5, delay: 0.28 + index * 0.07, ease: 'easeOut' }}
               className="relative flex h-full min-w-0 flex-col items-center justify-end"
             >
               <motion.div
+                data-achievement-marker="mobile"
                 initial={{ scale: 0 }}
-                animate={isInView ? { scale: 1 } : {}}
+                animate={isInView ? { scale: 1 } : { scale: 0 }}
                 transition={{ duration: 0.34, delay: 0.62 + index * 0.07, ease: 'backOut' }}
                 className="absolute z-20 h-[13px] w-[13px] rounded-full border border-[#fff3a8] bg-[radial-gradient(circle_at_35%_28%,#fff7b9_0,#ffd442_34%,#e48500_78%)] shadow-[0_0_15px_rgba(255,202,28,0.96)]"
                 style={{ bottom: `${item.height}%` }}
               />
               <motion.div
+                data-achievement-bar="mobile"
                 initial={{ scaleY: 0 }}
-                animate={isInView ? { scaleY: 1 } : {}}
+                animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
                 transition={{ duration: 0.68, delay: 0.4 + index * 0.07, ease: [0.16, 1, 0.3, 1] }}
                 className="w-full origin-bottom rounded-t-[13px] border border-[#fff2a2]/80 bg-[linear-gradient(180deg,#fff4bd_0%,#ffd66a_48%,#fff1bd_100%)] shadow-[0_0_16px_rgba(255,190,34,0.5),inset_0_0_13px_rgba(255,255,255,0.48)]"
                 style={{ height: `${item.height}%` }}

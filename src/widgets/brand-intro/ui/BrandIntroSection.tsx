@@ -106,7 +106,7 @@ export default function BrandIntroSection() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
               >
-                <div className="mb-1 truncate text-[0.52rem] font-semibold uppercase tracking-[0.08em] text-yellow-400/90 sm:mb-2 sm:text-[0.65rem] md:text-xs md:tracking-wider">
+                <div className="mb-1 truncate text-[0.8rem] font-semibold uppercase tracking-[0.08em] text-yellow-400/90 sm:mb-2 sm:text-[0.65rem] md:text-xs md:tracking-wider">
                   {value.subtitle}
                 </div>
                 <h3
@@ -115,7 +115,7 @@ export default function BrandIntroSection() {
                 >
                   {value.title}
                 </h3>
-                <p className="text-[0.58rem] font-medium leading-snug text-gray-300 sm:text-xs md:text-sm">
+                <p className="text-[0.8rem] font-medium leading-snug text-gray-300 sm:text-sm md:text-base">
                   {value.description}
                 </p>
               </motion.div>
