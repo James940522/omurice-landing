@@ -3,6 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { useStoreCount } from '@/lib/use-store-count';
+import { sanitizePhoneInput, validateInquiryLead } from '@/shared/lib/utils';
 
 // 도메인에 따른 SMS 메시지 생성 함수
 function getSmsMessageByDomain(): string {
@@ -51,6 +52,7 @@ export default function ContactFormSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [privacyAgree, setPrivacyAgree] = useState(false);
   const [hp, setHp] = useState(''); // honeypot
+  const isSubmitDisabled = isSubmitting || !privacyAgree;
 
   // 클라이언트 마운트 후 도메인 체크
   // SSR Hydration 에러 방지를 위해 클라이언트에서만 메시지 설정
@@ -67,21 +69,35 @@ export default function ContactFormSection() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === 'phone' ? sanitizePhoneInput(value) : value,
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
-    if (!privacyAgree) return;
-    if (
-      !formData.name.trim() ||
-      !formData.phone.trim() ||
-      !formData.storeType ||
-      !formData.region.trim() ||
-      !formData.hasStore
-    ) {
-      alert('필수 항목을 입력해주세요.');
+
+    const validation = validateInquiryLead({
+      name: formData.name,
+      phone: formData.phone,
+      region: formData.region,
+      privacyAgree,
+    });
+
+    if (!validation.valid) {
+      alert(validation.message);
+      return;
+    }
+
+    if (!formData.storeType) {
+      alert('매장형태를 선택해주세요.');
+      return;
+    }
+
+    if (!formData.hasStore) {
+      alert('점포 보유 유무를 선택해주세요.');
       return;
     }
 
@@ -204,6 +220,7 @@ export default function ContactFormSection() {
                     required
                     value={formData.name}
                     onChange={handleChange}
+                    maxLength={30}
                     className="w-full rounded-[8px] border-2 border-[#f2c26b] bg-white px-4 py-2.5 text-sm font-bold text-[#32190b] outline-none transition placeholder:text-[#9c7a5e] focus:border-[#ff6b12] focus:ring-2 focus:ring-[#fec601]/40"
                     placeholder="홍길동"
                   />
@@ -219,6 +236,9 @@ export default function ContactFormSection() {
                     required
                     value={formData.phone}
                     onChange={handleChange}
+                    inputMode="numeric"
+                    maxLength={13}
+                    pattern="[0-9-]*"
                     className="w-full rounded-[8px] border-2 border-[#f2c26b] bg-white px-4 py-2.5 text-sm font-bold text-[#32190b] outline-none transition placeholder:text-[#9c7a5e] focus:border-[#ff6b12] focus:ring-2 focus:ring-[#fec601]/40"
                     placeholder="010-1234-5678"
                   />
@@ -241,24 +261,36 @@ export default function ContactFormSection() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="storeType" className="mb-1.5 block text-xs font-black text-[#4a260f] md:text-sm">
+                  <span id="storeType-label" className="mb-1.5 block text-xs font-black text-[#4a260f] md:text-sm">
                     매장형태 <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    id="storeType"
-                    name="storeType"
-                    required
-                    value={formData.storeType}
-                    onChange={handleChange}
-                    className="w-full rounded-[8px] border-2 border-[#f2c26b] bg-white px-4 py-2.5 text-sm font-bold text-[#32190b] outline-none transition focus:border-[#ff6b12] focus:ring-2 focus:ring-[#fec601]/40"
+                  </span>
+                  <div
+                    role="radiogroup"
+                    aria-labelledby="storeType-label"
+                    className="grid grid-cols-2 gap-2"
                   >
-                    <option value="">선택</option>
                     {storeTypeOptions.map((option) => (
-                      <option key={option} value={option}>
+                      <label
+                        key={option}
+                        className={`flex min-h-11 cursor-pointer items-center justify-center rounded-[8px] border px-3 py-2.5 text-sm font-black leading-tight transition ${
+                          formData.storeType === option
+                            ? 'border-[#4a260f] bg-[#4a260f] text-[#fec601] shadow-[0_10px_20px_rgba(74,38,15,0.16)]'
+                            : 'border-[#f2c26b] bg-white text-[#6b4222] hover:border-[#ff6b12]/70'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="storeType"
+                          value={option}
+                          checked={formData.storeType === option}
+                          onChange={handleChange}
+                          required
+                          className="sr-only"
+                        />
                         {option}
-                      </option>
+                      </label>
                     ))}
-                  </select>
+                  </div>
                 </div>
               </div>
 
@@ -274,6 +306,7 @@ export default function ContactFormSection() {
                     required
                     value={formData.region}
                     onChange={handleChange}
+                    maxLength={40}
                     className="w-full rounded-[8px] border-2 border-[#f2c26b] bg-white px-4 py-2.5 text-sm font-bold text-[#32190b] outline-none transition placeholder:text-[#9c7a5e] focus:border-[#ff6b12] focus:ring-2 focus:ring-[#fec601]/40"
                     placeholder="서울 강남구"
                   />
@@ -352,12 +385,12 @@ export default function ContactFormSection() {
 
               <motion.button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitDisabled}
                 className={`w-full rounded-[12px] bg-[#ff6b12] px-8 py-3.5 text-lg font-black text-white shadow-[0_16px_32px_rgba(255,107,18,0.28)] transition-all duration-300 hover:scale-[1.02] hover:bg-[#4a260f] hover:text-[#fec601] hover:shadow-[0_18px_38px_rgba(74,38,15,0.25)] ${
-                  isSubmitting ? 'opacity-60 cursor-not-allowed' : ''
+                  isSubmitDisabled ? 'opacity-55 cursor-not-allowed' : ''
                 }`}
-                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                whileHover={{ scale: isSubmitDisabled ? 1 : 1.02 }}
+                whileTap={{ scale: isSubmitDisabled ? 1 : 0.98 }}
               >
                 {isSubmitting ? '전송 중...' : '창업 문의 신청하기'}
               </motion.button>

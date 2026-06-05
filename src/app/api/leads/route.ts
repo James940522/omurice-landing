@@ -1,6 +1,12 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import crypto from 'crypto';
+import {
+  isValidInquiryName,
+  isValidInquiryRegion,
+  isValidKoreanPhoneNumber,
+  normalizePhoneNumber,
+} from '@/shared/lib/utils';
 
 export const runtime = 'nodejs';
 
@@ -10,21 +16,17 @@ const optionalEmailSchema = z.preprocess(
 );
 
 const Schema = z.object({
-  name: z.string().min(1),
-  phone: z.string().min(8),
+  name: z.string().refine(isValidInquiryName, { message: 'INVALID_NAME' }),
+  phone: z.string().refine(isValidKoreanPhoneNumber, { message: 'INVALID_PHONE' }),
   email: optionalEmailSchema,
   storeType: z.enum(['샵인샵', '단독매장', '홀매장', '기타매장']),
-  region: z.string().min(1),
+  region: z.string().refine(isValidInquiryRegion, { message: 'INVALID_REGION' }),
   hasStore: z.enum(['있음', '없음']),
   message: z.string().optional().default(''),
   privacyAgree: z.literal(true),
   hp: z.string().optional(), // honeypot
   domain: z.string().optional(), // 도메인 정보 (네모 태그용)
 });
-
-function normalizePhone(input: string) {
-  return input.replace(/[^\d]/g, '');
-}
 
 function solapiAuthHeader() {
   const apiKey = process.env.SOLAPI_API_KEY!;
@@ -114,7 +116,7 @@ export async function POST(req: Request) {
   }
 
   const name = parsed.data.name.trim();
-  const phone = normalizePhone(parsed.data.phone);
+  const phone = normalizePhoneNumber(parsed.data.phone);
   const email = parsed.data.email;
   const storeType = parsed.data.storeType;
   const region = parsed.data.region.trim();

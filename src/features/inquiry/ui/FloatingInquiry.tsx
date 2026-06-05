@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { sanitizePhoneInput, validateInquiryLead } from '@/shared/lib/utils';
 
 const initialFormData = {
   name: '',
@@ -90,6 +91,7 @@ export default function FloatingInquiry() {
   }, [hasUserCollapsed, isMobile]);
 
   const shouldShow = isVisible && !isContactInView;
+  const isSubmitDisabled = isSubmitting || !privacyAgree;
 
   const handleMobileOpen = () => {
     setIsMobileExpanded(true);
@@ -103,20 +105,25 @@ export default function FloatingInquiry() {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === 'phone' ? sanitizePhoneInput(value) : value,
+    }));
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isSubmitting) return;
 
-    if (!formData.name.trim() || !formData.phone.trim() || !formData.region.trim()) {
-      alert('성함, 연락처, 희망지역을 입력해주세요.');
-      return;
-    }
+    const validation = validateInquiryLead({
+      name: formData.name,
+      phone: formData.phone,
+      region: formData.region,
+      privacyAgree,
+    });
 
-    if (!privacyAgree) {
-      alert('개인정보 수집 및 이용에 동의해주세요.');
+    if (!validation.valid) {
+      alert(validation.message);
       return;
     }
 
@@ -228,6 +235,7 @@ export default function FloatingInquiry() {
               name="name"
               value={formData.name}
               onChange={handleChange}
+              maxLength={30}
               className="h-11 w-full rounded-[10px] border border-[#f7c88b] bg-white px-4 text-base font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40"
               placeholder="성함"
               autoComplete="name"
@@ -237,6 +245,9 @@ export default function FloatingInquiry() {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
+              inputMode="numeric"
+              maxLength={13}
+              pattern="[0-9-]*"
               className="h-11 w-full rounded-[10px] border border-[#f7c88b] bg-white px-4 text-base font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40"
               placeholder="연락처"
               autoComplete="tel"
@@ -246,6 +257,7 @@ export default function FloatingInquiry() {
               name="region"
               value={formData.region}
               onChange={handleChange}
+              maxLength={40}
               className="h-11 w-full rounded-[10px] border border-[#f7c88b] bg-white px-4 text-base font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40"
               placeholder="희망지역"
             />
@@ -273,11 +285,11 @@ export default function FloatingInquiry() {
 
             <motion.button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitDisabled}
               className={`h-12 w-full rounded-[12px] bg-[#fec601] px-4 text-base font-black leading-tight text-[#32190b] shadow-[0_10px_22px_rgba(0,0,0,0.18)] transition active:bg-[#ffdd39] ${
-                isSubmitting ? 'cursor-not-allowed opacity-60' : ''
+                isSubmitDisabled ? 'cursor-not-allowed opacity-55' : ''
               }`}
-              whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+              whileTap={{ scale: isSubmitDisabled ? 1 : 0.98 }}
             >
               {isSubmitting ? '접수 중' : '가맹문의 신청'}
             </motion.button>
@@ -319,6 +331,7 @@ export default function FloatingInquiry() {
               name="name"
               value={formData.name}
               onChange={handleChange}
+              maxLength={30}
               className="h-10 min-w-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 lg:h-12 lg:w-[clamp(120px,10.2vw,164px)] lg:shrink-0 lg:rounded-[10px] lg:px-3 lg:text-[clamp(0.78rem,0.9vw,0.95rem)] xl:px-4"
               placeholder="성함"
               autoComplete="name"
@@ -328,6 +341,9 @@ export default function FloatingInquiry() {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
+              inputMode="numeric"
+              maxLength={13}
+              pattern="[0-9-]*"
               className="h-10 min-w-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 lg:h-12 lg:w-[clamp(128px,11vw,178px)] lg:shrink-0 lg:rounded-[10px] lg:px-3 lg:text-[clamp(0.78rem,0.9vw,0.95rem)] xl:px-4"
               placeholder="연락처"
               autoComplete="tel"
@@ -337,6 +353,7 @@ export default function FloatingInquiry() {
               name="region"
               value={formData.region}
               onChange={handleChange}
+              maxLength={40}
               className="h-10 min-w-0 rounded-[6px] border border-[#f7c88b] bg-white px-3 text-sm font-black text-[#32190b] outline-none placeholder:text-[#9b8571] focus:border-[#fec601] focus:ring-2 focus:ring-[#fec601]/40 sm:h-10 lg:h-12 lg:w-[clamp(120px,10.8vw,170px)] lg:shrink-0 lg:rounded-[10px] lg:px-3 lg:text-[clamp(0.78rem,0.9vw,0.95rem)] xl:px-4"
               placeholder="희망지역"
             />
@@ -364,12 +381,12 @@ export default function FloatingInquiry() {
 
             <motion.button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitDisabled}
               className={`h-10 min-w-0 break-keep rounded-[6px] bg-[#fec601] px-3 text-sm font-black leading-tight text-[#32190b] shadow-[0_8px_18px_rgba(0,0,0,0.18)] transition hover:bg-[#ffdd39] sm:h-10 sm:text-base lg:h-12 lg:min-w-[clamp(136px,11.5vw,184px)] lg:shrink-0 lg:rounded-[10px] lg:text-[clamp(0.84rem,1vw,1.08rem)] ${
-                isSubmitting ? 'cursor-not-allowed opacity-60' : ''
+                isSubmitDisabled ? 'cursor-not-allowed opacity-55' : ''
               }`}
-              whileHover={{ scale: isSubmitting ? 1 : 1.03 }}
-              whileTap={{ scale: isSubmitting ? 1 : 0.97 }}
+              whileHover={{ scale: isSubmitDisabled ? 1 : 1.03 }}
+              whileTap={{ scale: isSubmitDisabled ? 1 : 0.97 }}
             >
               {isSubmitting ? '접수 중' : '가맹문의 신청'}
             </motion.button>
