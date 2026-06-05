@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
+// import 'swiper/css';
+// import 'swiper/css/pagination';
 
 export default function HeroSectionLegacy() {
   return (
@@ -182,8 +182,7 @@ export default function HeroSectionLegacy() {
 
         {/* SEO: H1 타이틀 (검색엔진용, 시각적으로는 숨김) */}
         <h1 className="sr-only">
-          오므라이스 프랜차이즈 창업 | 재영에프앤비(Jaeyoung F&B) 오늘은 오므라이스 · 에그이츠(EGG
-          EATS)
+          오므라이스 프랜차이즈 창업 | 재영에프앤비(Jaeyoung F&B) 오늘은 오므라이스
         </h1>
 
         {/* 1. 브랜드 로고 문구 - 최상단 */}

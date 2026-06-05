@@ -4,9 +4,9 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+// import 'swiper/css';
+// import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
 
 const heroSlides = [
   {
@@ -75,8 +75,7 @@ export default function HeroSection() {
   return (
     <section className="relative mt-14 aspect-[720/1000] overflow-hidden bg-black md:mt-16 md:aspect-[1920/840]">
       <h1 className="sr-only">
-        오므라이스 프랜차이즈 창업 | 재영에프앤비(Jaeyoung F&B) 오늘은 오므라이스 · 에그이츠(EGG
-        EATS)
+        오므라이스 프랜차이즈 창업 | 재영에프앤비(Jaeyoung F&B) 오늘은 오므라이스
       </h1>
 
       <Swiper

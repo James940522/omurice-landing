@@ -1,4 +1,4 @@
-# 오늘은 오므라이스 · 에그이츠 | 공식 랜딩 페이지
+# 오늘은 오므라이스 공식 랜딩 페이지
 
 > 재영에프앤비(Jaeyoung F&B) 운영, 배달 중심 오므라이스 프랜차이즈 공식 웹사이트
 
@@ -130,7 +130,7 @@ Accent Green: #8CDE2D
 
 ### 4. Dual Brand
 
-- 오늘은 오므라이스 vs 에그이츠 비교
+- 오늘은 오므라이스
 
 ### 5. Startup Process
 
@@ -185,7 +185,7 @@ Accent Green: #8CDE2D
 
 ### 브랜드 엔티티 최적화
 
-- ✅ 타이틀: "오늘은 오므라이스 · 에그이츠" 우선
+- ✅ 타이틀: "오늘은 오므라이스" 우선
 - ✅ JSON-LD sameAs (공식 채널 연결)
 - ✅ Footer 브랜드명 내부 링크 (앵커 텍스트)
 
@@ -411,7 +411,6 @@ import Header from '@/widgets/header/ui/Header';
 **브랜드**:
 
 - 오늘은 오므라이스 (Today Omurice)
-- 에그이츠 (EGG EATS)
 
 ---
 

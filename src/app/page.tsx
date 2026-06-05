@@ -88,14 +88,9 @@ export default function Home() {
         name: '오늘은 오므라이스',
         alternateName: 'Today Omurice',
       },
-      {
-        '@type': 'Brand',
-        name: '에그이츠',
-        alternateName: ['EGG EATS', 'egg eats', 'Egg Eats'],
-      },
     ],
     description:
-      '재영에프앤비(Jaeyoung F&B) 운영. 배달 중심 오므라이스 프랜차이즈. 오늘은 오므라이스·에그이츠(EGG EATS) 1~2인 운영, 소형 매장 최적화, 수익 구조 공개.',
+      '재영에프앤비(Jaeyoung F&B) 운영. 배달 중심 오므라이스 프랜차이즈. 오늘은 오므라이스 1~2인 운영, 소형 매장 최적화, 수익 구조 공개.',
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: '+82-10-9923-9502',

@@ -19,8 +19,8 @@ export const metadata: Metadata = {
   // SEO: metadataBase - 모든 상대 경로의 기준 URL
   metadataBase: new URL(SITE_ORIGIN),
   title: {
-    default: '오늘은 오므라이스 · 에그이츠 | 오므라이스 창업 프랜차이즈',
-    template: '%s | 오늘은 오므라이스 · 에그이츠',
+    default: '오늘은 오므라이스 | 오므라이스 창업 프랜차이즈',
+    template: '%s | 오늘은 오므라이스',
   },
   description:
     '재영에프앤비(Jaeyoung F&B) 운영 오므라이스 프랜차이즈. 오늘은 오므라이스·에그이츠(EGG EATS) 배달 중심 1~2인 운영, 소형 매장 최적화, 수익 구조 공개. 창업 상담 진행 중.',
@@ -72,23 +72,23 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'ko_KR',
     url: SITE_ORIGIN, // 절대 URL
-    siteName: '오늘은 오므라이스 · 에그이츠',
-    title: '오늘은 오므라이스 · 에그이츠 | 오므라이스 창업 프랜차이즈',
+    siteName: '오늘은 오므라이스',
+    title: '오늘은 오므라이스 | 오므라이스 창업 프랜차이즈',
     description:
-      '대한민국 1등 오므라이스 프랜차이즈. 오늘은 오므라이스·에그이츠(EGG EATS) 배달 중심 1~2인 운영, 소형 매장 최적화, 수익 구조 공개.',
+      '대한민국 1등 오므라이스 프랜차이즈. 오늘은 오므라이스 배달 중심 1~2인 운영, 소형 매장 최적화, 수익 구조 공개.',
     images: [
       {
         url: OG_IMAGE_URL, // 절대 URL (site.ts에서 관리)
         width: OG_IMAGE_WIDTH,
         height: OG_IMAGE_HEIGHT,
-        alt: '오늘은 오므라이스 · 에그이츠 프랜차이즈 - 배달 전문 오므라이스 창업',
+        alt: '오늘은 오므라이스 프랜차이즈 - 배달 전문 오므라이스 창업',
       },
     ],
   },
   // SEO: Twitter Card (X 공유용)
   twitter: {
     card: 'summary_large_image',
-    title: '오늘은 오므라이스 · 에그이츠 | 오므라이스 창업 프랜차이즈',
+    title: '오늘은 오므라이스 | 오므라이스 창업 프랜차이즈',
     description: '대한민국 1등 오므라이스 프랜차이즈. 배달 중심 1~2인 운영, 소형 매장 최적화.',
     images: [OG_IMAGE_URL], // 절대 URL (site.ts에서 관리)
   },
