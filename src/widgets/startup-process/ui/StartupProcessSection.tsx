@@ -1,7 +1,7 @@
 'use client';
 
 import { ChevronRight } from 'lucide-react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, type Variants } from 'framer-motion';
 import Image from 'next/image';
 import { useRef } from 'react';
 
@@ -32,7 +32,9 @@ const processes = [
   },
 ];
 
-const processGridVariants = {
+const PROCESS_CARD_EASE = [0.22, 1, 0.36, 1] as const;
+
+const processGridVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
@@ -42,7 +44,7 @@ const processGridVariants = {
   },
 };
 
-const processCardVariants = {
+const processCardVariants: Variants = {
   hidden: {
     opacity: 0,
     x: -46,
@@ -54,7 +56,7 @@ const processCardVariants = {
     filter: 'blur(0px)',
     transition: {
       duration: 0.68,
-      ease: [0.22, 1, 0.36, 1],
+      ease: PROCESS_CARD_EASE,
     },
   },
 };
