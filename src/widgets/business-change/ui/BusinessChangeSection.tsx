@@ -262,7 +262,6 @@ export default function BusinessChangeSection() {
           <div className="relative z-10 mt-0 md:mt-[10%]">
             <h3 className="business-change-copy flex w-fit items-center gap-2 whitespace-nowrap border-b border-[#32190b]/50 pb-1 text-[0.82rem] font-black leading-none min-[390px]:gap-3 min-[390px]:text-[0.96rem] md:block md:pb-2 md:text-[2.1vw]">
               <span>업종변경 전</span>
-              <span className="hidden h-px w-9 border-t border-dotted border-[#32190b]/55 min-[390px]:block md:hidden" />
             </h3>
             <p className="business-change-copy mt-2.5 text-[0.6rem] font-bold leading-none min-[390px]:text-[0.68rem] md:mt-6 md:text-[1.15vw]">
               월매출
