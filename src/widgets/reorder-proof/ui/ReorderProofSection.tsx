@@ -254,7 +254,7 @@ export default function ReorderProofSection() {
                   alt={`최근 7일 신규 주문과 재주문 그래프 ${index + 1}`}
                   width={card.width}
                   height={card.height}
-                  className="aspect-[1.9/1] h-auto w-full bg-white object-contain"
+                  className="h-[128px] w-full bg-white object-fill min-[390px]:h-[142px] sm:h-[198px] md:h-[226px] lg:h-[214px] xl:h-[238px]"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
                 />
               </div>

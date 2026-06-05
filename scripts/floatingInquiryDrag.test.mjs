@@ -4,11 +4,11 @@ import test from 'node:test';
 
 const source = await readFile('src/features/inquiry/ui/FloatingInquiry.tsx', 'utf8');
 
-test('mobile floating inquiry panel can collapse from a downward drag', () => {
-  assert.match(source, /const handleMobileDragEnd/);
-  assert.match(source, /drag="y"/);
-  assert.match(source, /onDragEnd=\{handleMobileDragEnd\}/);
-  assert.match(source, /dragConstraints=\{\{ top: 0, bottom: MOBILE_DRAG_PANEL_RANGE \}\}/);
-  assert.match(source, /dragMomentum=\{false\}/);
-  assert.match(source, /exit=\{\{ opacity: 0, y: '100%' \}\}/);
+test('mobile floating inquiry panel only collapses from the fold button', () => {
+  assert.doesNotMatch(source, /useDragControls/);
+  assert.doesNotMatch(source, /handleMobileDragEnd/);
+  assert.doesNotMatch(source, /drag="y"/);
+  assert.doesNotMatch(source, /onDragEnd=/);
+  assert.doesNotMatch(source, /onPointerDown=/);
+  assert.match(source, /onClick=\{handleMobileCollapse\}/);
 });
