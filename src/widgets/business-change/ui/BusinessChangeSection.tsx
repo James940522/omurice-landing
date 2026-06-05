@@ -183,25 +183,34 @@ export default function BusinessChangeSection() {
         }
       `}</style>
 
-      <div className="relative mx-auto aspect-[941/1560] w-full overflow-hidden md:aspect-[1672/941]">
-        <Image
-          src="/new-asset/business-change/business-change-desktop.webp"
-          alt=""
-          fill
-          sizes="100vw"
-          className="hidden object-cover md:block"
-          quality={90}
+      <div className="relative mx-auto aspect-[941/1320] w-full overflow-hidden min-[390px]:aspect-[941/1260] md:aspect-[1672/941]">
+        <div className="absolute inset-0 bg-[#ffc400]" aria-hidden />
+        <div
+          className="absolute inset-y-0 left-0 w-1/2 bg-[linear-gradient(135deg,#fff0c7_0%,#ffe3a9_48%,#ffd991_100%)]"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-y-0 right-0 w-1/2 bg-[linear-gradient(135deg,#ffc900_0%,#ffb000_55%,#ff9f00_100%)]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(92,45,8,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(92,45,8,0.08)_1px,transparent_1px)] bg-[size:38px_38px] opacity-55 md:bg-[size:52px_52px]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_72%,rgba(255,255,255,0.28),transparent_34%),linear-gradient(90deg,rgba(255,255,255,0.22),transparent_30%,transparent_70%,rgba(107,39,0,0.12))]"
+          aria-hidden
         />
         <Image
-          src="/new-asset/business-change/business-change-mobile.webp"
+          src="/new-asset/business-change/omurice-change.webp"
           alt=""
-          fill
-          sizes="100vw"
-          className="object-cover md:hidden"
-          quality={90}
+          width={1672}
+          height={941}
+          sizes="(max-width: 767px) 116vw, 58vw"
+          className="pointer-events-none absolute left-1/2 bottom-[8.5%] z-[5] w-[114%] max-w-none -translate-x-1/2 drop-shadow-[0_22px_34px_rgba(78,27,0,0.24)] min-[390px]:bottom-[7%] min-[390px]:w-[112%] md:bottom-[-3.8%] md:w-[58%] md:max-w-[980px]"
+          quality={92}
+          priority={false}
         />
-
-        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-white/6 via-transparent to-black/5" />
 
         <motion.div
           initial={{ opacity: 0, y: 28 }}
