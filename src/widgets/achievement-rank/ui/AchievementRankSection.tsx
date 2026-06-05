@@ -59,14 +59,14 @@ export default function AchievementRankSection() {
         독보적인 오므라이스 가맹점 수 1위 브랜드
       </h2>
 
-      <div className="relative min-h-[clamp(820px,178vw,1340px)] md:min-h-[clamp(620px,56.3vw,920px)]">
+      <div className="relative h-[min(100svh,177.7vw)] min-h-[540px] bg-[#2a1007] md:h-auto md:min-h-[clamp(620px,56.3vw,920px)]">
         <Image
           src="/new-asset/achievement-rank/mo.webp"
           alt=""
           fill
           priority={false}
           sizes="100vw"
-          className="object-cover object-center md:hidden"
+          className="object-contain object-top md:hidden"
           quality={90}
         />
         <Image
@@ -80,23 +80,6 @@ export default function AchievementRankSection() {
         />
 
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_28%,rgba(255,214,94,0.12),transparent_32%),linear-gradient(180deg,rgba(36,13,4,0.02),rgba(36,13,4,0.3))]" />
-
-        <motion.div
-          aria-hidden
-          initial={{ opacity: 0, x: -64, y: 38, scale: 0.96 }}
-          animate={isInView ? { opacity: 1, x: 0, y: 0, scale: 1 } : {}}
-          transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
-          className="pointer-events-none absolute bottom-[8%] left-[16%] right-[1.5%] top-[5%] hidden opacity-95 md:block"
-        >
-          <Image
-            src="/new-asset/achievement-rank/pc-arrow.webp"
-            alt=""
-            fill
-            sizes="84vw"
-            className="object-fill"
-            quality={92}
-          />
-        </motion.div>
 
         <div className="absolute bottom-[7%] left-[35%] right-[5%] hidden h-[36%] items-end justify-between gap-[1.1vw] md:flex">
           {milestones.map((item, index) => (

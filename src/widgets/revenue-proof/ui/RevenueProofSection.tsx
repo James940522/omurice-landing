@@ -45,7 +45,7 @@ function CountingAmount({
   return (
     <span
       aria-label={value}
-      className={`inline-flex items-baseline whitespace-nowrap tabular-nums [font-variant-numeric:tabular-nums] ${className ?? ''}`}
+      className={`inline-flex max-w-full items-baseline whitespace-nowrap tabular-nums [font-variant-numeric:tabular-nums] ${className ?? ''}`}
     >
       {value.split('').map((character, index) => {
         if (!/\d/.test(character)) {
@@ -53,7 +53,7 @@ function CountingAmount({
             <span
               key={`${character}-${index}`}
               aria-hidden="true"
-              className="inline-block w-[0.24em] text-center"
+              className="inline-block w-[0.18em] text-center"
             >
               {character}
             </span>
@@ -64,12 +64,12 @@ function CountingAmount({
           <span
             key={`${character}-${index}`}
             aria-hidden="true"
-            className="relative inline-block h-[1em] w-[0.58em] overflow-hidden text-center align-baseline leading-none"
+            className="relative inline-block h-[1.1em] w-[0.53em] overflow-hidden text-center align-baseline leading-[1.1]"
           >
             <motion.span
               className="absolute left-0 top-0 flex w-full flex-col items-center"
               initial={{ y: '0em' }}
-              animate={active ? { y: '-10em' } : { y: '0em' }}
+              animate={active ? { y: '-11em' } : { y: '0em' }}
               transition={{
                 duration: 0.88 + index * 0.04,
                 delay: 0.1 + index * 0.035,
@@ -77,7 +77,10 @@ function CountingAmount({
               }}
             >
               {[...digitReel, character].map((number, reelIndex) => (
-                <span key={`${number}-${reelIndex}`} className="block h-[1em] w-full leading-none">
+                <span
+                  key={`${number}-${reelIndex}`}
+                  className="block h-[1.1em] w-full leading-[1.1]"
+                >
                   {number}
                 </span>
               ))}
@@ -166,13 +169,13 @@ export default function RevenueProofSection() {
               {featuredRevenue.region}
             </div>
 
-            <div className="relative z-20 mt-6 flex flex-wrap items-end justify-center gap-x-3 gap-y-1">
+            <div className="relative z-20 mt-6 flex w-full max-w-full flex-wrap items-end justify-center gap-x-2 gap-y-2 px-1 sm:gap-x-3">
               <CountingAmount
                 value={featuredRevenue.amount}
                 active={isInView}
-                className="font-heading text-[clamp(3rem,12vw,9.1rem)] font-black leading-none tracking-[-0.07em] text-[#180904] drop-shadow-[0_6px_0_rgba(255,255,255,0.72)]"
+                className="justify-center font-heading text-[clamp(2.7rem,9.4vw,7.4rem)] font-black leading-[1.04] tracking-[-0.055em] text-[#180904] drop-shadow-[0_6px_0_rgba(255,255,255,0.72)]"
               />
-              <span className="mb-1 rounded-full bg-[#ff6b12] px-4 py-2 font-heading text-lg font-black text-white shadow-[0_8px_20px_rgba(255,107,18,0.28)] sm:mb-5 sm:text-3xl">
+              <span className="mb-1 rounded-full bg-[#ff6b12] px-3 py-2 font-heading text-base font-black text-white shadow-[0_8px_20px_rgba(255,107,18,0.28)] sm:mb-4 sm:px-4 sm:text-2xl lg:text-3xl">
                 원 달성
               </span>
             </div>
@@ -226,7 +229,7 @@ export default function RevenueProofSection() {
                       <CountingAmount
                         value={item.amount}
                         active={isInView}
-                        className="justify-center font-heading text-[clamp(1.75rem,8vw,2.5rem)] font-black leading-none tracking-[-0.04em] text-[#ff6b12] sm:text-4xl"
+                        className="justify-center font-heading text-[clamp(1.45rem,6.4vw,2.05rem)] font-black leading-[1.04] tracking-[-0.03em] text-[#ff6b12] sm:text-[2rem]"
                       />
                       <p className="mt-2 font-heading text-sm font-black text-[#5a2c12]">원</p>
                     </div>

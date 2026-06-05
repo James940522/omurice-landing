@@ -93,13 +93,7 @@ const ribbonWords = [
 
 const getLoopItems = <T,>(items: T[]) => [...items, ...items, ...items, ...items];
 
-function RibbonMarquee({
-  direction,
-  duration,
-}: {
-  direction: 'left' | 'right';
-  duration: string;
-}) {
+function RibbonMarquee({ direction, duration }: { direction: 'left' | 'right'; duration: string }) {
   const animationClass = direction === 'right' ? 'omurice-marquee-right' : 'omurice-marquee-left';
 
   return (
@@ -227,7 +221,7 @@ export default function FranchiseMomentumSection() {
           id="franchise-momentum-title"
           className="break-keep font-heading text-[clamp(2.8rem,8vw,7rem)] font-black italic leading-[0.95] tracking-[-0.06em] text-white drop-shadow-[0_7px_0_rgba(74,34,12,0.2),0_18px_36px_rgba(125,63,0,0.16)]"
         >
-          {visibleCount}명의 이유있는 선택
+          {visibleCount}명이 선택한 프랜차이즈
         </h2>
       </motion.div>
 
