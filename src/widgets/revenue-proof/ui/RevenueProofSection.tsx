@@ -44,12 +44,10 @@ function CountingAmount({
 }) {
   const [displayValue, setDisplayValue] = useState('0');
   const targetValue = Number(value.replace(/[^\d]/g, ''));
+  const isNumericValue = !Number.isNaN(targetValue);
 
   useEffect(() => {
-    if (!active || Number.isNaN(targetValue)) {
-      setDisplayValue('0');
-      return;
-    }
+    if (!active || !isNumericValue) return;
 
     const controls = animate(0, targetValue, {
       duration: 2.35,
@@ -63,14 +61,14 @@ function CountingAmount({
     });
 
     return () => controls.stop();
-  }, [active, targetValue]);
+  }, [active, isNumericValue, targetValue]);
 
   return (
     <span
       aria-label={value}
       className={`inline-block max-w-full overflow-visible whitespace-nowrap tabular-nums [font-variant-numeric:tabular-nums] ${className ?? ''}`}
     >
-      {displayValue}
+      {isNumericValue ? displayValue : value}
     </span>
   );
 }

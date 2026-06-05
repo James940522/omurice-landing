@@ -10,30 +10,35 @@ const milestones = [
     month: '오픈',
     label: '100호점',
     height: 30,
+    desktopHeight: 24,
   },
   {
     year: '2026년',
     month: '1월',
     label: '13호점 오픈',
     height: 38,
+    desktopHeight: 32,
   },
   {
     year: '2026년',
     month: '2월',
     label: '6호점 오픈',
     height: 48,
+    desktopHeight: 42,
   },
   {
     year: '2026년',
     month: '3월',
     label: '13호점 오픈',
     height: 62,
+    desktopHeight: 55,
   },
   {
     year: '2026년',
     month: '4월',
     label: '10호점 오픈',
     height: 76,
+    desktopHeight: 70,
   },
   {
     year: '2026년',
@@ -41,6 +46,7 @@ const milestones = [
     label: '10호점 오픈',
     subLabel: '150호점 달성',
     height: 92,
+    desktopHeight: 86,
   },
 ];
 
@@ -79,9 +85,9 @@ export default function AchievementRankSection() {
           quality={90}
         />
 
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_28%,rgba(255,214,94,0.12),transparent_32%),linear-gradient(180deg,rgba(36,13,4,0.02),rgba(36,13,4,0.3))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_28%,rgba(255,214,94,0.12),transparent_32%),linear-gradient(180deg,rgba(36,13,4,0.02),rgba(36,13,4,0.3))] md:hidden" />
 
-        <div className="absolute bottom-[7%] left-[35%] right-[5%] hidden h-[36%] items-end justify-between gap-[1.1vw] md:flex">
+        <div className="absolute bottom-[4.5%] left-[42%] right-[7%] hidden h-[46%] items-end justify-between gap-[0.85vw] md:flex">
           {milestones.map((item, index) => (
             <motion.div
               key={`${item.year}-${item.month}`}
@@ -95,26 +101,26 @@ export default function AchievementRankSection() {
                 animate={isInView ? { scale: 1 } : {}}
                 transition={{ duration: 0.38, delay: 0.72 + index * 0.08, ease: 'backOut' }}
                 className="absolute z-20 h-5 w-5 rounded-full border border-[#fff3a8] bg-[radial-gradient(circle_at_35%_28%,#fff7b9_0,#ffd442_34%,#e48500_78%)] shadow-[0_0_18px_rgba(255,202,28,0.96)] lg:h-6 lg:w-6 xl:h-7 xl:w-7"
-                style={{ bottom: `${item.height}%` }}
+                style={{ bottom: `${item.desktopHeight}%` }}
               />
               <motion.div
                 initial={{ scaleY: 0 }}
                 animate={isInView ? { scaleY: 1 } : {}}
                 transition={{ duration: 0.72, delay: 0.48 + index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="relative w-full max-w-[128px] origin-bottom rounded-t-[22px] border border-[#fff2a2]/80 bg-[linear-gradient(180deg,#fff3b8_0%,#ffd876_44%,#fff0bb_100%)] shadow-[0_0_22px_rgba(255,190,34,0.56),inset_0_0_18px_rgba(255,255,255,0.46)]"
-                style={{ height: `${item.height}%` }}
+                className="relative w-full max-w-[112px] origin-bottom rounded-t-[22px] border border-[#fff2a2]/80 bg-[linear-gradient(180deg,#fff3b8_0%,#ffd876_44%,#fff0bb_100%)] shadow-[0_0_22px_rgba(255,190,34,0.56),inset_0_0_18px_rgba(255,255,255,0.46)]"
+                style={{ height: `${item.desktopHeight}%` }}
               />
               <div
-                className="absolute z-20 -translate-y-3 text-center font-black leading-tight text-white drop-shadow-[0_3px_4px_rgba(0,0,0,0.86)]"
-                style={{ bottom: `${item.height}%` }}
+                className="absolute z-20 -translate-y-2 text-center font-black leading-tight text-white drop-shadow-[0_3px_4px_rgba(0,0,0,0.86)]"
+                style={{ bottom: `${item.desktopHeight}%` }}
               >
-                <span className="block text-[clamp(13px,1.05vw,19px)]">{item.year}</span>
-                <span className="block text-[clamp(12px,0.95vw,17px)]">{item.month}</span>
-                <span className="block whitespace-nowrap text-[clamp(14px,1.12vw,20px)] text-[#ffe44a]">
+                <span className="block text-[clamp(11px,0.9vw,16px)]">{item.year}</span>
+                <span className="block text-[clamp(11px,0.86vw,15px)]">{item.month}</span>
+                <span className="block whitespace-nowrap text-[clamp(12px,0.92vw,16px)] text-[#ffe44a]">
                   {item.label}
                 </span>
                 {item.subLabel ? (
-                  <span className="block whitespace-nowrap text-[clamp(13px,1vw,18px)] text-[#ffe44a]">
+                  <span className="block whitespace-nowrap text-[clamp(11px,0.86vw,15px)] text-[#ffe44a]">
                     {item.subLabel}
                   </span>
                 ) : null}
