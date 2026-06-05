@@ -23,7 +23,7 @@ export default function BusinessChangeSection() {
     <section
       id="business-change"
       ref={ref}
-      className="business-change-section relative isolate overflow-hidden bg-[#ffb600] text-[#160b04]"
+      className="business-change-section relative isolate overflow-hidden text-[#160b04]"
     >
       <style jsx global>{`
         .business-change-word,
@@ -153,17 +153,26 @@ export default function BusinessChangeSection() {
           }
 
           .business-change-before .business-change-word {
-            color: rgba(74, 37, 15, 0.5);
-            text-shadow: 0 1px 0 rgba(255, 245, 215, 0.48);
+            color: rgba(65, 30, 9, 0.66);
+            font-size: clamp(1.35rem, 7.25vw, 1.82rem);
+            text-shadow:
+              0 1px 0 rgba(255, 246, 221, 0.72),
+              0 3px 10px rgba(96, 44, 8, 0.16);
           }
 
           .business-change-after .business-change-word {
-            color: rgba(255, 247, 214, 0.58);
-            text-shadow: 0 1px 0 rgba(105, 38, 0, 0.18);
+            color: rgba(255, 249, 224, 0.68);
+            font-size: clamp(1.35rem, 7.25vw, 1.82rem);
+            text-shadow:
+              0 1px 0 rgba(114, 39, 0, 0.28),
+              0 3px 12px rgba(255, 255, 255, 0.2);
           }
 
           .business-change-before:hover .business-change-word {
-            color: rgba(74, 37, 15, 0.5);
+            color: rgba(65, 30, 9, 0.66);
+            text-shadow:
+              0 1px 0 rgba(255, 246, 221, 0.72),
+              0 3px 10px rgba(96, 44, 8, 0.16);
           }
 
           .business-change-before:hover .business-change-copy,
@@ -176,7 +185,10 @@ export default function BusinessChangeSection() {
           }
 
           .business-change-after:hover .business-change-word {
-            color: rgba(255, 247, 214, 0.52);
+            color: rgba(255, 249, 224, 0.68);
+            text-shadow:
+              0 1px 0 rgba(114, 39, 0, 0.28),
+              0 3px 12px rgba(255, 255, 255, 0.2);
           }
 
           .business-change-after:hover .business-change-stat {
@@ -193,7 +205,7 @@ export default function BusinessChangeSection() {
         }
       `}</style>
 
-      <div className="relative mx-auto aspect-[941/1320] w-full overflow-hidden min-[390px]:aspect-[941/1260] md:aspect-[1672/941]">
+      <div className=" relative mx-auto aspect-[941/1280] w-full overflow-hidden min-[390px]:aspect-[941/1210] md:aspect-[1672/941]">
         <div className="absolute inset-0 bg-[#ffc400]" aria-hidden />
         <div
           className="absolute inset-y-0 left-0 w-1/2 bg-[linear-gradient(135deg,#fff0c7_0%,#ffe3a9_48%,#ffd991_100%)]"
@@ -216,8 +228,8 @@ export default function BusinessChangeSection() {
           alt=""
           width={1672}
           height={941}
-          sizes="(max-width: 767px) 116vw, 58vw"
-          className="pointer-events-none absolute left-1/2 bottom-[8.5%] z-[5] w-[114%] max-w-none -translate-x-1/2 drop-shadow-[0_22px_34px_rgba(78,27,0,0.24)] min-[390px]:bottom-[-4%] min-[390px]:w-[112%] md:bottom-[-4.8%] md:w-[58%] md:max-w-[980px]"
+          sizes="(max-width: 767px) 110vw, 58vw"
+          className="pointer-events-none absolute left-1/2 bottom-[5.5%] z-[5] w-[110%] max-w-none -translate-x-1/2 drop-shadow-[0_22px_34px_rgba(78,27,0,0.24)] min-[390px]:bottom-[-5%] min-[390px]:w-[108%] md:bottom-[-4.8%] md:w-[58%] md:max-w-[980px]"
           quality={92}
           priority={false}
         />
@@ -226,7 +238,7 @@ export default function BusinessChangeSection() {
           initial={{ opacity: 0, y: 28 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.72, ease: 'easeOut' }}
-          className="business-change-center absolute left-1/2 top-[7.5%] z-20 w-[74%] -translate-x-1/2 text-center min-[390px]:w-[76%] md:top-[22%] md:w-[42%]"
+          className="business-change-center absolute left-1/2 top-[9.5%] z-20 w-[74%] -translate-x-1/2 text-center min-[390px]:w-[76%] md:top-[22%] md:w-[42%]"
         >
           <p className="business-change-title break-keep font-heading text-[clamp(1.08rem,4.9vw,1.88rem)] font-black leading-[0.98] tracking-normal text-black transition duration-300 min-[390px]:text-[clamp(1.22rem,5.3vw,2.08rem)] md:text-[clamp(2.6rem,4vw,4.4rem)] md:leading-[1.08]">
             간판만 변경하시고
@@ -261,9 +273,18 @@ export default function BusinessChangeSection() {
                 만원
               </span>
             </p>
-            <ul className="business-change-list mt-3 space-y-1.5 text-[0.54rem] font-bold leading-snug text-[#9a3a19] min-[390px]:mt-4 min-[390px]:space-y-2 min-[390px]:text-[0.61rem] md:mt-6 md:block md:space-y-3 md:text-[1.02vw] md:leading-relaxed md:text-[#9a3a19]">
+            <ul className="business-change-list mt-3 space-y-1 text-[0.52rem] font-bold leading-snug text-[#9a3a19] min-[390px]:mt-4 min-[390px]:space-y-1.5 min-[390px]:text-[0.58rem] md:mt-6 md:block md:space-y-3 md:text-[1.02vw] md:leading-relaxed md:text-[#9a3a19]">
               {beforeItems.map((item, index) => (
-                <li key={item} className={index >= 4 ? 'hidden md:list-item' : undefined}>
+                <li
+                  key={item}
+                  className={
+                    index >= 4
+                      ? 'hidden md:list-item'
+                      : index === 3
+                        ? 'max-[374px]:hidden'
+                        : undefined
+                  }
+                >
                   # {item}
                 </li>
               ))}

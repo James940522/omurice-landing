@@ -55,7 +55,7 @@ const processCardVariants: Variants = {
     x: 0,
     filter: 'blur(0px)',
     transition: {
-      duration: 0.68,
+      duration: 2,
       ease: PROCESS_CARD_EASE,
     },
   },
@@ -82,7 +82,8 @@ export default function StartupProcessSection() {
       />
       <div className="pointer-events-none absolute -left-[8%] top-4 -z-10 h-9 w-[42rem] -rotate-[15deg] bg-[#ff6b12]/82 shadow-[0_16px_36px_rgba(84,35,0,0.16)]" />
       <div className="pointer-events-none absolute -left-[7%] top-6 z-0 hidden w-[42rem] -rotate-[15deg] overflow-hidden whitespace-nowrap font-heading text-xs font-black uppercase tracking-[0.14em] text-[#fff3c6] md:block">
-        TODAY OMURICE &nbsp; * &nbsp; START SMALL &nbsp; * &nbsp; GROW STRONG &nbsp; * &nbsp; OWNER FIRST
+        TODAY OMURICE &nbsp; * &nbsp; START SMALL &nbsp; * &nbsp; GROW STRONG &nbsp; * &nbsp; OWNER
+        FIRST
       </div>
       <div className="pointer-events-none absolute -left-[8%] top-[16%] -z-10 h-28 w-[118%] -rotate-[13deg] bg-[#fff4b8]/26" />
       <div className="pointer-events-none absolute -left-[8%] top-[27%] -z-10 h-24 w-[118%] -rotate-[13deg] bg-[#ff8a12]/18" />
@@ -93,7 +94,10 @@ export default function StartupProcessSection() {
       </div>
       <div className="pointer-events-none absolute left-10 top-[29%] -z-10 hidden gap-2 md:flex">
         {Array.from({ length: 7 }).map((_, index) => (
-          <span key={`process-stripe-${index}`} className="h-3 w-2 -skew-x-[22deg] bg-[#4a260f]/82" />
+          <span
+            key={`process-stripe-${index}`}
+            className="h-3 w-2 -skew-x-[22deg] bg-[#4a260f]/82"
+          />
         ))}
       </div>
       <div className="pointer-events-none absolute right-[11%] top-[24%] z-0 hidden size-24 items-center justify-center rounded-full border-2 border-[#f6c36d] bg-[#2d1609]/92 text-center font-heading text-lg font-black leading-tight text-[#fec601] shadow-[0_16px_36px_rgba(47,21,2,0.24)] lg:flex">
