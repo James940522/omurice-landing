@@ -14,6 +14,7 @@ const initialFormData = {
 export default function FloatingInquiry() {
   const [isVisible, setIsVisible] = useState(false);
   const [isContactInView, setIsContactInView] = useState(false);
+  const [isFooterInView, setIsFooterInView] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isMobileExpanded, setIsMobileExpanded] = useState(false);
   const [hasUserCollapsed, setHasUserCollapsed] = useState(false);
@@ -41,16 +42,27 @@ export default function FloatingInquiry() {
 
   useEffect(() => {
     const contactSection = document.getElementById('contact');
-    const observer = contactSection
-      ? new IntersectionObserver(
-          ([entry]) => {
-            setIsContactInView(entry.isIntersecting);
-          },
-          { threshold: 0.12 }
-        )
-      : null;
+    const footerSection = document.getElementById('footer');
+    const observer =
+      contactSection || footerSection
+        ? new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.target.id === 'contact') {
+                  setIsContactInView(entry.isIntersecting);
+                }
+
+                if (entry.target.id === 'footer') {
+                  setIsFooterInView(entry.isIntersecting);
+                }
+              });
+            },
+            { threshold: 0.12 }
+          )
+        : null;
 
     if (contactSection && observer) observer.observe(contactSection);
+    if (footerSection && observer) observer.observe(footerSection);
     setIsVisible(true);
 
     return () => observer?.disconnect();
@@ -90,7 +102,7 @@ export default function FloatingInquiry() {
     };
   }, [hasUserCollapsed, isMobile]);
 
-  const shouldShow = isVisible && !isContactInView;
+  const shouldShow = isVisible && !isContactInView && !isFooterInView;
   const isSubmitDisabled = isSubmitting || !privacyAgree;
 
   const handleMobileOpen = () => {
