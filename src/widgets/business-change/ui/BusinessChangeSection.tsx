@@ -207,7 +207,7 @@ export default function BusinessChangeSection() {
           width={1672}
           height={941}
           sizes="(max-width: 767px) 116vw, 58vw"
-          className="pointer-events-none absolute left-1/2 bottom-[8.5%] z-[5] w-[114%] max-w-none -translate-x-1/2 drop-shadow-[0_22px_34px_rgba(78,27,0,0.24)] min-[390px]:bottom-[7%] min-[390px]:w-[112%] md:bottom-[-3.8%] md:w-[58%] md:max-w-[980px]"
+          className="pointer-events-none absolute left-1/2 bottom-[8.5%] z-[5] w-[114%] max-w-none -translate-x-1/2 drop-shadow-[0_22px_34px_rgba(78,27,0,0.24)] min-[390px]:bottom-[-4%] min-[390px]:w-[112%] md:bottom-[-4.8%] md:w-[58%] md:max-w-[980px]"
           quality={92}
           priority={false}
         />
@@ -251,7 +251,7 @@ export default function BusinessChangeSection() {
                 만원
               </span>
             </p>
-            <ul className="business-change-list mt-4 space-y-2 text-[0.56rem] font-bold leading-snug text-[#b94b25] min-[390px]:mt-5 min-[390px]:space-y-2.5 min-[390px]:text-[0.66rem] md:mt-6 md:block md:space-y-3 md:text-[1.02vw] md:leading-relaxed md:text-[#9a3a19]">
+            <ul className="business-change-list mt-4 space-y-2 text-[0.56rem] font-bold leading-snug text-[#9a3a19] min-[390px]:mt-5 min-[390px]:space-y-2.5 min-[390px]:text-[0.66rem] md:mt-6 md:block md:space-y-3 md:text-[1.02vw] md:leading-relaxed md:text-[#9a3a19]">
               {beforeItems.map((item) => (
                 <li key={item}># {item}</li>
               ))}
@@ -290,7 +290,7 @@ export default function BusinessChangeSection() {
                   2.5배 성장
                 </span>
               </div>
-              <p className="mt-2 break-keep text-[0.52rem] font-black leading-snug text-[#6f2309] min-[390px]:text-[0.61rem] md:mt-3 md:text-base md:leading-relaxed">
+              <p className="mt-2 break-keep text-[0.52rem] font-black leading-snug text-black min-[390px]:text-[0.61rem] md:mt-3 md:text-base md:leading-relaxed">
                 간판은 바꾸고,
                 <br />
                 주문과 재구매는 오므라이스 시스템으로 채웁니다.

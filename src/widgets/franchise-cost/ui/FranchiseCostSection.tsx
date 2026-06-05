@@ -70,7 +70,7 @@ export default function FranchiseCostSection() {
     <section
       id="franchise-cost"
       ref={ref}
-      className="relative isolate overflow-hidden bg-[#fff8ef] pb-14 pt-20 md:pb-28 md:pt-36"
+      className="relative isolate overflow-hidden bg-[#fff8ef] pb-10 pt-16 md:pb-28 md:pt-36"
     >
       <div className="pointer-events-none absolute inset-0 -z-30 bg-[#fff8ef]" />
       <div className="pointer-events-none absolute left-0 top-0 -z-20 h-full w-[7vw] bg-[#ffe4c4]/60" />
@@ -101,18 +101,21 @@ export default function FranchiseCostSection() {
           transition={{ duration: 0.65 }}
           className="text-center"
         >
-          <p className="text-lg font-black text-[#0a3b2f]" style={{ fontFamily: 'Georgia, serif' }}>
+          <p
+            className="text-base font-black text-[#0a3b2f] md:text-lg"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
             Franchise
           </p>
           <h2
-            className="mt-3 text-2xl font-black leading-tight text-[#4a250f] sm:text-4xl md:mt-4 md:text-5xl"
+            className="mt-2 text-[1.65rem] font-black leading-tight text-[#4a250f] sm:text-4xl md:mt-4 md:text-5xl"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
             숨겨진 비용 없이
             <br />
             정직하게 시작하세요.
           </h2>
-          <p className="mt-3 text-xs font-bold text-[#6b4222] md:mt-5 md:text-base">
+          <p className="mt-2 text-[11px] font-bold text-[#6b4222] md:mt-5 md:text-base">
             자율시공 항목은 점주님의 상황에 맞춰 합리적으로 선택할 수 있습니다.
           </p>
         </motion.div>
@@ -121,9 +124,9 @@ export default function FranchiseCostSection() {
           initial={{ opacity: 0, y: 34 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.12 }}
-          className="mt-7 overflow-hidden rounded-[14px] border-2 border-[#5a2c12] bg-[#fffdf4] shadow-[0_30px_80px_rgba(84,45,10,0.18)] md:mt-10 md:rounded-[18px]"
+          className="mt-5 overflow-hidden rounded-[14px] border-2 border-[#5a2c12] bg-[#fffdf4] shadow-[0_30px_80px_rgba(84,45,10,0.18)] md:mt-10 md:rounded-[18px]"
         >
-          <div className="relative overflow-hidden bg-[#32190b] px-3 py-4 text-center text-[#fff2c6] md:px-8 md:py-6">
+          <div className="relative overflow-hidden bg-[#32190b] px-2.5 py-3 text-center text-[#fff2c6] md:px-8 md:py-6">
             <div
               className="absolute inset-0 opacity-[0.12]"
               style={{
@@ -132,50 +135,50 @@ export default function FranchiseCostSection() {
                 backgroundSize: '28px 28px',
               }}
             />
-            <div className="relative grid gap-3 md:grid-cols-3">
-              <div className="order-1 rounded-[10px] border border-[#fec601]/35 bg-white/8 px-3 py-3 md:px-4 md:py-4">
-                <p className="text-xs font-black uppercase tracking-[0.14em] text-[#fec601]">
+            <div className="relative grid gap-2 md:grid-cols-3 md:gap-3">
+              <div className="order-1 rounded-[9px] border border-[#fec601]/35 bg-white/8 px-2.5 py-2 md:rounded-[10px] md:px-4 md:py-4">
+                <p className="text-[10px] font-black uppercase tracking-[0.12em] text-[#fec601] md:text-xs md:tracking-[0.14em]">
                   Waived
                 </p>
-                <p className="mt-1 font-heading text-2xl font-black text-white md:text-3xl">
+                <p className="mt-0.5 font-heading text-xl font-black text-white md:mt-1 md:text-3xl">
                   {waivedCount}개 항목
                 </p>
-                <p className="mt-1 text-xs font-bold text-[#fff2c6]/75">
+                <p className="mt-0.5 text-[10px] font-bold leading-tight text-[#fff2c6]/75 md:mt-1 md:text-xs">
                   가맹비 · 교육비 · 보증금 · 로열티
                 </p>
               </div>
-              <div className="order-3 rounded-[10px] border border-[#fec601]/35 bg-[#fec601] px-3 py-3 text-[#32190b] shadow-[0_14px_28px_rgba(254,198,1,0.2)] md:order-2 md:px-4 md:py-4">
-                <p className="text-xs font-black uppercase tracking-[0.14em]">
+              <div className="order-3 rounded-[9px] border border-[#fec601]/35 bg-[#fec601] px-2.5 py-2 text-[#32190b] shadow-[0_14px_28px_rgba(254,198,1,0.2)] md:order-2 md:rounded-[10px] md:px-4 md:py-4">
+                <p className="text-[10px] font-black uppercase tracking-[0.12em] md:text-xs md:tracking-[0.14em]">
                   Startup Cost
                 </p>
-                <p className="mt-1 font-heading text-2xl font-black md:text-3xl">
+                <p className="mt-0.5 font-heading text-xl font-black md:mt-1 md:text-3xl">
                   550만원
                 </p>
-                <p className="mt-1 text-xs font-black text-[#5a2c12]">
+                <p className="mt-0.5 text-[10px] font-black leading-tight text-[#5a2c12] md:mt-1 md:text-xs">
                   주방설비 · 초도물품 기준
                 </p>
               </div>
-              <div className="order-2 rounded-[10px] border border-[#fec601]/35 bg-white/8 px-3 py-3 md:order-3 md:px-4 md:py-4">
-                <p className="text-xs font-black uppercase tracking-[0.14em] text-[#fec601]">
+              <div className="order-2 rounded-[9px] border border-[#fec601]/35 bg-white/8 px-2.5 py-2 md:order-3 md:rounded-[10px] md:px-4 md:py-4">
+                <p className="text-[10px] font-black uppercase tracking-[0.12em] text-[#fec601] md:text-xs md:tracking-[0.14em]">
                   Flexible
                 </p>
-                <p className="mt-1 font-heading text-2xl font-black text-white md:text-3xl">
+                <p className="mt-0.5 font-heading text-xl font-black text-white md:mt-1 md:text-3xl">
                   자율 선택
                 </p>
-                <p className="mt-1 text-xs font-bold text-[#fff2c6]/75">
+                <p className="mt-0.5 text-[10px] font-bold leading-tight text-[#fff2c6]/75 md:mt-1 md:text-xs">
                   인테리어 · 간판 · POS
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-[0.8fr_1fr_1.1fr] bg-[#5a2c12] px-3 py-3 text-center text-[11px] font-black text-[#fff2c6] md:px-8 md:py-4 md:text-base">
+          <div className="grid grid-cols-[0.8fr_1fr_1.1fr] bg-[#5a2c12] px-2.5 py-2 text-center text-[10px] font-black text-[#fff2c6] md:px-8 md:py-4 md:text-base">
             <div>항목</div>
             <div>일반 기준</div>
             <div>오늘은 오므라이스</div>
           </div>
 
-          <div className="space-y-1.5 bg-[#fff8ef] px-2.5 py-2.5 md:space-y-2 md:px-6 md:py-5">
+          <div className="space-y-1 bg-[#fff8ef] px-2 py-2 md:space-y-2 md:px-6 md:py-5">
             {costRows.map((row, index) => {
               const delay = 0.48 + index * 0.08;
               const isActive = activeRow === index;
@@ -189,7 +192,7 @@ export default function FranchiseCostSection() {
                   whileHover={{ y: -3 }}
                   onMouseEnter={() => setActiveRow(index)}
                   onMouseLeave={() => setActiveRow(null)}
-                  className={`group relative grid grid-cols-[0.8fr_1fr_1.1fr] items-center overflow-hidden rounded-[10px] border px-2.5 py-2 text-center text-[11px] font-bold text-[#43210d] shadow-[0_8px_18px_rgba(84,45,10,0.06)] transition-all duration-300 md:rounded-[12px] md:px-5 md:py-3 md:text-sm ${
+                  className={`group relative grid grid-cols-[0.8fr_1fr_1.1fr] items-center overflow-hidden rounded-[9px] border px-2 py-1.5 text-center text-[10px] font-bold text-[#43210d] shadow-[0_8px_18px_rgba(84,45,10,0.06)] transition-all duration-300 md:rounded-[12px] md:px-5 md:py-3 md:text-sm ${
                     row.waived
                       ? 'border-[#ff6b12]/45 bg-white hover:border-[#ff3f16] hover:shadow-[0_18px_34px_rgba(255,107,18,0.17)]'
                       : 'border-[#f4c47d]/75 bg-[#fffdf8] hover:border-[#fec601] hover:shadow-[0_18px_34px_rgba(84,45,10,0.10)]'
@@ -204,7 +207,7 @@ export default function FranchiseCostSection() {
                       transition={{ duration: 0.42, delay, ease: 'easeOut' }}
                     />
                   )}
-                  <div className="relative font-heading text-xs font-black md:text-base">
+                  <div className="relative font-heading text-[11px] font-black md:text-base">
                     {row.item}
                     {row.waived && row.note && (
                       <motion.span
@@ -218,7 +221,7 @@ export default function FranchiseCostSection() {
                       </motion.span>
                     )}
                   </div>
-                  <div className="flex min-h-7 items-center justify-center md:min-h-8">
+                  <div className="flex min-h-6 items-center justify-center md:min-h-8">
                     {row.waived ? (
                       <span className="relative inline-flex items-center justify-center px-1 text-[#8a6848]/70">
                         {row.amount}
@@ -233,7 +236,7 @@ export default function FranchiseCostSection() {
                       <span>{row.amount}</span>
                     )}
                   </div>
-                  <div className="flex min-h-7 items-center justify-center md:min-h-8">
+                  <div className="flex min-h-6 items-center justify-center md:min-h-8">
                     {row.waived ? (
                       <div className="flex flex-col items-center gap-1">
                         {isInView && <FreeStamp label="0원" delay={delay + 0.26} />}
@@ -252,7 +255,7 @@ export default function FranchiseCostSection() {
             })}
           </div>
 
-          <div className="bg-[#32190b] px-4 py-4 text-center text-[#fff2c6] md:px-8 md:py-6">
+          <div className="bg-[#32190b] px-4 py-3 text-center text-[#fff2c6] md:px-8 md:py-6">
             <p className="text-xs font-black uppercase tracking-[0.16em] text-[#fec601]">
               Final Estimate
             </p>
