@@ -9,35 +9,35 @@ const milestones = [
     year: '2025년',
     month: '오픈',
     label: '100호점',
-    height: 30,
+    height: 34,
     desktopHeight: 24,
   },
   {
     year: '2026년',
     month: '1월',
     label: '13호점 오픈',
-    height: 38,
+    height: 43,
     desktopHeight: 32,
   },
   {
     year: '2026년',
     month: '2월',
     label: '6호점 오픈',
-    height: 48,
+    height: 54,
     desktopHeight: 42,
   },
   {
     year: '2026년',
     month: '3월',
     label: '13호점 오픈',
-    height: 62,
+    height: 68,
     desktopHeight: 55,
   },
   {
     year: '2026년',
     month: '4월',
     label: '10호점 오픈',
-    height: 76,
+    height: 82,
     desktopHeight: 70,
   },
   {
@@ -45,7 +45,7 @@ const milestones = [
     month: '5월',
     label: '10호점 오픈',
     subLabel: '150호점 달성',
-    height: 92,
+    height: 97,
     desktopHeight: 86,
   },
 ];
@@ -65,7 +65,7 @@ export default function AchievementRankSection() {
         독보적인 오므라이스 가맹점 수 1위 브랜드
       </h2>
 
-      <div className="relative h-[min(100svh,177.7vw)] min-h-[540px] bg-[#2a1007] md:h-auto md:min-h-[clamp(620px,56.3vw,920px)]">
+      <div className="relative h-[min(100svh,177.7vw)] min-h-[540px] bg-[#2a1007] md:h-[min(56.28vw,941px)] md:min-h-0">
         <Image
           src="/new-asset/achievement-rank/mo.webp"
           alt=""
@@ -75,68 +75,75 @@ export default function AchievementRankSection() {
           className="object-contain object-top md:hidden"
           quality={90}
         />
-        <Image
-          src="/new-asset/achievement-rank/pc.webp"
-          alt=""
-          fill
-          priority={false}
-          sizes="100vw"
-          className="hidden object-cover object-center md:block"
-          quality={90}
-        />
 
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_28%,rgba(255,214,94,0.12),transparent_32%),linear-gradient(180deg,rgba(36,13,4,0.02),rgba(36,13,4,0.3))] md:hidden" />
 
         <div
-          data-achievement-chart="desktop"
-          className="absolute bottom-[4.5%] left-[42%] right-[7%] hidden h-[46%] items-end justify-between gap-[0.85vw] md:flex"
+          data-achievement-frame="desktop"
+          className="absolute inset-y-0 left-1/2 hidden h-full w-[min(100vw,1672px)] -translate-x-1/2 md:block"
         >
-          {milestones.map((item, index) => (
-            <motion.div
-              key={`${item.year}-${item.month}`}
-              initial={{ opacity: 0, y: 28 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
-              transition={{ duration: 0.55, delay: 0.36 + index * 0.08, ease: 'easeOut' }}
-              className="relative flex h-full min-w-0 flex-1 flex-col items-center justify-end"
-            >
+          <Image
+            data-achievement-image="desktop"
+            src="/new-asset/achievement-rank/pc.webp"
+            alt=""
+            fill
+            priority={false}
+            sizes="(min-width: 1672px) 1672px, 100vw"
+            className="object-contain object-center"
+            quality={90}
+          />
+
+          <div
+            data-achievement-chart="desktop"
+            className="absolute bottom-[4.5%] left-[42%] right-[7%] flex h-[46%] items-end justify-between gap-[0.85vw]"
+          >
+            {milestones.map((item, index) => (
               <motion.div
-                data-achievement-marker="desktop"
-                initial={{ scale: 0 }}
-                animate={isInView ? { scale: 1 } : { scale: 0 }}
-                transition={{ duration: 0.38, delay: 0.72 + index * 0.08, ease: 'backOut' }}
-                className="absolute z-20 h-5 w-5 rounded-full border border-[#fff3a8] bg-[radial-gradient(circle_at_35%_28%,#fff7b9_0,#ffd442_34%,#e48500_78%)] shadow-[0_0_18px_rgba(255,202,28,0.96)] lg:h-6 lg:w-6 xl:h-7 xl:w-7"
-                style={{ bottom: `${item.desktopHeight}%` }}
-              />
-              <motion.div
-                data-achievement-bar="desktop"
-                initial={{ scaleY: 0 }}
-                animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
-                transition={{ duration: 0.72, delay: 0.48 + index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="relative w-full max-w-[112px] origin-bottom rounded-t-[22px] border border-[#fff2a2]/80 bg-[linear-gradient(180deg,#fff3b8_0%,#ffd876_44%,#fff0bb_100%)] shadow-[0_0_22px_rgba(255,190,34,0.56),inset_0_0_18px_rgba(255,255,255,0.46)]"
-                style={{ height: `${item.desktopHeight}%` }}
-              />
-              <div
-                className="absolute z-20 -translate-y-2 text-center font-black leading-tight text-white drop-shadow-[0_3px_4px_rgba(0,0,0,0.86)]"
-                style={{ bottom: `${item.desktopHeight}%` }}
+                key={`${item.year}-${item.month}`}
+                initial={{ opacity: 0, y: 28 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+                transition={{ duration: 0.55, delay: 0.36 + index * 0.08, ease: 'easeOut' }}
+                className="relative flex h-full min-w-0 flex-1 flex-col items-center justify-end"
               >
-                <span className="block text-[clamp(11px,0.9vw,16px)]">{item.year}</span>
-                <span className="block text-[clamp(11px,0.86vw,15px)]">{item.month}</span>
-                <span className="block whitespace-nowrap text-[clamp(12px,0.92vw,16px)] text-[#ffe44a]">
-                  {item.label}
-                </span>
-                {item.subLabel ? (
-                  <span className="block whitespace-nowrap text-[clamp(11px,0.86vw,15px)] text-[#ffe44a]">
-                    {item.subLabel}
+                <motion.div
+                  data-achievement-marker="desktop"
+                  initial={{ scale: 0 }}
+                  animate={isInView ? { scale: 1 } : { scale: 0 }}
+                  transition={{ duration: 0.38, delay: 0.72 + index * 0.08, ease: 'backOut' }}
+                  className="absolute z-20 h-5 w-5 rounded-full border border-[#fff3a8] bg-[radial-gradient(circle_at_35%_28%,#fff7b9_0,#ffd442_34%,#e48500_78%)] shadow-[0_0_18px_rgba(255,202,28,0.96)] lg:h-6 lg:w-6 xl:h-7 xl:w-7"
+                  style={{ bottom: `${item.desktopHeight}%` }}
+                />
+                <motion.div
+                  data-achievement-bar="desktop"
+                  initial={{ scaleY: 0 }}
+                  animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
+                  transition={{ duration: 0.72, delay: 0.48 + index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative w-full max-w-[112px] origin-bottom rounded-t-[22px] border border-[#fff2a2]/80 bg-[linear-gradient(180deg,#fff3b8_0%,#ffd876_44%,#fff0bb_100%)] shadow-[0_0_22px_rgba(255,190,34,0.56),inset_0_0_18px_rgba(255,255,255,0.46)]"
+                  style={{ height: `${item.desktopHeight}%` }}
+                />
+                <div
+                  className="absolute z-20 -translate-y-2 text-center font-black leading-tight text-white drop-shadow-[0_3px_4px_rgba(0,0,0,0.86)]"
+                  style={{ bottom: `${item.desktopHeight}%` }}
+                >
+                  <span className="block text-[clamp(16px,0.9vw,16px)]">{item.year}</span>
+                  <span className="block text-[clamp(15px,0.86vw,15px)]">{item.month}</span>
+                  <span className="block whitespace-nowrap text-[clamp(14px,0.92vw,16px)] text-[#ffe44a]">
+                    {item.label}
                   </span>
-                ) : null}
-              </div>
-            </motion.div>
-          ))}
+                  {item.subLabel ? (
+                    <span className="block whitespace-nowrap text-[clamp(15px,0.86vw,15px)] text-[#ffe44a]">
+                      {item.subLabel}
+                    </span>
+                  ) : null}
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         <div
           data-achievement-chart="mobile"
-          className="absolute inset-x-0 bottom-[7%] grid h-[32%] grid-cols-6 items-end gap-[2.2vw] px-[4%] md:hidden"
+          className="absolute inset-x-0 bottom-[1%] grid h-[38%] grid-cols-6 items-end gap-[2.2vw] px-[4%] md:hidden"
         >
           {milestones.map((item, index) => (
             <motion.div
@@ -166,13 +173,13 @@ export default function AchievementRankSection() {
                 className="absolute z-20 -translate-y-2 text-center font-black leading-[1.05] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]"
                 style={{ bottom: `${item.height}%` }}
               >
-                <span className="block text-[clamp(7px,1.9vw,12px)]">{item.year}</span>
-                <span className="block text-[clamp(7px,1.9vw,12px)]">{item.month}</span>
-                <span className="block text-[clamp(7px,2vw,13px)] text-[#ffe44a]">
+                <span className="block text-[clamp(9px,2.5vw,13px)]">{item.year}</span>
+                <span className="block text-[clamp(9px,2.5vw,13px)]">{item.month}</span>
+                <span className="block text-[clamp(9px,2.6vw,14px)] text-[#ffe44a]">
                   {item.label}
                 </span>
                 {item.subLabel ? (
-                  <span className="block text-[clamp(7px,2vw,13px)] text-[#ffe44a]">
+                  <span className="block text-[clamp(9px,2.6vw,14px)] text-[#ffe44a]">
                     {item.subLabel}
                   </span>
                 ) : null}

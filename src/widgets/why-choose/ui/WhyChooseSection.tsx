@@ -112,7 +112,7 @@ export default function WhyChooseSection() {
         </motion.div>
       </div>
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
         {/* 헤더 */}
         <motion.div
           className="mb-5 text-center sm:mb-8 md:mb-12"
@@ -143,7 +143,7 @@ export default function WhyChooseSection() {
 
         {/* 4분할 그리드 */}
         <motion.div
-          className="relative grid grid-cols-2 gap-[5px] overflow-hidden rounded-3xl bg-[#c09060] shadow-[0_24px_60px_rgba(107,68,35,0.16)]"
+          className="relative grid grid-cols-2 gap-2 overflow-hidden rounded-3xl bg-[#c09060] shadow-[0_24px_60px_rgba(107,68,35,0.16)] sm:gap-3"
           initial={{ opacity: 0, y: 36 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.75, delay: 0.15 }}
@@ -154,9 +154,9 @@ export default function WhyChooseSection() {
               <div
                 key={item.number}
                 className={[
-                  'relative isolate flex min-h-[156px] flex-col justify-between overflow-hidden px-3 py-3 sm:min-h-[220px] sm:p-6 md:min-h-60 md:p-8 lg:min-h-[290px] lg:p-10',
+                  'relative isolate flex min-h-[184px] flex-col justify-between overflow-hidden px-4 py-4 sm:min-h-[250px] sm:p-7 md:min-h-[300px] md:p-9 lg:min-h-[350px] lg:p-11',
                   'transition-colors duration-700',
-                  index < 2 ? 'pb-12 sm:pb-6' : 'pt-12 sm:pt-6',
+                  index < 2 ? 'pb-16 sm:pb-10 md:pb-12' : 'pt-16 sm:pt-10 md:pt-12',
                   isActive ? 'text-white' : 'text-[#1a0a00]',
                   item.align === 'right' ? 'items-end text-right' : 'items-start text-left',
                   ROUND_CLASSES[index],
@@ -219,7 +219,7 @@ export default function WhyChooseSection() {
           })}
 
           {/* 중앙 회전 원형 이미지 */}
-          <div className="absolute left-1/2 top-1/2 z-20 aspect-square w-[36%] max-w-[132px] -translate-x-1/2 -translate-y-1/2 sm:w-[28%] sm:max-w-none">
+          <div className="absolute left-1/2 top-1/2 z-20 aspect-square w-[45%] max-w-[190px] -translate-x-1/2 -translate-y-1/2 sm:w-[34%] sm:max-w-[230px] md:w-[28%] md:max-w-[270px] lg:w-[24%]">
             {/* 테두리 링 */}
             <div className="absolute inset-0 rounded-full ring-[1.5px] ring-[#ffd21f]" />
 

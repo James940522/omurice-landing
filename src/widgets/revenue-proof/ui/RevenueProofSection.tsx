@@ -1,9 +1,9 @@
 'use client';
 
-import { animate, motion, useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import type { CSSProperties } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 const featuredRevenue = {
   region: '서울 OO점',
@@ -31,7 +31,7 @@ const revenueItems = [
 
 const revenueCarouselGroups = [0, 1, 2];
 
-const COUNT_EASE = [0.22, 1, 0.36, 1] as const;
+const digitReel = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 function CountingAmount({
   value,
@@ -42,33 +42,52 @@ function CountingAmount({
   active: boolean;
   className?: string;
 }) {
-  const [displayValue, setDisplayValue] = useState('0');
-  const targetValue = Number(value.replace(/[^\d]/g, ''));
-  const isNumericValue = !Number.isNaN(targetValue);
-
-  useEffect(() => {
-    if (!active || !isNumericValue) return;
-
-    const controls = animate(0, targetValue, {
-      duration: 2.35,
-      ease: COUNT_EASE,
-      onUpdate: (latestValue) => {
-        setDisplayValue(Math.floor(latestValue).toLocaleString('ko-KR'));
-      },
-      onComplete: () => {
-        setDisplayValue(targetValue.toLocaleString('ko-KR'));
-      },
-    });
-
-    return () => controls.stop();
-  }, [active, isNumericValue, targetValue]);
-
   return (
     <span
       aria-label={value}
-      className={`inline-block max-w-full overflow-visible whitespace-nowrap tabular-nums [font-variant-numeric:tabular-nums] ${className ?? ''}`}
+      className={`inline-flex max-w-full items-baseline whitespace-nowrap tabular-nums [font-variant-numeric:tabular-nums] ${className ?? ''}`}
     >
-      {isNumericValue ? displayValue : value}
+      {value.split('').map((character, index) => {
+        if (!/\d/.test(character)) {
+          return (
+            <span
+              key={`${character}-${index}`}
+              aria-hidden="true"
+              className="inline-block w-[0.18em] text-center"
+            >
+              {character}
+            </span>
+          );
+        }
+
+        return (
+          <span
+            key={`${character}-${index}`}
+            aria-hidden="true"
+            className="relative inline-block h-[1.1em] w-[0.53em] overflow-hidden text-center align-baseline leading-[1.1]"
+          >
+            <motion.span
+              className="absolute left-0 top-0 flex w-full flex-col items-center"
+              initial={{ y: '0em' }}
+              animate={active ? { y: '-11em' } : { y: '0em' }}
+              transition={{
+                duration: 0.88 + index * 0.04,
+                delay: 0.1 + index * 0.035,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
+              {[...digitReel, character].map((number, reelIndex) => (
+                <span
+                  key={`${number}-${reelIndex}`}
+                  className="block h-[1.1em] w-full leading-[1.1]"
+                >
+                  {number}
+                </span>
+              ))}
+            </motion.span>
+          </span>
+        );
+      })}
     </span>
   );
 }
