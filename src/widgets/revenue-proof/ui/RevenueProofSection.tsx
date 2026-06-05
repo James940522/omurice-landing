@@ -32,6 +32,13 @@ const revenueItems = [
 const revenueCarouselGroups = [0, 1, 2];
 
 const digitReel = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const DIGIT_REEL_STEP_EM = 1.3;
+const DIGIT_REEL_STEP = `${DIGIT_REEL_STEP_EM}em`;
+const DIGIT_REEL_TARGET_Y = `-${DIGIT_REEL_STEP_EM * digitReel.length}em`;
+const digitCellStyle: CSSProperties = {
+  height: DIGIT_REEL_STEP,
+  lineHeight: DIGIT_REEL_STEP,
+};
 
 function CountingAmount({
   value,
@@ -45,7 +52,7 @@ function CountingAmount({
   return (
     <span
       aria-label={value}
-      className={`inline-flex max-w-full items-baseline whitespace-nowrap tabular-nums [font-variant-numeric:tabular-nums] ${className ?? ''}`}
+      className={`inline-flex w-auto max-w-none items-baseline whitespace-nowrap tabular-nums [font-variant-numeric:tabular-nums] ${className ?? ''}`}
     >
       {value.split('').map((character, index) => {
         if (!/\d/.test(character)) {
@@ -53,7 +60,8 @@ function CountingAmount({
             <span
               key={`${character}-${index}`}
               aria-hidden="true"
-              className="inline-block w-[0.18em] text-center"
+              className="inline-block text-center align-baseline"
+              style={digitCellStyle}
             >
               {character}
             </span>
@@ -64,12 +72,20 @@ function CountingAmount({
           <span
             key={`${character}-${index}`}
             aria-hidden="true"
-            className="relative inline-block h-[1.1em] w-[0.53em] overflow-hidden text-center align-baseline leading-[1.1]"
+            className="relative inline-grid overflow-hidden text-center align-baseline"
+            style={digitCellStyle}
           >
+            <span
+              aria-hidden="true"
+              className="invisible col-start-1 row-start-1 block"
+              style={digitCellStyle}
+            >
+              8
+            </span>
             <motion.span
-              className="absolute left-0 top-0 flex w-full flex-col items-center"
+              className="absolute left-0 top-0 flex min-w-full flex-col items-center"
               initial={{ y: '0em' }}
-              animate={active ? { y: '-11em' } : { y: '0em' }}
+              animate={active ? { y: DIGIT_REEL_TARGET_Y } : { y: '0em' }}
               transition={{
                 duration: 0.88 + index * 0.04,
                 delay: 0.1 + index * 0.035,
@@ -79,7 +95,8 @@ function CountingAmount({
               {[...digitReel, character].map((number, reelIndex) => (
                 <span
                   key={`${number}-${reelIndex}`}
-                  className="block h-[1.1em] w-full leading-[1.1]"
+                  className="block w-full"
+                  style={digitCellStyle}
                 >
                   {number}
                 </span>
@@ -173,7 +190,7 @@ export default function RevenueProofSection() {
               <CountingAmount
                 value={featuredRevenue.amount}
                 active={isInView}
-                className="justify-center font-heading text-[clamp(2.7rem,9.4vw,7.4rem)] font-black leading-[1.04] tracking-[-0.055em] text-[#180904] drop-shadow-[0_6px_0_rgba(255,255,255,0.72)]"
+                className="justify-center font-heading text-[clamp(2.7rem,9.4vw,7.4rem)] font-black leading-[1.14] tracking-[-0.055em] text-[#180904] drop-shadow-[0_6px_0_rgba(255,255,255,0.72)]"
               />
               <span className="mb-1 rounded-full bg-[#ff6b12] px-3 py-2 font-heading text-base font-black text-white shadow-[0_8px_20px_rgba(255,107,18,0.28)] sm:mb-4 sm:px-4 sm:text-2xl lg:text-3xl">
                 원 달성
@@ -229,7 +246,7 @@ export default function RevenueProofSection() {
                       <CountingAmount
                         value={item.amount}
                         active={isInView}
-                        className="justify-center font-heading text-[clamp(1.45rem,6.4vw,2.05rem)] font-black leading-[1.04] tracking-[-0.03em] text-[#ff6b12] sm:text-[2rem]"
+                        className="justify-center font-heading text-[clamp(1.45rem,6.4vw,2.05rem)] font-black leading-[1.16] tracking-[-0.03em] text-[#ff6b12] sm:text-[2rem]"
                       />
                       <p className="mt-2 font-heading text-sm font-black text-[#5a2c12]">원</p>
                     </div>
