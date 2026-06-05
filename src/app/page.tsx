@@ -164,8 +164,8 @@ export default function Home() {
         <RevenueProofSection />
         <ReorderProofSection />
         <FranchiseCostSection />
-        <BusinessChangeSection />
         <SectionMarquee variant="signature" />
+        <BusinessChangeSection />
         <MenuSection />
         <BrandDesignSection />
         <CustomerBrandSection />
