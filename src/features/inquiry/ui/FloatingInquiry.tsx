@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
-import { AnimatePresence, motion, useDragControls } from 'framer-motion';
-import type { PanInfo } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { sanitizePhoneInput, validateInquiryLead } from '@/shared/lib/utils';
 
 const initialFormData = {
@@ -12,12 +11,7 @@ const initialFormData = {
   region: '',
 };
 
-const MOBILE_DRAG_PANEL_RANGE = 260;
-const MOBILE_COLLAPSE_DRAG_DISTANCE = 64;
-const MOBILE_COLLAPSE_DRAG_VELOCITY = 560;
-
 export default function FloatingInquiry() {
-  const mobileDragControls = useDragControls();
   const [isVisible, setIsVisible] = useState(false);
   const [isContactInView, setIsContactInView] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -107,15 +101,6 @@ export default function FloatingInquiry() {
   const handleMobileCollapse = () => {
     setIsMobileExpanded(false);
     setHasUserCollapsed(true);
-  };
-
-  const handleMobileDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    if (
-      info.offset.y > MOBILE_COLLAPSE_DRAG_DISTANCE ||
-      info.velocity.y > MOBILE_COLLAPSE_DRAG_VELOCITY
-    ) {
-      handleMobileCollapse();
-    }
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -221,22 +206,9 @@ export default function FloatingInquiry() {
             opacity: { duration: 0.18 },
             y: { type: 'spring', stiffness: 420, damping: 38, mass: 0.8 },
           }}
-          drag="y"
-          dragControls={mobileDragControls}
-          dragListener={false}
-          dragConstraints={{ top: 0, bottom: MOBILE_DRAG_PANEL_RANGE }}
-          dragElastic={0.04}
-          dragMomentum={false}
-          onDragEnd={handleMobileDragEnd}
           aria-label="빠른 가맹문의"
         >
-          <div
-            className="flex cursor-grab touch-pan-y justify-center bg-linear-to-r from-[#ff6b12] via-[#fec601] to-[#ff6b12] py-2 active:cursor-grabbing"
-            onPointerDown={(event) => mobileDragControls.start(event)}
-            aria-label="아래로 드래그해서 빠른 가맹문의 접기"
-          >
-            <span className="h-1.5 w-12 rounded-full bg-[#32190b]/45" />
-          </div>
+          <div className="h-1 bg-linear-to-r from-[#ff6b12] via-[#fec601] to-[#ff6b12]" />
           <form
             onSubmit={handleSubmit}
             className="relative mx-auto flex w-full max-w-[440px] flex-col gap-2 px-4 pb-[calc(env(safe-area-inset-bottom)+12px)] pt-2"
