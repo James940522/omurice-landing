@@ -165,11 +165,12 @@ export default function Home() {
         <ReorderProofSection />
         <FranchiseCostSection />
         <BusinessChangeSection />
+        <SectionMarquee variant="signature" />
         <MenuSection />
         <BrandDesignSection />
         <CustomerBrandSection />
         <StartupProcessSection />
-        <SectionMarquee />
+        <SectionMarquee variant="franchise" />
         <ContactFormSection />
         <Footer />
         <FloatingInquiry />
