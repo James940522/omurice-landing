@@ -91,8 +91,13 @@ export default function FranchiseHeroSection() {
             transition={{ duration: 0.75, delay: 0.2 }}
             className="mt-4 font-heading text-5xl font-black leading-none text-white drop-shadow-[0_5px_18px_rgba(0,0,0,0.34)] md:text-7xl"
           >
-            <span className="block sm:inline">독보적인</span>
-            <span className="block sm:ml-3 sm:inline">오므라이스</span>
+            <span className="sr-only">오므라이스 프랜차이즈 창업, 오늘은 오므라이스</span>
+            <span aria-hidden="true" className="block sm:inline">
+              독보적인
+            </span>
+            <span aria-hidden="true" className="block sm:ml-3 sm:inline">
+              오므라이스
+            </span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -293,7 +298,10 @@ export default function FranchiseHeroSection() {
       </div>
 
       <div className="relative z-20 overflow-hidden bg-[#ff6b12] py-3 text-white">
-        <div className="franchise-hero-marquee-track flex w-max gap-10 whitespace-nowrap font-heading text-lg font-black uppercase sm:text-xl">
+        <div
+          className="franchise-hero-marquee-track flex w-max gap-10 whitespace-nowrap font-heading text-lg font-black uppercase sm:text-xl"
+          aria-hidden="true"
+        >
           {[...marqueeWords, ...marqueeWords, ...marqueeWords, ...marqueeWords].map(
             (word, index) => (
               <span key={`${word}-${index}`} className="flex items-center gap-10">

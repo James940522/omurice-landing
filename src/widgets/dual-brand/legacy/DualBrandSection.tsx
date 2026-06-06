@@ -168,8 +168,8 @@ export default function DualBrandSection() {
                 <div className="bg-gray-50 rounded-2xl border-1 border-gray-200 shadow-lg">
                   <div className="relative w-full aspect-square">
                     <Image
-                      src="/asset/logo/에그이츠_로고.jpeg"
-                      alt="에그이츠"
+                      src="/asset/logo/오므라이스_로고.png"
+                      alt="오늘은 오므라이스 운영 시스템"
                       fill
                       className="object-contain rounded-lg"
                       quality={90}
@@ -195,7 +195,7 @@ export default function DualBrandSection() {
                   재료+조리법으로
                   <br />
                   <span className="text-orange-600 text-xl font-bold">
-                    오늘은 오므라이스 + 에그이츠
+                    오늘은 오므라이스 운영 시스템
                   </span>{' '}
                   = 배달앱 노출 2배
                   <br />

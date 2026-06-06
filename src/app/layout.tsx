@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import {
   SITE_ORIGIN,
-  absoluteUrl,
   OG_IMAGE_URL,
   OG_IMAGE_WIDTH,
   OG_IMAGE_HEIGHT,
@@ -15,17 +14,43 @@ const isPreview = process.env.VERCEL_ENV === 'preview';
 const googleVerification = process.env.GOOGLE_SITE_VERIFICATION;
 const naverVerification = process.env.NAVER_SITE_VERIFICATION;
 
+const siteTitle = '오늘은 오므라이스 | 오므라이스 창업 프랜차이즈';
+const siteDescription =
+  '재영에프앤비(Jaeyoung F&B)가 운영하는 오므라이스 프랜차이즈. 배달 중심 1~2인 운영, 소형 매장 최적화, 창업 비용 상담, 수익 구조 안내를 제공합니다.';
+const siteKeywords = [
+  '오므라이스 창업',
+  '오늘은 오므라이스',
+  '재영에프앤비',
+  '재영 F&B',
+  'Jaeyoung F&B',
+  '오므라이스 프랜차이즈',
+  '배달 전문점 창업',
+  '소자본 외식 창업',
+  '1인 운영 음식점 창업',
+  '오므라이스 창업 비용',
+  '오므라이스 가맹 문의',
+  '배달 오므라이스 창업',
+  '소형 매장 창업',
+  '프랜차이즈 창업 상담',
+];
+
 export const metadata: Metadata = {
   // SEO: metadataBase - 모든 상대 경로의 기준 URL
   metadataBase: new URL(SITE_ORIGIN),
   title: {
-    default: '오늘은 오므라이스 | 오므라이스 창업 프랜차이즈',
+    default: siteTitle,
     template: '%s | 오늘은 오므라이스',
   },
-  description:
-    '재영에프앤비(Jaeyoung F&B) 운영 오므라이스 프랜차이즈. 오늘은 오므라이스·에그이츠(EGG EATS) 배달 중심 1~2인 운영, 소형 매장 최적화, 수익 구조 공개. 창업 상담 진행 중.',
-  keywords:
-    '오므라이스 창업, 오늘은 오므라이스, 에그이츠, egg eats, EGG EATS, 재영에프앤비, 재영 F&B, Jaeyoung F&B, 오므라이스 프랜차이즈, 배달 전문점 창업, 소자본 외식 창업, 1인 운영 음식점 창업, 오므라이스 창업 비용, 오므라이스 가맹 문의, 배달 오므라이스 창업, 소형 매장 창업',
+  description: siteDescription,
+  applicationName: '오늘은 오므라이스',
+  authors: [{ name: '재영에프앤비', url: SITE_ORIGIN }],
+  creator: '재영에프앤비',
+  publisher: '재영에프앤비',
+  generator: 'Next.js',
+  category: 'Food Franchise',
+  classification: '오므라이스 프랜차이즈 창업',
+  referrer: 'strict-origin-when-cross-origin',
+  keywords: siteKeywords,
   // Favicon 설정 (모든 브라우저, 모바일, PWA 환경 지원)
   icons: {
     icon: [
@@ -55,17 +80,35 @@ export const metadata: Metadata = {
       },
     ],
   },
+  manifest: '/manifest.webmanifest',
   robots: {
     index: !isPreview,
     follow: !isPreview,
+    nocache: isPreview,
     googleBot: {
       index: !isPreview,
       follow: !isPreview,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
     },
+  },
+  formatDetection: {
+    telephone: true,
+    address: true,
+    email: true,
+  },
+  appleWebApp: {
+    capable: true,
+    title: '오늘은 오므라이스',
+    statusBarStyle: 'default',
   },
   // SEO: Canonical URL - 절대 경로 (GSC 필수)
   alternates: {
     canonical: '/',
+    languages: {
+      'ko-KR': '/',
+    },
   },
   // SEO: Open Graph - 카카오톡, 페이스북, 트위터 공유용 (절대 URL)
   openGraph: {
@@ -73,9 +116,8 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     url: SITE_ORIGIN, // 절대 URL
     siteName: '오늘은 오므라이스',
-    title: '오늘은 오므라이스 | 오므라이스 창업 프랜차이즈',
-    description:
-      '대한민국 1등 오므라이스 프랜차이즈. 오늘은 오므라이스 배달 중심 1~2인 운영, 소형 매장 최적화, 수익 구조 공개.',
+    title: siteTitle,
+    description: siteDescription,
     images: [
       {
         url: OG_IMAGE_URL, // 절대 URL (site.ts에서 관리)
@@ -88,27 +130,36 @@ export const metadata: Metadata = {
   // SEO: Twitter Card (X 공유용)
   twitter: {
     card: 'summary_large_image',
-    title: '오늘은 오므라이스 | 오므라이스 창업 프랜차이즈',
-    description: '대한민국 1등 오므라이스 프랜차이즈. 배달 중심 1~2인 운영, 소형 매장 최적화.',
-    images: [OG_IMAGE_URL], // 절대 URL (site.ts에서 관리)
+    title: siteTitle,
+    description: siteDescription,
+    images: [
+      {
+        url: OG_IMAGE_URL,
+        alt: '오늘은 오므라이스 프랜차이즈 - 배달 전문 오므라이스 창업',
+      },
+    ],
   },
   // SEO: Google Site Verification (built-in 지원)
   verification: {
     google: googleVerification,
   },
-  // SEO: Naver Site Verification (커스텀 메타 태그)
+  // SEO: Naver Site Verification 및 지역/브랜드 보조 메타 태그
   other: {
     ...(naverVerification && {
       'naver-site-verification': naverVerification,
     }),
+    'geo.region': 'KR-11',
+    'geo.placename': '서울특별시 동대문구',
+    'business:contact_data:country_name': 'South Korea',
   },
 };
 
-// SEO: Viewport 설정 (브랜드 테마 컬러 포함)
 export const viewport: Viewport = {
   themeColor: '#FFD700',
   width: 'device-width',
   initialScale: 1,
+  maximumScale: 5,
+  colorScheme: 'only light',
 };
 
 export default function RootLayout({

@@ -64,69 +64,119 @@ export default function Home() {
   };
 
   // SEO: JSON-LD Structured Data (Google Search Console용)
-  const organizationSchema = {
+  const pageDescription =
+    '재영에프앤비가 운영하는 오늘은 오므라이스 프랜차이즈 창업 안내 페이지입니다. 배달 중심 운영, 소형 매장, 1~2인 운영, 창업 비용 상담 정보를 제공합니다.';
+  const organizationId = `${SITE_ORIGIN}/#organization`;
+  const websiteId = `${SITE_ORIGIN}/#website`;
+  const webpageId = `${SITE_ORIGIN}/#webpage`;
+  const structuredDataSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: '오늘은 오므라이스',
-    legalName: '주식회사 재영에프앤비',
-    alternateName: ['재영에프앤비', '재영 F&B', 'Jaeyoung F&B', 'Jaeyoung F and B'],
-    url: SITE_ORIGIN, // 절대 도메인 (GSC 필수)
-    logo: absoluteUrl('/asset/logo/오므라이스_문구3.png'),
-    // SEO: 공식 채널 (브랜드 엔티티 신호 강화)
-    sameAs: [
-      // TODO: 실제 공식 채널 URL로 교체 필요
-      // 'https://www.instagram.com/todayomurice',
-      // 'https://www.youtube.com/@todayomurice',
-      // 'https://place.map.kakao.com/xxxxx', // 카카오 대표 매장
-      // 'https://map.naver.com/v5/search/오늘은오므라이스', // 네이버 플레이스
-      // 'https://pf.kakao.com/_xxxxx', // 카카오톡 채널
-      // 'https://blog.naver.com/todayomurice', // 공식 블로그
-    ],
-    brand: [
+    '@graph': [
       {
-        '@type': 'Brand',
+        '@type': 'Organization',
+        '@id': organizationId,
         name: '오늘은 오므라이스',
-        alternateName: 'Today Omurice',
-      },
-    ],
-    description:
-      '재영에프앤비(Jaeyoung F&B) 운영. 배달 중심 오므라이스 프랜차이즈. 오늘은 오므라이스 1~2인 운영, 소형 매장 최적화, 수익 구조 공개.',
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+82-10-9923-9502',
-      contactType: '가맹 상담',
-      areaServed: 'KR',
-      availableLanguage: 'Korean',
-    },
-  };
-
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: '1~2인 운영이 가능한가요?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: '네, 가능합니다. 배달 중심 운영 동선과 간소화된 조리 프로세스로 1~2인 운영이 가능하도록 설계되었습니다. 소형 매장 최적화로 효율적인 운영이 가능합니다.',
+        legalName: '주식회사 재영에프앤비',
+        alternateName: ['재영에프앤비', '재영 F&B', 'Jaeyoung F&B', 'Jaeyoung F and B'],
+        url: SITE_ORIGIN,
+        logo: {
+          '@type': 'ImageObject',
+          url: absoluteUrl('/asset/logo/오므라이스_문구3.png'),
+          width: 512,
+          height: 512,
+        },
+        image: absoluteUrl('/og.png'),
+        description: pageDescription,
+        brand: {
+          '@type': 'Brand',
+          name: '오늘은 오므라이스',
+          alternateName: 'Today Omurice',
+        },
+        contactPoint: {
+          '@type': 'ContactPoint',
+          telephone: '+82-10-9923-9502',
+          contactType: '가맹 상담',
+          areaServed: 'KR',
+          availableLanguage: 'Korean',
         },
       },
       {
-        '@type': 'Question',
-        name: '오므라이스 창업 비용은 어떻게 산정되나요?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: '창업 비용은 매장 규모, 입지, 인테리어 선택에 따라 달라집니다. 정확한 비용 산정과 수익 구조는 가맹 상담 시 개별적으로 안내해드립니다.',
+        '@type': 'WebSite',
+        '@id': websiteId,
+        name: '오늘은 오므라이스',
+        url: SITE_ORIGIN,
+        inLanguage: 'ko-KR',
+        publisher: {
+          '@id': organizationId,
         },
       },
       {
-        '@type': 'Question',
-        name: '가맹 상담은 어떻게 진행되나요?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: '홈페이지 창업 문의 또는 전화(010-9923-9502)로 1차 상담을 진행합니다. 이후 입지 분석, 수익 예상, 계약, 교육의 순서로 체계적인 창업 지원이 이루어집니다.',
+        '@type': 'WebPage',
+        '@id': webpageId,
+        name: '오늘은 오므라이스 | 오므라이스 창업 프랜차이즈',
+        url: SITE_ORIGIN,
+        description: pageDescription,
+        inLanguage: 'ko-KR',
+        isPartOf: {
+          '@id': websiteId,
         },
+        about: {
+          '@id': organizationId,
+        },
+        primaryImageOfPage: {
+          '@type': 'ImageObject',
+          url: absoluteUrl('/og.png'),
+          width: 1200,
+          height: 630,
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${SITE_ORIGIN}/#breadcrumb`,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: '홈',
+            item: SITE_ORIGIN,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: '창업 상담',
+            item: absoluteUrl('/#contact'),
+          },
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': `${SITE_ORIGIN}/#faq`,
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: '1~2인 운영이 가능한가요?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: '네, 가능합니다. 배달 중심 운영 동선과 간소화된 조리 프로세스로 1~2인 운영이 가능하도록 설계되었습니다. 소형 매장 최적화로 효율적인 운영이 가능합니다.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: '오므라이스 창업 비용은 어떻게 산정되나요?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: '창업 비용은 매장 규모, 입지, 인테리어 선택에 따라 달라집니다. 정확한 비용 산정과 수익 구조는 가맹 상담 시 개별적으로 안내해드립니다.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: '가맹 상담은 어떻게 진행되나요?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: '홈페이지 창업 문의 또는 전화(010-9923-9502)로 1차 상담을 진행합니다. 이후 입지 분석, 수익 예상, 계약, 교육의 순서로 체계적인 창업 지원이 이루어집니다.',
+            },
+          },
+        ],
       },
     ],
   };
@@ -135,17 +185,10 @@ export default function Home() {
     <>
       {/* SEO: Structured Data (JSON-LD) */}
       <Script
-        id="organization-schema"
+        id="structured-data-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationSchema),
-        }}
-      />
-      <Script
-        id="faq-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema),
+          __html: JSON.stringify(structuredDataSchema),
         }}
       />
 
