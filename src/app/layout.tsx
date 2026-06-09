@@ -151,6 +151,7 @@ export const metadata: Metadata = {
     'geo.region': 'KR-11',
     'geo.placename': '서울특별시 동대문구',
     'business:contact_data:country_name': 'South Korea',
+    'supported-color-schemes': 'light',
   },
 };
 

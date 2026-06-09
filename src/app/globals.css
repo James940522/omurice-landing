@@ -233,8 +233,14 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-html {
+:root,
+html,
+body,
+body * {
   color-scheme: only light;
+}
+
+html {
   scroll-behavior: smooth;
 }
 
@@ -250,6 +256,27 @@ body {
     url('/new-asset/cursor/cursor.png') 4 1,
     auto;
   overflow-x: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #6b4423;
+    --card: #ffffff;
+    --card-foreground: #6b4423;
+    --popover: #ffffff;
+    --popover-foreground: #6b4423;
+    --muted: #fff9e6;
+    --muted-foreground: #a0522d;
+    --border: #ffe8b3;
+    --input: #fff5dc;
+  }
+
+  html,
+  body {
+    color-scheme: only light;
+    background: #ffffff;
+  }
 }
 
 *,
