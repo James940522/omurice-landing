@@ -4,10 +4,12 @@ import test from 'node:test';
 
 const layoutSource = await readFile('src/app/layout.tsx', 'utf8');
 const globalStyles = await readFile('src/app/globals.css', 'utf8');
+const nextConfigSource = await readFile('next.config.ts', 'utf8');
 
 test('site opts out of browser auto darkening with a light-only color scheme', () => {
   assert.match(layoutSource, /colorScheme:\s*'only light'/);
   assert.match(layoutSource, /'supported-color-schemes':\s*'light'/);
+  assert.match(layoutSource, /style=\{lightSchemeStyle\}/);
   assert.match(globalStyles, /color-scheme:\s*only light;/);
 });
 
@@ -16,4 +18,10 @@ test('site keeps the light palette when browsers report a dark color preference'
   assert.match(globalStyles, /background:\s*#ffffff;/);
   assert.match(globalStyles, /--background:\s*#ffffff;/);
   assert.match(globalStyles, /--foreground:\s*#6b4423;/);
+});
+
+test('home document is revalidated so Samsung Internet can pick up color-scheme fixes', () => {
+  assert.match(nextConfigSource, /source:\s*'\/'/);
+  assert.match(nextConfigSource, /Cache-Control/);
+  assert.match(nextConfigSource, /max-age=0,\s*must-revalidate/);
 });

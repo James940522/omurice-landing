@@ -163,14 +163,21 @@ export const viewport: Viewport = {
   colorScheme: 'only light',
 };
 
+const lightSchemeStyle = {
+  colorScheme: 'only light',
+  backgroundColor: '#ffffff',
+} satisfies React.CSSProperties;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body className="antialiased">{children}</body>
+    <html lang="ko" style={lightSchemeStyle}>
+      <body className="antialiased" style={lightSchemeStyle}>
+        {children}
+      </body>
     </html>
   );
 }
