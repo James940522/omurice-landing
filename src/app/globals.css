@@ -240,6 +240,12 @@ body * {
   color-scheme: only light;
 }
 
+html,
+body {
+  background-color: #ffffff !important;
+  color: var(--foreground) !important;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -275,7 +281,8 @@ body {
   html,
   body {
     color-scheme: only light;
-    background: #ffffff;
+    background: #ffffff !important;
+    color: var(--foreground) !important;
   }
 }
 

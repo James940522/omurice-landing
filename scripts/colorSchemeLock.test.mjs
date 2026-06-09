@@ -12,6 +12,8 @@ test('site opts out of browser auto darkening with a light-only color scheme', (
   assert.match(layoutSource, /'supported-color-schemes':\s*'light'/);
   assert.match(layoutSource, /style=\{lightSchemeStyle\}/);
   assert.match(globalStyles, /color-scheme:\s*only light;/);
+  assert.match(globalStyles, /background-color:\s*#ffffff\s*!important;/);
+  assert.match(globalStyles, /color:\s*var\(--foreground\)\s*!important;/);
 });
 
 test('site keeps the light palette when browsers report a dark color preference', () => {
