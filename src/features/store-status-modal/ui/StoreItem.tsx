@@ -35,8 +35,8 @@ export default function StoreItem({ store, currentOpenMonth }: StoreItemProps) {
   const openDate = store.open_date?.trim() ?? '';
   const { label, upcoming, isCurrentMonthOpen } = getOpenStatus(openDate, currentOpenMonth);
   const cardClass = isCurrentMonthOpen
-    ? 'store-current-month-card flex h-[58px] w-full flex-col overflow-hidden rounded-[5px] border-2 border-[#ff6b12] bg-linear-to-b from-[#fffef2] to-[#fff3c8] shadow-[0_3px_0_rgba(37,18,7,0.28)] sm:h-[76px] sm:rounded-[7px] sm:shadow-[0_4px_0_rgba(37,18,7,0.3)]'
-    : 'flex h-[58px] w-full flex-col overflow-hidden rounded-[5px] border border-[#ffdf92]/70 bg-[#fffaf0] shadow-[0_3px_0_rgba(37,18,7,0.28)] sm:h-[76px] sm:rounded-[7px] sm:shadow-[0_4px_0_rgba(37,18,7,0.3)]';
+    ? 'store-current-month-card relative flex h-[58px] w-full flex-col overflow-hidden rounded-[5px] border-2 border-[#ff6b12] bg-linear-to-b from-[#fffef2] to-[#fff3c8] shadow-[0_3px_0_rgba(37,18,7,0.28)] sm:h-[76px] sm:rounded-[7px] sm:shadow-[0_4px_0_rgba(37,18,7,0.3)]'
+    : 'relative flex h-[58px] w-full flex-col overflow-hidden rounded-[5px] border border-[#ffdf92]/70 bg-[#fffaf0] shadow-[0_3px_0_rgba(37,18,7,0.28)] sm:h-[76px] sm:rounded-[7px] sm:shadow-[0_4px_0_rgba(37,18,7,0.3)]';
 
   const statusClass = isCurrentMonthOpen
     ? 'store-current-month-status bg-linear-to-r from-[#ff2a5f] via-[#ff6b12] to-[#ffb800] text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.65)]'
@@ -47,6 +47,11 @@ export default function StoreItem({ store, currentOpenMonth }: StoreItemProps) {
 
   return (
     <div className={cardClass}>
+      {isCurrentMonthOpen && (
+        <span className="absolute left-0 top-0 z-20 rounded-br-[4px] border-b border-r border-[#ffeaa7]/40 bg-linear-to-r from-[#ff2a5f] to-[#ff6b12] px-1 py-0.5 font-heading text-[6.5px] font-black leading-none text-white sm:rounded-br-[6px] sm:px-1.5 sm:py-1 sm:text-[9px]">
+          NEW
+        </span>
+      )}
       <div className="flex min-h-0 flex-1 items-center justify-center px-0.5 text-center sm:px-1.5">
         <p className="max-w-full whitespace-normal font-heading text-[9px] font-black leading-[1.05] text-[#301809] [overflow-wrap:anywhere] [word-break:normal] sm:text-[13px] sm:leading-tight">
           {anonymizedBranchName}
