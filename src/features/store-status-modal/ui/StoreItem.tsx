@@ -48,11 +48,15 @@ export default function StoreItem({ store, currentOpenMonth }: StoreItemProps) {
   return (
     <div className={cardClass}>
       {isCurrentMonthOpen && (
-        <span className="absolute left-0 top-0 z-20 rounded-br-[4px] border-b border-r border-[#ffeaa7]/40 bg-linear-to-r from-[#ff2a5f] to-[#ff6b12] px-1 py-0.5 font-heading text-[6.5px] font-black leading-none text-white sm:rounded-br-[6px] sm:px-1.5 sm:py-1 sm:text-[9px]">
+        <span className="absolute left-0 top-0 z-20 rounded-br-[4px] border-b border-r border-[#ffeaa7]/40 bg-linear-to-r from-[#ff2a5f] to-[#ff6b12] px-[4px] py-[1.5px] font-heading text-[6px] font-black leading-none text-white sm:rounded-br-[6px] sm:px-1.5 sm:py-1 sm:text-[9px]">
           NEW
         </span>
       )}
-      <div className="flex min-h-0 flex-1 items-center justify-center px-0.5 text-center sm:px-1.5">
+      <div
+        className={`flex min-h-0 flex-1 items-center justify-center px-0.5 text-center sm:px-1.5 ${
+          isCurrentMonthOpen ? 'pt-[10px] sm:pt-[14px]' : ''
+        }`}
+      >
         <p className="max-w-full whitespace-normal font-heading text-[9px] font-black leading-[1.05] text-[#301809] [overflow-wrap:anywhere] [word-break:normal] sm:text-[13px] sm:leading-tight">
           {anonymizedBranchName}
         </p>
