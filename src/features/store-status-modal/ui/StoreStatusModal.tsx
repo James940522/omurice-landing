@@ -6,6 +6,10 @@ import StoreItem from './StoreItem';
 import { fetchStores } from '@/lib/stores';
 import type { Store } from '@/lib/stores';
 import { useStoreCount } from '@/lib/use-store-count';
+import {
+  getNewBadgeOpenMonth,
+  type OpenMonth,
+} from '../getNewBadgeOpenMonth';
 
 interface StoreStatusModalProps {
   isOpen: boolean;
@@ -25,17 +29,10 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
   const [stores, setStores] = useState<Store[]>([]);
   const storeCount = useStoreCount();
   const [isLoading, setIsLoading] = useState(true);
-  const [currentOpenMonth, setCurrentOpenMonth] = useState<{
-    year: number;
-    month: number;
-  } | null>(null);
+  const [newBadgeOpenMonth, setNewBadgeOpenMonth] = useState<OpenMonth | null>(null);
 
   useEffect(() => {
-    const now = new Date(Date.now());
-    setCurrentOpenMonth({
-      year: now.getFullYear(),
-      month: now.getMonth() + 1,
-    });
+    setNewBadgeOpenMonth(getNewBadgeOpenMonth(new Date(Date.now())));
   }, []);
 
   useEffect(() => {
@@ -128,7 +125,7 @@ export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalPr
                 <StoreItem
                   key={store.store_code}
                   store={store}
-                  currentOpenMonth={currentOpenMonth}
+                  newBadgeOpenMonth={newBadgeOpenMonth}
                 />
               ))}
             </div>
