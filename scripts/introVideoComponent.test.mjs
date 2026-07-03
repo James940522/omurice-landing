@@ -34,6 +34,11 @@ test('loads exactly one responsive muted inline video', () => {
   assert.doesNotMatch(componentSource, /<motion\.video[^>]*\sloop(?:=|\s|>)/s);
 });
 
+test('fills mobile screens while preserving the complete desktop frame', () => {
+  assert.match(componentSource, /bg-\[#f29b10\]/);
+  assert.match(componentSource, /object-cover md:object-contain/);
+});
+
 test('keeps branded loading feedback until actual playback starts', () => {
   assert.match(componentSource, /오늘은 오므라이스를 준비하고 있어요/);
   assert.match(componentSource, /\{!state\.hasStarted && \(/);

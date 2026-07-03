@@ -85,7 +85,7 @@ export default function IntroVideo({
 
   return (
     <motion.div
-      className="fixed inset-0 z-[2147483647] overflow-hidden bg-[#fff9e6]"
+      className="fixed inset-0 z-[2147483647] overflow-hidden bg-[#f29b10]"
       style={{ height: '100dvh' }}
       initial={{ opacity: 1, y: 0 }}
       animate={
@@ -107,7 +107,7 @@ export default function IntroVideo({
         <motion.video
           key={source}
           src={source}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover md:object-contain"
           autoPlay
           muted
           playsInline
