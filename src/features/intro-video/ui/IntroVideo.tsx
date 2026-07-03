@@ -124,7 +124,7 @@ export default function IntroVideo({
       )}
 
       <AnimatePresence>
-        {state.phase === 'loading' && (
+        {!state.hasStarted && (
           <motion.div
             className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-5 bg-[#fff9e6]"
             role="status"

@@ -36,7 +36,8 @@ test('loads exactly one responsive muted inline video', () => {
 
 test('keeps branded loading feedback until actual playback starts', () => {
   assert.match(componentSource, /오늘은 오므라이스를 준비하고 있어요/);
-  assert.match(componentSource, /state\.phase === 'loading'/);
+  assert.match(componentSource, /\{!state\.hasStarted && \(/);
+  assert.doesNotMatch(componentSource, /\{state\.phase === 'loading' && \(/);
   assert.match(componentSource, /dispatch\(\{ type: 'playing' \}\)/);
   assert.match(componentSource, /role="status"/);
   assert.match(componentSource, /aria-live="polite"/);
