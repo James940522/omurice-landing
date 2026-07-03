@@ -29,18 +29,17 @@ test('loads exactly one responsive muted inline video', () => {
   assert.match(componentSource, /muted/);
   assert.match(componentSource, /playsInline/);
   assert.match(componentSource, /preload="auto"/);
-  assert.match(componentSource, /object-contain/);
+  assert.match(componentSource, /object-fill/);
   assert.equal(componentSource.match(/<motion\.video/g)?.length, 1);
   assert.doesNotMatch(componentSource, /<motion\.video[^>]*\sloop(?:=|\s|>)/s);
 });
 
-test('preserves the complete video frame over the golden background', () => {
-  assert.match(componentSource, /bg-\[#f29b10\]/);
+test('fills the complete viewport at every breakpoint', () => {
   assert.match(
     componentSource,
-    /className="absolute inset-0 h-full w-full object-contain"/,
+    /className="absolute inset-0 h-full w-full object-fill"/,
   );
-  assert.doesNotMatch(componentSource, /object-cover/);
+  assert.doesNotMatch(componentSource, /object-cover|object-contain/);
 });
 
 test('keeps branded loading feedback until actual playback starts', () => {

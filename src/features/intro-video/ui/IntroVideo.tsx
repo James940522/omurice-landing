@@ -107,7 +107,7 @@ export default function IntroVideo({
         <motion.video
           key={source}
           src={source}
-          className="absolute inset-0 h-full w-full object-contain"
+          className="absolute inset-0 h-full w-full object-fill"
           autoPlay
           muted
           playsInline

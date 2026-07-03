@@ -2,9 +2,9 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Keep the branded loading layer visible during failure exit and show the complete mobile and desktop videos without cropping.
+**Goal:** Keep the branded loading layer visible during failure exit and make the mobile and desktop videos fill the viewport.
 
-**Architecture:** Reuse the existing `state.hasStarted` flag as the loading-layer visibility source. Successful playback sets it to `true` and removes the loader; failure leaves it `false`, so the loader remains inside the already animated outer overlay until the 700 ms exit completes. Use `object-contain` at every breakpoint and expose a sampled golden background behind any surrounding areas.
+**Architecture:** Reuse the existing `state.hasStarted` flag as the loading-layer visibility source. Successful playback sets it to `true` and removes the loader; failure leaves it `false`, so the loader remains inside the already animated outer overlay until the 700 ms exit completes. Use `object-fill` at every breakpoint so the selected video occupies the complete viewport. Aspect-ratio distortion is accepted in exchange for avoiding both cropping and empty surrounding areas.
 
 **Tech Stack:** React 19, TypeScript, Framer Motion 12, Node.js test runner
 
@@ -93,7 +93,7 @@ git add scripts/introVideoComponent.test.mjs src/features/intro-video/ui/IntroVi
 git commit -m "Fix: preserve loader when intro video fails"
 ```
 
-### Task 2: Preserve the complete video frame at every breakpoint
+### Task 2: Fill the viewport at every breakpoint
 
 **Files:**
 - Modify: `scripts/introVideoComponent.test.mjs:25-35`
@@ -104,13 +104,12 @@ git commit -m "Fix: preserve loader when intro video fails"
 Add this test to `scripts/introVideoComponent.test.mjs` immediately after `loads exactly one responsive muted inline video`:
 
 ```js
-test('preserves the complete video frame over the golden background', () => {
-  assert.match(componentSource, /bg-\[#f29b10\]/);
+test('fills the complete viewport at every breakpoint', () => {
   assert.match(
     componentSource,
-    /className="absolute inset-0 h-full w-full object-contain"/,
+    /className="absolute inset-0 h-full w-full object-fill"/,
   );
-  assert.doesNotMatch(componentSource, /object-cover/);
+  assert.doesNotMatch(componentSource, /object-cover|object-contain/);
 });
 ```
 
@@ -122,7 +121,7 @@ Run:
 node --test scripts/introVideoComponent.test.mjs
 ```
 
-Expected: FAIL because the video still uses `object-cover` on mobile.
+Expected: FAIL because the video does not yet use `object-fill`.
 
 - [ ] **Step 3: Implement the responsive fitting classes**
 
@@ -141,13 +140,13 @@ with:
 Replace the video class:
 
 ```tsx
-          className="absolute inset-0 h-full w-full object-cover md:object-contain"
+          className="absolute inset-0 h-full w-full object-contain"
 ```
 
 with:
 
 ```tsx
-          className="absolute inset-0 h-full w-full object-contain"
+          className="absolute inset-0 h-full w-full object-fill"
 ```
 
 Keep the loading layer's own `bg-[#fff9e6]` class unchanged so loading and failure exits retain the approved cream treatment.
@@ -166,7 +165,7 @@ Expected: PASS, 10 tests and 0 failures.
 
 ```bash
 git add scripts/introVideoComponent.test.mjs src/features/intro-video/ui/IntroVideo.tsx
-git commit -m "Fix: preserve full desktop intro frame"
+git commit -m "Fix: fill viewport with intro video"
 ```
 
 ### Task 3: Verify the complete homepage behavior

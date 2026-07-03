@@ -59,8 +59,8 @@ The full-screen overlay:
 The video:
 
 - Uses `autoPlay`, `muted`, `playsInline`, and `preload="auto"`.
-- Uses `object-fit: contain` at every breakpoint so both mobile and desktop videos remain fully visible without cropping.
-- Allows golden areas around the video when its aspect ratio differs from the viewport.
+- Uses `object-fit: fill` at every breakpoint so both mobile and desktop videos always occupy the complete viewport without cropping or empty surrounding areas.
+- Allows aspect-ratio distortion when the video's dimensions differ from the viewport.
 - Has no controls and does not loop.
 - Starts transparent beneath the loading layer and fades in when actual playback begins.
 
@@ -108,7 +108,7 @@ Add focused regression coverage that verifies:
 
 - The mobile source is selected below 768px and the desktop source at 768px and above.
 - The video is muted, inline, autoplaying, preloaded, and non-looping.
-- Mobile and desktop both use contain fitting over the golden background.
+- Mobile and desktop both use fill fitting and never expose viewport gaps during playback.
 - The loading UI remains until the `playing` event.
 - `ended`, `error`, rejected playback, and timeout paths trigger an exit.
 - Completion occurs once and only after the exit transition.
@@ -122,7 +122,7 @@ Run the relevant tests, lint, and production build. Then verify the intro in a r
 - Every homepage entry plays the appropriate PC or mobile video once.
 - The browser requests only the selected responsive video.
 - Visitors see branded loading UI until the video actually starts.
-- Mobile and desktop playback are muted, inline, and shown in full without cropping; golden surrounding areas are acceptable.
+- Mobile and desktop playback are muted, inline, and fill the complete viewport without cropping or empty surrounding areas; aspect-ratio distortion is acceptable.
 - The completed video moves slightly down while fading out.
 - The homepage and existing landing modals continue normally afterward.
 - Video failures and slow loads always release the page.
