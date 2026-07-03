@@ -59,8 +59,8 @@ The full-screen overlay:
 The video:
 
 - Uses `autoPlay`, `muted`, `playsInline`, and `preload="auto"`.
-- Uses `object-fit: cover` below 768px so the mobile video fills the viewport.
-- Uses `object-fit: contain` at 768px and above so the complete desktop video remains visible. Wider screens may show narrow golden side areas rather than cropping the video.
+- Uses `object-fit: contain` at every breakpoint so both mobile and desktop videos remain fully visible without cropping.
+- Allows golden areas around the video when its aspect ratio differs from the viewport.
 - Has no controls and does not loop.
 - Starts transparent beneath the loading layer and fades in when actual playback begins.
 
@@ -108,7 +108,7 @@ Add focused regression coverage that verifies:
 
 - The mobile source is selected below 768px and the desktop source at 768px and above.
 - The video is muted, inline, autoplaying, preloaded, and non-looping.
-- Mobile uses cover fitting, while desktop uses contain fitting over the golden background.
+- Mobile and desktop both use contain fitting over the golden background.
 - The loading UI remains until the `playing` event.
 - `ended`, `error`, rejected playback, and timeout paths trigger an exit.
 - Completion occurs once and only after the exit transition.
@@ -122,8 +122,7 @@ Run the relevant tests, lint, and production build. Then verify the intro in a r
 - Every homepage entry plays the appropriate PC or mobile video once.
 - The browser requests only the selected responsive video.
 - Visitors see branded loading UI until the video actually starts.
-- Mobile playback is muted, inline, full-screen, and cropped to fill.
-- Desktop playback is muted, inline, and shown in full without cropping; golden side areas are acceptable on wider screens.
+- Mobile and desktop playback are muted, inline, and shown in full without cropping; golden surrounding areas are acceptable.
 - The completed video moves slightly down while fading out.
 - The homepage and existing landing modals continue normally afterward.
 - Video failures and slow loads always release the page.
