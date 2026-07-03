@@ -24,7 +24,8 @@ import { Footer } from '@/widgets/footer';
 
 // Features
 import { FloatingInquiry } from '@/features/inquiry';
-import { IntroAnimation } from '@/features/intro-animation';
+import { IntroVideo } from '@/features/intro-video';
+// import { IntroAnimation } from '@/features/intro-animation';
 import { StoreStatusModal } from '@/features/store-status-modal';
 import { BrandLetterModal } from '@/features/brand-letter-modal';
 
@@ -223,7 +224,8 @@ export default function Home() {
           isOpen={activeLandingModal === 'store-status'}
           onClose={handleLandingModalClose}
         />
-        <IntroAnimation isVisible={showIntro} onComplete={() => setShowIntro(false)} />
+        <IntroVideo isVisible={showIntro} onComplete={() => setShowIntro(false)} />
+        {/* <IntroAnimation isVisible={showIntro} onComplete={() => setShowIntro(false)} /> */}
       </main>
     </>
   );
