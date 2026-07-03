@@ -51,6 +51,7 @@ This preserves the current modal queue behavior: landing modals begin only after
 The full-screen overlay:
 
 - Uses the existing intro z-index of `2147483647` so it sits above the homepage and modals.
+- Uses `#f29b10`, sampled from the desktop video's outer background, behind the video.
 - Locks document and body scrolling while visible.
 - Restores the previous inline scroll styles on completion or unmount.
 - Uses `100dvh` and safe full-viewport positioning.
@@ -58,7 +59,8 @@ The full-screen overlay:
 The video:
 
 - Uses `autoPlay`, `muted`, `playsInline`, and `preload="auto"`.
-- Fills the viewport with `object-fit: cover`; edge cropping is intentional.
+- Uses `object-fit: cover` below 768px so the mobile video fills the viewport.
+- Uses `object-fit: contain` at 768px and above so the complete desktop video remains visible. Wider screens may show narrow golden side areas rather than cropping the video.
 - Has no controls and does not loop.
 - Starts transparent beneath the loading layer and fades in when actual playback begins.
 
@@ -105,7 +107,8 @@ No error message is shown; the underlying homepage is the fallback content.
 Add focused regression coverage that verifies:
 
 - The mobile source is selected below 768px and the desktop source at 768px and above.
-- The video is muted, inline, autoplaying, preloaded, cover-fitted, and non-looping.
+- The video is muted, inline, autoplaying, preloaded, and non-looping.
+- Mobile uses cover fitting, while desktop uses contain fitting over the golden background.
 - The loading UI remains until the `playing` event.
 - `ended`, `error`, rejected playback, and timeout paths trigger an exit.
 - Completion occurs once and only after the exit transition.
@@ -119,7 +122,8 @@ Run the relevant tests, lint, and production build. Then verify the intro in a r
 - Every homepage entry plays the appropriate PC or mobile video once.
 - The browser requests only the selected responsive video.
 - Visitors see branded loading UI until the video actually starts.
-- Playback is muted, inline, full-screen, and cropped to fill.
+- Mobile playback is muted, inline, full-screen, and cropped to fill.
+- Desktop playback is muted, inline, and shown in full without cropping; golden side areas are acceptable on wider screens.
 - The completed video moves slightly down while fading out.
 - The homepage and existing landing modals continue normally afterward.
 - Video failures and slow loads always release the page.

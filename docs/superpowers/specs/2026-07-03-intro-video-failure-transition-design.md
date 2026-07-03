@@ -40,4 +40,4 @@ Verify:
 - An immediate video failure never exposes a blank or broken-video frame.
 - The visitor sees the branded loading UI fade and move down, then the homepage.
 - No failure text is presented.
-- Successful PC and mobile intro behavior is unchanged.
+- The failure-handling change does not alter source selection or playback timing.
