@@ -6,12 +6,12 @@ const assets = [
   {
     name: 'desktop',
     path: 'public/new-asset/intro-video/pc.mp4',
-    expectedSize: 3_356_416,
+    expectedSize: 3_329_214,
   },
   {
     name: 'mobile',
     path: 'public/new-asset/intro-video/mo.mp4',
-    expectedSize: 3_930_555,
+    expectedSize: 3_482_033,
   },
 ];
 
