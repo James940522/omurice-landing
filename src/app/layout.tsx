@@ -16,7 +16,7 @@ const naverVerification = process.env.NAVER_SITE_VERIFICATION;
 
 const siteTitle = '오늘은 오므라이스 | 오므라이스 창업 프랜차이즈';
 const siteDescription =
-  '재영에프앤비(Jaeyoung F&B)가 운영하는 오므라이스 프랜차이즈. 배달 중심 1~2인 운영, 소형 매장 최적화, 창업 비용 상담, 수익 구조 안내를 제공합니다.';
+  '(주) 재영에프앤비가 운영하는 대한민국 1등 오므라이스 브랜드, 성공 창업의 새로운 기준 오늘은 오므라이스';
 const siteKeywords = [
   '오므라이스 창업',
   '오늘은 오므라이스',

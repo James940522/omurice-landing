@@ -48,7 +48,7 @@ src/
 ├── app/                        # Next.js App Router
 │   ├── layout.tsx             # 루트 레이아웃 (SEO 메타데이터)
 │   ├── page.tsx               # 메인 페이지
-│   ├── icon.tsx               # 동적 Favicon 생성
+│   ├── manifest.ts            # 웹앱 manifest 생성
 │   ├── robots.ts              # robots.txt 생성
 │   ├── sitemap.ts             # sitemap.xml 생성
 │   ├── __verify__/            # 검증 디버그 엔드포인트
@@ -197,10 +197,10 @@ Accent Green: #8CDE2D
 
 ### Favicon 완벽 설정 ✅
 
-- ✅ favicon.ico (15KB)
+- ✅ favicon.ico (8KB)
 - ✅ icon.png (512x512)
 - ✅ apple-touch-icon.png (180x180)
-- ✅ 동적 Favicon 생성 (src/app/icon.tsx)
+- ✅ android-chrome-192x192.png / android-chrome-512x512.png
 
 ---
 

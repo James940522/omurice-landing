@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: '오늘은 오므라이스',
     short_name: '오늘은 오므라이스',
     description:
-      '오므라이스 프랜차이즈 창업 상담, 배달 중심 운영, 소형 매장 최적화 정보를 제공하는 오늘은 오므라이스 공식 사이트입니다.',
+      '(주) 재영에프앤비가 운영하는 대한민국 1등 오므라이스 브랜드, 성공 창업의 새로운 기준 오늘은 오므라이스',
     start_url: '/',
     scope: '/',
     display: 'standalone',

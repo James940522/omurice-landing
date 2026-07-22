@@ -66,7 +66,7 @@ export default function Home() {
 
   // SEO: JSON-LD Structured Data (Google Search Console용)
   const pageDescription =
-    '재영에프앤비가 운영하는 오늘은 오므라이스 프랜차이즈 창업 안내 페이지입니다. 배달 중심 운영, 소형 매장, 1~2인 운영, 창업 비용 상담 정보를 제공합니다.';
+    '(주) 재영에프앤비가 운영하는 대한민국 1등 오므라이스 브랜드, 성공 창업의 새로운 기준 오늘은 오므라이스';
   const organizationId = `${SITE_ORIGIN}/#organization`;
   const websiteId = `${SITE_ORIGIN}/#website`;
   const webpageId = `${SITE_ORIGIN}/#webpage`;
