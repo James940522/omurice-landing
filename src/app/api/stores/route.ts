@@ -171,7 +171,7 @@ function parseCsv(text: string): BaseStore[] {
     .replace(/^\uFEFF/, '')
     .split(/\r?\n/)
     .map((line) => line.trim())
-    .filter((line) => line.length > 0);
+    .filter((line) => line.length > 0 && !line.startsWith('#'));
 
   const headers = parseCsvLine(lines[0]).map((header) =>
     header.replace(/^\uFEFF/, '').trim()

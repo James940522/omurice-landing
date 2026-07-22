@@ -49,7 +49,7 @@ export async function GET() {
       .replace(/^\uFEFF/, '')
       .split(/\r?\n/)
       .map((line) => line.trim())
-      .filter((line) => line.length > 0);
+      .filter((line) => line.length > 0 && !line.startsWith('#'));
     const dataLines = lines.slice(1);
     const maxStoreCode = dataLines.reduce((maxCode, line) => {
       const storeCode = Number(parseCsvLine(line)[0]);
