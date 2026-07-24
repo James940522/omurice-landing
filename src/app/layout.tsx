@@ -2,17 +2,19 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import {
   SITE_ORIGIN,
+  absoluteUrl,
   OG_IMAGE_URL,
   OG_IMAGE_WIDTH,
   OG_IMAGE_HEIGHT,
 } from '@/shared/config/site';
+import { getNaverSiteVerificationTokens } from '@/shared/config/search-verification';
 
 // SEO: Robots 설정 (preview 환경은 noindex)
 const isPreview = process.env.VERCEL_ENV === 'preview';
 
 // SEO: 검색엔진 소유확인 (안전한 처리)
 const googleVerification = process.env.GOOGLE_SITE_VERIFICATION;
-const naverVerification = process.env.NAVER_SITE_VERIFICATION;
+const naverVerificationTokens = getNaverSiteVerificationTokens();
 
 const siteTitle = '오늘은 오므라이스 | 오므라이스 창업 프랜차이즈';
 const siteDescription =
@@ -53,32 +55,13 @@ export const metadata: Metadata = {
   keywords: siteKeywords,
   // Favicon 설정 (모든 브라우저, 모바일, PWA 환경 지원)
   icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/icon.png', sizes: '512x512', type: 'image/png' }, // 표준 아이콘 (검색엔진 최적화)
-    ],
-    shortcut: '/favicon-32x32.png',
+    icon: [{ url: absoluteUrl('/favicon.ico'), sizes: 'any' }],
+    shortcut: absoluteUrl('/favicon.ico'),
     apple: {
-      url: '/apple-touch-icon.png',
+      url: absoluteUrl('/apple-touch-icon.png'),
       sizes: '180x180',
       type: 'image/png',
     },
-    other: [
-      {
-        rel: 'icon',
-        url: '/android-chrome-192x192.png',
-        sizes: '192x192',
-        type: 'image/png',
-      },
-      {
-        rel: 'icon',
-        url: '/android-chrome-512x512.png',
-        sizes: '512x512',
-        type: 'image/png',
-      },
-    ],
   },
   manifest: '/manifest.webmanifest',
   robots: {
@@ -142,12 +125,12 @@ export const metadata: Metadata = {
   // SEO: Google Site Verification (built-in 지원)
   verification: {
     google: googleVerification,
+    other: {
+      'naver-site-verification': naverVerificationTokens,
+    },
   },
-  // SEO: Naver Site Verification 및 지역/브랜드 보조 메타 태그
+  // SEO: 지역/브랜드 보조 메타 태그
   other: {
-    ...(naverVerification && {
-      'naver-site-verification': naverVerification,
-    }),
     'geo.region': 'KR-11',
     'geo.placename': '서울특별시 동대문구',
     'business:contact_data:country_name': 'South Korea',
