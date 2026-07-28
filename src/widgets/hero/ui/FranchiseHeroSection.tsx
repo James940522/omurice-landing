@@ -109,6 +109,15 @@ export default function FranchiseHeroSection() {
               ? `${storeCountLabel}개 점포가 증명한 오늘은 오므라이스의 힘`
               : '전국 점포가 증명한 오늘은 오므라이스의 힘'}
           </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.44 }}
+            className="mt-3 max-w-3xl break-keep text-sm font-semibold leading-relaxed text-white/82 md:text-base"
+          >
+            (주) 재영에프앤비가 운영하는 대한민국 1등 오므라이스 브랜드, 성공 창업의
+            새로운 기준 오늘은 오므라이스
+          </motion.p>
         </div>
       </div>
 
