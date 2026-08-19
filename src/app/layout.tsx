@@ -19,7 +19,7 @@ const naverVerificationTokens = getNaverSiteVerificationTokens();
 const siteTitle = '오늘은 오므라이스 | 오므라이스 창업 프랜차이즈';
 const siteDescription =
   '(주) 재영에프앤비가 운영하는 대한민국 1등 오므라이스 브랜드, 성공 창업의 새로운 기준 오늘은 오므라이스';
-const FAVICON_URL = absoluteUrl('/favicon.ico');
+const FAVICON_URL = absoluteUrl('/favicon-2026.png');
 const APPLE_TOUCH_ICON_URL = absoluteUrl('/apple-touch-icon.png');
 const siteKeywords = [
   '오므라이스 창업',
@@ -61,7 +61,8 @@ export const metadata: Metadata = {
     icon: [
       {
         url: FAVICON_URL,
-        type: 'image/x-icon',
+        sizes: '96x96',
+        type: 'image/png',
       },
     ],
     apple: {

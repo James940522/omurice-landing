@@ -40,6 +40,8 @@ const TOPPINGS = [
   '소세지',
 ];
 
+const CHICKEN_CHEESE_KATSU = '치킨치즈까스';
+
 const img = (...parts: string[]) => `${MENU_BASE}/${parts.join('/')}`;
 
 const dish = (dir: string, name: string): MenuItem => ({
@@ -49,6 +51,9 @@ const dish = (dir: string, name: string): MenuItem => ({
 
 const toppingDishes = (dir: string, suffix: string): MenuItem[] =>
   TOPPINGS.map((topping) => dish(dir, `${topping} ${suffix}`));
+
+const chickenCheeseKatsuDish = (dir: string, suffix: string): MenuItem =>
+  dish(dir, `${CHICKEN_CHEESE_KATSU} ${suffix}`);
 
 const bestMenuNames = new Set([
   '큐브스테이크 오므라이스',
@@ -63,22 +68,34 @@ const menuCategories: MenuCategory[] = [
   {
     id: 'omurice',
     name: '오므라이스',
-    items: toppingDishes(DIR.omurice, '오므라이스'),
+    items: [
+      ...toppingDishes(DIR.omurice, '오므라이스'),
+      chickenCheeseKatsuDish(DIR.omurice, '오므라이스'),
+    ],
   },
   {
     id: 'white',
     name: '화이트',
-    items: toppingDishes(DIR.white, '화이트 오므라이스'),
+    items: [
+      ...toppingDishes(DIR.white, '화이트 오므라이스'),
+      chickenCheeseKatsuDish(DIR.white, '화이트 오므라이스'),
+    ],
   },
   {
     id: 'kimchi',
     name: '김치',
-    items: toppingDishes(DIR.kimchi, '김치 오므라이스'),
+    items: [
+      ...toppingDishes(DIR.kimchi, '김치 오므라이스'),
+      chickenCheeseKatsuDish(DIR.kimchi, '김치 오므라이스'),
+    ],
   },
   {
     id: 'toowoomba',
     name: '투움바',
-    items: toppingDishes(DIR.toowoomba, '투움바 오므라이스'),
+    items: [
+      ...toppingDishes(DIR.toowoomba, '투움바 오므라이스'),
+      chickenCheeseKatsuDish(DIR.toowoomba, '투움바 오므라이스'),
+    ],
   },
   {
     id: 'white-kimchi',
@@ -91,12 +108,16 @@ const menuCategories: MenuCategory[] = [
         name: '우삼겹 화이트 김치 오므라이스',
         image: img(DIR.whiteKimchi, '우삼겸 화이트 김치 오므라이스.jpeg'),
       },
+      chickenCheeseKatsuDish(DIR.whiteKimchi, '화이트 김치 오므라이스'),
     ],
   },
   {
     id: 'bokkeumbap',
     name: '김치볶음밥',
-    items: TOPPINGS.map((topping) => dish(DIR.bokkeumbap, `${topping} 베이컨 김치볶음밥`)),
+    items: [
+      ...TOPPINGS.map((topping) => dish(DIR.bokkeumbap, `${topping} 베이컨 김치볶음밥`)),
+      dish(DIR.bokkeumbap, `${CHICKEN_CHEESE_KATSU} 김치볶음밥`),
+    ],
   },
   {
     id: 'half',
@@ -130,6 +151,7 @@ const menuCategories: MenuCategory[] = [
       { name: '대왕소세지', image: img(DIR.side, '대왕소세지.jpg') },
       { name: '돈까스', image: img(DIR.side, '돈까스.jpeg') },
       { name: '떡갈비', image: img(DIR.side, '떡갈비.jpeg') },
+      { name: CHICKEN_CHEESE_KATSU, image: img(DIR.side, `${CHICKEN_CHEESE_KATSU}.png`) },
       { name: '버팔로봉', image: img(DIR.side, '버팔로봉.jpg') },
       { name: '버팔로윙', image: img(DIR.side, '버팔로윙.jpg') },
       { name: '짜장만두', image: img(DIR.side, '짜장만두.jpg') },
