@@ -38,9 +38,9 @@ export default function Footer() {
                 className="text-sm font-bold leading-relaxed text-amber-700"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
-                주소: 서울특별시 동대문구 왕산로 200
+                주소: 경기도 하남시 풍산동 492
                 <br />
-                롯데캐슬 SKY-L65 섹션오피스 1204호
+                미사하우스디엘타워 제6층 제에프621호
               </p>
             </div>
           </div>

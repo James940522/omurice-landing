@@ -139,8 +139,8 @@ export const metadata: Metadata = {
   },
   // SEO: 지역/브랜드 보조 메타 태그
   other: {
-    'geo.region': 'KR-11',
-    'geo.placename': '서울특별시 동대문구',
+    'geo.region': 'KR-41',
+    'geo.placename': '경기도 하남시',
     'business:contact_data:country_name': 'South Korea',
     'supported-color-schemes': 'light',
   },
