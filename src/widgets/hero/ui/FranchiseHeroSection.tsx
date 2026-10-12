@@ -296,7 +296,7 @@ export default function FranchiseHeroSection() {
               className="px-5"
             >
               <p className="mx-auto mb-3 w-fit rounded-full bg-[#fec601] px-4 py-1.5 font-heading text-sm font-black text-[#4e2d14]">
-                전국 매장수
+                현재 운영중인 매장수
               </p>
               <p className="font-heading text-5xl font-black leading-none text-white md:text-6xl">
                 {storeCountLabel ?? '-'}
