@@ -6,6 +6,7 @@ import StoreItem from './StoreItem';
 import { fetchStores } from '@/lib/stores';
 import type { Store } from '@/lib/stores';
 import { useStoreCount } from '@/lib/use-store-count';
+import { parseStoreOpenDate } from '../parseStoreOpenDate';
 import {
   getNewBadgeOpenMonth,
   type OpenMonth,
@@ -16,13 +17,8 @@ interface StoreStatusModalProps {
   onClose: () => void;
 }
 
-const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
-
-const getSortTime = (store: Store) => {
-  const openDate = store.open_date?.trim() ?? '';
-  if (!DATE_PATTERN.test(openDate)) return 0;
-  return new Date(`${openDate}T00:00:00+09:00`).getTime();
-};
+const getSortTime = (store: Store) =>
+  parseStoreOpenDate(store.open_date ?? '')?.sortTime ?? 0;
 
 export default function StoreStatusModal({ isOpen, onClose }: StoreStatusModalProps) {
   // CSV 데이터에서 동적으로 가맹점 리스트를 가져옴

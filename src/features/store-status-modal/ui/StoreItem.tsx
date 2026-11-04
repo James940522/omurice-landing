@@ -1,4 +1,5 @@
 import type { Store } from '@/lib/stores';
+import { parseStoreOpenDate } from '../parseStoreOpenDate';
 
 interface StoreItemProps {
   store: Store;
@@ -8,17 +9,16 @@ interface StoreItemProps {
   } | null;
 }
 
-const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
-
 const getOpenStatus = (
   openDate: string,
   newBadgeOpenMonth: StoreItemProps['newBadgeOpenMonth']
 ) => {
-  if (!DATE_PATTERN.test(openDate)) {
+  const parsedDate = parseStoreOpenDate(openDate);
+  if (!parsedDate) {
     return { label: '오픈완료', upcoming: false, isNewOpen: false };
   }
 
-  const [year, month] = openDate.split('-').map(Number);
+  const { year, month } = parsedDate;
   const isNewOpen =
     newBadgeOpenMonth !== null &&
     year === newBadgeOpenMonth.year &&

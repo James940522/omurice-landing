@@ -2,8 +2,8 @@
 
 import { motion, useInView } from 'framer-motion';
 import type { CSSProperties } from 'react';
-import { useEffect, useRef, useState } from 'react';
-import { fetchStoreCount } from '@/lib/stores';
+import { useRef } from 'react';
+import { useStoreCount } from '@/lib/use-store-count';
 
 const ownerQuotes = [
   {
@@ -165,23 +165,7 @@ function QuoteCarousel({
 export default function FranchiseMomentumSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '0px 0px -14% 0px', amount: 0.18 });
-  const [storeCount, setStoreCount] = useState<number | null>(null);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    fetchStoreCount().then((count) => {
-      if (isMounted) {
-        setStoreCount(count);
-      }
-    });
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  const visibleCount = storeCount ?? 157;
+  const storeCount = useStoreCount();
 
   return (
     <section
@@ -221,7 +205,9 @@ export default function FranchiseMomentumSection() {
           id="franchise-momentum-title"
           className="break-keep font-heading text-[clamp(2.8rem,8vw,7rem)] font-black italic leading-[0.95] tracking-[-0.06em] text-white drop-shadow-[0_7px_0_rgba(74,34,12,0.2),0_18px_36px_rgba(125,63,0,0.16)]"
         >
-          {visibleCount}명이 선택한 프랜차이즈
+          {storeCount === null
+            ? '전국 점주님들이 선택한 프랜차이즈'
+            : `${storeCount.toLocaleString('ko-KR')}명이 선택한 프랜차이즈`}
         </h2>
       </motion.div>
 
