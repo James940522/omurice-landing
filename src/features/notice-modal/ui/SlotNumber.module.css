@@ -21,6 +21,7 @@
   width: 0.66em;
   height: 1.15em;
   overflow: hidden;
+  animation: focus var(--slot-duration) linear both;
 }
 
 .track {
@@ -28,9 +29,7 @@
   width: 100%;
   flex-direction: column;
   transform: translateY(var(--slot-distance));
-  animation:
-    roll var(--slot-duration) cubic-bezier(0.12, 0.65, 0.14, 1) both,
-    focus var(--slot-duration) linear both;
+  animation: roll var(--slot-duration) linear both;
   will-change: transform;
 }
 
@@ -55,12 +54,14 @@
     transform: translateY(0);
   }
 
-  84% {
-    transform: translateY(calc(var(--slot-distance) + 0.09em));
+  70% {
+    transform: translateY(calc(var(--slot-distance) * 0.9));
+    animation-timing-function: cubic-bezier(0.18, 0.55, 0.4, 1);
   }
 
   94% {
     transform: translateY(calc(var(--slot-distance) - 0.022em));
+    animation-timing-function: ease-out;
   }
 
   100% {
@@ -77,11 +78,15 @@
 
   7%,
   68% {
-    filter: blur(0.018em);
+    filter: blur(0.008em);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .window {
+    animation: none;
+  }
+
   .track {
     animation: none;
     will-change: auto;
