@@ -28,16 +28,22 @@ import { IntroVideo } from '@/features/intro-video';
 // import { IntroAnimation } from '@/features/intro-animation';
 import { StoreStatusModal } from '@/features/store-status-modal';
 import { BrandLetterModal } from '@/features/brand-letter-modal';
+import { StoreMilestoneModal } from '@/features/notice-modal';
 
 // Shared Config
 import { SITE_ORIGIN, absoluteUrl } from '@/shared/config/site';
 
-type LandingModalId = 'brand-letter' | 'store-status';
+type LandingModalId = 'store-milestone' | 'brand-letter' | 'store-status';
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
   const [landingModalQueue, setLandingModalQueue] = useState<LandingModalId[]>([]);
-  const activeLandingModal = landingModalQueue[0] ?? null;
+  const [landingModalIndex, setLandingModalIndex] = useState(0);
+  const activeLandingModal = landingModalQueue[landingModalIndex] ?? null;
+  const landingModalSequence = {
+    current: landingModalIndex + 1,
+    total: landingModalQueue.length,
+  };
 
   useEffect(() => {
     if (showIntro) return;
@@ -45,12 +51,15 @@ export default function Home() {
     const timer = setTimeout(() => {
       const hideStore = localStorage.getItem('hideModal_store-status');
       const hideBrandLetter = localStorage.getItem('hideModal_brand-letter');
+      const hideMilestone = localStorage.getItem('hideModal_store-milestone');
       const now = new Date().getTime();
       const shouldShowBrandLetter = !hideBrandLetter || parseInt(hideBrandLetter) < now;
       const shouldShowStore = !hideStore || parseInt(hideStore) < now;
+      const shouldShowMilestone = !hideMilestone || parseInt(hideMilestone) < now;
 
       setLandingModalQueue(
         [
+          shouldShowMilestone ? 'store-milestone' : null,
           shouldShowBrandLetter ? 'brand-letter' : null,
           shouldShowStore ? 'store-status' : null,
         ].filter(Boolean) as LandingModalId[]
@@ -61,7 +70,7 @@ export default function Home() {
   }, [showIntro]);
 
   const handleLandingModalClose = () => {
-    setLandingModalQueue((queue) => queue.slice(1));
+    setLandingModalIndex((index) => index + 1);
   };
 
   // SEO: JSON-LD Structured Data (Google Search Console용)
@@ -216,13 +225,20 @@ export default function Home() {
         <Footer />
         <FloatingInquiry />
 
+        <StoreMilestoneModal
+          isOpen={activeLandingModal === 'store-milestone'}
+          onClose={handleLandingModalClose}
+          sequence={landingModalSequence}
+        />
         <BrandLetterModal
           isOpen={activeLandingModal === 'brand-letter'}
           onClose={handleLandingModalClose}
+          sequence={landingModalSequence}
         />
         <StoreStatusModal
           isOpen={activeLandingModal === 'store-status'}
           onClose={handleLandingModalClose}
+          sequence={landingModalSequence}
         />
         <IntroVideo isVisible={showIntro} onComplete={() => setShowIntro(false)} />
         {/* <IntroAnimation isVisible={showIntro} onComplete={() => setShowIntro(false)} /> */}

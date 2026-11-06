@@ -1,0 +1,19 @@
+.popup {
+  --notice-top: 4rem;
+
+  position: fixed;
+  z-index: 2147483647;
+  max-height: calc(100svh - var(--notice-top) - 1rem);
+}
+
+@media (min-width: 640px) {
+  .popup {
+    --notice-top: 5rem;
+  }
+}
+
+@media (max-height: 500px) {
+  .popup {
+    --notice-top: 0.75rem;
+  }
+}
