@@ -10,9 +10,9 @@ interface SlotNumberProps {
 const SPIN_DIGITS = [8, 3, 6, 1, 9, 4, 7, 0, 5, 2, 9, 5, 0, 7, 3, 8, 2, 6, 4, 1];
 
 const REELS = [
-  { steps: 96, duration: '2.5s', target: 2 },
-  { steps: 120, duration: '2.85s', target: 0 },
-  { steps: 150, duration: '3.2s', target: 0 },
+  { steps: 96, duration: '1.75s', target: 2 },
+  { steps: 120, duration: '1.995s', target: 0 },
+  { steps: 150, duration: '2.24s', target: 0 },
 ].map((reel, reelIndex) => ({
   ...reel,
   digits: Array.from({ length: reel.steps + 1 }, (_, index) =>
